@@ -99,7 +99,7 @@ export default function TableFilter({
   return (
     <div className="table-filter mb-4 flex items-center justify-between">
       <div className="flex flex-wrap items-center gap-4">
-        {!showSearchOnTheRight ? (
+        {/* {!showSearchOnTheRight ? (
           <Input
             type="search"
             placeholder="Search by anything..."
@@ -110,7 +110,7 @@ export default function TableFilter({
             clearable={true}
             prefix={<PiMagnifyingGlassBold className="h-4 w-4" />}
           />
-        ) : null}
+        ) : null} */}
 
         {showSearchOnTheRight && enableDrawerFilter ? (
           <>{menu ? menu : null}</>

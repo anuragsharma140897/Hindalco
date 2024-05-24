@@ -43,12 +43,14 @@ const config: Config = {
           DEFAULT: "rgb(var(--primary-default) / <alpha-value>)",
           dark: "rgb(var(--primary-dark) / <alpha-value>)",
           foreground: "rgb(var(--primary-foreground) / <alpha-value>)",
+          main : '#AE2026'
         },
         secondary: {
           lighter: "rgb(var(--secondary-lighter) / <alpha-value>)",
           DEFAULT: "rgb(var(--secondary-default) / <alpha-value>)",
           dark: "rgb(var(--secondary-dark) / <alpha-value>)",
           foreground: "rgb(var(--secondary-foreground) / <alpha-value>)",
+          main : '#F7D552'
         },
         red: {
           lighter: "rgb(var(--red-lighter) / <alpha-value>)",

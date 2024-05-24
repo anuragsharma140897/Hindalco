@@ -1,12 +1,8 @@
 import { combineReducers } from "redux"
-import MapviewReducer from "./mapview/mapview-reducer";
-import RoadReducer from "./roads/roads-reducer";
-import EmployeeReducer from "./employee/employee-reducer";
+import AuthReducer from "@/redux/reducer/auth/auth-reducer";
 
 const rootReducer = combineReducers({
-    MapviewReducer : MapviewReducer,
-    RoadReducer : RoadReducer,
-    EmployeeReducer : EmployeeReducer
+    AuthReducer : AuthReducer
 })
 
 export default rootReducer;

@@ -1,12 +1,4 @@
-export const SET_WIDTH = 'SET_WIDTH'
-export const SET_MESSAGE = 'SET_MESSAGE'
-export const SET_LOADING = 'SET_LOADING'
-export const SET_DATA = 'SET_DATA'
-export const SET_SESSION = 'SET_SESSION'
-export const SET_USER_INFO = 'SET_USER_INFO'
-export const WISHLIST_DATA = 'WISHLIST_DATA'
-
-
+export const SET_AUTH = 'SET_AUTH'
 export const SET_ROAD_DATA = 'SET_ROAD_DATA'
 export const SET_ROAD_JSON = 'SET_ROAD_JSON'
 
