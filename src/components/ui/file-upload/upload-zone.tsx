@@ -13,6 +13,9 @@ import cn from '@/utils/class-names';
 import { endsWith } from 'lodash';
 import { FileWithPath } from 'react-dropzone';
 import { useUploadThing } from '@/utils/uploadthing';
+import { ClientUploadedFileData } from 'uploadthing/types';
+import { generateClientDropzoneAccept } from 'uploadthing/client';
+import UploadIcon from '@/components/shape/upload';
 
 interface UploadZoneProps {
   label?: string;

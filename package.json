@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.0",
+    "@types/react-datepicker": "^6.2.0",
+    "@types/react-scroll": "^1.8.10",
     "axios": "^1.7.0",
     "headsup-npm-test": "^1.0.0",
     "next": "14.2.3",
@@ -17,9 +19,11 @@
     "react": "^18",
     "react-datepicker": "6.3.0",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.51.4",
     "react-hot-toast": "^2.4.1",
-    "ulip-super-admin": "^0.4.0"
+    "ulip-super-admin": "^0.4.0",
+    "uploadthing": "^6.6.0"
   },
   "devDependencies": {
     "@floating-ui/react": "^0.26.9",

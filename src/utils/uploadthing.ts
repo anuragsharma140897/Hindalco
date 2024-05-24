@@ -1,10 +1,10 @@
+import { OurFileRouter } from '@/pages/api/uploadthing/core';
 import {
   generateUploadButton,
   generateUploadDropzone,
   generateUploader,
 } from '@uploadthing/react';
 import { generateReactHelpers } from '@uploadthing/react/hooks';
-import type { OurFileRouter } from '@/app/api/uploadthing/core';
 
 export const Uploader = generateUploader<OurFileRouter>();
 export const UploadButton = generateUploadButton<OurFileRouter>();

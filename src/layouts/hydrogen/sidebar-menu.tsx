@@ -79,6 +79,7 @@ export function SidebarMenu() {
                                         {item?.dropdownItems?.map((dropdownItem, index) => {
                                             const isChildActive =
                                                 pathname === (dropdownItem?.href as string);
+                                                //@ts-ignore
                                                 let childIcon = dropdownItem?.icon
                                             return (
                                                 <Link
@@ -137,7 +138,10 @@ export function SidebarMenu() {
                                                 </span>
                                             )}
                                             <span className="truncate">{item.name}</span>
-                                            {!!item?.shortcut && (
+                                            
+                                            {
+                                            //@ts-ignore
+                                            !!item?.shortcut && (
                                                 <span
                                                     className={cn(
                                                         'ms-auto hidden items-center gap-1 rounded px-1 duration-200 xl:inline-flex',
@@ -152,7 +156,10 @@ export function SidebarMenu() {
                                                             className="h-[15px] w-[15px]"
                                                         />
                                                     </kbd>
-                                                    <kbd>{item.shortcut?.key}</kbd>
+                                                    
+                                                    <kbd>{ 
+                                                    //@ts-ignore
+                                                    item.shortcut?.key}</kbd>
                                                 </span>
                                             )}
                                         </div>

@@ -132,7 +132,9 @@ function MessagesList({
       <div className="mb-2 flex items-center justify-between ps-6">
         <Title as="h5">Messages</Title>
         <Link
-          href={routes.support.inbox}
+          href={
+            //@ts-ignore
+            routes.support.inbox}
           onClick={() => setIsOpen(false)}
           className="hover:underline"
         >

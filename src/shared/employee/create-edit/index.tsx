@@ -1,7 +1,5 @@
 'use client';
 
-import { Text } from 'rizzui';
-import cn from '@/utils/class-names';
 import { formParts } from './form-nav';
 import { CreateProductInput, productFormSchema } from '@/utils/validators/create-product.schema';
 import { useState } from 'react';
@@ -9,17 +7,8 @@ import { useLayout } from '@/hooks/use-layout';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { defaultValues } from '@/shared/employee/create-edit/form-utils';
-import FormNav from '@/shared/employee/create-edit/form-nav';
-import toast from 'react-hot-toast';
-import { Element } from 'react-scroll';
-import FormFooter from '@/components/form-footer';
 import ProductSummary from './product-summary';
-import ProductMedia from './product-media';
 import { useDispatch } from 'react-redux';
-import { setEmployeeData } from '@/redux/action/employee/employee-action';
-
-
-
 
 
 const MAP_STEP_TO_COMPONENT = {
@@ -70,7 +59,7 @@ export default function CreateEditEmployee({
 
   const handleSub = () =>{
     console.log('handle submit fiunctio');
-    dispatch(setEmployeeData(null))
+    // dispatch(setEmployeeData(null))
     
     // window.location.href = '/employee'
     

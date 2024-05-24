@@ -89,7 +89,7 @@ export default function AuthWrapperFive({
                 href={'/'}
                 className="mb-6 inline-block max-w-[168px] xl:mb-8"
               >
-                <Image src={siteConfig.logo} alt={siteConfig.title} />
+                <Image src={siteConfig?.logo} alt={siteConfig?.title} />
               </Link>
               <Title
                 as="h2"

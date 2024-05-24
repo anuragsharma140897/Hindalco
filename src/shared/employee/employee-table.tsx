@@ -64,6 +64,7 @@ export default function EmployeeTable({ data = [] }: { data: any[] }) {
         checkedItems: selectedRowKeys,
         onHeaderCellClick,
         onDeleteItem,
+        //@ts-ignore
         onChecked: handleRowSelect,
         handleSelectAll,
       }),
