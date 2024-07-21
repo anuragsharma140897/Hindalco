@@ -8,13 +8,25 @@ import './App.css'
 import Layout from './Layout/Layout';
 import GlobalDrawer from './shared/drawer-views/container';
 import GlobalModal from './shared/modal-views/container';
+import Signin from './WebView/Account/Signin';
 
 export default function App() {
+const isloggedIn = true;
+
+
   return (
     <div>
-      <Layout/>
-      <GlobalDrawer />
-      <GlobalModal />
-    </div>
+      {
+        isloggedIn ?
+          <>
+            <Layout />
+            <GlobalDrawer />
+            <GlobalModal />
+          </>
+          :
+          <Signin />
+      }
+
+    </div >
   )
 }

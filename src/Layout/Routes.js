@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import SampleFiles from '../SampleFiles/SampleFiles'
 import UserManagement from '../WebView/user-management/users/user-management'
 import RolesAndPermission from '../WebView/user-management/roles-and-permission/roles-and-permission'
 import { routes } from '../config/routes'
@@ -22,6 +21,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManagement?.readerType} exact element={<RolesAndPermission />} />
             <Route path={routes?.panel?.deviceManagement?.readerHealth} exact element={<RolesAndPermission />} />
             <Route path={routes?.panel?.deviceManagement?.readerReplacement} exact element={<RolesAndPermission />} />
+
         </Routes>
     )
 }
