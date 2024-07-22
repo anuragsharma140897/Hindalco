@@ -25,15 +25,9 @@ const classes = {
     '[&_.rc-table-row:nth-child(2n)_.rc-table-cell]:bg-gray-100/50 [&_.rc-table-row:hover]:bg-transparent',
 };
 
-export default function Table({
-  striped,
-  variant = 'classic',
-  emptyText,
-  className,
-  ...props
-}) {
+export default function Table({ striped, variant = 'elegant', emptyText, className, ...props }) {
   return (
-    <RcTable className={cn( classes.table, classes.thead, classes.tCell, classes.variants[variant], striped && classes.striped, className )}
+    <RcTable className={cn(classes.table, classes.thead, classes.tCell, classes.variants[variant], striped && classes.striped, className)}
       emptyText={
         emptyText || (
           <div className="py-5 text-center lg:py-8">
@@ -53,27 +47,15 @@ function handleTextAlignment(align) {
   return '';
 }
 
-export function HeaderCell({
-  title,
-  align = 'left',
-  width,
-  ellipsis,
-  sortable,
-  className,
-}) {
+export function HeaderCell({ title, align = 'left', width, ellipsis, sortable, className }) {
   if (ellipsis && width === undefined) {
-    console.warn(
-      'When ellipsis is true make sure you are using the same column width in HeaderCell component too.'
-    );
+    console.warn('When ellipsis is true make sure you are using the same column width in HeaderCell component too.');
   }
   if (width !== undefined && ellipsis !== true) {
-    console.warn(
-      "width prop without ellipsis won't work, please set ellipsis prop true."
-    );
+    console.warn("width prop without ellipsis won't work, please set ellipsis prop true.");
   }
   return (
-    <div
-      className={cn( 'flex items-center gap-1', sortable && 'cursor-pointer', handleTextAlignment(align), className )} >
+    <div className={cn('flex items-center gap-1 ', sortable && 'cursor-pointer', handleTextAlignment(align), className)} >
       <div {...(ellipsis && { className: 'truncate' })} {...(ellipsis && width && { style: { width } })}>
         {title}
       </div>

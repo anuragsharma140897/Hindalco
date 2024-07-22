@@ -20,10 +20,7 @@ export default function TablePagination({ total, paginatorClassName = 'mt-5 xs:m
   }
 
   return (
-    <div className={cn('table-pagination flex items-center justify-center sm:justify-between', paginatorClassName)}>
-      {/* <div className="hidden text-gray-500 sm:inline-flex">
-        {props.current} of {Math.ceil(total / reduxPagination?.doc?.pageSize )} pages
-      </div> */}
+    <div className={cn('table-pagination flex items-center justify-center sm:justify-between px-5', paginatorClassName)}>
       <div className="hidden items-center sm:flex">
         Rows per page:{' '}
         <Select options={paginationLimitOptions} onChange={handlePaginate} size="sm" variant="flat" value={reduxPagination?.doc?.pageSize} getOptionValue={({ value }) => value}

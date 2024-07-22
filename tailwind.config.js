@@ -72,11 +72,17 @@ const config = {
           DEFAULT: "rgb(var(--green-default) / <alpha-value>)",
           dark: "rgb(var(--green-dark) / <alpha-value>)",
         },
+        grey: {
+          lighter: "rgb(var(--red-lighter) / <alpha-value>)",
+          DEFAULT: "rgb(var(--red-default) / <alpha-value>)",
+          dark: "rgb(var(--gray-darker) / <alpha-value>)",
+        },
       },
       fontFamily: {
         inter: ["var(--font-inter)"],
         lexend: ["var(--font-lexend)"],
       },
+      
     },
   },
   plugins: [

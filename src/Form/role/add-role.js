@@ -5,6 +5,7 @@ import { Form } from '../../Component/ui/form';
 import { loginSchema } from '../../Utils/validators/login.schema';
 import { useEffect } from 'react';
 import { setRolesAndPermission } from '../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
+import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-permission.schema';
 
 
 const initialValues = {
@@ -28,7 +29,13 @@ export default function UserForm() {
     }, [])
 
     const onSubmit = (data) => {
-        console.log('Sign in data ->', data);
+        
+        var t_access = reduxRolesAndPermission?.doc;
+        var json = {
+            roleName : data?.roleName,
+            permissions : t_access
+        }
+        console.log('Sign in data ->', JSON.stringify(json));
     };
 
     const handleChange = (e) => {
@@ -74,11 +81,11 @@ export default function UserForm() {
 
     return (
         <div className='p-10'>
-            <Form validationSchema={loginSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
+            <Form validationSchema={rolesAndPermissionSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
                 {({ register, formState: { errors } }) => (
                     <div className="space-y-5 lg:space-y-6">
                         <div className='grid grid-cols-2 gap-4'>
-                            <Input type="text" size={isMedium ? 'lg' : 'xl'} label="Role Name" placeholder="eg. Admin" className="[&>label>span]:font-medium " {...register('firstName')} error={errors?.firstName?.message} />
+                            <Input type="text" size={isMedium ? 'lg' : 'xl'} label="Role Name" placeholder="eg. Admin" className="[&>label>span]:font-medium " {...register('roleName')} error={errors?.roleName?.message} />
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                             <Text as="h6" className='font-bold'>Access</Text>
