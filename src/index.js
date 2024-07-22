@@ -9,12 +9,16 @@ import {thunk} from 'redux-thunk';
 import SampleReducer from './Store/Reducer/Auth/Sample/SampleReducer';
 import PaginationReducer from './Store/Reducer/Pagination/PaginationReducer';
 import RolesAndPermissionReducer from './Store/Reducer/RolesAndPermission/RolesAndPermissionReducer';
+import AuthReducer from './Store/Reducer/Auth/Sample/SampleReducer';
+import InventoryManagementReducer from './Store/Reducer/Inventory-management/inventory-management-reducer';
 
 
 const rootReducer = combineReducers({
   SampleReducer : SampleReducer,
   PaginationReducer : PaginationReducer,
-  RolesAndPermissionReducer : RolesAndPermissionReducer
+  RolesAndPermissionReducer : RolesAndPermissionReducer,
+  AuthReducer : AuthReducer,
+  InventoryManagementReducer : InventoryManagementReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

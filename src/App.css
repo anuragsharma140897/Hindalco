@@ -35,6 +35,8 @@
     --gray-900: 17 17 17;
     /* For rgb(0 0 0 / <alpha-value>) = #000000 */
     --gray-1000: 0 0 0;
+    
+    --gray-darker: 129 129 129;
 
     /* body style */
     --background: 255 255 255; /* #ffffff */
@@ -1366,4 +1368,13 @@ div[style="z-index: 1000001;"],
   .swiper-pagination
   span.swiper-pagination-bullet-active {
   @apply !w-4 !bg-gray-400;
+}
+
+.login{
+  background: #ccc;
+  background-image: url('./Assets/loginbg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
 }

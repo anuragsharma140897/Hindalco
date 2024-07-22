@@ -1,18 +1,18 @@
-import { SET_DATA } from "../../../Action/Sample/SampleAction";
+import { SET_AUTH } from "../../../Action/Auth/Sample/AuthAction";
 
 const initialState = {
     doc: null,
     timestamp: Date.now()
 }
 
-const SampleReducer = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case SET_DATA:
+        case SET_AUTH:
             return ({ ...state, doc: action.value, timestamp: Date.now() })
         default:
             return state;
     }
 }
 
-export default SampleReducer;
+export default AuthReducer;
