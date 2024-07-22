@@ -21,9 +21,16 @@ export const pageHeader = [
             { href: routes?.panel?.master?.buildingsMaster, name: 'Building Master' },
             { name: 'List' }
         ],
-    }, {
+    },
+     {
         title: 'Reader Master', breadcrumb: [
             { href: routes?.panel?.master?.readerMaster, name: 'Reader Master' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Reader Health', breadcrumb: [
+            { href: routes?.panel?.master?.readerHealthMaster, name: 'Reader Health' },
             { name: 'List' }
         ],
     },
