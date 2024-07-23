@@ -6,15 +6,25 @@ import { userData } from '../../../dummyData/user-data';
 import { getUserColumns } from './user-column';
 import { useColumn } from '../../../Hooks/use-column';
 import { TableClass } from '../../../Constant/Classes/Classes';
+import AddUserMaster from '../../../Form/master/user-master/add-user-master';
+
+
+
+const initialValues = {
+    siteName: '',
+    building: '',
+    area: ''
+};
 
 export default function UserManagement() {
-    const { openModal } = useModal();
+    const { openModal ,closeModal} = useModal();
     const columns = useMemo(() => getUserColumns({ userData, openModal }))
     const { visibleColumns } = useColumn(columns);
 
     return (
         <div>
-            <PageHeader metaTitle={'User Management'} btnText={'Add User'} children={<h1>H1 Tag</h1>} />
+            <PageHeader metaTitle={'User Management'} btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
+
             
             <ControlledTable
                 variant="modern"

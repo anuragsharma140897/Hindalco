@@ -14,8 +14,12 @@ import SupplierMaster from '../WebView/master/supplier-master/supplier-master'
 import GeneralMaster from '../WebView/master/general-master/general-master'
 import ReaderBuildingMappingMaster from '../WebView/master/reader-building-mapping-master/reader-building-mapping-master'
 import CreateProduct from '../WebView/master/product-master/create/create-product'
+import InboundOrder from '../WebView/inbound/inbound-order/inbound-order'
+import WebReceiving from '../WebView/inbound/web-receving/web-receving'
 
 export default function CustomRoutes() {
+
+    
     return (
         <Routes>
             <Route path={routes?.panel?.master?.users} exact element={<UserManagement />} />
@@ -32,6 +36,10 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
             <Route path={routes?.panel?.master?.readerBuildingMappingMaster} exact element={<ReaderBuildingMappingMaster />} />
+            <Route path={routes?.panel?.inbond?.inboundOrder} exact element={<InboundOrder />} />
+            <Route path={routes?.panel?.inbond?.webReceiving} exact element={<WebReceiving />} />
+
+
             
         </Routes>
     )

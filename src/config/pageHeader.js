@@ -29,6 +29,12 @@ export const pageHeader = [
         ],
     },
     {
+        title: 'Reader Replacement', breadcrumb: [
+            { href: routes?.panel?.master?.readerMaster, name: 'Reader Replacement' },
+            { name: 'List' }
+        ],
+    },
+    {
         title: 'Reader Health', breadcrumb: [
             { href: routes?.panel?.master?.readerHealthMaster, name: 'Reader Health' },
             { name: 'List' }
@@ -54,6 +60,12 @@ export const pageHeader = [
     },
     {
         title: 'Reports', breadcrumb: [],
+    },
+    {
+        title: 'Inbound', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundOrder, name: 'Inbound' },
+            { name: 'List' }
+        ],
     },
 
 ]

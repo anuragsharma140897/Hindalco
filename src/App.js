@@ -14,15 +14,19 @@ import GlobalConfirmBox from './shared/confirm/container';
 import { useSelector } from 'react-redux';
 
 export default function App() {
-  const reduxAuth = useSelector(state => state.AuthReducer)
+  const isLogin  = true
+
   return (
     <div>
-      {!reduxAuth?.doc ? <>
+      {
+      isLogin ? <>
         <Layout />
         <GlobalDrawer />
         <GlobalModal />
         <GlobalConfirmBox />
-      </> : <Login />}
+      </> : 
+      <Login />
+      }
       {/* <Layout/>
       <GlobalDrawer />
       <GlobalModal />
