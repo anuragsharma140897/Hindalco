@@ -20,6 +20,12 @@ export const routes = {
     inbond: {
       inboundOrder: '/inbond/inbound-order',
       webReceiving: '/inbond/web-receiving',
-    }
-  }
+      inboundCreate : '/inbond/inbound-create',
+    },
+    outbond: {
+      outboundOrder: '/outbond/outbound-order',
+      webPicking: '/outbond/web-picking',
+      outboundCreate : '/outbond/outbound-create',
+    },
+  },
 };

@@ -17,7 +17,7 @@ function InboundOrder() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Inbound'} btnText={'Create'} href={routes.panel.inbond.inboundOrder} disbleExport />
+      <PageHeader metaTitle={'Inbound'} btnText={'Create'} href={routes.panel?.inbond?.inboundCreate} disbleExport />
       <ControlledTable
           variant="modern"
           isLoading={false}

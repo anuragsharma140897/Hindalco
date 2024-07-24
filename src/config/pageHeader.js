@@ -67,5 +67,35 @@ export const pageHeader = [
             { name: 'List' }
         ],
     },
+    {
+        title: 'Inbound / Web Receving', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundOrder, name: 'Web Receving' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Inbound / Create', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundCreate, name: 'Inbound Create' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound', breadcrumb: [
+            { href: routes?.panel?.outbond?.outOrder, name: 'Outbound' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound / Web Picking', breadcrumb: [
+            { href: routes?.panel?.outbond?.webPicking, name: 'Web Picking' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound / Create', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundCreate, name: 'Outbound Create' },
+            { name: 'List' }
+        ],
+    },
 
-]
+] 

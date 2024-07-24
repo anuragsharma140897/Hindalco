@@ -32,8 +32,8 @@ export const menuItems = [
   },{
     name: 'Outbound', href: '#', icon: <PiMapPin />,
     dropdownItems: [
-      { name: 'Outbound Order', href: routes?.panel?.locationMapping?.mapping },
-      { name: 'Web Receving', href: routes?.panel?.locationMapping?.units },
+      { name: 'Outbound Order', href: routes?.panel?.outbond?.outboundOrder },
+      { name: 'Web Picking', href: routes?.panel?.outbond?.webPicking },
     ],
   },
 ];

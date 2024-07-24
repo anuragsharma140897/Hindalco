@@ -27,10 +27,6 @@ export default function App() {
       </> : 
       <Login />
       }
-      {/* <Layout/>
-      <GlobalDrawer />
-      <GlobalModal />
-      <GlobalConfirmBox/> */}
 
     </div>
   )
