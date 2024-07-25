@@ -46,7 +46,7 @@ function AddUserMaster({closeModal}) {
                     <CustomInput type={'text'} label={'Last Name'} register={register} fieldName={'lastName'} errors={errors} />
                     <CustomInput type={'text'} label={'User Name'} register={register} fieldName={'userName'} errors={errors} />
                     <CustomInput type={'text'} label={'Password'} register={register} fieldName={'password'} errors={errors} />
-                    <CustomSelect options={[]} title={'Gender'} register={register} fieldName={'gender'} errors={errors} />
+                    <CustomSelect options={[{ label: 'Male', value: 'Male' },{label:"Female",value:"Female"}]} title={'Gender'} register={register} fieldName={'gender'} errors={errors} />
                     <CustomSelect options={[]} title={'Role'} register={register} fieldName={'role'} errors={errors} />
                     <CustomInput type={'text'} label={'Contact no'} register={register} fieldName={'contactNumber'} errors={errors} />
                     <CustomInput type={'text'} label={'Address'} register={register} fieldName={'address'} errors={errors} />

@@ -4,11 +4,15 @@ const initialState = {
     doc: [
         { "dashboard": { read: false, write: false, delete: false } },
         { "user management": { read: false, write: false, delete: false } },
-        { "location mapping": { read: false, write: false, delete: false } },
-        { "device management": { read: false, write: false, delete: false } },
-        { "inventory management": { read: false, write: false, delete: false } },
-        { "erp": { read: false, write: false, delete: false } },
-        { "reoprts": { read: false, write: false, delete: false } },
+        { 
+            "Master": { read: false, write: false, delete: false },
+            child :[
+                { "Role and Permission": { read: false, write: false, delete: false } },
+                { "Site": { read: false, write: false, delete: false } },
+                { "Buildings": { read: false, write: false, delete: false } },
+                { "Zone": { read: false, write: false, delete: false } },
+            ]
+        },
     ],
     timestamp: Date.now()
 }

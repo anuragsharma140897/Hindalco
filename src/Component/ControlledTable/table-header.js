@@ -6,7 +6,7 @@ export default function TableHeader({ columns }) {
   return (
     <tr>
       {
-        columns?.map((item, index) => <td><HeaderCell title={item?.title}  /></td>)
+        columns?.map((item, index) => <td ><HeaderCell title={item?.title}  /></td>)
       }
     </tr>
   )

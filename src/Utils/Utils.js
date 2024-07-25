@@ -79,3 +79,21 @@ export const getFormattedDate = (UNIX_timestamp, types, symbol = '-', timeSepara
 
   return result;
 }
+
+
+
+
+export const AddChildRolePermission = (arr, itemKey) => {
+    for (const item of arr) {
+        if (item[itemKey]) {
+            return item[itemKey];
+        }
+        if (item.child) {
+            const result = AddChildRolePermission(item.child,itemKey);
+            if (result) {
+                return result;
+            }
+        }
+    }
+    return null;
+}
