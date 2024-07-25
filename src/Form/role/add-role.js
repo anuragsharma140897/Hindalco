@@ -1,8 +1,8 @@
-import {  Button, Input,  Text } from 'rizzui';
+import { Button, Input, Text } from 'rizzui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from '../../Hooks/use-media';
 import { Form } from '../../Component/ui/form';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setRolesAndPermission } from '../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
 import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-permission.schema';
 import DropDownIcon from '../../Constant/Icons/dropdown-icon';
@@ -23,12 +23,12 @@ export const genderOption = [
     { value: 'female', label: 'female' },
     { value: 'other', label: 'other' },
 ];
-export default function UserForm({closeModal}) {
+export default function UserForm({ closeModal }) {
     var dispatch = useDispatch()
     const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
     const isMedium = useMedia('(max-width: 1200px)', false);
+    const [expandedIndex, setExpandedIndex] = useState(null); 
 
-    const [showChild, setShowChild] = useState(false)
 
     useEffect(() => {
 
@@ -41,35 +41,30 @@ export default function UserForm({closeModal}) {
             roleName: data?.roleName,
             permissions: t_access
         }
-
-        HitApi(json,addRole).then((res)=>{
-            console.log("res",res)
-            if(res.message === "Role added successfully" && res.status ===200){
+        HitApi(json, addRole).then((res) => {
+            console.log("res", res)
+            if (res.message === "Role added successfully" && res.status === 200) {
                 alert(res.message)
-             
+
             }
         })
-
-        
-
     };
 
-    const handleChange = (e) => {
-        console.log('e', e);
-    }
     const handleAccessChnage = (itemKey, perm, child) => {
 
+
         var t_access = reduxRolesAndPermission?.doc;
+        var element = null
 
         if (!child) {
-            var element = t_access?.find(ele => Object.keys(ele)[0] === itemKey);
+           element = t_access?.find(ele => Object.keys(ele)[0] === itemKey);
             if (element) {
                 element[itemKey][perm] = !element[itemKey][perm];
                 dispatch(setRolesAndPermission(t_access));
             }
         }
         else {
-            var element = AddChildRolePermission(t_access, itemKey)
+             element = AddChildRolePermission(t_access, itemKey)
             if (element) {
                 element[perm] = !element[perm];
                 dispatch(setRolesAndPermission(t_access));
@@ -81,9 +76,9 @@ export default function UserForm({closeModal}) {
     let access;
 
 
-    const handleChild = (onOff) => {
-        setShowChild(onOff)
-    }
+    const handleChildToggle = (index) => {
+        setExpandedIndex(index === expandedIndex ? null : index); // Toggle the expanded item
+    };
 
     if (reduxRolesAndPermission?.doc) {
         access = reduxRolesAndPermission?.doc?.map((item, index) => {
@@ -91,68 +86,66 @@ export default function UserForm({closeModal}) {
             const permissions = item[itemKey];
             const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
 
-            console.log("item", item);
-
-
-
+            console.log("item", item[itemKey].child);
             return (
                 <div>
-                  
-                    <div key={index} className='flex justify-between'>
-                        <div className={`flex items-center justify-center  rounded-md gap-x-5 ${item?.child && "px-5 border cursor-pointer"}`} onClick={() => handleChild(!showChild)}>
-                            <Text className="capitalize">{itemKey}</Text>
-                            {item?.child &&
-                                <div >
-                                    {showChild ? <DropUpIcon /> : <DropDownIcon />}
-                                </div>
-                            }
 
-                            {console.log("itemchos", item.child)}
+                    <div key={index} className='flex justify-between'>
+                        <div className={`flex items-center justify-center  rounded-md gap-x-5 ${item[itemKey].child && "px-5 border cursor-pointer"}`} onClick={() => handleChildToggle(index)}>
+                            <Text className="capitalize">{itemKey}</Text>
+                            {item[itemKey].child &&
+                              <div>
+                              {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
+                          </div>
+                            }
+                    {console.log("itemchos", item.child)}
                         </div>
 
-                        <div className="flex gap-2">
-                            {Object.entries(permissions).map(([perm, value]) => (
-                                <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
-                                    <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? 'bg-white' : 'bg-gray-200'} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(itemKey, perm)}>
-                                        {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                    </Text>
+                        <div>
+                            {
+                                <div className="flex gap-x-2">
+                                    {Object.entries(permissions).map(([perm, value]) => (
+
+                                        <React.Fragment>
+                                            {typeof value === "boolean" &&
+                                                <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
+                                                    <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? 'bg-white' : 'bg-gray-200'} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(itemKey, perm)}>
+                                                        {perm.charAt(0).toUpperCase() + perm.slice(1)}
+                                                    </Text>
+                                                </div>
+                                            }
+                                        </React.Fragment>
+
+                                    ))}
                                 </div>
-                            ))}
+                            }
                         </div>
                     </div>
                     <div>
                     </div>
                     {
-                        showChild ?
-                            item?.child?.map((ele, i) => {
-                                console.log("ele", ele);
-                                return (
-                                    <div className='flex items-center gap-x-4 '>
-                                        <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
-                                        <div className="flex gap-2">
-                                            {
-                                                Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
-
-                                                    {
-                                                        console.log("perm", perm)
-                                                        console.log("value", value)
-                                                    }
-                                                    return (
-                                                        <div key={`${Object.keys(ele)}-${perm}-${i}`} className="flex items-center gap-1">
-                                                            <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? "bg-white" : "bg-gray-200"} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(`${Object.keys(ele)}`, perm, true)}>
-                                                                {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                                            </Text>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
+                       expandedIndex === index && item[itemKey].child?.map((ele, childIndex) => {
+                            return (
+                                <div key={childIndex} className='flex items-center gap-x-4 '>
+                                    <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
+                                    {console.log("ele", ele)}
+                                    <div className="flex gap-2">
+                                        {
+                                            Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
+                                                return (
+                                                    <div key={`${Object.keys(ele)}-${perm}-${childIndex}`} className="flex items-center gap-1">
+                                                        <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? "bg-white" : "bg-gray-200"} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(`${Object.keys(ele)}`, perm, true)}>
+                                                            {perm.charAt(0).toUpperCase() + perm.slice(1)}
+                                                        </Text>
+                                                    </div>
+                                                )
+                                            })
+                                        }
                                     </div>
 
-                                )
-                            })
-                            :
-                            ''
+                                </div>
+                            )
+                        })
                     }
                 </div>
             );
@@ -174,10 +167,10 @@ export default function UserForm({closeModal}) {
                         </div>
                         {access}
                         <div className='flex gap-3 justify-end'>
-                            <Button  size={isMedium ? 'lg' : 'md'} onClick={closeModal}>
+                            <Button size={isMedium ? 'lg' : 'md'} onClick={closeModal}>
                                 Cancel
                             </Button>
-                            <Button  type="submit" size={isMedium ? 'lg' : 'md'}>
+                            <Button type="submit" size={isMedium ? 'lg' : 'md'}>
                                 Submit
                             </Button>
                         </div>

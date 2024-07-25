@@ -11,9 +11,6 @@ export const GetFullYear = (timestamp) => {
   var year = a.getFullYear();
   var month = months[a.getMonth()];
   var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
   var time = date + '-' + month + '-' + year;
   return time;
 }
@@ -81,19 +78,19 @@ export const getFormattedDate = (UNIX_timestamp, types, symbol = '-', timeSepara
 }
 
 
-
-
 export const AddChildRolePermission = (arr, itemKey) => {
     for (const item of arr) {
         if (item[itemKey]) {
             return item[itemKey];
         }
-        if (item.child) {
-            const result = AddChildRolePermission(item.child,itemKey);
-            if (result) {
-                return result;
+        for (const key in item) {
+            if (item[key] && item[key].child) {
+                const result = AddChildRolePermission(item[key].child, itemKey);
+                if (result) {
+                    return result;
+                }
             }
         }
     }
     return null;
-}
+};
