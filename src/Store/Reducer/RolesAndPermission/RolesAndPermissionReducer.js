@@ -5,23 +5,11 @@ const initialState = {
         {
             "dashboard": {
                 read: false, write: false, delete: false, 
-                child: [
-                    { "Ron": { read: false, write: false, delete: false } },
-                    { "Se": { read: false, write: false, delete: false } },
-                    { "Budings": { read: false, write: false, delete: false } },
-                    { "Ze": { read: false, write: false, delete: false } },
-                ]
             }
         },
         {
             "user management": {
-                read: false, write: false, delete: false,
-                child: [
-                    { "Roln": { read: false, write: false, delete: false } },
-                    { "Sie": { read: false, write: false, delete: false } },
-                    { "Buldings": { read: false, write: false, delete: false } },
-                    { "Zne": { read: false, write: false, delete: false } },
-                ]
+                read: false, write: false, delete: false ,
             }
         },
         {

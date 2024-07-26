@@ -51,8 +51,6 @@ if(data === null){
     setRoleData(res.doc)
   })
 }
-
-
   
 console.log("data",data);
   return (

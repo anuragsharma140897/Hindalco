@@ -1,4 +1,4 @@
-import { Button, Input, Text } from 'rizzui';
+import {  Input, Text } from 'rizzui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from '../../Hooks/use-media';
 import { Form } from '../../Component/ui/form';
@@ -10,6 +10,7 @@ import DropUpIcon from '../../Constant/Icons/dropup-icon';
 import { AddChildRolePermission } from '../../Utils/Utils';
 import { HitApi } from '../../Store/Action/Api/ApiAction';
 import { addRole } from '../../Constant/Api/Api';
+import CommonButtton from '../../Component/ui/buttons/common-button';
 
 
 const initialValues = {
@@ -167,12 +168,8 @@ export default function UserForm({ closeModal }) {
                         </div>
                         {access}
                         <div className='flex gap-3 justify-end'>
-                            <Button size={isMedium ? 'lg' : 'md'} onClick={closeModal}>
-                                Cancel
-                            </Button>
-                            <Button type="submit" size={isMedium ? 'lg' : 'md'}>
-                                Submit
-                            </Button>
+                            <CommonButtton text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={closeModal}/>
+                            <CommonButtton type={"submit"} text={"Submit"} size={isMedium ? 'lg' : 'md'}/>
                         </div>
                     </div>
                 )}
