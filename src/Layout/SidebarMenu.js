@@ -4,6 +4,7 @@ import cn from '../Utils/class-names'
 import { PiCaretDownBold, PiCommand } from 'react-icons/pi';
 import { menuItems } from "./menu-items";
 import { usePathname } from "../Hooks/use-pathname";
+import { NavLink } from "react-router-dom";
 
 
 const SidebarMenu = ({ colorPresetName, theme }) => {
@@ -16,8 +17,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
         const isDropdownOpen = Boolean(item?.dropdownItems?.some(dropdownItem => dropdownItem.href === pathname));
 
         const renderItem = (href, isActive, children) => (
-            <a
-                href={href}
+            <a href={href}
                 className={cn(
                     'group relative mx-3 my-0.5 flex items-center justify-between rounded-md px-3 py-2 font-medium capitalize lg:my-1 2xl:mx-5 2xl:my-2',
                     isActive
