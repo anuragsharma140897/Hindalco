@@ -35,11 +35,11 @@ export default function Login() {
     <div className='grid grid-cols-7  h-screen'>
       <div className='col-span-4' style={{ backgroundImage: `url(${banner})`, backgroundSize: "120%  100% " }}>
         <div className='px-16 py-32 h-screen' style={{ background: 'rgba(0,0,0,0.7)' }}>
-          <i className='text-xl font-medium' style={{ color: Colors.LOGINYELLOW, fontFamily: "Montserrat" }}>
+          <i className='text-xl font-medium' style={{ color: Colors.LOGINYELLOW }}>
             Welcome to
           </i>
-          <div className='text-white text-3xl font-bold' style={{ fontFamily: "Montserrat" }}>Track and Trace</div>
-          <div className='text-white text-3xl font-bold' style={{ fontFamily: "Montserrat" }}>System USing RFID</div>
+          <div className='text-white text-3xl font-bold' >Track and Trace</div>
+          <div className='text-white text-3xl font-bold' >System USing RFID</div>
         </div>
       </div>
       <div className='col-span-3 px-16 py-32' style={{ background: Colors.LOGINRED }}>

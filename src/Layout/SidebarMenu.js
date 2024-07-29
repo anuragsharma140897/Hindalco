@@ -5,6 +5,7 @@ import { PiCaretDownBold, PiCommand } from 'react-icons/pi';
 import { menuItems } from "./menu-items";
 import { usePathname } from "../Hooks/use-pathname";
 import { NavLink } from "react-router-dom";
+import { RxDashboard } from "react-icons/rx";
 
 
 const SidebarMenu = ({ colorPresetName, theme }) => {
@@ -17,6 +18,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
         const isDropdownOpen = Boolean(item?.dropdownItems?.some(dropdownItem => dropdownItem.href === pathname));
 
         const renderItem = (href, isActive, children) => (
+
             <a href={href}
                 className={cn(
                     'group relative mx-3 my-0.5 flex items-center justify-between rounded-md px-3 py-2 font-medium capitalize lg:my-1 2xl:mx-5 2xl:my-2',
@@ -36,6 +38,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
                             )}
                         >
                             {Icon}
+                           
                         </span>
                     )}
                     <span className="truncate">{children}</span>
@@ -69,18 +72,14 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
                         : 'text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900'
                 )}
             >
-                <div className="flex items-center truncate">
-                    <span
-                        className={cn(
-                            'me-[18px] ms-1 inline-flex h-1 w-1 rounded-full bg-current transition-all duration-200',
-                            isChildActive
-                                ? 'bg-primary ring-[1px] ring-primary'
-                                : 'opacity-40'
-                        )}
-                    />
-                    <span className="flex items-center truncate">
+             
+                <div className="flex items-center justify-between gap-x-1">
+                <RxDashboard />
+                    <span className="flex items-center truncate text-xs">
                         {dropdownItem.name}
+                        {console.log({dropdownItem})}
                     </span>
+
                 </div>
             </a>
         );

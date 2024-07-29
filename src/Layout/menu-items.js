@@ -1,14 +1,16 @@
 import { PiMapPin, PiListChecksBold, PiBarcode, PiBookOpenText, PiBatteryVerticalHigh, PiTrash } from 'react-icons/pi';
-import { VscGraph } from "react-icons/vsc";
+import { RxDashboard } from "react-icons/rx";
+
 import { FaUsersCog } from "react-icons/fa";
 import { routes } from '../config/routes';
 
 export const menuItems = [
-  { name: 'Dashboard', href: routes?.panel?.dashboard, icon: <PiListChecksBold /> },
+  { name: 'Dashboard', href: routes?.panel?.dashboard, icon: <RxDashboard />
+},
   {
-    name: 'Master', href: '#', icon: <FaUsersCog />, badge: 'New',
+    name: 'Master', href: '#', icon: '', badge: 'New',
     dropdownItems: [
-      { name: 'User Management Master', href: routes?.panel?.master?.users },
+      { name: 'User Management Master', href: routes?.panel?.master?.users},
       { name: 'Role and Permission Master', href: routes?.panel?.master?.rolesAndPermission },
       { name: 'Site Master', href: routes?.panel?.master?.siteMaster },
       { name: 'Buildings Master', href: routes?.panel?.master?.buildingsMaster },
