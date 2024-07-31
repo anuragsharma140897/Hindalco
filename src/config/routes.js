@@ -1,7 +1,7 @@
 
 export const routes = {
   panel: {
-    dashboard: '/dashboard',
+    dashboard: '/',
     master: {
       users: '/master/users',
       rolesAndPermission: '/master/roles-and-permission',

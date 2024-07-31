@@ -58,7 +58,7 @@ function AddUserMaster({ closeModal }) {
                 {({ register, formState: { errors } }) => (
                     <div className="space-y-5 lg:space-y-6">
                         <div className='grid grid-cols-2 gap-4'>
-                            <CustomInput type={'text'} label={'Frist Name'} register={register} fieldName={'firstName'} errors={errors} />
+                            <CustomInput type={'text'} label={'First Name'} register={register} fieldName={'firstName'} errors={errors} />
                             <CustomInput type={'text'} label={'Last Name'} register={register} fieldName={'lastName'} errors={errors} />
                             <CustomInput type={'text'} label={'User Name'} register={register} fieldName={'userName'} errors={errors} />
                             <CustomInput type={'text'} label={'Password'} register={register} fieldName={'password'} errors={errors} />
@@ -67,7 +67,7 @@ function AddUserMaster({ closeModal }) {
                             <CustomInput type={'text'} label={'Contact no'} register={register} fieldName={'contactno'} errors={errors} />
                             <CustomInput type={'text'} label={'Address'} register={register} fieldName={'address'} errors={errors} />
                             <CustomInput type={'text'} label={'Email ID'} register={register} fieldName={'email'} errors={errors} />
-                            <CustomInput type={'text'} label={'Emplyee ID'} register={register} fieldName={'employeeID'} errors={errors} />
+                            <CustomInput type={'text'} label={'Employee ID'} register={register} fieldName={'employeeID'} errors={errors} />
                         </div>
                         <div className='flex gap-3 justify-end'>
                             <CommonButtton className="w-full"  variant="flat" text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={() => closeModal()}/>

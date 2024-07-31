@@ -6,6 +6,8 @@ import { menuItems } from "./menu-items";
 import { usePathname } from "../Hooks/use-pathname";
 import { NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
+import UserManagementIcon from "../Constant/Icons/user-management-icon";
+import { Colors } from "../Constant/Colors/Color";
 
 
 const SidebarMenu = ({ colorPresetName, theme }) => {
@@ -17,30 +19,34 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
         const isActive = pathname === item.href;
         const isDropdownOpen = Boolean(item?.dropdownItems?.some(dropdownItem => dropdownItem.href === pathname));
 
+        console.log("isDropdownOpen",isDropdownOpen);
+
         const renderItem = (href, isActive, children) => (
 
             <a href={href}
                 className={cn(
                     'group relative mx-3 my-0.5 flex items-center justify-between rounded-md px-3 py-2 font-medium capitalize lg:my-1 2xl:mx-5 2xl:my-2',
                     isActive
-                        ? 'bg-primary text-gray-0'
-                        : 'text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-700/90'
+                        ? 'bg-lightpink text-theme'
+                        : 'text-black transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-700/90'
                 )}
             >
                 <div className="flex w-full items-center truncate">
-                    {Icon && (
-                        <span
-                            className={cn(
-                                'me-2 inline-flex h-5 w-5 items-center justify-center rounded-md duration-200 [&>svg]:h-[20px] [&>svg]:w-[20px]',
-                                isActive
-                                    ? 'text-gray-0'
-                                    : 'text-gray-800 dark:text-gray-500 dark:group-hover:text-gray-700'
-                            )}
-                        >
-                            {Icon}
-                           
-                        </span>
-                    )}
+                    <div className={`flex items-center justify-center me-2 p-1 rounded-full ${isActive ? 'iconboxout' : ''} `}>
+                        {Icon && (
+                            <span
+                                className={cn(
+                                    ' inline-flex h-5 w-5 items-center justify-center rounded-md duration-200 [&>svg]:h-[20px] [&>svg]:w-[20px]',
+                                    isActive
+                                        ? 'text-theme'
+                                        : 'text-gray-800 dark:text-gray-500 dark:group-hover:text-gray-700'
+                                )}
+                            >
+                                {Icon}
+
+                            </span>
+                        )}
+                    </div>
                     <span className="truncate">{children}</span>
                     {item?.shortcut && (
                         <span
@@ -66,18 +72,19 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
                 href={dropdownItem.href}
                 key={dropdownItem.name}
                 className={cn(
-                    'mx-3.5 mb-0.5 flex items-center justify-between rounded-md px-3.5 py-2 font-medium capitalize last-of-type:mb-1 lg:last-of-type:mb-2 2xl:mx-5',
+                    'mx-3.5 mb-0.5 flex items-center justify-between rounded-md px-2 py-2 font-medium capitalize last-of-type:mb-1 lg:last-of-type:mb-2 2xl:mx-5',
                     isChildActive
-                        ? 'text-primary'
+                        ? 'text-theme bg-lightpink'
                         : 'text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900'
                 )}
             >
-             
+
                 <div className="flex items-center justify-between gap-x-1">
-                <RxDashboard />
+                    <div className="p-[5px] rounded-full " style={{ background: Colors.SUBICONBG }}>
+                        {dropdownItem.icon}
+                    </div>
                     <span className="flex items-center truncate text-xs">
                         {dropdownItem.name}
-                        {console.log({dropdownItem})}
                     </span>
 
                 </div>
@@ -98,7 +105,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
                                         isDropdownOpen
                                             ? colorPresetName === 'black' && theme === 'dark'
                                                 ? 'bg-gray-900 text-gray-0'
-                                                : 'bg-primary text-gray-0'
+                                                : 'text-theme'
                                             : 'text-gray-700 transition-colors duration-200 hover:bg-gray-100 dark:text-gray-700/90 dark:hover:text-gray-700'
                                     )}
                                 >
@@ -125,7 +132,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
                                             isDropdownOpen
                                                 ? colorPresetName === 'black' && theme === 'dark'
                                                     ? 'text-gray-0 dark:text-gray-0'
-                                                    : 'text-gray-0'
+                                                    : 'text-theme'
                                                 : 'text-gray-800 dark:text-gray-500 dark:group-hover:text-gray-700'
                                         )}
                                     />
