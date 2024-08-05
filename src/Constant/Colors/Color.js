@@ -6,6 +6,7 @@ export const Colors = {
     CRITICAL :"#FF0000",
     ACTIVE :"#45AB15",
     SUBICONBG :'#D4D4D4',
+    CIRCULERPINK :'#990C0C24'
 
  
  }

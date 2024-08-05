@@ -18,7 +18,7 @@ export default function ControlledTable({ disablePagination, columns, className,
   }
   return (
     <div className='bg-white pb-5 rounded-md'>
-      <div className="relative ">
+      <div className="relative">
         <Table data={data} scroll={{ x: 1300 }} rowKey={(record) => record._id} className={cn(className)} columns={columns} />
       </div>
       {disablePagination ? null : <TablePagination

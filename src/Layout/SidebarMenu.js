@@ -4,9 +4,6 @@ import cn from '../Utils/class-names'
 import { PiCaretDownBold, PiCommand } from 'react-icons/pi';
 import { menuItems } from "./menu-items";
 import { usePathname } from "../Hooks/use-pathname";
-import { NavLink } from "react-router-dom";
-import { RxDashboard } from "react-icons/rx";
-import UserManagementIcon from "../Constant/Icons/user-management-icon";
 import { Colors } from "../Constant/Colors/Color";
 
 
@@ -80,7 +77,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
             >
 
                 <div className="flex items-center justify-between gap-x-1">
-                    <div className="p-[5px] rounded-full " style={{ background: Colors.SUBICONBG }}>
+                    <div className="p-[5px] rounded-full " style={{ background:isChildActive? Colors.CIRCULERPINK  :Colors.SUBICONBG}}>
                         {dropdownItem.icon}
                     </div>
                     <span className="flex items-center truncate text-xs">
