@@ -18,7 +18,7 @@ useEffect(()=>{
 
   return (
     <div>
-      <PageHeader metaTitle={'Reader Health'} btnText={'Add Reader'} children={<AddReaderMaster closeModal={closeModal} />} title={'Add Reader'} titleClass={'text-center'} customSize={700} />
+      <PageHeader btnText={'Add Reader'} children={<AddReaderMaster closeModal={closeModal} />} title={'Add Reader'} titleClass={'text-center'} customSize={700} />
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {
           ReaderHealthData?.map((data,index)=>{
