@@ -14,14 +14,14 @@ export default function CustomSelect({ options, dropdownClassName, className, su
     const [value, setValue] = useState(null);
     return (
         <div>
-            {title?<span className="rizzui-input-label block text-base mb-2 font-medium">{title}</span>:null}
+            {title?<span className="rizzui-input-label block text-base mb-1.5 font-medium">{title}</span>:null}
             <Select
                 options={options}
                 value={value}
                 onChange={setValue}
                 placeholder={placeholder || 'Select '+title}
                 getOptionDisplayValue={(option) => renderOptionDisplayValue(option)}
-                selectClassName={cn('h-14 min-w-[150px]', selectClassName)}
+                selectClassName={cn('h-12 min-w-[150px]', selectClassName)}
                 className={cn(className)}
                 dropdownClassName={cn('z-[9999] p-1.5', dropdownClassName)}
                 suffixClassName={suffixClassName}

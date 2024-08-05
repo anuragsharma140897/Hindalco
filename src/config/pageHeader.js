@@ -41,8 +41,24 @@ export const pageHeader = [
     {
         title: 'Create Product', breadcrumb: [
             { href: routes?.panel?.master?.productMaster, name: 'Product Master' },
-            { href: routes?.panel?.master?.createProduct, name: 'Create' },
+            { href: routes?.panel?.master?.createProduct, name: 'Create' }
+        ],
+    },
+    {
+        title: 'Create Customer', breadcrumb: [
+            { href: routes?.panel?.master?.productMaster, name: 'Customer Master' },
+            { href: routes?.panel?.master?.createProduct, name: 'Create' }
+        ],
+    },{
+        title: 'Supplier Master', breadcrumb: [
+            { href: routes?.panel?.master?.supplierMaster, name: 'Supplier Master' },
             { name: 'List' }
+        ],
+    },{
+        title: 'Create Supplier', breadcrumb: [
+            { href: routes?.panel?.master?.supplierMaster, name: 'Supplier Master' },
+            { href: routes?.panel?.master?.createSupplier, name: 'Create' },
+            { name: '' }
         ],
     },
     {

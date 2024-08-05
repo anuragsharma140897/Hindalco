@@ -1,3 +1,8 @@
 .rc-table-thead tr .rc-table-cell{
     color: #000;
 }
+
+.rizzui-input-container{
+    padding: 10px;
+    height: 3rem;
+}

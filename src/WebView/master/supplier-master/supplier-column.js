@@ -4,7 +4,7 @@ import { routes } from '../../../config/routes';
 import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
 
-export const getCustomerMasterColumns = ({ onDeleteItem, openModal }) => [
+export const getSupplierMasterColumns = ({ onDeleteItem, openModal }) => [
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -13,51 +13,42 @@ export const getCustomerMasterColumns = ({ onDeleteItem, openModal }) => [
     render: (value) => <Text>{value || '---'}</Text>,
   },
   {
-    title: <HeaderCell title="Customer Name" className={'font-extrabold'} />,
-    dataIndex: 'customerName',
-    key: 'customerName',
-    width: 120,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
-    title: <HeaderCell title="Customer Code" className={'font-extrabold'} />,
-    dataIndex: 'customerCode',
-    key: 'customerCode',
+    title: <HeaderCell title="Supplier Code" className={'font-extrabold'} />,
+    dataIndex: 'supplierCode',
+    key: 'supplierCode',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   }, {
-    title: <HeaderCell title="Customer GST" className={'font-extrabold'} />,
-    dataIndex: 'customerGST',
-    key: 'customerGST',
+    title: <HeaderCell title="Supplier Name" className={'font-extrabold'} />,
+    dataIndex: 'supplierName',
+    key: 'supplierName',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   }, {
-    title: <HeaderCell title="Customer Address" className={'font-extrabold'} />,
-    dataIndex: 'customerAddress',
-    key: 'customerAddress',
+    title: <HeaderCell title="Supplier City" className={'font-extrabold'} />,
+    dataIndex: 'supplierCity',
+    key: 'supplierCity',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
-    title: <HeaderCell title="Customer PAN" className={'font-extrabold'} />,
-    dataIndex: 'customerPAN',
-    key: 'customerPAN',
+    title: <HeaderCell title="Supplier Class" className={'font-extrabold'} />,
+    dataIndex: 'supplierClass',
+    key: 'supplierClass',
     width: 20,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   }, {
-    title: <HeaderCell title="Customer Status" className={'font-extrabold'} />,
-    dataIndex: 'customerStatus',
-    key: 'customerStatus',
+    title: <HeaderCell title="Supplier State" className={'font-extrabold'} />,
+    dataIndex: 'supplierState',
+    key: 'supplierState',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
