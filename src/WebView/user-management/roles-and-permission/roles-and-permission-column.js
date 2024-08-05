@@ -72,7 +72,6 @@ export const GenerateBadge = (items) => {
                 permissions[perm] ? (
                   <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
                     <Badge renderAsDot className={badgeColors[perm]} />
-                    {/* <Text className={' font-semibold '}>{perm.charAt(0).toUpperCase() + perm.slice(1)}</Text> */}
                   </div>
                 ) : null
               )}

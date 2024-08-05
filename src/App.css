@@ -48,7 +48,7 @@
     /* primary/brand colors */
     /* ----------------------------------- */
     --primary-lighter: 227 227 227; /* #e3e3e3 */
-    --primary-default: 17 17 17; /* #111111 */
+    --primary-default: 153 12 12; /* #111111 */
     --primary-dark: 0 0 0; /* #000000 */
     --primary-foreground: 255 255 255; /* #ffffff */
 
@@ -1370,6 +1370,12 @@ div[style="z-index: 1000001;"],
   @apply !w-4 !bg-gray-400;
 }
 
+
+.onfoucsnone{
+  box-shadow: none !important;
+  padding: 0px -80px;
+
+}
 .login{
   background: #ccc;
   background-image: url('./Assets/loginbg.png');
@@ -1378,3 +1384,15 @@ div[style="z-index: 1000001;"],
   background-size: cover;
   background-blend-mode: multiply;
 }
+
+.bg-lightpink {
+  background-color: #FFF2F2;
+}
+.text-theme {
+  color: #990C0C !important;
+}
+.iconboxout {
+  background-color: #990C0C24;
+}
+
+

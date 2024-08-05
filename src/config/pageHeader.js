@@ -21,9 +21,22 @@ export const pageHeader = [
             { href: routes?.panel?.master?.buildingsMaster, name: 'Building Master' },
             { name: 'List' }
         ],
-    }, {
+    },
+     {
         title: 'Reader Master', breadcrumb: [
             { href: routes?.panel?.master?.readerMaster, name: 'Reader Master' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Reader Replacement', breadcrumb: [
+            { href: routes?.panel?.master?.readerMaster, name: 'Reader Replacement' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Reader Health', breadcrumb: [
+            { href: routes?.panel?.master?.readerHealthMaster, name: 'Reader Health' },
             { name: 'List' }
         ],
     },
@@ -64,5 +77,41 @@ export const pageHeader = [
     {
         title: 'Reports', breadcrumb: [],
     },
+    {
+        title: 'Inbound', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundOrder, name: 'Inbound' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Inbound / Web Receving', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundOrder, name: 'Web Receving' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Inbound / Create', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundCreate, name: 'Inbound Create' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound', breadcrumb: [
+            { href: routes?.panel?.outbond?.outOrder, name: 'Outbound' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound / Web Picking', breadcrumb: [
+            { href: routes?.panel?.outbond?.webPicking, name: 'Web Picking' },
+            { name: 'List' }
+        ],
+    },
+    {
+        title: 'Outbound / Create', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundCreate, name: 'Outbound Create' },
+            { name: 'List' }
+        ],
+    },
 
-]
+] 

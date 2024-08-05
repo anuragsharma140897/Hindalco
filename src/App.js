@@ -11,22 +11,21 @@ import GlobalDrawer from './shared/drawer-views/container';
 import GlobalModal from './shared/modal-views/container';
 import Login from './WebView/login/login';
 import GlobalConfirmBox from './shared/confirm/container';
-import { useSelector } from 'react-redux';
 
 export default function App() {
-  const reduxAuth = useSelector(state => state.AuthReducer)
+  const isLogin = true
+
   return (
     <div>
-      {!reduxAuth?.doc ? <>
-        <Layout />
-        <GlobalDrawer />
-        <GlobalModal />
-        <GlobalConfirmBox />
-      </> : <Login />}
-      {/* <Layout/>
-      <GlobalDrawer />
-      <GlobalModal />
-      <GlobalConfirmBox/> */}
+      {
+        isLogin ? <>
+          <Layout />
+          <GlobalDrawer />
+          <GlobalModal />
+          <GlobalConfirmBox />
+        </> :
+          <Login />
+      }
 
     </div>
   )

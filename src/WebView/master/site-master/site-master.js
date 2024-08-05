@@ -11,6 +11,7 @@ import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 export default function SiteMaster() {
   const { openModal, closeModal } = useModal();
   const columns = useMemo(() => getSiteMasterColumns({ userData, openModal }))
+
   const { visibleColumns } = useColumn(columns);
 
   return (

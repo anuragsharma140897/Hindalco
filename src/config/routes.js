@@ -1,7 +1,7 @@
 
 export const routes = {
   panel: {
-    dashboard: '/dashboard',
+    dashboard: '/',
     master: {
       users: '/master/users',
       rolesAndPermission: '/master/roles-and-permission',
@@ -19,5 +19,15 @@ export const routes = {
       generalMaster : '/master/general',
       readerBuildingMappingMaster : '/master/reader-builing-mapping',
     },
-  }
+    inbond: {
+      inboundOrder: '/inbond/inbound-order',
+      webReceiving: '/inbond/web-receiving',
+      inboundCreate : '/inbond/inbound-create',
+    },
+    outbond: {
+      outboundOrder: '/outbond/outbound-order',
+      webPicking: '/outbond/web-picking',
+      outboundCreate : '/outbond/outbound-create',
+    },
+  },
 };

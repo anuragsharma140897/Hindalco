@@ -8,13 +8,15 @@ export default function Header() {
     let theme = 'light'
 
     return (
-        <StickyHeader className="fixed start-0 top-0 z-[990] w-full bg-primary dark:bg-gray-100/50 dark:backdrop-blur-3xl 2xl:py-5 3xl:px-8 4xl:px-10">
+          <div className="fixed start-0 top-0 z-[990]">
             <div className="flex w-full max-w-2xl items-center">
-                <HamburgerButton
-                    className="text-gray-200 dark:text-gray-600"
+              <div className="p-5">
+              <HamburgerButton
+                    className="text-primary dark:text-gray-600"
                     view={<Sidebar className="static w-full 2xl:w-full" />}
                 />
-                <label
+              </div>
+                {/* <label
                     aria-label="Site Logo"
                     className="me-4 w-9 shrink-0 text-gray-900 hover:text-gray-800 lg:me-5 xl:hidden"
                 >
@@ -27,8 +29,8 @@ export default function Header() {
                     >
                         <Logo className="max-w-[155px] invert dark:invert-0" />
                     </label>
-                </div>
+                </div> */}
             </div>
-        </StickyHeader>
+        </div>
     );
 }

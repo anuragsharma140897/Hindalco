@@ -1,7 +1,11 @@
 import React from 'react'
+import UserManagementIcon from '../../../Constant/Icons/user-management-icon'
 
 export default function ReaderBuildingMappingMaster() {
   return (
-    <div>reader-building-mapping-master</div>
+    <div>
+      <UserManagementIcon/>
+
+    </div>
   )
 }

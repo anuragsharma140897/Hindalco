@@ -16,8 +16,17 @@ import ReaderBuildingMappingMaster from '../WebView/master/reader-building-mappi
 import CreateProduct from '../WebView/master/product-master/create/create-product'
 import CreateCustomer from '../WebView/master/customer-master/create/create-customer'
 import CreateSupplier from '../WebView/master/supplier-master/create/create-supplier'
+import InboundOrder from '../WebView/inbound/inbound-order/inbound-order'
+import WebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
+import InboundWebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
+import OutboundOrder from '../WebView/outbound/outbound-order/outbound-order'
+import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-picking'
+import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
+import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 
 export default function CustomRoutes() {
+
+
     return (
         <Routes>
             <Route path={routes?.panel?.master?.users} exact element={<UserManagement />} />
@@ -35,7 +44,12 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
             <Route path={routes?.panel?.master?.readerBuildingMappingMaster} exact element={<ReaderBuildingMappingMaster />} />
-            
+            <Route path={routes?.panel?.inbond?.inboundOrder} exact element={<InboundOrder />} />
+            <Route path={routes?.panel?.inbond?.webReceiving} exact element={<InboundWebReceiving />} />
+            <Route path={routes?.panel?.inbond?.inboundCreate} exact element={<CreateInbound />} />
+            <Route path={routes.panel?.outbond?.outboundOrder} exact element={<OutboundOrder />} />
+            <Route path={routes?.panel?.outbond?.webPicking} exact element={<OutboundWebPicking />} />
+            <Route path={routes?.panel?.outbond?.outboundCreate} exact element={<CreateOutbound />} />
         </Routes>
     )
 }
