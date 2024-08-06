@@ -1,8 +1,21 @@
-.rc-table-thead tr .rc-table-cell{
-    color: #000;
-}
-
-.rizzui-input-container{
+.rizzui-input-container {
     padding: 10px;
     height: 3rem;
 }
+
+table { 
+    
+    /* overflow: hidden; */
+}
+/* table thead { 
+    font-weight: bold; 
+    background-color: #516eb1; 
+    color: white; 
+}
+
+table tr:nth-child(even) { 
+    background-color: silver; 
+}
+table tr td { 
+    padding: .3em; 
+} */

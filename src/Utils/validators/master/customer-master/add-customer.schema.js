@@ -21,7 +21,7 @@ export const addCustomerSchema = z.object({
   [customerMasterVariable?.customerContact]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerContact, ['required'])}),
   [customerMasterVariable?.customerCST]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerCST, ['required'])}),
   [customerMasterVariable?.customerPAN]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerPAN, ['required'])}),
-  [customerMasterVariable?.customerStatus]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerStatus, ['required'])}),
+  [customerMasterVariable?.customerStatus]: z.string({message:GenerateMessage(customerMasterVariable?.customerStatus, ['required'])}),
   [customerMasterVariable?.customerVAT]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerVAT, ['required'])}),
   [customerMasterVariable?.customerTAN]: z.string().min(6, {message:GenerateMessage(customerMasterVariable?.customerTAN, ['required'])}),
 

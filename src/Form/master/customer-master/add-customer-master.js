@@ -4,16 +4,15 @@ import { useMedia } from '../../../Hooks/use-media';
 import { Form } from '../../../Component/ui/form';
 import { addCustomerSchema } from '../../../Utils/validators/master/customer-master/add-customer.schema';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import { Button } from 'rizzui';
+import { Button, Select } from 'rizzui';
 import CustomSelect from '../../../Component/ui/form/select/custom-select';
 import { StatusOptions } from '../../../Constant/Common/Common';
 import SubmitButton from '../../../Component/ui/form/button/SubmitButton';
 import { customerMasterVariable } from '../../../Constant/variables/master/customer-master/customer-master.variable';
+import { Controller } from 'react-hook-form';
 
 const initialValues = {
-    siteName: '',
-    building: '',
-    area: ''
+
 };
 
 export default function AddCustomeMaster({ closeModal }) {
@@ -24,10 +23,12 @@ export default function AddCustomeMaster({ closeModal }) {
 
     };
 
+
+
     return (
         <div className='p-10 bg-white'>
             <Form validationSchema={addCustomerSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                {({ register, formState: { errors } }) => (
+                {({ register, control, formState: { errors } }) => (
                     <div className="space-y-5 lg:space-y-6">
                         <div className='grid grid-cols-4 gap-4'>
                             <CustomInput type={'text'} label={'Customer Code'} register={register} fieldName={customerMasterVariable?.customerCode} errors={errors} />
@@ -55,13 +56,13 @@ export default function AddCustomeMaster({ closeModal }) {
                         </div>
                         <div className='grid grid-cols-4 gap-4'>
                             <CustomInput type={'text'} label={'Customer PAN'} register={register} fieldName={customerMasterVariable?.customerPAN} errors={errors} />
-                            <CustomSelect type={'text'} title={'Customer Status'} options={StatusOptions} register={register} fieldName={customerMasterVariable?.customerStatus} errors={errors} />
+                            <CustomSelect type={'text'} title={'Customer Status'} options={StatusOptions} control={control} fieldName={customerMasterVariable?.customerStatus} errors={errors} />
                             <CustomInput type={'text'} label={'Customer VAT'} register={register} fieldName={customerMasterVariable?.customerVAT} errors={errors} />
                             <CustomInput type={'text'} label={'Customer TAN'} register={register} fieldName={customerMasterVariable?.customerTAN} errors={errors} />
                         </div>
                         <div className='grid grid-cols-5 gap-3 justify-end'>
                             <Button className="w-full" variant="flat" type="button" size={isMedium ? 'lg' : 'md'} onClick={() => closeModal()}> Cancel </Button>
-                            <SubmitButton title={'Save'}/>
+                            <SubmitButton title={'Save'} />
                         </div>
                     </div>
                 )}

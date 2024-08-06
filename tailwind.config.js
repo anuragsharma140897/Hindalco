@@ -53,9 +53,10 @@ const config = {
           main : '#F7D552'
         },
         red: {
-          lighter: "rgb(var(--red-lighter) / <alpha-value>)",
+          lighter: "#FFF2F2",
           DEFAULT: "rgb(var(--red-default) / <alpha-value>)",
           dark: "rgb(var(--red-dark) / <alpha-value>)",
+          main:'#990C0C'
         },
         orange: {
           lighter: "rgb(var(--orange-lighter) / <alpha-value>)",
