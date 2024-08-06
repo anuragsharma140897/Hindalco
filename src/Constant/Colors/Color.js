@@ -7,7 +7,8 @@ export const Colors = {
     ACTIVE :"#45AB15",
     SUBICONBG :'#D4D4D4',
     CIRCULERPINK :'#990C0C24',
-    THEMEPINK :'#FFF2F2'
+    THEMEPINK :'#FFF2F2',
+    LOGINTEXT :'#F1BBBB'
 
  
  }

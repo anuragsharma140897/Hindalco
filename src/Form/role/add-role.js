@@ -75,10 +75,8 @@ export default function UserForm({ closeModal }) {
     }
 
     let access;
-
-
     const handleChildToggle = (index) => {
-        setExpandedIndex(index === expandedIndex ? null : index); // Toggle the expanded item
+        setExpandedIndex(index === expandedIndex ? null : index); 
     };
 
     if (reduxRolesAndPermission?.doc) {

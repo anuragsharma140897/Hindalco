@@ -10,8 +10,6 @@ function HeaderPannel() {
 
   useEffect(() => {
     setHeading(getHeadingFromPathname());
-    let x = getHeadingFromPathname();
-    console.log("x",x);
   }, [window.location.pathname]);
 
   return (
