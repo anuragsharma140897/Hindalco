@@ -3,31 +3,19 @@ import cn from '../../Utils/class-names';
 import { Empty, Text } from 'rizzui';
 
 const classes = {
-  table:
-    '[&_.rc-table-content]:overflow-x-auto [&_table]:w-full [&_.rc-table-row:hover]:bg-gray-50 [&_.rc-table-row-expand-icon-cell]:w-14 ',
-  thead:
-    '[&_thead]:text-left [&_thead]:rtl:text-right [&_th.rc-table-cell]:uppercase [&_th.rc-table-cell]:text-xs [&_th.rc-table-cell]:font-semibold [&_th.rc-table-cell]:tracking-wider [&_th.rc-table-cell]:text-gray-500 ',
-  tCell:
-    '[&_.rc-table-cell]:px-3 [&_th.rc-table-cell]:py-3 [&_td.rc-table-cell]:py-4',
-  variants: {
-    classic:
-      '[&_thead]:bg-gray-100 [&_.rc-table-container]:border-x [&_.rc-table-container]:border-muted/70 [&_td.rc-table-cell]:border-b [&_td.rc-table-cell]:border-muted/70 [&_thead]:border-y [&_thead]:border-muted/70',
-    modern:
-      '[&_thead_th]:bg-gray-100 [&_td.rc-table-cell]:border-b [&_td.rc-table-cell]:border-muted/70 [&_thead_.rc-table-row-expand-icon-cell]:bg-gray-100',
-    minimal:
-      '[&_thead_th]:bg-gray-100 [&_thead_th:first-child]:rounded-ss-lg [&_thead_th:first-child]:rounded-es-lg [&_thead_th:last-child]:rounded-se-lg [&_thead_th:last-child]:rounded-ee-lg [&_thead_.rc-table-row-expand-icon-cell]:bg-gray-100',
-    elegant:
-      '[&_thead]:border-y [&_thead]:border-muted/70 [&_td.rc-table-cell]:border-b [&_td.rc-table-cell]:border-muted/70',
-    retro:
-      '[&_thead]:border-y [&_thead]:border-muted/70 [&_tbody_tr:last-child_td.rc-table-cell]:border-b [&_tbody_tr:last-child_td.rc-table-cell]:border-muted/70',
-  },
+  table : `[&_table]:w-full  [&_table]:rounded-[14px] [&_table]:overflow-hidden	[&_table]:bg-white`,
+  thead : `[&_thead]:text-left [&_thead]:bg-red-main [&_thead]:text-white`,
+  tcell : `[&_.rc-table-cell]:px-3 [&_th.rc-table-cell]:py-2 [&_td.rc-table-cell]:py-2`,
   striped:
-    '[&_.rc-table-row:nth-child(2n)_.rc-table-cell]:bg-gray-100/50 [&_.rc-table-row:hover]:bg-transparent',
+    '[&_.rc-table-row:hover]:bg-red-lighter [&_.rc-table-row:hover]:duration-100',
+
+  
 };
 
-export default function Table({ striped, variant = 'elegant', emptyText, className, ...props }) {
+export default function Table({ striped, variant = 'retro', emptyText, className, ...props }) {
   return (
-    <RcTable className={cn(classes.table, classes.thead, classes.tCell, classes.variants[variant], striped && classes.striped, className)}
+    // <RcTable className={cn(classes.table, classes.thead, classes.tCell, classes.variants[variant], striped && classes.striped, className,' rounded-2xl')}
+    <RcTable  className={cn(classes?.table, classes?.thead, classes?.tcell, classes?.striped)}
       emptyText={
         emptyText || (
           <div className="py-5 text-center lg:py-8">

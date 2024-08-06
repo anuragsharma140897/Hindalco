@@ -17,17 +17,18 @@ export default function ControlledTable({ disablePagination, columns, className,
     dispatch(setPagination(json))
   }
   return (
-    <div className='bg-white pb-5 rounded-md'>
-      <div className="relative">
-        <Table data={data} scroll={{ x: 1300 }} rowKey={(record) => record._id} className={cn(className)} columns={columns} />
+    <div className=''>
+      <div className="relative ">
+        <Table  data={data} scroll={{ x: 1300 }} rowKey={(record) => record._id} className={cn(className)} columns={columns} />
       </div>
-      {disablePagination ? null : <TablePagination
+      
+      {/* {disablePagination ? null : <TablePagination
         current={reduxPagination?.doc?.current}
         total={reduxPagination?.doc?.total}
         pageSize={reduxPagination?.doc?.pageSize}
         onChange={handlePaginate}
         paginatorClassName={paginatorClassName}
-      />}
+      />} */}
     </div>
   )
 }

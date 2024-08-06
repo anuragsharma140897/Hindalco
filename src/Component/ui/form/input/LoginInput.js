@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Colors } from '../../../../Constant/Colors/Color';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-function LoginInput({ icon, placeholder, ispassword }) {
+function LoginInput({ icon, placeholder, ispassword ,name}) {
     const [changeType, setType] = useState(ispassword ? 'password' : 'text');
+   
 
     return (
         <div>
@@ -14,6 +15,7 @@ function LoginInput({ icon, placeholder, ispassword }) {
                         className="w-full outline-none border-0 rounded-xl text-black" 
                         placeholder={placeholder} 
                         type={changeType} 
+
                     />
                     {ispassword && (
                         changeType === "password" 

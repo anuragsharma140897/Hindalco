@@ -17,7 +17,7 @@ export default function CustomerMaster() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Customer Master'} btnText={'Create'} href={routes?.panel?.master?.createProduct} disbleExport />
+      <PageHeader metaTitle={'Customer Master'} btnText={'Create'} href={routes?.panel?.master?.createCustomer} disbleExport />
       <ControlledTable
         variant="modern"
         isLoading={false}

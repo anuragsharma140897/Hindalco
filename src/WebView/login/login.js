@@ -7,6 +7,7 @@ import LoginPasswordIcon from '../../Constant/Icons/login-password-icon'
 import LoginUserIcon from '../../Constant/Icons/login-user-icon'
 
 function login() {
+  
   return (
     <div style={{ backgroundImage: `url(${banner})`, backgroundSize: "100%  100% " }}>
       <div className='h-screen' style={{ background: 'rgba(0,0,0,0.3)' }}>
@@ -20,14 +21,12 @@ function login() {
                   <div style={{ color: Colors.LOGINTEXT }} className='mt-3 text-base'>Welcome to Track and Trace System Using RFID</div>
                 </div>
                 <div className='mt-10 flex flex-col gap-y-5'>
-                  <LoginInput icon={<LoginUserIcon/>} placeholder="Username" />
-                  <LoginInput icon={<LoginPasswordIcon/>} placeholder="Password" ispassword />
-
+                  <LoginInput icon={<LoginUserIcon/>} placeholder="Username" name={"username"} />
+                  <LoginInput icon={<LoginPasswordIcon/>} placeholder="Password" ispassword  name={"password"}/>
                 </div>
                 <div>
                   <button className=' text-xl w-full mt-10 text-red-900 py-4 rounded-2xl bg-white font-extrabold '>Login</button>
                 </div>
-
               </div>
             </div>
           </div>
