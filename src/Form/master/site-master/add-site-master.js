@@ -3,30 +3,31 @@ import { Form } from '../../../Component/ui/form'
 import { siteMasterSchema } from '../../../Utils/validators/master/site-master/site-master.schema'
 import { useDispatch } from 'react-redux';
 import { useMedia } from '../../../Hooks/use-media';
-import { Button, Input, Password, Switch } from 'rizzui';
+import { Button, Input } from 'rizzui';
+import { addSite } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
 
 const initialValues = {
     siteName: '',
-    building: '',
+    buildings: '',
     area: ''
 };
 
 export default function AddSiteMaster({ closeModal }) {
-    const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
     const onSubmit = (data) => {
-        // console.log('Sign in data ->', data);
-        // HitApi(initialValues, LoginApi).then((res) => {
-        //     console.log('res', res);
-        //     if (res) {
-        //         dispatch(setAuth(res))
-        //     }
-        // })
+        console.log('Sign in data ->', data);
+        HitApi(data, addSite).then((res) => {
+            console.log('res', res);
+            alert(res.message)
+          
+        })
 
     };
 
     return (
         <div className='p-10'>
+              <div className='text-xl mb-2 font-bold text-center'>Add Site</div>
             <Form validationSchema={siteMasterSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
                 {({ register, formState: { errors } }) => (
                     <div className="space-y-5 lg:space-y-6">

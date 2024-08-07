@@ -16,7 +16,7 @@ export default function SiteMaster() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal}/>} customSize={400} />
+      <PageHeader  btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal}/>} customSize={400} />
       <ControlledTable
         variant="modern"
         isLoading={false}

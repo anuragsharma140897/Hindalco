@@ -17,7 +17,7 @@ export default function ProductMaster() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Product Master'} btnText={'Create'} href={routes?.panel?.master?.createProduct} disbleExport />
+      <PageHeader btnText={'Create'} href={routes?.panel?.master?.createProduct} disbleExport />
       <ControlledTable
         variant="modern"
         isLoading={false}

@@ -85,7 +85,6 @@ export default function UserForm({ closeModal }) {
             const permissions = item[itemKey];
             const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
 
-            console.log("item", item[itemKey].child);
             return (
                 <div>
 
@@ -97,7 +96,6 @@ export default function UserForm({ closeModal }) {
                               {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
                           </div>
                             }
-                    {console.log("itemchos", item.child)}
                         </div>
 
                         <div>
@@ -125,10 +123,10 @@ export default function UserForm({ closeModal }) {
                     {
                        expandedIndex === index && item[itemKey].child?.map((ele, childIndex) => {
                             return (
-                                <div key={childIndex} className='flex items-center gap-x-4 '>
+                                <div key={childIndex} className='flex items-center justify-between '>
                                     <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
                                     {console.log("ele", ele)}
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-x-2">
                                         {
                                             Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
                                                 return (

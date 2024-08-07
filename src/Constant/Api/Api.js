@@ -1,5 +1,6 @@
-export const BaseUrl = 'http://192.168.1.45:8080/api/v1/'
+export const BaseUrl = 'http://192.168.1.64:8082/api/v1/'
 export const LoginApi = BaseUrl+'login'
 export const ReaderDataApi = BaseUrl+'reader'
 export const addRole = BaseUrl+'addRole'
 export const getRoles = BaseUrl+'getRoles'
+export const addSite = BaseUrl+'addSite'

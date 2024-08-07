@@ -129,6 +129,8 @@ export const getHeadingFromPathname = () => {
             return "General Master";
         case "/master/reader-builing-mapping":
             return "Reader Builing Mapping Master";
+            case "/master/product/create":
+                return "Product Master / Create";
         default:
             return "";
     }

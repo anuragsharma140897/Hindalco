@@ -59,7 +59,7 @@ function CreateInbound() {
                                 <div className='grid grid-cols-4 gap-4 items-end'>
                                     <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
                                     <CustomSelect options={[]} title={'Line ID'} register={register} fieldName={'lineId'} errors={errors} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Product Code" placeholder="Enter Product code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
+                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Product Code" placeholder=" code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
                                     <CustomSelect options={[]} title={'Condition'} register={register} fieldName={'lineId'} errors={errors} />
                                     <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
                                     <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />

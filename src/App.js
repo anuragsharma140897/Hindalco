@@ -13,7 +13,7 @@ import Login from './WebView/login/login';
 import GlobalConfirmBox from './shared/confirm/container';
 
 export default function App() {
-  const isLogin = false
+  const isLogin = true
 
   return (
     <div>
