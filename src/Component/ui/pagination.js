@@ -199,7 +199,7 @@ export default function Pagination({
           rounded={rounded}
           outline={outline}
           className={nextIconClassName}
-          onChange={()=>console.log('NextIcon Pressed')}
+
         />
       }
       prevIcon={

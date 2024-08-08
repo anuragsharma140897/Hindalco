@@ -17,9 +17,9 @@ export default function LoginForm() {
     const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
     const onSubmit = (data) => {
-        console.log('Sign in data ->', data);
+
         HitApi(initialValues, LoginApi).then((res) => {
-            console.log('res', res);
+
             if (res) {
                 dispatch(setAuth(res))
             }

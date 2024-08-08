@@ -19,7 +19,7 @@ const SidebarMenu = ({ colorPresetName, theme }) => {
         const isActive = pathname === item.href;
         const isDropdownOpen = Boolean(item?.dropdownItems?.some(dropdownItem => dropdownItem.href === pathname));
 
-        console.log("isDropdownOpen",isDropdownOpen);
+
 
         const renderItem = (href, isActive, children) => (
 

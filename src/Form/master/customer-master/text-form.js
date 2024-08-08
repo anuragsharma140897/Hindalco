@@ -13,7 +13,7 @@ export default function SelectWithForm() {
   });
 
   const onSubmit = (data) => {
-    console.log("Submitted data", data);
+
   };
 
   return (

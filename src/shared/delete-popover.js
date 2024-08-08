@@ -18,8 +18,8 @@ export default function DeletePopover({ title, description, onDelete }) {
             </Title>
             <Text className="mb-2 leading-relaxed text-gray-500"> {description} </Text>
             <div className="flex items-center justify-end ">
-              <Button size="sm" className="me-1.5 h-7 bg-red-600" onClick={onDelete}> Yes </Button>
-              <Button size="sm" variant="outline" className="h-7" onClick={() => setOpen(false)}> No </Button>
+              <Button size="sm" variant="outline" className="me-1.5 h-7 hover:bg-red-main hover:text-white" onClick={onDelete}> Yes </Button>
+              <Button size="sm" variant="outline" className="h-7 hover:!border-gray-900 hover:text-gray-700" onClick={() => setOpen(false)}> No </Button>
             </div>
           </div>
         )}

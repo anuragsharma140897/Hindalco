@@ -6,7 +6,7 @@ import { SET_AUTH, setAuth } from '../../../../Store/Action/Auth/Sample/AuthActi
 function LoginInput({ placeholder, type, name, error }) {
     const AuthReducer = useSelector(state => state.AuthReducer)
 
-    console.log("AuthReducer",AuthReducer);
+
     const dispatch = useDispatch()
 
     const onChnage = (value) => {

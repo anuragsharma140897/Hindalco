@@ -27,9 +27,9 @@ function AddUserMaster({ closeModal }) {
     const reduxPagination = useSelector(state => state.PaginationReducer)
 
     const onSubmit = (data) => {
-        console.log('Sign in data ->', data);
+
         // HitApi(initialValues, LoginApi).then((res) => {
-        //     console.log('res', res);
+
         //     if (res) {
         //         dispatch(setAuth(res))
         //     }
@@ -42,7 +42,7 @@ function AddUserMaster({ closeModal }) {
             limit: 2 || 10,
         }
         HitApi(json, getRoles).then((res) => {
-            console.log("res", res);
+
             setRoleData(res.doc)
         })
     }

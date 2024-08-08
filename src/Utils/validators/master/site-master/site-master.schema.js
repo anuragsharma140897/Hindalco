@@ -1,6 +1,10 @@
 import { z } from 'zod';
+import { siteMasterVariable } from '../../../../Constant/variables/master/site-master/site-master.variable';
+import { GenerateMessage } from '../../../../config/message';
 
 // form zod validation schema
 export const siteMasterSchema = z.object({
-    siteName: z.string().min(6, {message:'Site Name is Required'})
+    [siteMasterVariable?.siteName]: z.string().min(6, { message: GenerateMessage(siteMasterVariable?.siteName, ['required']) }),
+    [siteMasterVariable?.building]: z.optional(z.string()),
+    [siteMasterVariable?.area]: z.optional(z.string()),
 });

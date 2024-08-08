@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { FaBell } from "react-icons/fa";
 import { Colors } from '../Constant/Colors/Color';
 import { getHeadingFromPathname } from '../Utils/Utils';
+import { useTranslation } from 'react-i18next';
 
 function HeaderPannel() {
   const [heading, setHeading] = useState("");
-
-
+  const { t } = useTranslation();
 
   useEffect(() => {
     setHeading(getHeadingFromPathname());
     let x = getHeadingFromPathname();
-    console.log("x",x);
-  }, [window.location.pathname]);
 
+  }, [window.location.pathname]);
+  
   return (
     <div className='px-5 py-3 bg-[#f1f1f1] border border-l-0 mb-3'>
       <div className='flex justify-between items-center font-bold text-lg'>
-        <div>{heading}</div>
+        <div>{t(heading)}</div>
         <div>
           <div className='flex gap-x-5 items-center'>
             <div>

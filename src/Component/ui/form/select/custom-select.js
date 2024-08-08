@@ -14,7 +14,7 @@ function renderOptionDisplayValue(option) {
 export default function CustomSelect({ options, dropdownClassName, className, suffixClassName, title, fieldName, placeholder, register, errors, selectClassName, control, ...props }) {
     const [value, setValue] = useState(null);
 
-    console.log('errors', errors);
+
 
     return (
         <div>

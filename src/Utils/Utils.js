@@ -99,7 +99,7 @@ export const AddChildRolePermission = (arr, itemKey) => {
 
 export const getHeadingFromPathname = () => {
     const pathname = window.location.pathname;
-    console.log({ pathname });
+
     switch (pathname) {
         case "/":
             return "Dashboard"

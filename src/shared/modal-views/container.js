@@ -8,15 +8,12 @@ export default function GlobalModal() {
   const pathname = usePathname();
   useEffect(() => {
     closeModal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  console.log('title', title);
-
   return (
-    <Modal isOpen={isOpen} onClose={closeModal} customSize={customSize} overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-lg" containerClassName="dark:bg-gray-100" className="z-[9999]">
+    <Modal isOpen={isOpen} onClose={()=>{}} customSize={customSize} overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-lg" containerClassName="dark:bg-gray-100" className="z-[9999]">
       {title ? <div className="m-auto px-7 pt-6">
-        <div className={` ${titleClass}`}> <Text as="h3" className={`font-bold`}>{title}</Text></div>
+        <div className={` ${titleClass} text-center`}> <Text as="h3" className={`font-bold`}>{title}</Text></div>
       </div> : null}
       {view}
     </Modal>

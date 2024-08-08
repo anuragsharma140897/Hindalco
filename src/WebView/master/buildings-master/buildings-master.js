@@ -9,9 +9,8 @@ import AddBuildingMaster from '../../../Form/master/building-master/add-building
 import { buildingData } from '../../../dummyData/building-data'
 
 export default function BuildingsMaster() {
-
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getBuildingMasterColumns({ buildingData, openModal }))
+  const columns = useMemo(() => getBuildingMasterColumns({ buildingData, openModal, closeModal }))
   const { visibleColumns } = useColumn(columns);
 
   return (

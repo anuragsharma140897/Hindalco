@@ -10,13 +10,13 @@ import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 
 export default function SiteMaster() {
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getSiteMasterColumns({ userData, openModal }))
+  const columns = useMemo(() => getSiteMasterColumns({ userData, openModal, closeModal }))
 
   const { visibleColumns } = useColumn(columns);
 
   return (
     <div>
-      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal}/>} customSize={400} />
+      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal}/>} title={'Add Site'} customSize={400} />
       <ControlledTable
         variant="modern"
         isLoading={false}

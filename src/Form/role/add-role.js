@@ -43,7 +43,7 @@ export default function UserForm({ closeModal }) {
             permissions: t_access
         }
         HitApi(json, addRole).then((res) => {
-            console.log("res", res)
+
             if (res.message === "Role added successfully" && res.status === 200) {
                 alert(res.message)
 
@@ -87,7 +87,7 @@ export default function UserForm({ closeModal }) {
             const permissions = item[itemKey];
             const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
 
-            console.log("item", item[itemKey].child);
+
             return (
                 <div>
 
@@ -99,7 +99,7 @@ export default function UserForm({ closeModal }) {
                               {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
                           </div>
                             }
-                    {console.log("itemchos", item.child)}
+
                         </div>
 
                         <div>
@@ -129,7 +129,7 @@ export default function UserForm({ closeModal }) {
                             return (
                                 <div key={childIndex} className='flex items-center gap-x-4 '>
                                     <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
-                                    {console.log("ele", ele)}
+
                                     <div className="flex gap-2">
                                         {
                                             Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
@@ -153,7 +153,7 @@ export default function UserForm({ closeModal }) {
         });
     }
 
-    console.log("reduxRolesAndPermission", reduxRolesAndPermission);
+
 
     return (
         <div className='p-10'>

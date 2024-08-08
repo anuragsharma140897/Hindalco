@@ -11,9 +11,10 @@ import GlobalDrawer from './shared/drawer-views/container';
 import GlobalModal from './shared/modal-views/container';
 import Login from './WebView/login/login';
 import GlobalConfirmBox from './shared/confirm/container';
+import "./i18n";
 
 export default function App() {
-  const isLogin = true
+  const isLogin = false
 
   return (
     <div>

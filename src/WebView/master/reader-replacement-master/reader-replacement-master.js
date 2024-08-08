@@ -11,10 +11,10 @@ export default function ReaderReplacementMaster() {
   const { openModal, closeModal } = useModal();
   const columns = useMemo(() => getReaderReplacementColumn({ readerReplacementData, openModal }))
 
-  console.log("readerReplacementData", readerReplacementData);
+
   const { visibleColumns } = useColumn(columns);
 
-  console.log("visibleColumns", visibleColumns);
+
 
 
 

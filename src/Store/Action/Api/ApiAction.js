@@ -11,7 +11,7 @@ export const HitApi = (json, api) => {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('result', result);
+
                     if (result) {
                         resolve(result)
                     }

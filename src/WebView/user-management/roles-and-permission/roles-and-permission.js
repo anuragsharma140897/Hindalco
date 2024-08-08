@@ -36,7 +36,7 @@ export default function RolesAndPermission() {
   const { openModal ,closeModal } = useModal();
   const columns = useMemo(() => getRolesAndPermissionColumns({ roleData, openModal }))
 
-  console.log("columns",columns);
+
   const { visibleColumns } = useColumn(columns);
   const reduxPagination = useSelector(state => state.PaginationReducer)
 const [data,setRoleData] = useState(null)
@@ -47,12 +47,12 @@ if(data === null){
     limit: 2 || 10,
   }
   HitApi(json,getRoles).then((res)=>{
-    console.log("res",res);
+
     setRoleData(res.doc)
   })
 }
   
-console.log("data",data);
+
   return (
     <div>
       <PageHeader metaTitle={'Role And Permission'} btnText={'Add Role'} children={<AddRolesAndPermission closeModal={closeModal}  />} />

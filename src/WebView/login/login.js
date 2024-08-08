@@ -13,21 +13,27 @@ export default function Login() {
 
   const AuthReducer = useSelector(state => state.AuthReducer)
 
-  console.log("AuthReducer",AuthReducer);
+
   const dispatch = useDispatch()
 
 
   const handleLogin = () => {
     dispatch(setAuthError({}))
-    LoginValidation(AuthReducer.doc).then((error)=>{
-      console.log("error",error);
-      dispatch(setAuthError(error))
-      if(Object.keys(error).length === 0){
-        HitApi(AuthReducer.doc,LoginApi).then((response)=>{
-          console.log("response",response);
-        })
+    // LoginValidation(AuthReducer.doc).then((error)=>{
+
+    //   dispatch(setAuthError(error))
+    //   if(Object.keys(error).length === 0){
+    //     HitApi(AuthReducer.doc,LoginApi).then((response)=>{
+
+    //     })
         
-      }
+    //   }
+    // })
+
+    console.log('AuthReducer', AuthReducer?.doc);
+    
+    HitApi(AuthReducer?.doc, LoginApi).then((res)=>{
+      console.log('login es', res);
     })
 
   }

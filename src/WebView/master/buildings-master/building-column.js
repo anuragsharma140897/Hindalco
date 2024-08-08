@@ -7,8 +7,10 @@ import ProtectIcon from '../../../Constant/Icons/protect';
 import SearchUser from '../../../shared/common/search-user';
 import { PiInfoFill } from 'react-icons/pi';
 import BuildingReaderInfo from '../../../InfoModal/building-reader-info/building-reader-info';
+import { EditScreen } from '../../../shared/edit-screen';
+import AddBuildingMaster from '../../../Form/master/building-master/add-building-master';
 
-export const getBuildingMasterColumns = ({ onDeleteItem, openModal }) => [
+export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal }) => [
   {
     title: (
       <HeaderCell title="#" />
@@ -72,8 +74,8 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal }) => [
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+          <label>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700"  onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Building Master' , AddBuildingMaster)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
@@ -82,7 +84,7 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal }) => [
           onDelete={() => onDeleteItem(row.id)}
         />
         <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
+          <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
               <ProtectIcon className="h-4 w-4" />
             </ActionIcon>

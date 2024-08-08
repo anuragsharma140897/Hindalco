@@ -11,6 +11,8 @@ import PaginationReducer from './Store/Reducer/Pagination/PaginationReducer';
 import RolesAndPermissionReducer from './Store/Reducer/RolesAndPermission/RolesAndPermissionReducer';
 import AuthReducer from './Store/Reducer/Auth/Sample/SampleReducer';
 import InventoryManagementReducer from './Store/Reducer/Inventory-management/inventory-management-reducer';
+import SiteMasterReducer from './Store/Reducer/master/site-master/site-master-reducer'
+import BuildingMasterReducer from './Store/Reducer/master/building-master/building-master-reducer';
 
 
 const rootReducer = combineReducers({
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
   PaginationReducer : PaginationReducer,
   RolesAndPermissionReducer : RolesAndPermissionReducer,
   AuthReducer : AuthReducer,
-  InventoryManagementReducer : InventoryManagementReducer
+  InventoryManagementReducer : InventoryManagementReducer,
+  SiteMasterReducer : SiteMasterReducer,
+  BuildingMasterReducer : BuildingMasterReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

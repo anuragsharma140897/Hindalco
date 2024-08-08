@@ -22,9 +22,9 @@ function CreateOutbound() {
 
 
     const onSubmit = (data) => {
-        console.log('web receving ', data);
+
         // HitApi(initialValues, LoginApi).then((res) => {
-        //     console.log('res', res);
+
         //     if (res) {
         //         dispatch(setAuth(res))
         //     }
