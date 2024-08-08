@@ -16,7 +16,7 @@ export default function SupplierMaster() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Supplier Master'} btnText={'Create'} href={routes?.panel?.master?.createSupplier} disbleExport />
+      <PageHeader btnText={'Create'} href={routes?.panel?.master?.createSupplier} disbleExport />
       <ControlledTable
         variant="modern"
         isLoading={false}

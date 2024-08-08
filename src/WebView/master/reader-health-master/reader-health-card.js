@@ -21,15 +21,15 @@ function ReaderHealthCard({ data }) {
             </div>
             <hr className='mt-3' />
             <div className='grid grid-cols-3 gap-5 mt-3'>
-                <div className='p-2 rounded-lg' style={{ background: Colors.DEFAULTBG }}>
+                <div className='p-2 rounded-lg' style={{ background: Colors.THEMEPINK }}>
                     <div className='text-xs text-black' >Up Time</div>
                     <div className='text-xs font-semibold text-black ' >{data.upTime}</div>
                 </div>
-                <div className='p-2 rounded-lg' style={{ background: Colors.DEFAULTBG }}>
+                <div className='p-2 rounded-lg' style={{ background: Colors.THEMEPINK }}>
                     <div className='text-xs text-black' >Down Time</div>
                     <div className='text-xs font-semibold text-black ' >{data?.downTime}</div>
                 </div>
-                <div className='p-2 rounded-lg' style={{ background: Colors.DEFAULTBG }}>
+                <div className='p-2 rounded-lg' style={{ background: Colors.THEMEPINK }}>
                     <div className='text-xs text-black' >Active</div>
                     <div className='text-xs font-semibold text-black ' >{data.lastActive}</div>
                 </div>

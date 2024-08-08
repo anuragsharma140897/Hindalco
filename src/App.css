@@ -1396,3 +1396,20 @@ div[style="z-index: 1000001;"],
 }
 
 
+
+
+
+input[type="text"] {
+  --tw-shadow: none;
+}
+
+input[type="text"]::before {
+  --tw-shadow: none;
+}
+input[type="password"] {
+  --tw-shadow: none;
+}
+
+input[type="password"]::before {
+  --tw-shadow: none;
+}

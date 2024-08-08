@@ -75,10 +75,8 @@ export default function UserForm({ closeModal }) {
     }
 
     let access;
-
-
     const handleChildToggle = (index) => {
-        setExpandedIndex(index === expandedIndex ? null : index); // Toggle the expanded item
+        setExpandedIndex(index === expandedIndex ? null : index); 
     };
 
     if (reduxRolesAndPermission?.doc) {
@@ -86,7 +84,6 @@ export default function UserForm({ closeModal }) {
             const itemKey = Object.keys(item)[0];
             const permissions = item[itemKey];
             const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
-
 
             return (
                 <div>
@@ -99,7 +96,6 @@ export default function UserForm({ closeModal }) {
                               {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
                           </div>
                             }
-
                         </div>
 
                         <div>
@@ -127,10 +123,10 @@ export default function UserForm({ closeModal }) {
                     {
                        expandedIndex === index && item[itemKey].child?.map((ele, childIndex) => {
                             return (
-                                <div key={childIndex} className='flex items-center gap-x-4 '>
+                                <div key={childIndex} className='flex items-center justify-between '>
                                     <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
-
-                                    <div className="flex gap-2">
+                                    {console.log("ele", ele)}
+                                    <div className="flex gap-x-2">
                                         {
                                             Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
                                                 return (

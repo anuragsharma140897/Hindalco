@@ -55,7 +55,7 @@ if(data === null){
 
   return (
     <div>
-      <PageHeader metaTitle={'Role And Permission'} btnText={'Add Role'} children={<AddRolesAndPermission closeModal={closeModal}  />} />
+      <PageHeader metaTitle={'Role And Permission'} btnText={'Add Role'} children={<AddRolesAndPermission closeModal={closeModal}   />} customSize={800}  />
       <PermissionTypes />
       <ControlledTable
         variant="modern"

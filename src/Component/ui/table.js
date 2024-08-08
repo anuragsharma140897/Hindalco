@@ -55,7 +55,7 @@ export function HeaderCell({ title, align = 'left', width, ellipsis, sortable, c
   }
   return (
     <div className={cn('flex items-center gap-1 ', sortable && 'cursor-pointer', handleTextAlignment(align), className)} >
-      <div {...(ellipsis && { className: 'truncate' })} {...(ellipsis && width && { style: { width } })}>
+      <div {...(ellipsis && { className: 'truncate' })} {...(ellipsis && width && { style: { width } })} >
         {title}
       </div>
     </div>

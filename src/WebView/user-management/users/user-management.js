@@ -21,7 +21,7 @@ export default function UserManagement() {
 
     return (
         <div>
-            <PageHeader metaTitle={'User Management'} btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
+            <PageHeader  btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
             <ControlledTable variant="modern" isLoading={false} showLoadingText={true} data={userData} columns={visibleColumns} className={TableClass} />
         </div>
     )
