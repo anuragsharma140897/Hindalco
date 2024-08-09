@@ -28,10 +28,6 @@ export default function UserForm({ closeModal }) {
     const isMedium = useMedia('(max-width: 1200px)', false);
     const [expandedIndex, setExpandedIndex] = useState(null); 
 
-
-    console.log("reduxRolesAndPermission",reduxRolesAndPermission);
-
-
     useEffect(() => {
 
     }, [])
@@ -46,10 +42,8 @@ export default function UserForm({ closeModal }) {
 
         console.log("json",json);
         // HitApi(json, addRole).then((res) => {
-
         //     if (res.message === "Role added successfully" && res.status === 200) {
         //         alert(res.message)
-
         //     }
         // })
     };
