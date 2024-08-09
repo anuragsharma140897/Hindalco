@@ -8,8 +8,6 @@ import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-p
 import DropDownIcon from '../../Constant/Icons/dropdown-icon';
 import DropUpIcon from '../../Constant/Icons/dropup-icon';
 import { AddChildRolePermission } from '../../Utils/Utils';
-// import { HitApi } from '../../Store/Action/Api/ApiAction';
-// import { addRole } from '../../Constant/Api/Api';
 import CommonButtton from '../../Component/ui/buttons/common-button';
 
 
