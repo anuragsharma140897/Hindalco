@@ -138,4 +138,43 @@ export const getHeadingFromPathname = () => {
     }
 }
 
-// master/customer/create
+const endpointBasedOnPermissions = {
+    USER_MANAGEMENT: {
+        read: ["/usermanagement/read"],
+        write: ["/usermanagement/write"],
+        delete: ["/usermanagement/delete"]
+    },
+    USER_VIEW: {
+        read: ["/userview/read"],
+        write: ["/userview/write"],
+        delete: ["/userview/delete"]
+    }
+};
+
+const checkPermissions = (perms)=>{
+    const allowedEndPoints = [];  // Array to hold the allowed endpoints based on the permissions.
+    const { value, permission } = perms;
+    permission.forEach((permissionItem) => {
+        const permissionKeys = Object.keys(permissionItem);
+        permissionKeys.forEach((key) => {
+            if (permissionItem[key] && endpointBasedOnPermissions[value]) {
+                allowedEndPoints.push(...endpointBasedOnPermissions[value][key]);
+            }
+        });
+    })
+    return allowedEndPoints
+}
+export const getEnpointsToPermissons =(doc) =>{
+    
+    let allowedEndPoints = [] ;
+    doc.forEach((perms,index)=>{
+        console.log("Permissions", perms.child.length)
+        allowedEndPoints.push(...checkPermissions(perms))
+        if (perms.child.length > 0) {
+            perms.child.forEach((childPerm) => {
+                allowedEndPoints.push(...checkPermissions(childPerm))
+            })
+        }
+    })
+    console.log(allowedEndPoints, "allowedEndPoints")
+}

@@ -3,28 +3,50 @@ import { SET_ROLES_AND_PERMISSION } from "../../Action/RolesAndPermission/RolesA
 const initialState = {
     doc: [
         {
-            "dashboard": {
-                read: false, write: false, delete: false, 
+          value: "USER_MANAGEMENT",
+          permission: [
+            {
+              read: false,
+              write: false,
+              delete: false
             }
-        },
-        {
-            "user management": {
-                read: false, write: false, delete: false ,
-            }
-        },
-        {
-            "Master": {
-                read: false, write: false, delete: false,
-                child: [
-                    { "Role and Permission": { read: false, write: false, delete: false } },
-                    { "Site": { read: false, write: false, delete: false } },
-                    { "Buildings": { read: false, write: false, delete: false } },
-                    { "Zone": { read: false, write: false, delete: false } },
-                ]
+          ],
+          child: [
+            {
+              value: "USER_VIEW",
+              permission: [
+                {
+                  read: false,
+                  write: false,
+                  delete: false
+                }
+              ]
             },
+            {
+              value: "USER_EDIT",
+              permission: [
+                {
+                  read: false,
+                  write: false,
+                  delete: false
+                }
+              ]
+            }
+          ]
         },
-    ],
-    timestamp: Date.now()
+        {
+          value: "REPORT_MANAGEMENT",
+          permission: [
+            {
+              read: false,
+              write: false,
+              delete: false
+            }
+          ],
+          child: []
+        }
+      ]
+      
 }
 
 const RolesAndPermissionReducer = (state = initialState, action) => {

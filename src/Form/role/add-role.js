@@ -1,4 +1,4 @@
-import {  Input, Text } from 'rizzui';
+import { Input, Text } from 'rizzui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from '../../Hooks/use-media';
 import { Form } from '../../Component/ui/form';
@@ -7,7 +7,7 @@ import { setRolesAndPermission } from '../../Store/Action/RolesAndPermission/Rol
 import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-permission.schema';
 import DropDownIcon from '../../Constant/Icons/dropdown-icon';
 import DropUpIcon from '../../Constant/Icons/dropup-icon';
-import { AddChildRolePermission } from '../../Utils/Utils';
+import { AddChildRolePermission, getEnpointsToPermissons } from '../../Utils/Utils';
 import CommonButtton from '../../Component/ui/buttons/common-button';
 
 
@@ -25,8 +25,10 @@ export const genderOption = [
 export default function UserForm({ closeModal }) {
     var dispatch = useDispatch()
     const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
+    const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
+    console.log("reduxRolesAndPermission", reduxRolesAndPermission);
     const isMedium = useMedia('(max-width: 1200px)', false);
-    const [expandedIndex, setExpandedIndex] = useState(null); 
+    const [expandedIndex, setExpandedIndex] = useState(null);
 
     useEffect(() => {
 
@@ -39,8 +41,8 @@ export default function UserForm({ closeModal }) {
             roleName: data?.roleName,
             permissions: t_access
         }
-
-        console.log("json",json);
+        getEnpointsToPermissons(t_access);
+        console.log("json", json);
         // HitApi(json, addRole).then((res) => {
         //     if (res.message === "Role added successfully" && res.status === 200) {
         //         alert(res.message)
@@ -48,99 +50,109 @@ export default function UserForm({ closeModal }) {
         // })
     };
 
-    const handleAccessChnage = (itemKey, perm, child) => {
+    const handleAccessChnage = (item, permissionKey ,permissionType, child = {}) => {
 
-
-        var t_access = reduxRolesAndPermission?.doc;
-        var element = null
-
-        if (!child) {
-           element = t_access?.find(ele => Object.keys(ele)[0] === itemKey);
-            if (element) {
-                element[itemKey][perm] = !element[itemKey][perm];
-                dispatch(setRolesAndPermission(t_access));
+        const permission_access = reduxRolesAndPermission?.doc;
+        const { isChild, childElementIndex } = child
+        if (!isChild) {
+            const permissionObject = permission_access.find((access, index) => {
+                if (access.value === permissionType) {
+                    access["index"] = index;
+                    return access
+                }
+                return null
+            } );
+            const newItem = { ...item, [permissionKey]: !item[permissionKey] }
+            const { index, ...access } = permissionObject;
+            permission_access[index] = { ...access, permission: [newItem] }
+            dispatch(setRolesAndPermission(permission_access));
+        } else {
+            const childElements = permission_access[expandedIndex].child;
+            const newItem = { ...item, [permissionKey]: !item[permissionKey] }
+            childElements[childElementIndex] = { ...childElements[childElementIndex], permission: [newItem] }
+            permission_access[expandedIndex] = {
+                ...permission_access[expandedIndex],
+                child: childElements
             }
-        }
-        else {
-             element = AddChildRolePermission(t_access, itemKey)
-            if (element) {
-                element[perm] = !element[perm];
-                dispatch(setRolesAndPermission(t_access));
-            }
+            dispatch(setRolesAndPermission(permission_access));
+           console.log(item, "item_+_+_+", permission_access, childElementIndex, permissionKey, permissionType, expandedIndex, childElements) 
         }
 
     }
 
     let access;
     const handleChildToggle = (index) => {
-        setExpandedIndex(index === expandedIndex ? null : index); 
+        setExpandedIndex(index === expandedIndex ? null : index);
     };
 
+    const getPermissionSection = (item, permissionType, child = {}) => {
+        const permissionKeys = Object.keys(item);
+        return permissionKeys.map((permissionKey, keyIndex) => {
+            return (<React.Fragment>
+                {
+                    <div key={`${keyIndex}`} className="flex items-center gap-1">
+                        <Text className={`font-semibold border py-2 px-5 rounded-lg ${item[permissionKey] ? 'bg-white' : 'bg-gray-200'} cursor-pointer ${item[permissionKey] ? colors?.[permissionKey] : null}`} onClick={() => handleAccessChnage(item, permissionKey, permissionType, child)} >
+                            {permissionKey.charAt(0).toUpperCase() + permissionKey.slice(1)}
+                        </Text>
+                    </div>
+                }
+            </React.Fragment>
+            )
+        })
+    };
+
+    const getChildPermissions = (item) => {
+        if (item.child && item.child.length === 0) return null;
+        return item?.child?.map((ele, childIndex) => {
+            console.log(item, ele, "child:")
+            const childPermissions = ele.permission;
+            return (
+                <div key={childIndex} className='flex items-center justify-between '>
+                    <div className='my-5 w-40 ' >{ele.value}</div>
+                    <div className="flex gap-x-2">
+                        {childPermissions.map((childPerm) => getPermissionSection(childPerm, ele.value, { childElementIndex: childIndex, isChild: true }))}
+                    </div>
+
+                </div>
+            )
+        })
+    }
+
     if (reduxRolesAndPermission?.doc) {
+
         access = reduxRolesAndPermission?.doc?.map((item, index) => {
+            console.log("item__", item);
+
             const itemKey = Object.keys(item)[0];
-            const permissions = item[itemKey];
-            const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
+
+            const permissions = item?.permission;
+
+            console.log("permissions", item[itemKey]);
 
             return (
                 <div>
-
                     <div key={index} className='flex justify-between'>
-                        <div className={`flex items-center justify-center  rounded-md gap-x-5 ${item[itemKey].child && "px-5 border cursor-pointer"}`} onClick={() => handleChildToggle(index)}>
-                            <Text className="capitalize">{itemKey}</Text>
-                            {item[itemKey].child &&
+                        <div className={`flex items-center justify-center  rounded-md gap-x-5 ${item?.child?.length && "px-5 border cursor-pointer"}`} onClick={() => handleChildToggle(index)}>
+                            <Text className="capitalize">{item?.value}</Text>
+                            {item?.child?.length ?
                               <div>
                               {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
-                          </div>
+                          </div> : null
                             }
                         </div>
 
                         <div>
                             {
+
                                 <div className="flex gap-x-2">
-                                    {Object.entries(permissions).map(([perm, value]) => (
-
-                                        <React.Fragment>
-                                            {typeof value === "boolean" &&
-                                                <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
-                                                    <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? 'bg-white' : 'bg-gray-200'} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(itemKey, perm)}>
-                                                        {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                                    </Text>
-                                                </div>
-                                            }
-                                        </React.Fragment>
-
-                                    ))}
+                                    {permissions.map((perm) => getPermissionSection(perm, item[itemKey], {}))}
                                 </div>
                             }
                         </div>
                     </div>
                     <div>
                     </div>
-                    {
-                       expandedIndex === index && item[itemKey].child?.map((ele, childIndex) => {
-                            return (
-                                <div key={childIndex} className='flex items-center justify-between '>
-                                    <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
-                                    {console.log("ele", ele)}
-                                    <div className="flex gap-x-2">
-                                        {
-                                            Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
-                                                return (
-                                                    <div key={`${Object.keys(ele)}-${perm}-${childIndex}`} className="flex items-center gap-1">
-                                                        <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? "bg-white" : "bg-gray-200"} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(`${Object.keys(ele)}`, perm, true)}>
-                                                            {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                                        </Text>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-
-                                </div>
-                            )
-                        })
-                    }
+                    {expandedIndex === index ? getChildPermissions(item) : null}
                 </div>
             );
         });
@@ -161,8 +173,8 @@ export default function UserForm({ closeModal }) {
                         </div>
                         {access}
                         <div className='flex gap-3 justify-end'>
-                            <CommonButtton text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={closeModal}/>
-                            <CommonButtton type={"submit"} text={"Submit"} size={isMedium ? 'lg' : 'md'}/>
+                            <CommonButtton text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={closeModal} />
+                            <CommonButtton type={"submit"} text={"Submit"} size={isMedium ? 'lg' : 'md'} />
                         </div>
                     </div>
                 )}
