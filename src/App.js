@@ -12,14 +12,20 @@ import GlobalModal from './shared/modal-views/container';
 import Login from './WebView/login/login';
 import GlobalConfirmBox from './shared/confirm/container';
 import "./i18n";
+import { getAuthenticatedUser } from './Storage/Storage';
 
 export default function App() {
-  const isLogin = false
+
+ let user = getAuthenticatedUser()
+
+ console.log("user",user);
+ 
+
 
   return (
     <div>
       {
-        isLogin ? <>
+        user ? <>
           <Layout />
           <GlobalDrawer />
           <GlobalModal />

@@ -8,8 +8,8 @@ import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-p
 import DropDownIcon from '../../Constant/Icons/dropdown-icon';
 import DropUpIcon from '../../Constant/Icons/dropup-icon';
 import { AddChildRolePermission } from '../../Utils/Utils';
-import { HitApi } from '../../Store/Action/Api/ApiAction';
-import { addRole } from '../../Constant/Api/Api';
+// import { HitApi } from '../../Store/Action/Api/ApiAction';
+// import { addRole } from '../../Constant/Api/Api';
 import CommonButtton from '../../Component/ui/buttons/common-button';
 
 
@@ -31,6 +31,9 @@ export default function UserForm({ closeModal }) {
     const [expandedIndex, setExpandedIndex] = useState(null); 
 
 
+    console.log("reduxRolesAndPermission",reduxRolesAndPermission);
+
+
     useEffect(() => {
 
     }, [])
@@ -42,13 +45,15 @@ export default function UserForm({ closeModal }) {
             roleName: data?.roleName,
             permissions: t_access
         }
-        HitApi(json, addRole).then((res) => {
 
-            if (res.message === "Role added successfully" && res.status === 200) {
-                alert(res.message)
+        console.log("json",json);
+        // HitApi(json, addRole).then((res) => {
 
-            }
-        })
+        //     if (res.message === "Role added successfully" && res.status === 200) {
+        //         alert(res.message)
+
+        //     }
+        // })
     };
 
     const handleAccessChnage = (itemKey, perm, child) => {

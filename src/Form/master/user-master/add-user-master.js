@@ -55,15 +55,15 @@ function AddUserMaster({ closeModal }) {
     return (
         <div className='p-10'>
             <Form validationSchema={addUserSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                {({ register, formState: { errors } }) => (
+                {({ register,control, formState: { errors } }) => (
                     <div className="space-y-5 lg:space-y-6">
                         <div className='grid grid-cols-2 gap-4'>
                             <CustomInput type={'text'} label={'First Name'} register={register} fieldName={'firstName'} errors={errors} />
                             <CustomInput type={'text'} label={'Last Name'} register={register} fieldName={'lastName'} errors={errors} />
                             <CustomInput type={'text'} label={'User Name'} register={register} fieldName={'userName'} errors={errors} />
                             <CustomInput type={'text'} label={'Password'} register={register} fieldName={'password'} errors={errors} />
-                            <CustomSelect options={[{ label: 'Male', value: 'Male' }, { label: "Female", value: "Female" }]} title={'Gender'} register={register} fieldName={'gender'} error={errors.gender?.message} />
-                            <CustomSelect options={roleptions} title={'Role'} register={register} fieldName={'roleName'}  error={errors.roleName?.message} />
+                            <CustomSelect control={control} options={[{ label: 'Male', value: 'Male' }, { label: "Female", value: "Female" }]} title={'Gender'} register={register} fieldName={'gender'} error={errors.gender?.message} />
+                            <CustomSelect control={control} options={roleptions} title={'Role'} register={register} fieldName={'roleName'}  error={errors.roleName?.message} />
                             <CustomInput type={'text'} label={'Contact no'} register={register} fieldName={'contactno'} errors={errors} />
                             <CustomInput type={'text'} label={'Address'} register={register} fieldName={'address'} errors={errors} />
                             <CustomInput type={'text'} label={'Email ID'} register={register} fieldName={'email'} errors={errors} />

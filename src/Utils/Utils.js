@@ -129,9 +129,13 @@ export const getHeadingFromPathname = () => {
             return "General Master";
         case "/master/reader-builing-mapping":
             return "Reader Builing Mapping Master";
-            case "/master/product/create":
-                return "Product Master / Create";
+        case "/master/product/create":
+            return "Product Master / Create";
+        case "/master/customer/create":
+            return "Coustomer Master / Create";
         default:
             return "";
     }
 }
+
+// master/customer/create
