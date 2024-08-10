@@ -7,8 +7,11 @@ import { setRolesAndPermission } from '../../Store/Action/RolesAndPermission/Rol
 import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-permission.schema';
 import DropDownIcon from '../../Constant/Icons/dropdown-icon';
 import DropUpIcon from '../../Constant/Icons/dropup-icon';
-import { AddChildRolePermission, getEnpointsToPermissons } from '../../Utils/Utils';
+import {  getEnpointsToPermissons } from '../../Utils/Utils';
 import CommonButtton from '../../Component/ui/buttons/common-button';
+import { addRole } from '../../Constant/Api/Api';
+import { HitApi } from '../../Store/Action/Api/ApiAction';
+import { getAuthToken } from '../../Storage/Storage';
 
 
 const initialValues = {
@@ -39,15 +42,16 @@ export default function UserForm({ closeModal }) {
         var t_access = reduxRolesAndPermission?.doc;
         var json = {
             roleName: data?.roleName,
-            permissions: t_access
+            allowedEndPoints:getEnpointsToPermissons(t_access),
+            permission: t_access,
         }
-        getEnpointsToPermissons(t_access);
-        console.log("json", json);
-        // HitApi(json, addRole).then((res) => {
-        //     if (res.message === "Role added successfully" && res.status === 200) {
-        //         alert(res.message)
-        //     }
-        // })
+        console.log("Json", json);
+        HitApi(json, addRole,getAuthToken()).then((res) => {
+            console.log("res",res);
+            if ( res.status === 200) {
+                alert(res.message)
+            }
+        })
     };
 
     const handleAccessChnage = (item, permissionKey ,permissionType, child = {}) => {

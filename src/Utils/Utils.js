@@ -152,7 +152,7 @@ const endpointBasedOnPermissions = {
 };
 
 const checkPermissions = (perms)=>{
-    const allowedEndPoints = [];  // Array to hold the allowed endpoints based on the permissions.
+    const allowedEndPoints = [] 
     const { value, permission } = perms;
     permission.forEach((permissionItem) => {
         const permissionKeys = Object.keys(permissionItem);
@@ -176,5 +176,6 @@ export const getEnpointsToPermissons =(doc) =>{
             })
         }
     })
-    console.log(allowedEndPoints, "allowedEndPoints")
+    // console.log(allowedEndPoints, "allowedEndPoints")
+    return allowedEndPoints
 }
