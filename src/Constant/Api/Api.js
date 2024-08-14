@@ -13,4 +13,8 @@ export const getRoles = BaseUrl+'getRoles'
 
 export const addSite = BaseUrl2+'addSite'
 export const getSite = BaseUrl2+'getSite'
+
+
 export const updateSite = BaseUrl2+'updateSite'
+
+// export const updateSite = BaseUrl2+'updateSite'
