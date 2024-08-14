@@ -1,10 +1,10 @@
 import { Text, Tooltip, ActionIcon } from 'rizzui';
 import { HeaderCell } from '../../../Component/ui/table';
-import { routes } from '../../../config/routes';
 import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
 import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 import {EditScreen} from '../../../shared/edit-screen';
+import { updateSite } from '../../../Constant/Api/Api';
 
 export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, openModal, closeModal }) => [
   {
@@ -14,7 +14,16 @@ export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellCli
     dataIndex: 'index',
     key: 'index',
     width: 10,
-    render: (value) => <Text>{value || '---'}</Text>,
+    render: (value, row, index) => <Text>{index + 1 || '---'}</Text>,
+  },
+  {
+    title: <HeaderCell title="id" className={'font-extrabold'} />,
+    dataIndex: 'id',
+    key: 'id',
+    width: 100,
+    render: (value) => (
+      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    ),
   },
   {
     title: <HeaderCell title="Site Name" className={'font-extrabold'} />,
@@ -27,17 +36,17 @@ export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellCli
   },
   {
     title: <HeaderCell title="Building"  className={'font-extrabold'}/>,
-    dataIndex: 'building',
-    key: 'building',
+    dataIndex: 'buildings',
+    key: 'buildings',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
-    title: <HeaderCell title="Status"  className={'font-extrabold'}/>,
-    dataIndex: 'status',
-    key: 'status',
+    title: <HeaderCell title="Area"  className={'font-extrabold'}/>,
+    dataIndex: 'area',
+    key: 'area',
     width: 80,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>

@@ -1,4 +1,7 @@
 
 export const EditScreen = (openModal, closeModal, row, title, ScreenName) => {
-    openModal({view:<ScreenName row={row} closeModal={closeModal}/>, title : title || 'No Title' })
+
+    console.log('row',row);
+
+    openModal({view:<ScreenName row={row} closeModal={closeModal} title={title}/>, title : title || 'No Title' })
 }

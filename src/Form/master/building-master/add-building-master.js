@@ -37,7 +37,6 @@ export default function AddBuildingMaster({ row, closeModal }) {
         // })
     };
 
-    
 
     return (
         <div className='p-10'>

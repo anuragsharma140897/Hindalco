@@ -15,15 +15,8 @@ export default function BuildingsMaster() {
 
   return (
     <div>
-      <PageHeader metaTitle={'Building Master'} btnText={'Add Building'} children={<AddBuildingMaster closeModal={closeModal} />} title={'Add Building'} titleClass={'text-center'} customSize={700} />
-      <ControlledTable
-        variant="modern"
-        isLoading={false}
-        showLoadingText={true}
-        data={buildingData}
-        columns={visibleColumns}
-        className={TableClass}
-      />
+      <PageHeader  btnText={'Add Building'} children={<AddBuildingMaster closeModal={closeModal} />} title={'Add Building'} titleClass={'text-center'} customSize={700} />
+      <ControlledTable variant="modern" isLoading={false} showLoadingText={true} data={buildingData} columns={visibleColumns} className={TableClass}/>
     </div>
   )
 }
