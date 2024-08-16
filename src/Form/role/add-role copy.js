@@ -1,173 +1,114 @@
-import {  Input, Text } from 'rizzui';
-import { useDispatch, useSelector } from 'react-redux';
-import { useMedia } from '../../Hooks/use-media';
-import { Form } from '../../Component/ui/form';
 import React, { useEffect, useState } from 'react';
-import { setRolesAndPermission } from '../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
-import { rolesAndPermissionSchema } from '../../Utils/validators/user/role-and-permission.schema';
-import DropDownIcon from '../../Constant/Icons/dropdown-icon';
-import DropUpIcon from '../../Constant/Icons/dropup-icon';
-import { AddChildRolePermission } from '../../Utils/Utils';
-import CommonButtton from '../../Component/ui/buttons/common-button';
+import { validationSchema } from '../../Utils/validators/validationSchema';
+import useValidation from '../../Hooks/useValidation';
+import CustomInput from '../../Component/ui/form/input/custom-input';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRolesAndPermissionApiJson } from '../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
+import PermissionComponent from './PermissionComponent';
+import CustomButton from '../../Component/ui/buttons/custom-button';
+import { Text } from 'rizzui';
+import { ConstructJson, ReCompileJsonForEdit } from './permission-promiss';
+import { HitApi } from '../../Store/Action/Api/ApiAction';
+import { addRole } from '../../Constant/Api/Api';
+import { rolesAndPermissionVariable as variable  } from '../../Constant/variables/master/role-and-permission/role-and-permisson.variable';
 
+const readerSchema = {
+  roleName: validationSchema.string('Role Name Field will be number')
+    .min(6, 'Role Name Field should be min 6 characters long'),
 
-const initialValues = {
-    email: 'admin@admin.com',
-    password: 'admin',
-    rememberMe: true,
 };
 
-export const genderOption = [
-    { value: 'male', label: 'male' },
-    { value: 'female', label: 'female' },
-    { value: 'other', label: 'other' },
-];
-export default function UserForm({ closeModal }) {
-    var dispatch = useDispatch()
-    const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
-    const isMedium = useMedia('(max-width: 1200px)', false);
-    const [expandedIndex, setExpandedIndex] = useState(null); 
+const AddRole = ({ closeModal, row }) => {
+  var dispatch = useDispatch()
+  const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
+  const { errors, validate } = useValidation(readerSchema);
 
-    useEffect(() => {
+  useEffect(() => {
 
-    }, [])
+    if (row?.id) {
+      loadDefault(row)
+  }
+    console.log('row', row);
 
-    const onSubmit = (data) => {
+  }, [])
 
-        var t_access = reduxRolesAndPermission?.doc;
-        var json = {
-            roleName: data?.roleName,
-            permissions: t_access
-        }
+  const loadDefault = (row) => {
+    // var json = reduxRolesAndPermission?.apiJson
+    // Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
 
-        console.log("json",json);
-        // HitApi(json, addRole).then((res) => {
-        //     if (res.message === "Role added successfully" && res.status === 200) {
-        //         alert(res.message)
-        //     }
-        // })
-    };
-
-    const handleAccessChnage = (itemKey, perm, child) => {
-
-
-        var t_access = reduxRolesAndPermission?.doc;
-        var element = null
-
-        if (!child) {
-           element = t_access?.find(ele => Object.keys(ele)[0] === itemKey);
-            if (element) {
-                element[itemKey][perm] = !element[itemKey][perm];
-                dispatch(setRolesAndPermission(t_access));
-            }
-        }
-        else {
-             element = AddChildRolePermission(t_access, itemKey)
-            if (element) {
-                element[perm] = !element[perm];
-                dispatch(setRolesAndPermission(t_access));
-            }
-        }
-
-    }
-
-    let access;
-    const handleChildToggle = (index) => {
-        setExpandedIndex(index === expandedIndex ? null : index); 
-    };
-
-    if (reduxRolesAndPermission?.doc) {
-        access = reduxRolesAndPermission?.doc?.map((item, index) => {
-            const itemKey = Object.keys(item)[0];
-            const permissions = item[itemKey];
-            const colors = { read: "bg-yellow-500 text-white", write: "bg-green-500 text-white", delete: "bg-red-500 text-white" };
-            console.log(permissions, itemKey, "itemKeyitemKey")
-            return (
-                <div>
-
-                    <div key={index} className='flex justify-between'>
-                        <div className={`flex items-center justify-center  rounded-md gap-x-5 ${item[itemKey].child && "px-5 border cursor-pointer"}`} onClick={() => handleChildToggle(index)}>
-                            <Text className="capitalize">{itemKey}</Text>
-                            {item[itemKey].child &&
-                              <div>
-                              {expandedIndex === index ? <DropUpIcon /> : <DropDownIcon />}
-                          </div>
-                            }
-                        </div>
-
-                        <div>
-                            {
-                                <div className="flex gap-x-2">
-                                    {Object.entries(permissions).map(([perm, value]) => (
-
-                                        <React.Fragment>
-                                            {typeof value === "boolean" &&
-                                                <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
-                                                    <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? 'bg-white' : 'bg-gray-200'} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(itemKey, perm)}>
-                                                        {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                                    </Text>
-                                                </div>
-                                            }
-                                        </React.Fragment>
-
-                                    ))}
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                    {
-                       expandedIndex === index && item[itemKey].child?.map((ele, childIndex) => {
-                            return (
-                                <div key={childIndex} className='flex items-center justify-between '>
-                                    <div className='my-5 w-40 ' >{Object.keys(ele)}</div>
-                                    {console.log("ele", ele)}
-                                    <div className="flex gap-x-2">
-                                        {
-                                            Object.entries(ele[Object.keys(ele)]).map(([perm, value]) => {
-                                                return (
-                                                    <div key={`${Object.keys(ele)}-${perm}-${childIndex}`} className="flex items-center gap-1">
-                                                        <Text className={`font-semibold border py-2 px-5 rounded-lg ${value ? "bg-white" : "bg-gray-200"} cursor-pointer ${value ? colors?.[perm] : null}`} onClick={() => handleAccessChnage(`${Object.keys(ele)}`, perm, true)}>
-                                                            {perm.charAt(0).toUpperCase() + perm.slice(1)}
-                                                        </Text>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            );
-        });
-    }
-
-
-
-    return (
-        <div className='p-10'>
-            <Form validationSchema={rolesAndPermissionSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                {({ register, formState: { errors } }) => (
-                    <div className="space-y-5 lg:space-y-6">
-                        <div className='grid grid-cols-2 gap-4'>
-                            <Input type="text" size={isMedium ? 'lg' : 'xl'} label="Role Name" placeholder="eg. Admin" className="[&>label>span]:font-medium " {...register('roleName')} error={errors?.roleName?.message} />
-                        </div>
-                        <div className='grid grid-cols-2 gap-4'>
-                            <Text as="h6" className='font-bold'>Access</Text>
-                        </div>
-                        {access}
-                        <div className='flex gap-3 justify-end'>
-                            <CommonButtton text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={closeModal}/>
-                            <CommonButtton type={"submit"} text={"Submit"} size={isMedium ? 'lg' : 'md'}/>
-                        </div>
-                    </div>
-                )}
-            </Form>
-
-        </div>
-    );
+    // console.log('eidt json', json);
+    // // setData(json)
+    // dispatch(setRolesAndPermissionApiJson(json))
+    ReCompileJsonForEdit(row).then((Result)=>{
+      console.log('Result', Result);
+      dispatch(setRolesAndPermissionApiJson(Result))
+    })
 }
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    var json = reduxRolesAndPermission?.apiJson
+    Object.assign(json, { [name]: value });
+    dispatch(setRolesAndPermissionApiJson(json))
+    validate({ ...reduxRolesAndPermission?.apiJson, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    console.log('reduxRolesAndPermission', reduxRolesAndPermission?.apiJson);
+    e.preventDefault();
+    const validationErrors = validate(reduxRolesAndPermission?.apiJson);
+    if (Object.keys(validationErrors).length === 0) {
+      ConstructJson(reduxRolesAndPermission?.doc).then((FinalJson) => {
+        if (FinalJson) {
+          var json = {
+            roleName: reduxRolesAndPermission?.apiJson?.roleName,
+            allowedEndPoints : FinalJson?.allowedEndPoints,
+            permission: FinalJson?.permission,
+          }
+          console.log('final sending json', json);
+          HitApi(json, addRole).then((result)=>{
+            console.log('result', result);
+          })
+        }
+      })
+    } else {
+      console.log('Form has errors');
+    }
+  };
+
+  return (
+    <div>
+      <div className='p-10'>
+        <form onSubmit={handleSubmit}>
+          <div className="space-y-5 lg:space-y-6">
+            <div className='grid grid-cols-2 gap-4'>
+              <CustomInput
+                name="roleName"
+                label="Role Name"
+                value={reduxRolesAndPermission?.apiJson?.roleName}
+                onChange={handleChange}
+                error={errors}
+                reduxState={reduxRolesAndPermission?.apiJson}
+                setAction={setRolesAndPermissionApiJson}
+              />
+            </div>
+            <div className='grid grid-cols-2 gap-4'>
+              <Text as="h6" className='font-bold'>Access</Text>
+            </div>
+            <div>
+              <PermissionComponent permissionsData={reduxRolesAndPermission?.doc} />
+            </div>
+            <div className='flex gap-3 justify-end'>
+              <CustomButton text={'Cancel'} className={''} onClick={closeModal} />
+              <CustomButton type={"submit"} className={'bg-primary-main'} text={'Submit'} />
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  );
+};
+
+export default AddRole;

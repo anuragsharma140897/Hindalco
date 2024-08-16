@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useModal } from '../../../shared/modal-views/use-modal';
 import { useColumn } from '../../../Hooks/use-column';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRolesAndPermissionColumns } from './roles-and-permission-column';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
 import { TableClass } from '../../../Constant/Classes/Classes';
@@ -10,7 +10,10 @@ import { roleData } from '../../../dummyData/role-and-permission-data';
 import { Badge, Text, Title } from 'rizzui';
 import AddRolesAndPermission from './add/add-roles-and-permission';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { getRoles } from '../../../Constant/Api/Api';
+import { searchRole } from '../../../Constant/Api/Api';
+import { setRolesAndPermissionMainData } from '../../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
+import { CompileRolesAndPermission } from './promiss/roles-and-permission.promiss';
+import data from './data.json'
 
 export const PermissionTypes = () => {
   return <div className='flex items-center gap-5'>
@@ -33,35 +36,49 @@ export const PermissionTypes = () => {
 }
 
 export default function RolesAndPermission() {
-  const { openModal ,closeModal } = useModal();
-  const columns = useMemo(() => getRolesAndPermissionColumns({ roleData, openModal }))
-
+  const { openModal, closeModal } = useModal();
+  const dispatch = useDispatch()
+  const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
+  let rd = reduxRolesAndPermission?.mainData || []
+  const columns = useMemo(() => getRolesAndPermissionColumns({ openModal, closeModal }))
 
   const { visibleColumns } = useColumn(columns);
   const reduxPagination = useSelector(state => state.PaginationReducer)
-const [data,setRoleData] = useState(null)
 
-if(data === null){
-  var json ={
-    page: reduxPagination?.doc?.current || 1,
-    limit: 2 || 10,
+  useEffect(() => {
+    if (reduxRolesAndPermission?.mainData === null) {
+      loadData()
+    }
+
+  }, [])
+
+  const loadData = () => {
+    var json = reduxRolesAndPermission?.searchJson
+    console.log('json', json);
+    if (data?.content?.length > 0)
+      // CompileRolesAndPermission(data).then((CompiledData) => {
+      //   console.log('CompiledData', CompiledData);
+      //   dispatch(setRolesAndPermissionMainData(CompiledData))
+      // })
+    HitApi(json, searchRole).then((result) => {
+      console.log('result', result);
+      if (result?.content?.length > 0)
+        CompileRolesAndPermission(result).then((CompiledData) => {
+        console.log('CompiledData', CompiledData);
+          dispatch(setRolesAndPermissionMainData(CompiledData))
+        })
+    })
   }
-  HitApi(json,getRoles).then((res)=>{
-
-    setRoleData(res.doc)
-  })
-}
-  
 
   return (
     <div>
-      <PageHeader  btnText={'Add Role'} children={<AddRolesAndPermission closeModal={closeModal}   />} customSize={800}  />
+      <PageHeader btnText={'Add Role'} children={<AddRolesAndPermission closeModal={closeModal} />} customSize={800} title={'Add Roles and Permission'} />
       <PermissionTypes />
       <ControlledTable
         variant="modern"
         isLoading={false}
         showLoadingText={true}
-        data={roleData}
+        data={reduxRolesAndPermission?.mainData?.docs}
         columns={visibleColumns}
         className={TableClass}
       />

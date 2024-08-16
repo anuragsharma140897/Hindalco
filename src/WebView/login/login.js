@@ -20,10 +20,11 @@ function Login() {
     LoginValidation(AuthReducer?.doc).then((error) => {
       dispatch(setAuthError(error, SET_AUTH_ERROR))
       if (Object.keys(error).length === 0) {
+        console.log();
         HitApi(AuthReducer?.doc, LoginApi).then((res) => {
           console.log("response", res);
-          if (res.status === 200) {
-            setAuthenticatedUser(res?.token)
+          if (res.statusCode === 200) {
+            setAuthenticatedUser(res?.jwtToken)
             window.location.reload()
           }
           if(res.status === 500){
@@ -33,8 +34,6 @@ function Login() {
       }
     })
   }
-
-
 
   return (
     <div style={{ backgroundImage: `url(${banner})`, backgroundSize: "100%  100% " }}>

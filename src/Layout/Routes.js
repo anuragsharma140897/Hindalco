@@ -23,6 +23,7 @@ import OutboundOrder from '../WebView/outbound/outbound-order/outbound-order'
 import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-picking'
 import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
+import Test from '../WebView/test/test'
 
 export default function CustomRoutes() {
 
@@ -50,6 +51,9 @@ export default function CustomRoutes() {
             <Route path={routes.panel?.outbond?.outboundOrder} exact element={<OutboundOrder />} />
             <Route path={routes?.panel?.outbond?.webPicking} exact element={<OutboundWebPicking />} />
             <Route path={routes?.panel?.outbond?.outboundCreate} exact element={<CreateOutbound />} />
+            <Route path={'/test'} exact element={<Test />} />
+
+            
         </Routes>
     )
 }

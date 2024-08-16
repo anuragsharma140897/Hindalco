@@ -1,5 +1,5 @@
 export const siteMasterVariable = {
     siteName : 'siteName',
-    building : 'building',
+    buildings : 'buildings',
     area : 'area',
 }
