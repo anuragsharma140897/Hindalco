@@ -1,72 +1,90 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { useMedia } from '../../../Hooks/use-media';
-import { Form } from '../../../Component/ui/form';
-import { addCustomerSchema } from '../../../Utils/validators/master/customer-master/add-customer.schema';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import useValidation from '../../../Hooks/useValidation';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import { Button, Select } from 'rizzui';
-import CustomSelect from '../../../Component/ui/form/select/custom-select';
-import { StatusOptions } from '../../../Constant/Common/Common';
-import SubmitButton from '../../../Component/ui/form/button/SubmitButton';
-import { customerMasterVariable } from '../../../Constant/variables/master/customer-master/customer-master.variable';
-import { Controller } from 'react-hook-form';
+import { addCustomer, addGeneral, updateCustomer, updateGeneral } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { customerMasterVariable as variable } from '../../../Constant/variables/master/customer-master/customer-master.variable';
+import { generalMasterSchema } from '../../../Utils/validators/master/general-master/general-master-schema';
+import { setCustomerMasterApiJson } from '../../../Store/Action/master/customer-master/customer-master-action';
+import { customerlMasterSchema } from '../../../Utils/validators/master/customer-master/customer-master-schema';
 
-const initialValues = {
 
-};
 
-export default function AddCustomeMaster({ closeModal }) {
-    const dispatch = useDispatch()
-    const isMedium = useMedia('(max-width: 1200px)', false);
+export default function AddCustomeMaster({ row, closeModal }) {
+    var dispatch = useDispatch()
+    const reduxCustomer = useSelector(state=>state.CustomerMasterReducer)
 
-    const onSubmit = (data) => {
+    const { errors, validate } = useValidation(customerlMasterSchema);
 
+    useEffect(() => {
+        if (row?.id) {
+            loadDefault(row)
+        }
+    }, [])
+
+
+    const loadDefault = (row) => {
+        var json = reduxCustomer?.apiJson
+
+        console.log("json111111", json);
+        Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        dispatch(setCustomerMasterApiJson(json))
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var json = reduxCustomer?.apiJson
+        const validationErrors = validate(json);
+        if (Object.keys(validationErrors).length === 0) {
+            if (row?.id) {
+                Object.assign(json, { id: row?.id })
+                HitApi(json, updateCustomer).then((result) => {
+                    console.log('result', result);
+                })
+            } else {
+                Object.assign(json, { status: json?.status || 'active' })
+                HitApi(json, addCustomer).then((result) => {
+                    console.log('result', result);
+                })
+            }
+        } else {
+            console.log('Form has errors');
+        }
     };
 
-
-
     return (
-        <div className='p-10 bg-white'>
-            <Form validationSchema={addCustomerSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                {({ register, control, formState: { errors } }) => (
-                    <div className="space-y-5 lg:space-y-6">
-                        <div className='grid grid-cols-4 gap-4'>
-                            <CustomInput type={'text'} label={'Customer Code'} register={register} fieldName={customerMasterVariable?.customerCode} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Name'} register={register} fieldName={customerMasterVariable?.customerName} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Group'} register={register} fieldName={customerMasterVariable?.customerGroup} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Email'} register={register} fieldName={customerMasterVariable?.customerEmail} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            <CustomInput type={'text'} label={'Customer Visibility'} register={register} fieldName={customerMasterVariable?.customerVisibility} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Type'} register={register} fieldName={customerMasterVariable?.customerType} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Address 1'} register={register} fieldName={customerMasterVariable?.customerAddress1} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Address 2'} register={register} fieldName={customerMasterVariable?.customerAddress2} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            <CustomInput type={'text'} label={'Customer Landmark'} register={register} fieldName={customerMasterVariable?.customerLandmark} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer City'} register={register} fieldName={customerMasterVariable?.customerCity} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer State'} register={register} fieldName={customerMasterVariable?.customerState} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Region'} register={register} fieldName={customerMasterVariable?.customerRegion} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            <CustomInput type={'text'} label={'Customer Postcode'} register={register} fieldName={customerMasterVariable?.customerPostcode} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Country'} register={register} fieldName={customerMasterVariable?.customerCountry} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer Contact'} register={register} fieldName={customerMasterVariable?.customerContact} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer CST'} register={register} fieldName={customerMasterVariable?.customerCST} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            <CustomInput type={'text'} label={'Customer PAN'} register={register} fieldName={customerMasterVariable?.customerPAN} errors={errors} />
-                            <CustomSelect type={'text'} title={'Customer Status'} options={StatusOptions} control={control} fieldName={customerMasterVariable?.customerStatus} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer VAT'} register={register} fieldName={customerMasterVariable?.customerVAT} errors={errors} />
-                            <CustomInput type={'text'} label={'Customer TAN'} register={register} fieldName={customerMasterVariable?.customerTAN} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-5 gap-3 justify-end'>
-                            <Button className="w-full" variant="flat" type="button" size={isMedium ? 'lg' : 'md'} onClick={() => closeModal()}> Cancel </Button>
-                            <SubmitButton title={'Save'} />
-                        </div>
+        <div className='p-10'>
+            <form onSubmit={handleSubmit}>
+                <div className="space-y-5 lg:space-y-6">
+                    <div className='grid grid-cols-4 gap-x-4 '>
+                        <CustomInput important={true} name="customerName" label="Customer Name" value={reduxCustomer?.apiJson?.customerName} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerCode" label="Customer Code" value={reduxCustomer?.apiJson?.status} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerGroup" label="Customer Group" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerEmail" label="Customer Email" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerVisibility" label="Customer Visibility" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerType" label="Customer Type" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerAddress1" label="Customer Add1" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerAddress2" label="Customer Add2" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerLandmark" label="Customer Landmark" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerCity" label="Customer City" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerState" label="Customer State" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerRegion" label="Customer Region" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerPostCode" label="Customer PostCode" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerCountry" label="Customer Country" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerGst" label="Customer Gst" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerContact" label="Customer Contact" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerPan" label="Customer PAN" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerStatus" label="Customer Status" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerVat" label="Customer VAT" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
+                        <CustomInput important={true} name="customerTan" label="Customer TAN" value={reduxCustomer?.apiJson?.usedBy} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson} />
                     </div>
-                )}
-            </Form>
+                    <div className='flex gap-3 justify-end'>
+                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
+                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                    </div>
+                </div>
+            </form>
         </div>
     )
 }

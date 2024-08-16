@@ -16,6 +16,8 @@ import BuildingMasterReducer from './Store/Reducer/master/building-master/buildi
 import ApiReducer from './Store/Reducer/Api/ApiReducer';
 import UserReducer from './Store/Reducer/user-management/user-reducer';
 import SupplierMasterReducer from './Store/Reducer/master/supplier-master/supplier-master-reducer';
+import GeneralMasterReducer from './Store/Reducer/master/general-master/general-master-reducer';
+import CustomerMasterReducer from './Store/Reducer/master/customer-master/customer-master-reducer';
 
 
 const rootReducer = combineReducers({
@@ -28,7 +30,9 @@ const rootReducer = combineReducers({
   SiteMasterReducer : SiteMasterReducer,
   BuildingMasterReducer : BuildingMasterReducer,
   UserReducer : UserReducer,
-  SupplierMasterReducer : SupplierMasterReducer
+  SupplierMasterReducer : SupplierMasterReducer,
+  GeneralMasterReducer :GeneralMasterReducer,
+  CustomerMasterReducer : CustomerMasterReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

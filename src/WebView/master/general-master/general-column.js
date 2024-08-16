@@ -5,9 +5,11 @@ import PencilIcon from '../../../Constant/Icons/pencil';
 import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 import {EditScreen} from '../../../shared/edit-screen';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { deleteSite } from '../../../Constant/Api/Api';
+import { deleteGeneral, deleteSite } from '../../../Constant/Api/Api';
+import AddGeneralMaster from '../../../Form/master/general-master/add-general-master';
 
-export const getSiteMasterColumns = ({ openModal, closeModal }) => [
+export const getGeneralMasterColumns = ({ openModal, closeModal }) => [
+    
   {
     title: (
       <HeaderCell title="#" />
@@ -27,37 +29,28 @@ export const getSiteMasterColumns = ({ openModal, closeModal }) => [
     ),
   },
   {
-    title: <HeaderCell title="Site Name" className={'font-extrabold'} />,
-    dataIndex: 'siteName',
-    key: 'siteName',
+    title: <HeaderCell title="Value" className={'font-extrabold'} />,
+    dataIndex: 'value',
+    key: 'value',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
-    title: <HeaderCell title="Building"  className={'font-extrabold'}/>,
-    dataIndex: 'buildings',
-    key: 'buildings',
+    title: <HeaderCell title="Status"  className={'font-extrabold'}/>,
+    dataIndex: 'status',
+    key: 'status',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
-    title: <HeaderCell title="Area"  className={'font-extrabold'}/>,
-    dataIndex: 'area',
-    key: 'area',
+    title: <HeaderCell title="Used By"  className={'font-extrabold'}/>,
+    dataIndex: 'usedBy',
+    key: 'usedBy',
     width: 100,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
-    title: <HeaderCell title="Area"  className={'font-extrabold'}/>,
-    dataIndex: 'area',
-    key: 'area',
-    width: 80,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
@@ -69,14 +62,14 @@ export const getSiteMasterColumns = ({ openModal, closeModal }) => [
     width: 600,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        <Tooltip size="sm" content={'Edit Site Master'} placement="top" color="invert">
+        <Tooltip size="sm" content={'Edit General Master'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddSiteMaster, 400)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit General Master' , AddGeneralMaster, 400)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
         </Tooltip>
-        <DeletePopover title={`Delete Site Master`}  description={`Are you sure you want to delete this employee?`} 
+        <DeletePopover title={`Delete General Master`}  description={`Are you sure you want to delete this employee?`} 
           onDelete={() => DeleteItem(row.id)} 
         />
       </div>
@@ -87,7 +80,7 @@ export const getSiteMasterColumns = ({ openModal, closeModal }) => [
 
 export const DeleteItem = (id) =>{
   var json = {id:id}
-  HitApi(json, deleteSite).then((Result)=>{
-
+  HitApi(json, deleteGeneral).then((Result)=>{
+    console.log('Result', Result);
   })
 }
