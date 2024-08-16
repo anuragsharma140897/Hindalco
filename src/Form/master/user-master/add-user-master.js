@@ -1,87 +1,124 @@
-import React, { useEffect, useState } from 'react'
-import { Form } from '../../../Component/ui/form'
-import {  useSelector } from 'react-redux';
-import { useMedia } from 'react-use';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import useValidation from '../../../Hooks/useValidation';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
+import { setUserApiJson } from '../../../Store/Action/user-management/user-action';
+import useDeleteKeys from '../../../Hooks/use-delete-keys';
 import CustomSelect from '../../../Component/ui/form/select/custom-select';
-import { getRole } from '../../../Constant/Api/Api';
+import { addUser, searchRole, updateUser } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { CompileRoleForSelect } from './promiss/add-user-master.promiss';
+import { setRolesAndPermissionMainData } from '../../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
 import { addUserSchema } from '../../../Utils/validators/user/add-user-scheema';
-import CommonButtton from '../../../Component/ui/buttons/common-button';
-const initialValues = {
-    firstName: '',
-    lastName: '',
-    userName: '',
-    password: '',
-    gender:'',
-    roleName:'',
-    contactno: '',
-    address: '',
-    email: '',
-    employeeID: '',
-};
+import { userMasterVariable as variable  } from '../../../Constant/variables/user-master/user-master.variable';
 
-function AddUserMaster({ closeModal }) {
-    const [data, setRoleData] = useState(null)
-    const isMedium = useMedia('(max-width: 1200px)', false);
-    const reduxPagination = useSelector(state => state.PaginationReducer)
+const GenderOption = [
+    { id: 'male', label: 'Male', value: 'male' },
+    { id: 'female', label: 'Female', value: 'female' },
+    { id: 'other', label: 'Other', value: 'other' },
+]
 
-    useEffect(()=>{
-        
-    },[])
+export default function AddUserMaster({ row, closeModal }) {
+    var dispatch = useDispatch()
+    const reduxUser = useSelector(state => state.UserReducer)
+    const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
+    const { errors, validate } = useValidation(addUserSchema);
+    const deleteKeys = useDeleteKeys();
 
-    const onSubmit = (data) => {
+    useEffect(() => {
+        if (row?.id) {
+            loadDefault(row)
+        }
+        if (reduxRolesAndPermission?.mainData === null) {
+            handleLoadRole()
+        }
 
-        // HitApi(initialValues, LoginApi).then((res) => {
+        console.log(reduxUser?.apiJson);
 
-        //     if (res) {
-        //         dispatch(setAuth(res))
-        //     }
-        // })
+    }, [])
+
+    const loadDefault = (row) => {
+        var json = reduxUser?.apiJson
+        Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        dispatch(setUserApiJson(json))
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var json = reduxUser?.apiJson
+        const validationErrors = validate(json);
+        if (Object.keys(validationErrors).length === 0) {
+            if (row?.id) {
+                Object.assign(json, { id: row?.id })
+                HitApi(json, updateUser).then((result) => {
+                    console.log(result);
+
+                })
+            } else {
+                Object.assign(json, { status: json?.status || 'active' })
+
+                console.log('sjosn', json);
+
+                HitApi(json, addUser).then((result) => {
+                    console.log(result);
+                })
+            }
+            console.log('json', json);
+        } else {
+            console.log('Form has error');
+        }
     };
 
-    if (data === null) {
-        var json = {
-            page: reduxPagination?.doc?.current || 1,
-            limit: 2 || 10,
-        }
-        // HitApi(json, getRole).then((res) => {
-
-        //     setRoleData(res.doc)
-        // })
+    const handleClose = () => {
+        closeModal();
+        dispatch(setUserApiJson(deleteKeys(reduxUser?.apiJson)))
     }
 
-    const roleptions = data?.map(role => ({
-        label: role.roleName,
-        value: role.roleName,
-    }));
+    const handleLoadRole = () => {
+        var json = reduxRolesAndPermission?.searchJson
+        HitApi(json, searchRole).then((result) => {
+            if (result) {
+                CompileRoleForSelect(result).then((CompiledData) => {
+                    console.log('CompiledData', CompiledData);
+                    dispatch(setRolesAndPermissionMainData(CompiledData))
+                })
+            }
+        })
+    }
+
+    const handleCustomChange = (e) => {
+        var json = reduxUser?.apiJson
+        const index = e?.target?.selectedIndex;
+        const el = e?.target?.childNodes[index]
+        const roleId = el?.getAttribute('id');
+        Object.assign(json, {roleId : roleId, roleName :e?.target?.value })
+        dispatch(setUserApiJson(json))
+    }
 
     return (
         <div className='p-10'>
-            <Form validationSchema={addUserSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                {({ register,control, formState: { errors } }) => (
-                    <div className="space-y-5 lg:space-y-6">
-                        <div className='grid grid-cols-2 gap-4'>
-                            <CustomInput type={'text'} label={'First Name'} register={register} fieldName={'firstName'} errors={errors} />
-                            <CustomInput type={'text'} label={'Last Name'} register={register} fieldName={'lastName'} errors={errors} />
-                            <CustomInput type={'text'} label={'User Name'} register={register} fieldName={'userName'} errors={errors} />
-                            <CustomInput type={'text'} label={'Password'} register={register} fieldName={'password'} errors={errors} />
-                            <CustomSelect control={control} options={[{ label: 'Male', value: 'Male' }, { label: "Female", value: "Female" }]} title={'Gender'} register={register} fieldName={'gender'} error={errors.gender?.message} />
-                            <CustomSelect control={control} options={roleptions} title={'Role'} register={register} fieldName={'roleName'}  error={errors.roleName?.message} />
-                            <CustomInput type={'text'} label={'Contact no'} register={register} fieldName={'contactno'} errors={errors} />
-                            <CustomInput type={'text'} label={'Address'} register={register} fieldName={'address'} errors={errors} />
-                            <CustomInput type={'text'} label={'Email ID'} register={register} fieldName={'email'} errors={errors} />
-                            <CustomInput type={'text'} label={'Employee ID'} register={register} fieldName={'employeeID'} errors={errors} />
-                        </div>
-                        <div className='flex gap-3 justify-end'>
-                            <CommonButtton className="w-full"  variant="flat" text={"Cancel"} size={isMedium ? 'lg' : 'md'} onClick={() => closeModal()}/>
-                            <CommonButtton className="w-full" text={"Submit"} type={"sbumit"} size={isMedium ? 'lg' : 'md'} />
-                        </div>
+            <form onSubmit={handleSubmit}>
+                <div className="space-y-5 lg:space-y-6">
+                    <div className='grid grid-cols-2 gap-4'>
+                        <CustomInput name="firstName" label="First Name" value={reduxUser?.apiJson?.firstName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput name="lastName" label="Last Name" value={reduxUser?.apiJson?.lastName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput name="username" label="Username" value={reduxUser?.apiJson?.username} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput type={'password'} name="password" label="Password" value={reduxUser?.apiJson?.password} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} disabled={row?.id ? true : false} />
+                        <CustomSelect name="gender" label="Gender" options={GenderOption} value={reduxUser?.apiJson?.gender} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomSelect name="roleName" label="Role" options={reduxRolesAndPermission?.mainData || []} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleCustomChange} />
+                        <CustomInput name="contact" label="Contact No" value={reduxUser?.apiJson?.contact} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput name="address" label="Address" value={reduxUser?.apiJson?.address} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput name="email" label="Email Id" value={reduxUser?.apiJson?.email} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <CustomInput name="employeeId" label="Employee Id" value={reduxUser?.apiJson?.employeeId} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                     </div>
-                )}
-            </Form>
+
+                    <div className='flex gap-3 justify-end'>
+                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={() => handleClose()} />
+                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                    </div>
+                </div>
+            </form>
+
         </div>
     )
 }
-
-export default AddUserMaster

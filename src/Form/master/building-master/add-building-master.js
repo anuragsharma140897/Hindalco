@@ -3,24 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import { addBuilding, addSite, updateSite } from '../../../Constant/Api/Api';
+import { addBuilding, updateBuilding, } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { siteMasterVariable as variable } from '../../../Constant/variables/master/site-master/site-master.variable';
 import { setBuildingMasterApiJson } from '../../../Store/Action/master/building-master/building-master-action';
 import CustomCheckBox from '../../../Component/ui/form/checkbox/custom-checkbox';
-import { validationSchema } from '../../../Utils/validators/validationSchema';
-
-const builingMasterSchema = {
-    buildingName: validationSchema.string('Building Name is required').min(6, 'Building Name Fields should be 6 characotre long'),
-    buildingNo: validationSchema.string('Building No is required'),
-    unit: validationSchema.string('Unit is required')
-};
-
+import { builingMasterSchema } from '../../../Utils/validators/master/building-master/building-master.schema';
+import { buildingMasterVariable as variable  } from '../../../Constant/variables/master/building-master/building-master.variable';
+import useDeleteKeys from '../../../Hooks/use-delete-keys';
 
 export default function AddSiteMaster({ row, closeModal }) {
     var dispatch = useDispatch()
     const reduxBuilding = useSelector(state => state.BuildingMasterReducer)
     const { errors, validate } = useValidation(builingMasterSchema);
+    const deleteKeys = useDeleteKeys();
 
     useEffect(() => {
         if (row?.id) {
@@ -40,19 +35,27 @@ export default function AddSiteMaster({ row, closeModal }) {
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
-                HitApi(json, updateSite).then((result) => {
-                    console.log('result', result);
+                HitApi(json, updateBuilding).then((result) => {
+
                 })
             } else {
-                // Object.assign(json, { status: json?.status || 'active' })
-                // HitApi(json, addBuilding).then((result) => {
-                //     console.log('result', result);
-                // })
+                Object.assign(json, { status: json?.status || 'active' })
+                HitApi(json, addBuilding).then((result) => {
+
+                })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
+
+
+    const handleClose = () => {
+        closeModal();
+        dispatch(setBuildingMasterApiJson(deleteKeys(reduxBuilding?.apiJson)))
+    }
+
+
 
     return (
         <div className='p-10'>
@@ -63,12 +66,12 @@ export default function AddSiteMaster({ row, closeModal }) {
                         <CustomInput name="buildingNo" label="Building No" validate={validate} value={reduxBuilding?.apiJson?.buildingNo} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
                     </div>
                     <div className='grid grid-cols-2 gap-4'>
-                        <CustomInput name="unit" label="Unit"  value={reduxBuilding?.apiJson?.unit} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
-                        <CustomCheckBox name="addEmptyBox" label="Unit"  validate={validate} value={reduxBuilding?.apiJson?.addEmptyBox} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson}/>
+                        <CustomInput name="unit" label="Unit" validate={validate} value={reduxBuilding?.apiJson?.unit} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
+                        <CustomCheckBox name="addEmptyBag" label="Add Empty Bag" validate={validate} value={reduxBuilding?.apiJson?.addEmptyBox} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson}/>
                     </div>
 
                     <div className='flex gap-3 justify-end'>
-                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
+                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={()=>handleClose()} />
                         <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
                     </div>
                 </div>

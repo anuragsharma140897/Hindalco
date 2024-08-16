@@ -80,6 +80,6 @@ export const getSiteMasterColumns = ({ openModal, closeModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteSite).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

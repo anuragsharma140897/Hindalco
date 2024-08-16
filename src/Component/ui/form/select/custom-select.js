@@ -1,60 +1,65 @@
-import React, { useState } from 'react'
-import { Select, Text, Title } from 'rizzui'
-import cn from '../../../../Utils/class-names';
-import { Controller } from 'react-hook-form';
+import React from 'react';
+import { useMedia } from '../../../../Hooks/use-media';
+import { useDispatch } from 'react-redux';
 
-function renderOptionDisplayValue(option) {
+export default function CustomSelect({ 
+  name, 
+  label, 
+  onChange, 
+  error, 
+  placeholder, 
+  reduxState, 
+  setAction, 
+  important = true, 
+  disabled = false, 
+  validate,
+  options = []
+}) {
+    const dispatch = useDispatch();
+    const isMedium = useMedia('(max-width: 1200px)', false);
+
+    // Fetch the value from reduxState using the name prop
+    const value = reduxState?.[name] || '';
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        // Automatically insert the selected value (e.g., ID) into the Redux state
+        let updatedJson = { ...reduxState };
+        updatedJson[name] = value; // This assumes 'value' is the ID or relevant data
+        dispatch(setAction(updatedJson));
+
+        // Validate the current field (if needed)
+        if (validate) validate({ ...updatedJson });
+
+         // If a custom onChange handler is provided, call it
+         if (onChange) onChange(e, updatedJson);
+    };
+
     return (
-        <div className="flex items-center gap-3">
-            <Text fontWeight="medium">{option.label}</Text>
+        <div className="mb-6 relative">
+            <label className="block font-bold mb-2">{label}{important === false ? ' (Optional)' : ''}</label>
+            <div className="relative">
+                <select
+                    name={name}
+                    value={value}
+                    onChange={handleChange}
+                    disabled={disabled}
+                    className={`w-full p-3 text-lg rounded-lg border appearance-none 
+                    disabled:bg-gray-200
+                    ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
+                >
+                    <option value="" disabled>{placeholder || `Select ${label}`}</option>
+                    {options.map((option, index) => (
+                        <option key={index} id={option?.id} value={option?.value}>
+                            {option.label}
+                        </option>
+                        
+                    ))}
+                </select>
+            </div>
+            {disabled && <span className='text-red-500 text-xs tracking-wide'>This field cannot be edited</span>}
+            {error?.[name] && <span className="text-red-500 text-sm mt-2 block">{error?.[name]}</span>}
         </div>
     );
-}
-
-export default function CustomSelect({ options, dropdownClassName, className, suffixClassName, title, fieldName, placeholder, register, errors, selectClassName, control, ...props }) {
-    const [value, setValue] = useState(null);
-
-
-
-    return (
-        <div>
-            {title ? <span className="rizzui-input-label block text-base mb-1.5 font-medium">{title}</span> : null}
-            {/* <Select
-                options={options}
-                value={value}
-                onChange={setValue}
-                placeholder={placeholder || 'Select ' + title}
-                getOptionDisplayValue={(option) => renderOptionDisplayValue(option)}
-                selectClassName={cn('h-12 min-w-[150px]', selectClassName)}
-                className={cn(className)}
-                dropdownClassName={cn('z-[9999] p-1.5', dropdownClassName)}
-                suffixClassName={suffixClassName}
-                optionClassName={cn('dark:hover:bg-gray-300')}
-                error={error}
-                {...register(fieldName || 'dummyData')}
-                {...props}
-                disabled={!options}
-            /> */}
-
-            <Controller
-                name={fieldName}
-                control={control}
-                render={({ field: { onChange, value } }) => (
-                    <Select
-                        dropdownClassName={cn('z-[9999] p-1.5', dropdownClassName)}
-                        value={value}
-                        options={options}
-                        className={cn(className)}
-                        selectClassName={cn('h-12 min-w-[150px]', selectClassName)}
-                        suffixClassName={suffixClassName}
-                        optionClassName={cn('dark:hover:bg-gray-300')}
-                        onChange={onChange}
-                        error={errors?.[fieldName]?.message}
-                        getOptionValue={(option) => option.value}
-                        disabled={!options}
-                    />
-                )}
-            />
-        </div>
-    )
 }

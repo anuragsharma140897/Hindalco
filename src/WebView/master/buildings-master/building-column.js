@@ -9,6 +9,9 @@ import { PiInfoFill } from 'react-icons/pi';
 import BuildingReaderInfo from '../../../InfoModal/building-reader-info/building-reader-info';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddBuildingMaster from '../../../Form/master/building-master/add-building-master';
+import { deleteBuilding } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { FaUserPlus } from "react-icons/fa";
 
 export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal }) => [
   {
@@ -51,19 +54,19 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal }
     ),
   }, {
     title: <HeaderCell title="Plant" className={'font-extrabold'} />,
-    dataIndex: 'status',
-    key: 'status',
+    dataIndex: 'unit',
+    key: 'unit',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   }, {
     title: <HeaderCell title="Add Empty Bag" className={'font-extrabold'} />,
-    dataIndex: 'status',
-    key: 'status',
+    dataIndex: 'addEmptyBag',
+    key: 'addEmptyBag',
     width: 150,
     render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      <Text className="font-medium text-gray-700">{value ? 'Yes' : 'No' || '---'}</Text>
     ),
   },
   {
@@ -73,20 +76,20 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal }
     width: 130,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
+        <Tooltip size="sm" content={'Edit Building'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700"  onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Building Master' , AddBuildingMaster)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700"  onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Building Master' , AddBuildingMaster, 800)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
         </Tooltip>
-        <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
-          onDelete={() => onDeleteItem(row.id)}
+        <DeletePopover title={`Delete Building`} description={`Are you sure you want to delete this employee?`}
+          onDelete={() => DeleteItem(row.id)}
         />
         <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
-              <ProtectIcon className="h-4 w-4" />
+              <FaUserPlus className="h-4 w-4" />
             </ActionIcon>
           </label>
         </Tooltip>
@@ -94,3 +97,10 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal }
     ),
   },
 ];
+
+export const DeleteItem = (id) =>{
+  var json = {id:id}
+  HitApi(json, deleteBuilding).then((Result)=>{
+
+  })
+}

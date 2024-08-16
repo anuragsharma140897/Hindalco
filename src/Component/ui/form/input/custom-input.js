@@ -3,7 +3,7 @@ import { useMedia } from '../../../../Hooks/use-media';
 import cn from '../../../../Utils/class-names';
 import { useDispatch } from 'react-redux';
 
-export default function CustomInput({ name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate }) {
+export default function CustomInput({ type, name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate }) {
     const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
 
@@ -25,7 +25,7 @@ export default function CustomInput({ name, label, onChange, error, placeholder,
         <div className="mb-6">
             <label className="block font-bold mb-2">{label}{important === false?'(Optional)':''}</label>
             <input 
-                type="text" 
+                type={type || 'text'}
                 name={name} 
                 value={value} 
                 onChange={handleChange} 

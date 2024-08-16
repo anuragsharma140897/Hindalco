@@ -34,7 +34,7 @@ export default function AddUser({ setShow }) {
 
     const onSubmit = (data) => {
         var json = reduxSiteMaster?.apiJson
-        console.log('json', json);
+
     }
     return (
         <div>

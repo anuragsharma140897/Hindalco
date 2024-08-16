@@ -14,6 +14,8 @@ import InventoryManagementReducer from './Store/Reducer/Inventory-management/inv
 import SiteMasterReducer from './Store/Reducer/master/site-master/site-master-reducer'
 import BuildingMasterReducer from './Store/Reducer/master/building-master/building-master-reducer';
 import ApiReducer from './Store/Reducer/Api/ApiReducer';
+import UserReducer from './Store/Reducer/user-management/user-reducer';
+import SupplierMasterReducer from './Store/Reducer/master/supplier-master/supplier-master-reducer';
 
 
 const rootReducer = combineReducers({
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
   AuthReducer : AuthReducer,
   InventoryManagementReducer : InventoryManagementReducer,
   SiteMasterReducer : SiteMasterReducer,
-  BuildingMasterReducer : BuildingMasterReducer
+  BuildingMasterReducer : BuildingMasterReducer,
+  UserReducer : UserReducer,
+  SupplierMasterReducer : SupplierMasterReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

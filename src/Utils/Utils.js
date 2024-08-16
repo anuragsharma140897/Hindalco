@@ -168,7 +168,7 @@ export const getEnpointsToPermissons =(doc) =>{
     
     let allowedEndPoints = [] ;
     doc.forEach((perms,index)=>{
-        console.log("Permissions", perms.child.length)
+
         allowedEndPoints.push(...checkPermissions(perms))
         if (perms.child.length > 0) {
             perms.child.forEach((childPerm) => {
@@ -176,6 +176,6 @@ export const getEnpointsToPermissons =(doc) =>{
             })
         }
     })
-    // console.log(allowedEndPoints, "allowedEndPoints")
+
     return allowedEndPoints
 }

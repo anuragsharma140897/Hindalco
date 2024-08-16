@@ -7,7 +7,7 @@ import { SET_AUTH, setAuth } from '../../../../Store/Action/Auth/Sample/AuthActi
 function LoginInput({ icon, placeholder, ispassword, value, error, name }) {
     const [changeType, setType] = useState(ispassword ? 'password' : 'text');
     const AuthReducer = useSelector(state => state.AuthReducer)
-    console.log("AuthReducer", AuthReducer);
+
 
     const dispatch = useDispatch()
     const onChange = (value) => {
@@ -15,7 +15,7 @@ function LoginInput({ icon, placeholder, ispassword, value, error, name }) {
         var json = {
             [name]: value
         }
-        console.log('json', json);
+
         Object.assign(oldJson, json)
         dispatch(setAuth(oldJson, SET_AUTH))
     }

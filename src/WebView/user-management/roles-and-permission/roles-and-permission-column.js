@@ -21,6 +21,15 @@ export const getRolesAndPermissionColumns = ({ openModal, closeModal }) => [
     render: (value) => <Text>{value || '---'}</Text>,
   },
   {
+    title: (
+      <HeaderCell title="id" />
+    ),
+    dataIndex: 'id',
+    key: 'id',
+    width: 10,
+    render: (value) => <Text>{value || '---'}</Text>,
+  },
+  {
     title: <HeaderCell title="Role Name" />,
     dataIndex: 'roleName',
     key: 'roleName',
@@ -112,6 +121,6 @@ export const GenerateBadge = (items) => {
 export const DeleteItem = (id) => {
   var json = { id: id }
   HitApi(json, deleteRole).then((Result) => {
-    console.log('Result', Result);
+
   })
 }

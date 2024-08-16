@@ -24,7 +24,7 @@ export default function CustomerMaster() {
 
   const laodData = () =>{
     // HitApi({page:1, limit : 2, }, searchCustomer, getAuthToken()).then((result)=>{
-    //   console.log('result', result);
+
     // })
   }
 

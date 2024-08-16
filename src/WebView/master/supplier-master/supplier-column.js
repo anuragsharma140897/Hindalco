@@ -3,6 +3,8 @@ import { HeaderCell } from '../../../Component/ui/table';
 import { routes } from '../../../config/routes';
 import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
+import { deleteSupplier } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
 
 export const getSupplierMasterColumns = ({ onDeleteItem, openModal }) => [
   {
@@ -69,9 +71,17 @@ export const getSupplierMasterColumns = ({ onDeleteItem, openModal }) => [
           </label>
         </Tooltip>
         <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
-          onDelete={() => onDeleteItem(row.id)}
+          onDelete={() => DeleteItem(row.id)}
         />
       </div>
     ),
   },
 ];
+
+
+export const DeleteItem = (id) =>{
+  var json = {id:id}
+  HitApi(json, deleteSupplier).then((Result)=>{
+    console.log('Result', Result);
+  })
+}

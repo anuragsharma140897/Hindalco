@@ -76,7 +76,7 @@ export const  ReCreateJsonForEdit = (row, reduxRolesAndPermission) => {
 
   row.permission.forEach((item) => {
     const refItem = original.find((obj) => obj?.value === item?.value);
-    console.log('refItem', refItem);
+
     if (refItem) {
       const permissions = refItem.permission[0];
 
