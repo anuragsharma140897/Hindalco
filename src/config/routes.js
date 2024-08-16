@@ -12,6 +12,7 @@ export const routes = {
       readerHealthMaster : '/master/reader-health',
       productMaster : '/master/product',
       createProduct : '/master/product/create',
+      editProduct : '/master/product/edit/:id',
       customerMaster : '/master/customer',
       createCustomer : '/master/customer/create',
       supplierMaster : '/master/supplier',

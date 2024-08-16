@@ -1,7 +1,7 @@
 
 export const BaseUrl = 'http://137.184.74.218/auth/'
 export const UserMicroService = 'http://137.184.74.218/user/api/'
-export const HelperMicroService = 'http://137.184.74.218/helperservice/api/'
+export const HelperMicroService = 'http://137.184.74.218/helper/api/'
 export const PlantMicroService = 'http://137.184.74.218/plant/api/'
 
 export const LoginApi = BaseUrl+'login'

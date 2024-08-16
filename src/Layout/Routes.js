@@ -27,7 +27,6 @@ import Test from '../WebView/test/test'
 
 export default function CustomRoutes() {
 
-
     return (
         <Routes>
             <Route path={routes?.panel?.master?.users} exact element={<UserManagement />} />
@@ -39,6 +38,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
             <Route path={routes?.panel?.master?.productMaster} exact element={<ProductMaster />} />
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
+            <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
             <Route path={routes?.panel?.master?.createCustomer} exact element={<CreateCustomer />} />
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
@@ -52,8 +52,6 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.outbond?.webPicking} exact element={<OutboundWebPicking />} />
             <Route path={routes?.panel?.outbond?.outboundCreate} exact element={<CreateOutbound />} />
             <Route path={'/test'} exact element={<Test />} />
-
-            
         </Routes>
     )
 }
