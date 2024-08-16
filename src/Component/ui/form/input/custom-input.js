@@ -3,7 +3,7 @@ import { useMedia } from '../../../../Hooks/use-media';
 import cn from '../../../../Utils/class-names';
 import { useDispatch } from 'react-redux';
 
-export default function CustomInput({ name, label, onChange, error, placeholder, reduxState, setAction, important, disabled }) {
+export default function CustomInput({ name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate }) {
     const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
 
@@ -18,6 +18,7 @@ export default function CustomInput({ name, label, onChange, error, placeholder,
         dispatch(setAction(updatedJson));
         // Validate the current field (if needed)
         if (onChange) onChange(e); // Calls the parent onChange handler if provided
+        if (validate) validate({ ...updatedJson });
     };
 
     return (
