@@ -14,5 +14,3 @@ export const ProductMasterVariable = {
     captureBatchNo : 'captureBatchNo',
     captureLotNo : 'captureLotNo',
 }
-
-

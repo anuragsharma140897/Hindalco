@@ -5,6 +5,7 @@ export const Colors = {
     INACTIVE :"#AB1515",
     CRITICAL :"#FF0000",
     ACTIVE :"#45AB15",
+    WHITE :"#FFF",
     SUBICONBG :'#D4D4D4',
     CIRCULERPINK :'#990C0C24',
     THEMEPINK :'#FFF2F2',

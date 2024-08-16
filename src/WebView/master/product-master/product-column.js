@@ -1,14 +1,11 @@
 import { Text, Tooltip, ActionIcon } from 'rizzui';
 import { HeaderCell } from '../../../Component/ui/table';
-import { routes } from '../../../config/routes';
 import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
-import ProtectIcon from '../../../Constant/Icons/protect';
-import SearchUser from '../../../shared/common/search-user';
-import { PiInfoFill } from 'react-icons/pi';
-import ReaderMasterBuildingInfo from '../../../InfoModal/reader-master-building-info/reader-master-building-info';
+import { deleteProduct } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
 
-export const getProductMasterColumns = ({ onDeleteItem, openModal }) => [
+export const getProductMasterColumns = () => [
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -68,19 +65,19 @@ export const getProductMasterColumns = ({ onDeleteItem, openModal }) => [
     ),
   }, {
     title: <HeaderCell title="Batch" className={'font-extrabold'} />,
-    dataIndex: 'batch',
+    dataIndex: 'captureBatchNo',
     key: 'batch',
     width: 150,
     render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      <Text className="font-medium text-gray-700">{value === true ? 'true' : value === false ? 'false' : value ? value : '---'}</Text>
     ),
   }, {
     title: <HeaderCell title="Lot" className={'font-extrabold'} />,
-    dataIndex: 'lot',
+    dataIndex: 'captureLotNo',
     key: 'lot',
     width: 150,
     render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      <Text className="font-medium text-gray-700">{value === true ? 'true' : value === false ? 'false' : value ? value : '---'}</Text>
     ),
   },
   {
@@ -90,24 +87,33 @@ export const getProductMasterColumns = ({ onDeleteItem, openModal }) => [
     width: 130,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
+        <Tooltip size="sm" content={'Edit Product'} placement="top" color="invert">
+          <a href={'/master/product/edit/' + row.id}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
-          </label>
+          </a>
         </Tooltip>
         <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
-          onDelete={() => onDeleteItem(row.id)}
+          onDelete={() => DeleteItem(row.id)}
         />
-        <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
+        {/* <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
           <label href={routes?.eCommerce?.editOrder(row.id)}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
               <ProtectIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
-        </Tooltip>
+        </Tooltip> */}
       </div>
     ),
   },
 ];
+
+export const DeleteItem = (id) => {
+  var json = { id: id }
+  HitApi(json, deleteProduct).then((Result) => {
+    if (Result.status === 200) {
+      window.location.reload()
+    }
+  })
+}

@@ -28,6 +28,7 @@ export default function AddSiteMaster({ row, closeModal }) {
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setSiteMasterApiJson(json))
     }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxSite?.apiJson

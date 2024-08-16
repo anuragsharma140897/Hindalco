@@ -18,6 +18,7 @@ import UserReducer from './Store/Reducer/user-management/user-reducer';
 import SupplierMasterReducer from './Store/Reducer/master/supplier-master/supplier-master-reducer';
 import GeneralMasterReducer from './Store/Reducer/master/general-master/general-master-reducer';
 import CustomerMasterReducer from './Store/Reducer/master/customer-master/customer-master-reducer';
+import ProductMasterReducer from './Store/Reducer/master/product-master/product-master-reducer';
 
 
 const rootReducer = combineReducers({
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   UserReducer : UserReducer,
   SupplierMasterReducer : SupplierMasterReducer,
   GeneralMasterReducer :GeneralMasterReducer,
-  CustomerMasterReducer : CustomerMasterReducer
+  CustomerMasterReducer : CustomerMasterReducer,
+  ProductMasterReducer : ProductMasterReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))
