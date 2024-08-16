@@ -19,10 +19,10 @@ export default function LoginForm() {
     const onSubmit = (data) => {
 
         HitApi(initialValues, LoginApi).then((res) => {
-
-            if (res) {
-                dispatch(setAuth(res))
-            }
+            console.log('res', res);
+            // if (res) {
+            //     dispatch(setAuth(res))
+            // }
         })
     };
 

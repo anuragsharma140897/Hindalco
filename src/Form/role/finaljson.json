@@ -1,0 +1,283 @@
+{
+    "totalPages": 1,
+    "totalElements": 4,
+    "last": true,
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": false,
+            "empty": true,
+            "unsorted": true
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "size": 10,
+    "content": [
+        {
+            "id": "66bdf0dbd31fca767616cd11",
+            "roleName": "Super Admin",
+            "allowedEndPoints": [
+                "/user/api/addUser",
+                "/user/api/updateUser",
+                "/user/api/searchUser",
+                "/user/api/deleteUser",
+                "/user/api/addRole",
+                "/user/api/updateRole",
+                "/user/api/searchRole",
+                "/user/api/deleteRole",
+                "/device/api/addReader",
+                "/device/api/updateReader",
+                "/device/api/searchReader",
+                "/device/api/deleteReader",
+                "/helper/api/addProduct",
+                "/helper/api/updateProduct",
+                "/helper/api/searchProduct",
+                "/helper/api/deleteProduct",
+                "/helper/api/addSupplier",
+                "/helper/api/updateSupplier",
+                "/helper/api/searchSupplier",
+                "/helper/api/deleteSupplier",
+                "/helper/api/addCustomer",
+                "/helper/api/updateCustomer",
+                "/helper/api/searchCustomer",
+                "/helper/api/deleteCustomer",
+                "/helper/api/addGeneral",
+                "/helper/api/updateGeneral",
+                "/helper/api/searchGeneral",
+                "/helper/api/deleteGeneral",
+                "/plant/api/addSite",
+                "/plant/api/updateSite",
+                "/plant/api/searchSite",
+                "/plant/api/deleteSite",
+                "/plant/api/addBuilding",
+                "/plant/api/updateBuilding",
+                "/plant/api/searchBuilding",
+                "/plant/api/deleteBuilding"
+            ],
+            "permission": [
+                {
+                    "value": "USER_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": false
+                        }
+                    ],
+                    "child": [
+                        {
+                            "value": "USER_VIEW",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": false,
+                                    "delete": false
+                                }
+                            ]
+                        },
+                        {
+                            "value": "USER_EDIT",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": true,
+                                    "delete": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "value": "REPORT_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": true
+                        }
+                    ],
+                    "child": []
+                }
+            ],
+            "index": 1
+        },
+        {
+            "id": "66be0931e6219e05753716b6",
+            "roleName": "operator",
+            "allowedEndPoints": [
+                "/plant/api/addSite",
+                "/plant/api/updateSite",
+                "/plant/api/deleteSite",
+                "/plant/api/searchSite",
+                "/user/api/searchRole",
+                "/plant/api/searchBuilding",
+                "/plant/api/addBuilding",
+                "/plant/api/updateBuilding",
+                "/plant/api/deleteBuilding"
+            ],
+            "permission": [
+                {
+                    "value": "USER_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": false
+                        }
+                    ],
+                    "child": [
+                        {
+                            "value": "USER_VIEW",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": false,
+                                    "delete": false
+                                }
+                            ]
+                        },
+                        {
+                            "value": "USER_EDIT",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": true,
+                                    "delete": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "value": "REPORT_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": true
+                        }
+                    ],
+                    "child": []
+                }
+            ],
+            "index": 2
+        },
+        {
+            "id": "66be202d4a60110de2535fbf",
+            "roleName": "helper",
+            "allowedEndPoints": [
+                "/user/api/addUser",
+                "/helper/api/addProduct",
+                "/helper/api/updateProduct",
+                "/helper/api/searchProduct",
+                "/helper/api/deleteProduct",
+                "/helper/api/addSupplier",
+                "/helper/api/updateSupplier",
+                "/helper/api/searchSupplier",
+                "/helper/api/deleteSupplier",
+                "/helper/api/addCustomer",
+                "/helper/api/updateCustomer",
+                "/helper/api/searchCustomer",
+                "/helper/api/deleteCustomer"
+            ],
+            "permission": [
+                {
+                    "value": "USER_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": false
+                        }
+                    ],
+                    "child": [
+                        {
+                            "value": "USER_VIEW",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": false,
+                                    "delete": false
+                                }
+                            ]
+                        },
+                        {
+                            "value": "USER_EDIT",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": true,
+                                    "delete": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "value": "REPORT_MANAGEMENT",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": true
+                        }
+                    ],
+                    "child": []
+                }
+            ],
+            "index": 3
+        },
+        {
+            "id": "66bf2696ac823046db5db868",
+            "roleName": "Test Inbound",
+            "allowedEndPoints": [],
+            "permission": [
+                {
+                    "value": "inbound",
+                    "permission": [
+                        {
+                            "read": true,
+                            "write": true,
+                            "delete": true
+                        }
+                    ],
+                    "child": [
+                        {
+                            "value": "inbound order",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": true,
+                                    "delete": false
+                                }
+                            ]
+                        },
+                        {
+                            "value": "web receving",
+                            "permission": [
+                                {
+                                    "read": true,
+                                    "write": false,
+                                    "delete": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "index": 4
+        }
+    ],
+    "number": 0,
+    "sort": {
+        "sorted": false,
+        "empty": true,
+        "unsorted": true
+    },
+    "numberOfElements": 4,
+    "first": true,
+    "empty": false
+}

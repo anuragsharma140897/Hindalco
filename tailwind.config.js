@@ -56,7 +56,8 @@ const config = {
           lighter: "#FFF2F2",
           DEFAULT: "rgb(var(--red-default) / <alpha-value>)",
           dark: "rgb(var(--red-dark) / <alpha-value>)",
-          main:'#990C0C'
+          main:'#990C0C',
+          buttonRed : '#C31D1D'
         },
         orange: {
           lighter: "rgb(var(--orange-lighter) / <alpha-value>)",
@@ -72,12 +73,16 @@ const config = {
           lighter: "rgb(var(--green-lighter) / <alpha-value>)",
           DEFAULT: "rgb(var(--green-default) / <alpha-value>)",
           dark: "rgb(var(--green-dark) / <alpha-value>)",
+          buttonGreen : '#299E16'
         },
         grey: {
           lighter: "rgb(var(--red-lighter) / <alpha-value>)",
           DEFAULT: "rgb(var(--red-default) / <alpha-value>)",
           dark: "rgb(var(--gray-darker) / <alpha-value>)",
         },
+        yellow:{
+          buttonYellow : '#FBC900'
+        }
       },
       fontFamily: {
         inter: ["var(--font-inter)"],

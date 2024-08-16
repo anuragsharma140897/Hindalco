@@ -13,9 +13,11 @@ import AuthReducer from './Store/Reducer/Auth/Sample/SampleReducer';
 import InventoryManagementReducer from './Store/Reducer/Inventory-management/inventory-management-reducer';
 import SiteMasterReducer from './Store/Reducer/master/site-master/site-master-reducer'
 import BuildingMasterReducer from './Store/Reducer/master/building-master/building-master-reducer';
+import ApiReducer from './Store/Reducer/Api/ApiReducer';
 
 
 const rootReducer = combineReducers({
+  ApiReducer: ApiReducer,
   SampleReducer : SampleReducer,
   PaginationReducer : PaginationReducer,
   RolesAndPermissionReducer : RolesAndPermissionReducer,

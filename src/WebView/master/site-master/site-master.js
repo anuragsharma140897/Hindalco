@@ -8,57 +8,43 @@ import { getSiteMasterColumns } from './site-column';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { getSite } from '../../../Constant/Api/Api';
+import { searchSite } from '../../../Constant/Api/Api';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthToken } from '../../../Storage/Storage';
-import { useDismiss } from '@floating-ui/react';
+import { CompileSiteMaster } from './promiss/site-master.promiss';
 import { setSiteMasterData } from '../../../Store/Action/master/site-master/site-master-action';
 
 export default function SiteMaster() {
-  const { openModal, closeModal } = useModal();
-  const reduxPagination = useSelector(state => state.PaginationReducer)
-  const SiteMasterReducer = useSelector(state => state.SiteMasterReducer)
-
   const dispatch = useDispatch()
-
-  const columns = useMemo(() => getSiteMasterColumns({ userData, openModal, closeModal }))
-
+  const reduxSite = useSelector(state=>state.SiteMasterReducer)
+  const { openModal, closeModal } = useModal();
+  const columns = useMemo(() => getSiteMasterColumns({ openModal, closeModal }))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
-    loadData()
-
-  }, [])
-  const loadData = () => {
-    var json = {
-      page: reduxPagination?.doc?.current || 1,
-      limit:  10,
-      search: {
-      }
+    if(reduxSite?.doc === null){
+      loadData()
     }
-    HitApi(json, getSite, getAuthToken()).then((res) => {
-      console.log("res", res);
-      if (res.status === 200) {
-        dispatch(setSiteMasterData(res))
-      }
-      else {
-        alert(res.message)
-      }
+  }, [])
 
-
+  const loadData = () => {
+    var json = reduxSite?.searchJson
+    HitApi(json, searchSite).then((result) => {
+      if(result){
+        CompileSiteMaster(result).then((CompiledData)=>{
+          dispatch(setSiteMasterData(CompiledData))
+        })
+      }
     })
   }
 
-  console.log("SiteMasterReducer",SiteMasterReducer);
-
   return (
     <div>
-      <PageHeader btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal} />} title={'Add Site'} customSize={400} />
+      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal} />} title={'Add Site'} customSize={400} />
       <ControlledTable
         variant="modern"
         isLoading={false}
         showLoadingText={true}
-        data={SiteMasterReducer?.doc?.doc?.[0]}
+        data={reduxSite?.doc?.content}
         columns={visibleColumns}
         className={TableClass}
       />

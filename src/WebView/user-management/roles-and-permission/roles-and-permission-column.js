@@ -3,11 +3,14 @@ import { HeaderCell } from '../../../Component/ui/table';
 import { routes } from '../../../config/routes';
 import Permission from '../permission/permission';
 import PencilIcon from '../../../Constant/Icons/pencil';
-import EyeIcon from '../../../Constant/Icons/eye';
 import DeletePopover from '../../../shared/delete-popover';
 import React from 'react';
+import { deleteRole } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { EditScreen } from '../../../shared/edit-screen';
+import AddRolesAndPermission from './add/add-roles-and-permission';
 
-export const getRolesAndPermissionColumns = ({ onDeleteItem }) => [
+export const getRolesAndPermissionColumns = ({ openModal, closeModal }) => [
   {
     title: (
       <HeaderCell title="SR No." />
@@ -19,8 +22,8 @@ export const getRolesAndPermissionColumns = ({ onDeleteItem }) => [
   },
   {
     title: <HeaderCell title="Role Name" />,
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'roleName',
+    key: 'roleName',
     width: 80,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -40,45 +43,75 @@ export const getRolesAndPermissionColumns = ({ onDeleteItem }) => [
     width: 130,
     render: (_, row) => (
       <div className="flex items-center justify-end gap-3 pe-4">
-        <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+        <Tooltip size="sm" content={'Edit Site Master'} placement="top" color="invert">
+          <label>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Roles And Permission' , AddRolesAndPermission, 800)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Role`} description={`Are you sure you want to delete this Role?`}
-          onDelete={() => onDeleteItem(row.id)}
+          onDelete={() => DeleteItem(row.id)}
         />
       </div>
     ),
   },
+
 ];
 
 export const GenerateBadge = (items) => {
-  const badgeColors = { read: "bg-yellow-500", write: "bg-green-500", delete: "bg-red-500" };
-  const textColors = { read: "text-yellow-500", write: "text-green-500", delete: "text-red-500" };
+  const badgeColors = { read: "bg-yellow-buttonYellow", write: "bg-green-buttonGreen", delete: "bg-red-buttonRed" };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-row gap-4">
       {items.map((item, index) => {
-        const itemKey = Object.keys(item)[0];
-        const permissions = item[itemKey];
         return (
-          <div key={index} className="flex flex-col border rounded-lg py-1 px-1.5">
-            <Text className="capitalize">{itemKey}</Text>
-            <div className="flex gap-2">
-              {Object.keys(permissions).map((perm) =>
-                permissions[perm] ? (
-                  <div key={`${itemKey}-${perm}`} className="flex items-center gap-1">
-                    <Badge renderAsDot className={badgeColors[perm]} />
+          <div key={index} className="flex flex-col py-1 px-1.5">
+            <label className='capitalize'>{item?.value}</label>
+            <div className="flex flex-row gap-2">
+              {item.permission.map((perm, permIndex) => (
+                <div key={permIndex} className="flex flex-col">
+                  <div className="flex gap-2">
+                    {Object.keys(perm).map((key) =>
+                      perm[key] ? (
+                        <Badge
+                          key={`${item.value}-${key}`}
+                          renderAsDot
+                          className={badgeColors[key]}
+                        />
+                      ) : null
+                    )}
                   </div>
-                ) : null
-              )}
+                  {item.child && item.child.length > 0 && (
+                  <div className="pl-4 mt-2">
+                    {item.child.map((child, childIndex) => (
+                      <div key={childIndex} className="flex flex-col">
+                        <label className="capitalize">{child.value}</label>
+                        <div className="flex gap-2 my-1">
+                          {Object.keys(child.permission[0]).map((key) =>
+                            child.permission[0][key] ? (
+                              <Badge key={`${child.value}-${key}`} renderAsDot className={badgeColors[key]}/>
+                            ) : null
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                </div>
+              ))}
             </div>
           </div>
-        );
+        )
       })}
     </div>
   );
 };
+
+
+export const DeleteItem = (id) => {
+  var json = { id: id }
+  HitApi(json, deleteRole).then((Result) => {
+    console.log('Result', Result);
+  })
+}

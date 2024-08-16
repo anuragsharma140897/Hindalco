@@ -1401,6 +1401,7 @@ div[style="z-index: 1000001;"],
 
 input[type="text"] {
   --tw-shadow: none;
+
 }
 
 input[type="text"]::before {
@@ -1412,4 +1413,7 @@ input[type="password"] {
 
 input[type="password"]::before {
   --tw-shadow: none;
+}
+input[type="text"]:focus {
+  outline: none!important;
 }

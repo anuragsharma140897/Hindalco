@@ -1,13 +1,10 @@
-import { z } from 'zod';
-import { buildingMasterVariable } from '../../../../Constant/variables/master/building-master/building-master.variable';
-import { GenerateMessage } from '../../../../config/message';
+import { validationSchema } from "../../validationSchema";
 
-// form zod validation schema
-export const buildingMasterSchema = z.object({
-    [buildingMasterVariable?.buildingName]: z.string().min(6, { message: GenerateMessage(buildingMasterVariable?.buildingName, ['required']) }),
-    [buildingMasterVariable?.buildingNo]: z.string().min(6, { message: GenerateMessage(buildingMasterVariable?.buildingNo, ['required']) }),
-    [buildingMasterVariable?.NoOfReaders]: z.string().min(6, { message: GenerateMessage(buildingMasterVariable?.NoOfReaders, ['required']) }),
-    [buildingMasterVariable?.addEmptyBag]: z.boolean().refine((val) => val === true, {
-        message: "Add Empty Bag Status is Required",
-    }),
-});
+export const builingMasterSchema = {
+    buildingName: validationSchema.string('Building Name Field will be number'),
+    buildingNo: validationSchema.string('Building Name Field will be number'),
+    NoOfReaders: validationSchema.string('Building Name Field will be number'),
+    // addEmptyBag: validationSchema.boolean().refine((val) => val === true, {
+    //     message: "Add Empty Bag Status is Required",
+    // }),
+};

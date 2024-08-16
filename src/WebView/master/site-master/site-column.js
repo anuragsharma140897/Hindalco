@@ -4,9 +4,10 @@ import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
 import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 import {EditScreen} from '../../../shared/edit-screen';
-import { updateSite } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { deleteSite } from '../../../Constant/Api/Api';
 
-export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, openModal, closeModal }) => [
+export const getSiteMasterColumns = ({ openModal, closeModal }) => [
   {
     title: (
       <HeaderCell title="#" />
@@ -47,6 +48,15 @@ export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellCli
     title: <HeaderCell title="Area"  className={'font-extrabold'}/>,
     dataIndex: 'area',
     key: 'area',
+    width: 100,
+    render: (value) => (
+      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    ),
+  },
+  {
+    title: <HeaderCell title="Area"  className={'font-extrabold'}/>,
+    dataIndex: 'area',
+    key: 'area',
     width: 80,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -61,16 +71,23 @@ export const getSiteMasterColumns = ({ sortConfig, onDeleteItem, onHeaderCellCli
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit Site Master'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddSiteMaster)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddSiteMaster, 400)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Site Master`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => onDeleteItem(row.id)} 
+          onDelete={() => DeleteItem(row.id)} 
         />
       </div>
     ),
   },
 ];
 
+
+export const DeleteItem = (id) =>{
+  var json = {id:id}
+  HitApi(json, deleteSite).then((Result)=>{
+    console.log('Result', Result);
+  })
+}

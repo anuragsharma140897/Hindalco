@@ -1,63 +1,78 @@
 import React, { useEffect } from 'react'
-import { Form } from '../../../Component/ui/form'
-import { siteMasterSchema } from '../../../Utils/validators/master/site-master/site-master.schema'
 import { useDispatch, useSelector } from 'react-redux';
-import { useMedia } from '../../../Hooks/use-media';
-import { Button, Checkbox, Input, Password, Switch } from 'rizzui';
-import CustomCheckBox from '../../../Component/ui/form/checkbox/custom-checkbox';
-import { buildingMasterSchema } from '../../../Utils/validators/master/building-master/building-master.schema';
+import useValidation from '../../../Hooks/useValidation';
+import { siteMasterSchema } from '../../../Utils/validators/master/site-master/site-master.schema';
+import { setSiteMasterApiJson } from '../../../Store/Action/master/site-master/site-master-action';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
+import { addSite, updateSite } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { siteMasterVariable as variable } from '../../../Constant/variables/master/site-master/site-master.variable';
 import { setBuildingMasterApiJson } from '../../../Store/Action/master/building-master/building-master-action';
-import { buildingMasterVariable as variable } from '../../../Constant/variables/master/building-master/building-master.variable';
+import CustomCheckBox from '../../../Component/ui/form/checkbox/custom-checkbox';
+import { builingMasterSchema } from '../../../Utils/validators/master/building-master/building-master.schema';
 
-export default function AddBuildingMaster({ row, closeModal }) {
-    const dispatch = useDispatch()
-    const isMedium = useMedia('(max-width: 1200px)', false);
-    const reduxBuildingMaster = useSelector(state => state.BuildingMasterReducer)
+
+
+
+export default function AddSiteMaster({ row, closeModal }) {
+    var dispatch = useDispatch()
+    const reduxBuilding = useSelector(state => state.BuildingMasterReducer)
+    const { errors, validate } = useValidation(builingMasterSchema);
 
     useEffect(() => {
-        row?.index && loadDefault(row);
+        if (row?.id) {
+            loadDefault(row)
+        }
     }, [])
 
-    const loadDefault = (row) => {
-        var json = reduxBuildingMaster?.apiJson
-        // Assign Every key value to respective variable
-        Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
 
+    const loadDefault = (row) => {
+        var json = reduxBuilding?.apiJson
+        Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setBuildingMasterApiJson(json))
     }
-    
-    const onSubmit = (data) => {
-
-        // HitApi(initialValues, LoginApi).then((res) => {
-
-        //     if (res) {
-        //         dispatch(setAuth(res))
-        //     }
-        // })
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var json = reduxBuilding?.apiJson
+        const validationErrors = validate(json);
+        if (Object.keys(validationErrors).length === 0) {
+            if (row?.id) {
+                Object.assign(json, { id: row?.id })
+                HitApi(json, updateSite).then((result) => {
+                    console.log('result', result);
+                })
+            } else {
+                Object.assign(json, { status: json?.status || 'active' })
+                HitApi(json, addSite).then((result) => {
+                    console.log('result', result);
+                })
+            }
+        } else {
+            console.log('Form has errors');
+        }
     };
-
 
     return (
         <div className='p-10'>
-            <Form validationSchema={buildingMasterSchema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange'}} >
-                {({ register, formState: { errors } }) => (
-                    <div className="space-y-5 lg:space-y-6">
-                        <div className='grid grid-cols-2 gap-4'>
-                            <CustomInput type={'text'} json={reduxBuildingMaster?.apiJson} label={'Building Name'} register={register} fieldName={variable?.buildingName} errors={errors} />
-                            <CustomInput type={'text'} json={reduxBuildingMaster?.apiJson} label={'Building No'} register={register} fieldName={variable?.buildingNo} errors={errors} />
-                        </div>
-                        <div className='grid grid-cols-2 gap-4'>
-                            <CustomInput type={'text'} json={reduxBuildingMaster?.apiJson} label={'Unit'} register={register} fieldName={variable?.NoOfReaders} errors={errors} />
-                            <CustomCheckBox register={register} fieldName={variable?.addEmptyBag} errors={errors} />
-                        </div>
-                        <div className='flex gap-3 justify-end'>
-                            <Button className="w-full" variant="flat" type="button" size={isMedium ? 'lg' : 'md'} onClick={() => closeModal()}> Cancel </Button>
-                            <Button className="w-full" type="submit" size={isMedium ? 'lg' : 'md'} > Submit </Button>
-                        </div>
+            <form onSubmit={handleSubmit}>
+                <div className="">
+                    <div className='grid grid-cols-2 gap-4'>
+                        <CustomInput name="buildingName" label="Building Name" value={reduxBuilding?.apiJson?.buildingName} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
+                        <CustomInput name="buildingNo" label="Building No" value={reduxBuilding?.apiJson?.buildingName} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
                     </div>
-                )}
-            </Form>
+                    <div className='grid grid-cols-2 gap-4'>
+                        <CustomInput name="unit" label="Unit" value={reduxBuilding?.apiJson?.buildingName} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
+                        <CustomCheckBox name="addEmptyBox" label="Unit" value={reduxBuilding?.apiJson?.addEmptyBox} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson}/>
+                    </div>
+
+                    <div className='flex gap-3 justify-end'>
+                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
+                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                    </div>
+                </div>
+            </form>
+
         </div>
     )
 }

@@ -1,6 +1,6 @@
 export const buildingMasterVariable = {
     buildingName : 'buildingName',
-    buildingNo : 'buildingNo',
-    NoOfReaders : 'NoOfReaders',
-    addEmptyBag : 'addEmptyBag'
+    // buildingNo : 'buildingNo',
+    // NoOfReaders : 'NoOfReaders',
+    // addEmptyBag : 'addEmptyBag'
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form } from '../../../Component/ui/form'
 import {  useSelector } from 'react-redux';
 import { useMedia } from 'react-use';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
 import CustomSelect from '../../../Component/ui/form/select/custom-select';
-import { getRoles } from '../../../Constant/Api/Api';
+import { getRole } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { addUserSchema } from '../../../Utils/validators/user/add-user-scheema';
 import CommonButtton from '../../../Component/ui/buttons/common-button';
@@ -26,6 +26,10 @@ function AddUserMaster({ closeModal }) {
     const isMedium = useMedia('(max-width: 1200px)', false);
     const reduxPagination = useSelector(state => state.PaginationReducer)
 
+    useEffect(()=>{
+        
+    },[])
+
     const onSubmit = (data) => {
 
         // HitApi(initialValues, LoginApi).then((res) => {
@@ -41,10 +45,10 @@ function AddUserMaster({ closeModal }) {
             page: reduxPagination?.doc?.current || 1,
             limit: 2 || 10,
         }
-        HitApi(json, getRoles).then((res) => {
+        // HitApi(json, getRole).then((res) => {
 
-            setRoleData(res.doc)
-        })
+        //     setRoleData(res.doc)
+        // })
     }
 
     const roleptions = data?.map(role => ({
