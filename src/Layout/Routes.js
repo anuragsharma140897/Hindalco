@@ -14,10 +14,8 @@ import SupplierMaster from '../WebView/master/supplier-master/supplier-master'
 import GeneralMaster from '../WebView/master/general-master/general-master'
 import ReaderBuildingMappingMaster from '../WebView/master/reader-building-mapping-master/reader-building-mapping-master'
 import CreateProduct from '../WebView/master/product-master/create/create-product'
-import CreateCustomer from '../WebView/master/customer-master/create/create-customer'
 import CreateSupplier from '../WebView/master/supplier-master/create/create-supplier'
 import InboundOrder from '../WebView/inbound/inbound-order/inbound-order'
-import WebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
 import InboundWebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
 import OutboundOrder from '../WebView/outbound/outbound-order/outbound-order'
 import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-picking'
@@ -40,7 +38,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.productMaster} exact element={<ProductMaster />} />
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
-            <Route path={routes?.panel?.master?.createCustomer} exact element={<CreateCustomer />} />
+            {/* <Route path={routes?.panel?.master?.createCustomer} exact element={<CreateCustomer />} /> */}
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />

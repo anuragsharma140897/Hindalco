@@ -1,6 +1,6 @@
 export const customerMasterVariable = {
-    customerCode : 'customerCode',
     customerName : 'customerName',
+    customerCode : 'customerCode',
     customerGroup : 'customerGroup',
     customerEmail : 'customerEmail',
     customerVisibility : 'customerVisibility',
@@ -14,9 +14,9 @@ export const customerMasterVariable = {
     customerPostcode : 'customerPostcode',
     customerCountry : 'customerCountry',
     customerContact : 'customerContact',
-    customerCST : 'customerCST',
-    customerPAN : 'customerPAN',
+    customerGst : 'customerGst',
+    customerPan : 'customerPan',
     customerStatus : 'customerStatus',
-    customerVAT : 'customerVAT',
-    customerTAN : 'customerTAN',
+    customerVat : 'customerVat',
+    customerTan : 'customerTan',
 }

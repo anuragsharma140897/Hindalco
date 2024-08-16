@@ -11,7 +11,6 @@ import { siteMasterVariable as variable } from '../../../Constant/variables/mast
 
 
 
-
 export default function AddSiteMaster({ row, closeModal }) {
     var dispatch = useDispatch()
     const reduxSite = useSelector(state => state.SiteMasterReducer)
