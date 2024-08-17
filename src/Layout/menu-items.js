@@ -44,6 +44,7 @@ export const menuItems = [
       { name: 'Reader Replacement Master', href: routes?.panel?.device?.readerReplacementMaster,icon : <ReaderReplacementMasterIcon />}, 
       { name: 'Reader Health Master', href: routes?.panel?.device?.readerHealthMaster ,icon : <ReaderHealthMasterIcon /> },
       { name: 'Reader Building Mapping Master', href: routes?.panel?.device?.readerBuildingMappingMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
+      { name: 'Weighing Scale', href: routes?.panel?.device?.weighingScale ,icon : <ReaderBuildingMappingMasterIcon /> },
     ],
   },
   { name: 'Reports', },

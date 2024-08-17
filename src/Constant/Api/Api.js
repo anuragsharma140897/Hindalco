@@ -51,3 +51,9 @@ export const addReader = DeviceMicroService+'addReader'
 export const updateReader = DeviceMicroService+'updateReader'
 export const searchReader = DeviceMicroService+'searchReader'
 export const deleteReader = DeviceMicroService+'deleteReader'
+
+//Weighing Scale
+export const addWeighingScale = DeviceMicroService+'addWeighingScale' 
+export const updateWeighingScale = DeviceMicroService+'updateWeighingScale'
+export const searchWeighingScale = DeviceMicroService+'searchWeighingScale'
+export const deleteWeighingScale = DeviceMicroService+'deleteWeighingScale'

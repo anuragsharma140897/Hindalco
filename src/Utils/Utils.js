@@ -113,7 +113,6 @@ export const getHeadingFromPathname = () => {
             return "Role And Permission";
         case "/master/building":
             return "Building Master";
-
         case "/master/product":
             return "Product Master";
         case "/master/customer":
@@ -122,12 +121,10 @@ export const getHeadingFromPathname = () => {
             return "Supplier Master";
         case "/master/general":
             return "General Master";
-
         case "/master/product/create":
             return "Product Master / Create";
         case "/master/customer/create":
             return "Coustomer Master / Create";
-
         case "/device/reader":
             return "Device / Reader Master";
         case "/device/reader-replacement":
@@ -138,7 +135,10 @@ export const getHeadingFromPathname = () => {
             return "Device / Create Reader";
         case "/device/reader-builing-mapping":
             return "Device / Reader Builing Mapping Master";
-
+        case "/device/weighingscale":
+            return "Device / Weighing Scale";
+        case "/device/weighingscale/create":
+            return "Device / Create Weighing Scale ";
         default:
             return "";
     }

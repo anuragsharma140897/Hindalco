@@ -16,6 +16,7 @@ import BuildingMasterReducer from './Store/Reducer/master/building-master/buildi
 import ApiReducer from './Store/Reducer/Api/ApiReducer';
 import ProductMasterReducer from './Store/Reducer/master/product-master/product-master-reducer';
 import DeviceReaderReducer from './Store/Reducer/device/device-reader/device-reader-action';
+import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing-scale-action';
 
 
 const rootReducer = combineReducers({
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   SiteMasterReducer : SiteMasterReducer,
   BuildingMasterReducer : BuildingMasterReducer,
   ProductMasterReducer : ProductMasterReducer,
-  DeviceReaderReducer : DeviceReaderReducer
+  DeviceReaderReducer : DeviceReaderReducer,
+  WeighingScaleReducer : WeighingScaleReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))

@@ -27,6 +27,9 @@ export const routes = {
       readerReplacementMaster : '/device/reader-replacement',
       readerHealthMaster : '/device/reader-health',
       readerBuildingMappingMaster : '/device/reader-builing-mapping',
+      weighingScale : '/device/weighingscale',
+      createWeighingScale : '/device/weighingscale/create',
+      editWeighingScale : '/device/weighingscale/edit/:id',
     },
     inbond: {
       inboundOrder: '/inbond/inbound-order',

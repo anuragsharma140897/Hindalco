@@ -61,6 +61,9 @@ export default function AddProduct() {
           else if (result.status === 400) {
             window.alert(result.message)
           }
+          else if (result.status === 500) {
+            window.alert(result.message)
+          }
         })
       } else {
         Object.assign(json, { status: json?.status || 'active' })
@@ -72,6 +75,9 @@ export default function AddProduct() {
             }
           }
           else if (result.status === 400) {
+            window.alert(result.message)
+          }
+          else if (result.status === 500) {
             window.alert(result.message)
           }
         })

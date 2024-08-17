@@ -17,7 +17,6 @@ import CreateProduct from '../WebView/master/product-master/create/create-produc
 import CreateCustomer from '../WebView/master/customer-master/create/create-customer'
 import CreateSupplier from '../WebView/master/supplier-master/create/create-supplier'
 import InboundOrder from '../WebView/inbound/inbound-order/inbound-order'
-import WebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
 import InboundWebReceiving from '../WebView/inbound/web-receving/inbound-web-receving'
 import OutboundOrder from '../WebView/outbound/outbound-order/outbound-order'
 import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-picking'
@@ -25,6 +24,8 @@ import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
 import CreateDeviceReader from '../Form/device/create-device-reader/create-device-reader'
+import WeighingScale from '../WebView/device/weighing-scale/weighing-scale'
+import CreateWeighingScale from '../Form/device/create-weighing-scale/create-weighing-scale'
 
 export default function CustomRoutes() {
 
@@ -39,6 +40,10 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.device?.createReader} exact element={<CreateDeviceReader />} />
             <Route path={routes?.panel?.device?.editReader} exact element={<CreateDeviceReader />} />
             <Route path={routes?.panel?.device?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
+            <Route path={routes?.panel?.device?.weighingScale} exact element={<WeighingScale />} />
+            <Route path={routes?.panel?.device?.createWeighingScale} exact element={<CreateWeighingScale />} />
+            <Route path={routes?.panel?.device?.createWeighingScale} exact element={<CreateWeighingScale />} />
+            <Route path={routes?.panel?.device?.editWeighingScale} exact element={<CreateWeighingScale />} />
             <Route path={routes?.panel?.master?.productMaster} exact element={<ProductMaster />} />
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
