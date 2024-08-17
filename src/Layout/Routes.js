@@ -24,6 +24,7 @@ import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-pic
 import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
+import CreateDeviceReader from '../Form/device/create-device-reader/create-device-reader'
 
 export default function CustomRoutes() {
 
@@ -33,9 +34,11 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.rolesAndPermission} exact element={<RolesAndPermission />} />
             <Route path={routes?.panel?.master?.siteMaster} exact element={<SiteMaster />} />
             <Route path={routes?.panel?.master?.buildingsMaster} exact element={<BuildingsMaster />} />
-            <Route path={routes?.panel?.master?.readerMaster} exact element={<ReaderMaster />} />
-            <Route path={routes?.panel?.master?.readerReplacementMaster} exact element={<ReaderReplacementMaster />} />
-            <Route path={routes?.panel?.master?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
+            <Route path={routes?.panel?.device?.readerMaster} exact element={<ReaderMaster />} />
+            <Route path={routes?.panel?.device?.readerReplacementMaster} exact element={<ReaderReplacementMaster />} />
+            <Route path={routes?.panel?.device?.createReader} exact element={<CreateDeviceReader />} />
+            <Route path={routes?.panel?.device?.editReader} exact element={<CreateDeviceReader />} />
+            <Route path={routes?.panel?.device?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
             <Route path={routes?.panel?.master?.productMaster} exact element={<ProductMaster />} />
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
@@ -44,7 +47,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
-            <Route path={routes?.panel?.master?.readerBuildingMappingMaster} exact element={<ReaderBuildingMappingMaster />} />
+            <Route path={routes?.panel?.device?.readerBuildingMappingMaster} exact element={<ReaderBuildingMappingMaster />} />
             <Route path={routes?.panel?.inbond?.inboundOrder} exact element={<InboundOrder />} />
             <Route path={routes?.panel?.inbond?.webReceiving} exact element={<InboundWebReceiving />} />
             <Route path={routes?.panel?.inbond?.inboundCreate} exact element={<CreateInbound />} />
