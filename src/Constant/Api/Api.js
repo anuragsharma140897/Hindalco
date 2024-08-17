@@ -1,6 +1,6 @@
 
 export const IP = '137.184.74.218'
-// export const IP = '192.168.0.104:9090'
+// export const IP = '192.168.0.100:9090'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
@@ -54,6 +54,13 @@ export const addReader = DeviceMicroService+'addReader'
 export const updateReader = DeviceMicroService+'updateReader'
 export const searchReader = DeviceMicroService+'searchReader'
 export const deleteReader = DeviceMicroService+'deleteReader'
+// Reader Configutaio
+export const loginReader = DeviceMicroService+'loginReader'
+export const readerStatus = DeviceMicroService+'readerStatus'
+export const readerNetwork = DeviceMicroService+'readerNetwork'
+export const getAccessInMqtt = DeviceMicroService+'getAccessInMqtt'
+export const viewTopics = DeviceMicroService+'viewTopics'
+
 
 //Weighing Scale
 export const addWeighingScale = DeviceMicroService+'addWeighingScale' 

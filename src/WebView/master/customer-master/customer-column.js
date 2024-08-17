@@ -223,6 +223,6 @@ export const getCustomerMasterColumns = ({ closeModal, openModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteCustomer).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

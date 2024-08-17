@@ -32,6 +32,7 @@
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "react-use": "^17.5.0",
+    "react-xml-parser": "^1.1.8",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "rizzui": "^0.8.4",

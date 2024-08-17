@@ -24,28 +24,31 @@ import ZoneMasterReducer from './Store/Reducer/master/zone-master/zone-master-re
 import LocationMasterReducer from './Store/Reducer/master/location-master/location-master-reducer';
 import TagMasterReducer from './Store/Reducer/master/tag-master/tag-master-reducer';
 import DeviceReaderReducer from './Store/Reducer/device/device-reader/device-reader-action';
+import ReaderConfigurationReducer from './Store/Reducer/device/reader-configuration/reader-configuration-reducer';
 import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing-scale-action';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
-  SampleReducer: SampleReducer,
-  PaginationReducer: PaginationReducer,
-  RolesAndPermissionReducer: RolesAndPermissionReducer,
-  AuthReducer: AuthReducer,
-  InventoryManagementReducer: InventoryManagementReducer,
-  SiteMasterReducer: SiteMasterReducer,
-  BuildingMasterReducer: BuildingMasterReducer,
-  UserReducer: UserReducer,
-  SupplierMasterReducer: SupplierMasterReducer,
-  GeneralMasterReducer: GeneralMasterReducer,
-  CustomerMasterReducer: CustomerMasterReducer,
-  ProductMasterReducer: ProductMasterReducer,
+  SampleReducer : SampleReducer,
+  PaginationReducer : PaginationReducer,
+  RolesAndPermissionReducer : RolesAndPermissionReducer,
+  AuthReducer : AuthReducer,
+  InventoryManagementReducer : InventoryManagementReducer,
+  SiteMasterReducer : SiteMasterReducer,
+  BuildingMasterReducer : BuildingMasterReducer,
+  UserReducer : UserReducer,
+  SupplierMasterReducer : SupplierMasterReducer,
+  GeneralMasterReducer :GeneralMasterReducer,
+  CustomerMasterReducer : CustomerMasterReducer,
+  ProductMasterReducer : ProductMasterReducer,
+  DeviceReaderReducer : DeviceReaderReducer,
+  ReaderConfigurationReducer : ReaderConfigurationReducer,
+  WeighingScaleReducer:WeighingScaleReducer,
   VehicleMasterReducer: VehicleMasterReducer,
   ZoneMasterReducer: ZoneMasterReducer,
   LocationMasterReducer: LocationMasterReducer,
   TagMasterReducer:TagMasterReducer,
-  DeviceReaderReducer:DeviceReaderReducer,
-  WeighingScaleReducer:WeighingScaleReducer
+
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

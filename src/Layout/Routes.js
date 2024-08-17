@@ -22,6 +22,7 @@ import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-pic
 import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
+import ReaderConfiguraiton from '../WebView/configuration/reader-configuraiton'
 import CreateDeviceReader from '../Form/device/create-device-reader/create-device-reader'
 import WeighingScale from '../WebView/device/weighing-scale/weighing-scale'
 import CreateWeighingScale from '../Form/device/create-weighing-scale/create-weighing-scale'
@@ -44,6 +45,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.device?.readerReplacementMaster} exact element={<ReaderReplacementMaster />} />
             <Route path={routes?.panel?.device?.createReader} exact element={<CreateDeviceReader />} />
             <Route path={routes?.panel?.device?.editReader} exact element={<CreateDeviceReader />} />
+            <Route path={routes?.panel?.device?.readerConfiguration} exact element={<ReaderConfiguraiton />} />
             <Route path={routes?.panel?.device?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
             <Route path={routes?.panel?.device?.weighingScale} exact element={<WeighingScale />} />
             <Route path={routes?.panel?.device?.createWeighingScale} exact element={<CreateWeighingScale />} />

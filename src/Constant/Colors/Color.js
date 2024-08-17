@@ -13,3 +13,24 @@ export const Colors = {
 
  
  }
+
+ // statusClasses.js
+
+export const STATUS_CLASSES = {
+    active: {
+        badgeColor: 'success',
+        textColor: 'text-green-dark'
+    },
+    inactive: {
+        badgeColor: 'warning',
+        textColor: 'text-orange-dark'
+    },
+    blocked: {
+        badgeColor: 'danger',
+        textColor: 'text-red-dark'
+    },
+    default: {
+        badgeColor: 'bg-gray-400',
+        textColor: 'text-gray-600'
+    }
+};

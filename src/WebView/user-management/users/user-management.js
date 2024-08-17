@@ -13,12 +13,14 @@ import { searchUser } from '../../../Constant/Api/Api';
 import { CompileUserMaster } from './promiss/user-promiss';
 import { setUserApiJson, setUserData } from '../../../Store/Action/user-management/user-action';
 import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
+import { useFilterOptions } from '../../../Hooks/user-filter-options';
 
 
 export default function UserManagement() {
     const dispatch = useDispatch()
     const reduxUser = useSelector(state => state.UserReducer)
     const reduxPagination = useSelector(state => state.PaginationReducer)
+    
     const { openModal, closeModal } = useModal();
     const columns = useMemo(() => getUserColumns({ openModal, closeModal }))
     const { visibleColumns } = useColumn(columns);
@@ -28,7 +30,7 @@ export default function UserManagement() {
             loadData('init')
         }
 
-
+       
 
     }, [])
 
@@ -55,6 +57,7 @@ export default function UserManagement() {
         <div>
             <PageHeader btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
             <ControlledTable
+                screen={'user'}
                 variant="modern"
                 isLoading={false}
                 showLoadingText={true}

@@ -37,7 +37,7 @@ export default function CustomerMaster() {
       }
     })
   }
-  console.log("reduxCustomer",reduxCustomer);
+
 
 
   return (

@@ -155,6 +155,15 @@ export const getHeadingFromPathname = () => {
             return "";
     }
 }
+
+
+
+
+
+
+
+
+// not used
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],

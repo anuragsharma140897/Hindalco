@@ -7,13 +7,13 @@ function Permissions() {
     const [values, setValues] = useState(["apple"]);
 
 
-    console.log("reduxRolesAndPermission", reduxRolesAndPermission);
+
 
     return (
         <div className='flex flex-col gap-y-3'>
             {
                 reduxRolesAndPermission?.doc?.map((permission, index) => {
-                    console.log("permission", permission);
+
                     return (
                         <div className='flex items-center justify-between'>
                             <div className={`${permission?.child?.length > 0 ? "border px-4 py-1" : ""}`}>

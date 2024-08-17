@@ -31,6 +31,7 @@ export const routes = {
       readerMaster : '/device/reader',
       createReader : '/device/reader/create',
       editReader : '/device/reader/edit/:id',
+      readerConfiguration : '/device/reader/reader-configuration/:id',
       readerReplacementMaster : '/device/reader-replacement',
       readerHealthMaster : '/device/reader-health',
       readerBuildingMappingMaster : '/device/reader-builing-mapping',
