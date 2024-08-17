@@ -8,27 +8,33 @@ import { isEmpty } from 'underscore';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 
-export default function ControlledTable({ disablePagination, columns, className, tableProps, data, paginatorOptions, paginatorClassName }) {
+export default function ControlledTable({ columns, className, data, ApitHit}) {
   const dispatch = useDispatch()
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const handlePaginate = (page) => {
+
+    console.log('page', page);
     var json = reduxPagination?.doc
-    json.current = page
+    json.number = page
     dispatch(setPagination(json))
+    if(ApitHit) ApitHit()
   }
+
   return (
     <div className=''>
       <div className="relative ">
         <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>
-      
-      {/* {disablePagination ? null : <TablePagination
-        current={reduxPagination?.doc?.current}
-        total={reduxPagination?.doc?.total}
-        pageSize={reduxPagination?.doc?.pageSize}
+
+      <TablePagination
+        current={reduxPagination?.doc?.number}
+        total={reduxPagination?.doc?.totalElements}
+        pageSize={reduxPagination?.doc?.limit}
         onChange={handlePaginate}
-        paginatorClassName={paginatorClassName}
-      />} */}
+        ApitHit={ApitHit}
+        // paginatorClassName={paginatorClassName}
+      />
+
     </div>
   )
 }
