@@ -3,12 +3,14 @@ import { HeaderCell } from '../../../Component/ui/table';
 import { routes } from '../../../config/routes';
 import DeletePopover from '../../../shared/delete-popover';
 import PencilIcon from '../../../Constant/Icons/pencil';
-import ProtectIcon from '../../../Constant/Icons/protect';
-import SearchUser from '../../../shared/common/search-user';
 import { PiInfoFill } from 'react-icons/pi';
 import ReaderMasterBuildingInfo from '../../../InfoModal/reader-master-building-info/reader-master-building-info';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { deleteReader } from '../../../Constant/Api/Api';
+import { IoMdSettings } from "react-icons/io";
 
-export const getReaderMasterColumns = ({ onDeleteItem, openModal }) => [
+
+export const getReaderMasterColumns = ({ openModal }) => [
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -18,7 +20,7 @@ export const getReaderMasterColumns = ({ onDeleteItem, openModal }) => [
   },
   {
     title: <HeaderCell title="Placement" className={'font-extrabold'} />,
-    dataIndex: 'placement',
+    dataIndex: 'placementName',
     key: 'placement',
     width: 120,
     render: (value) => (
@@ -27,7 +29,7 @@ export const getReaderMasterColumns = ({ onDeleteItem, openModal }) => [
   },
   {
     title: <HeaderCell title="Reader Type" className={'font-extrabold'} />,
-    dataIndex: 'readerType',
+    dataIndex: 'readerTypeName',
     key: 'readerType',
     width: 150,
     render: (value) => (
@@ -78,23 +80,40 @@ export const getReaderMasterColumns = ({ onDeleteItem, openModal }) => [
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
+          <a href={'/device/reader/edit/'+row.id}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
-          </label>
+          </a>
+        </Tooltip>
+        <Tooltip size="sm" content={'Check Device'} placement="top" color="invert">
+          <a href={'/device/reader/reader-configuration/'+row.id}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+            <IoMdSettings className="h-4 w-4" />
+            </ActionIcon>
+          </a>
         </Tooltip>
         <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
           onDelete={() => onDeleteItem(row.id)}
         />
-        <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
+        {/* <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
           <label href={routes?.eCommerce?.editOrder(row.id)}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
               <ProtectIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
-        </Tooltip>
+        </Tooltip> */}
       </div>
     ),
   },
 ];
+
+
+export const onDeleteItem = (id) => {
+  var json = { id: id }
+  HitApi(json, deleteReader).then((Result) => {
+    if (Result.status === 200) {
+      window.location.reload()
+    }
+  })
+}

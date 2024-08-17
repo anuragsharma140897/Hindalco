@@ -5,12 +5,11 @@ import { STATUS_CLASSES } from '../../../Constant/Colors/Color';
 
 
 export default function CustomFilter({ screen }) {
-
     let FilterItem = FilterCondition?.find(Obj => Obj?.screen === screen);
-    
+
     useEffect(() => {
         console.log('FilterItem', FilterItem);
-    }, []);
+    }, [FilterItem]);
 
     return (
         <div className='grid grid-cols-4 gap-4'>
@@ -22,9 +21,9 @@ export default function CustomFilter({ screen }) {
                             placeholder={ele?.placeholder || 'Select ...'}
                             optionClassName='hover:bg-red-lighter'
                             getOptionDisplayValue={
-                                ele?.useCustomDisplay 
-                                ? (option) => renderOptionDisplayValue(option.value) 
-                                : (option) => renderDefaultDisplay(option.value) 
+                                ele?.useCustomDisplay
+                                    ? (option) => renderOptionDisplayValue(option.value)
+                                    : (option) => renderDefaultDisplay(option.value)
                             }
                         />
                     </div>

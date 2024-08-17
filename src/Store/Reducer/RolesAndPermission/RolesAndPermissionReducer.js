@@ -144,6 +144,40 @@ const initialState = {
       ]
     },
     {
+      value: "Device",
+      url: [],
+      permission: [
+        {
+          read: { allowed: false, url: [] },
+          write: { allowed: false, url: [] },
+          delete: { allowed: false, url: [] },
+        }
+      ],
+      child: [
+        {
+          value: "inbound order",
+          url: [],
+          permission: [
+            {
+              read: { allowed: false, url: [] },
+              write: { allowed: false, url: [] },
+              delete: { allowed: false, url: [] },
+            }
+          ]
+        }, {
+          value: "web receving",
+          url: [],
+          permission: [
+            {
+              read: { allowed: false, url: [] },
+              write: { allowed: false, url: [] },
+              delete: { allowed: false, url: [] },
+            }
+          ]
+        },
+      ]
+    },
+    {
       value: "inbound",
       url: [],
       permission: [

@@ -113,12 +113,7 @@ export const getHeadingFromPathname = () => {
             return "Role And Permission";
         case "/master/building":
             return "Building Master";
-        case "/master/reader":
-            return "Reader Master";
-        case "/master/reader-replacement":
-            return "Reader Replacement";
-        case "/master/reader-health":
-            return "Reader Health";
+
         case "/master/product":
             return "Product Master";
         case "/master/customer":
@@ -127,16 +122,29 @@ export const getHeadingFromPathname = () => {
             return "Supplier Master";
         case "/master/general":
             return "General Master";
-        case "/master/reader-builing-mapping":
-            return "Reader Builing Mapping Master";
+
         case "/master/product/create":
             return "Product Master / Create";
         case "/master/customer/create":
             return "Coustomer Master / Create";
+
+        case "/device/reader":
+            return "Device / Reader Master";
+        case "/device/reader-replacement":
+            return "Device / Reader Replacement";
+        case "/device/reader-health":
+            return "Device / Reader Health";
+        case "/device/reader/create":
+            return "Device / Create Reader";
+        case "/device/reader-builing-mapping":
+            return "Device / Reader Builing Mapping Master";
+
         default:
             return "";
     }
 }
+
+// device/reader
 
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
@@ -151,8 +159,8 @@ const endpointBasedOnPermissions = {
     }
 };
 
-const checkPermissions = (perms)=>{
-    const allowedEndPoints = [] 
+const checkPermissions = (perms) => {
+    const allowedEndPoints = []
     const { value, permission } = perms;
     permission.forEach((permissionItem) => {
         const permissionKeys = Object.keys(permissionItem);
@@ -162,20 +170,5 @@ const checkPermissions = (perms)=>{
             }
         });
     })
-    return allowedEndPoints
-}
-export const getEnpointsToPermissons =(doc) =>{
-    
-    let allowedEndPoints = [] ;
-    doc.forEach((perms,index)=>{
-
-        allowedEndPoints.push(...checkPermissions(perms))
-        if (perms.child.length > 0) {
-            perms.child.forEach((childPerm) => {
-                allowedEndPoints.push(...checkPermissions(childPerm))
-            })
-        }
-    })
-
     return allowedEndPoints
 }

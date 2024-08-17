@@ -1,10 +1,11 @@
 
-export const IP = '137.184.74.218'
-// export const IP = '192.168.0.104:9090'
+// export const IP = '137.184.74.218'
+export const IP = '192.168.0.100:9090'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
 export const PlantMicroService = `http://${IP}/plant/api/`
+export const DeviceMicroService = `http://${IP}/device/api/`
 
 export const LoginApi = BaseUrl+'login'
 // User
@@ -48,7 +49,15 @@ export const updateBuilding = PlantMicroService+'updateBuilding'
 export const searchBuilding = PlantMicroService+'searchBuilding'
 export const deleteBuilding = PlantMicroService+'deleteBuilding'
 // Reader
-export const addReader = PlantMicroService+'addReader' 
-export const updateReader = PlantMicroService+'updateReader'
-export const searchReader = PlantMicroService+'searchReader'
-export const deleteReader = PlantMicroService+'deleteReader'
+export const addReader = DeviceMicroService+'addReader' 
+export const updateReader = DeviceMicroService+'updateReader'
+export const searchReader = DeviceMicroService+'searchReader'
+export const deleteReader = DeviceMicroService+'deleteReader'
+// Reader Configutaio
+export const loginReader = DeviceMicroService+'loginReader'
+export const readerStatus = DeviceMicroService+'readerStatus'
+export const readerNetwork = DeviceMicroService+'readerNetwork'
+export const getAccessInMqtt = DeviceMicroService+'getAccessInMqtt'
+export const viewTopics = DeviceMicroService+'viewTopics'
+
+

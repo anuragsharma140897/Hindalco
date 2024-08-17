@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import CustomInput from '../../../../Component/ui/form/input/custom-input'
-import { productMasterSchema } from '../../../../Utils/validators/master/product-master/add-product.schema'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import CustomInput from '../../../../Component/ui/form/input/custom-input';
+import { productMasterSchema } from '../../../../Utils/validators/master/product-master/add-product.schema';
+import { useDispatch, useSelector } from 'react-redux';
 import { setProductMasterApiJson } from '../../../../Store/Action/master/product-master/product-master-action';
 import useValidation from '../../../../Hooks/useValidation';
 import CustomButton from '../../../../Component/ui/buttons/custom-button';

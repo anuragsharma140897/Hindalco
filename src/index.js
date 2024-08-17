@@ -19,6 +19,8 @@ import SupplierMasterReducer from './Store/Reducer/master/supplier-master/suppli
 import GeneralMasterReducer from './Store/Reducer/master/general-master/general-master-reducer';
 import CustomerMasterReducer from './Store/Reducer/master/customer-master/customer-master-reducer';
 import ProductMasterReducer from './Store/Reducer/master/product-master/product-master-reducer';
+import DeviceReaderReducer from './Store/Reducer/device/device-reader/device-reader-action';
+import ReaderConfigurationReducer from './Store/Reducer/device/reader-configuration/reader-configuration-reducer';
 
 
 const rootReducer = combineReducers({
@@ -34,7 +36,9 @@ const rootReducer = combineReducers({
   SupplierMasterReducer : SupplierMasterReducer,
   GeneralMasterReducer :GeneralMasterReducer,
   CustomerMasterReducer : CustomerMasterReducer,
-  ProductMasterReducer : ProductMasterReducer
+  ProductMasterReducer : ProductMasterReducer,
+  DeviceReaderReducer : DeviceReaderReducer,
+  ReaderConfigurationReducer : ReaderConfigurationReducer
 })
 
 const store = createStore(rootReducer,applyMiddleware(thunk))
