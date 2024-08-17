@@ -11,7 +11,7 @@ export default function GlobalModal() {
   }, [pathname]);
 
   return (
-    <Modal isOpen={isOpen} onClose={()=>{}} customSize={customSize} overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-lg" containerClassName="dark:bg-gray-100" className="z-[9999]">
+    <Modal isOpen={isOpen} onClose={()=>closeModal()} customSize={customSize} overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-lg" containerClassName="dark:bg-gray-100" className="z-[9999]">
       {title ? <div className="m-auto px-7 pt-6">
         <div className={` ${titleClass} text-center`}> <Text as="h3" className={`font-bold`}>{title}</Text></div>
       </div> : null}

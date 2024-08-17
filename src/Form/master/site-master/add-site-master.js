@@ -37,16 +37,16 @@ export default function AddSiteMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateSite).then((result) => {
-                  console.log('result', result);
+
                 })
               } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addSite).then((result) => {
-                  console.log('result', result);
+
                 })
               }
         } else {
-            console.log('Form has errors');
+
         }
     };
 

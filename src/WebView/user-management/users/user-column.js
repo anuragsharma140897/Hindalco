@@ -5,8 +5,12 @@ import Permission from '../permission/permission';
 import PencilIcon from '../../../Constant/Icons/pencil';
 import EyeIcon from '../../../Constant/Icons/eye';
 import DeletePopover from '../../../shared/delete-popover';
+import { deleteUser } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { EditScreen } from '../../../shared/edit-screen';
+import AddUserMaster from '../../../Form/master/user-master/add-user-master';
 
-export const getUserColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, openModal }) => [
+export const getUserColumns = ({ openModal, closeModal }) => [
   {
     title: (
       <HeaderCell title="SR No." />
@@ -14,22 +18,24 @@ export const getUserColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, op
     dataIndex: 'index',
     key: 'index',
     width: 120,
-    render: (value) => <Text>{value || '---'}</Text>,
+    render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
   },
   {
     title: <HeaderCell title="Name" />,
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'firstName',
+    key: 'firstName',
     width: 150,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    render: (value, row) => (
+      <div>
+        <Text className="font-semibold text-gray-700">{row?.firstName + ' ' +  row?.lastName}</Text>
+        <Text className="text-xs font-medium text-gray-700">{row?.username}</Text>
+      </div>
     ),
   },
   {
     title: <HeaderCell title="Role" />,
-    // onHeaderCell: () => onHeaderCellClick('role'),
-    dataIndex: 'role',
-    key: 'role',
+    dataIndex: 'roleName',
+    key: 'roleName',
     width: 150,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -72,8 +78,8 @@ export const getUserColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, op
     render: (_, row) => (
       <div className="flex items-center justify-end gap-3 pe-4">
         <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+          <label>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddUserMaster, 800)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
@@ -86,9 +92,17 @@ export const getUserColumns = ({ sortConfig, onDeleteItem, onHeaderCellClick, op
           </label>
         </Tooltip>
         <DeletePopover title={`Delete User`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => onDeleteItem(row.id)} 
+          onDelete={() => DeleteItem(row.id)} 
         />
       </div>
     ),
   },
 ];
+
+
+export const DeleteItem = (id) =>{
+  var json = {id:id}
+  HitApi(json, deleteUser).then((Result)=>{
+    console.log('Result', Result);
+  })
+}

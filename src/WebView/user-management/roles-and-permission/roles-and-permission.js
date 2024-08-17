@@ -54,20 +54,14 @@ export default function RolesAndPermission() {
 
   const loadData = () => {
     var json = reduxRolesAndPermission?.searchJson
-    console.log('json', json);
-    if (data?.content?.length > 0)
-      // CompileRolesAndPermission(data).then((CompiledData) => {
-      //   console.log('CompiledData', CompiledData);
-      //   dispatch(setRolesAndPermissionMainData(CompiledData))
-      // })
+
     HitApi(json, searchRole).then((result) => {
-      console.log('result', result);
       if (result?.content?.length > 0)
         CompileRolesAndPermission(result).then((CompiledData) => {
-        console.log('CompiledData', CompiledData);
           dispatch(setRolesAndPermissionMainData(CompiledData))
         })
     })
+
   }
 
   return (

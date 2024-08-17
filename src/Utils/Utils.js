@@ -139,13 +139,20 @@ export const getHeadingFromPathname = () => {
             return "Device / Weighing Scale";
         case "/device/weighingscale/create":
             return "Device / Create Weighing Scale ";
+        case "/master/vehicle":
+            return "Vehicle Master";
+        case "/master/zone":
+            return "Zone Master";
+        case "/master/location":
+            return "Location Master";
+        case "/master/tag":
+            return "Tag Master";
+        case "/master/configuration":
+            return "Configuration Master";
         default:
             return "";
     }
 }
-
-// device/reader
-
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],
@@ -176,7 +183,6 @@ export const getEnpointsToPermissons = (doc) => {
 
     let allowedEndPoints = [];
     doc.forEach((perms, index) => {
-        console.log("Permissions", perms.child.length)
         allowedEndPoints.push(...checkPermissions(perms))
         if (perms.child.length > 0) {
             perms.child.forEach((childPerm) => {
@@ -184,6 +190,6 @@ export const getEnpointsToPermissons = (doc) => {
             })
         }
     })
-    // console.log(allowedEndPoints, "allowedEndPoints")
+
     return allowedEndPoints
 }

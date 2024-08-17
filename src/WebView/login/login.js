@@ -10,6 +10,7 @@ import { SET_AUTH_ERROR, setAuthError } from '../../Store/Action/Auth/Sample/Aut
 import { HitApi } from '../../Store/Action/Api/ApiAction'
 import { LoginApi } from '../../Constant/Api/Api'
 import { setAuthenticatedUser } from '../../Storage/Storage'
+import bcrypt from "bcryptjs-react"
 
 function Login() {
   const AuthReducer = useSelector(state => state.AuthReducer)
@@ -20,9 +21,8 @@ function Login() {
     LoginValidation(AuthReducer?.doc).then((error) => {
       dispatch(setAuthError(error, SET_AUTH_ERROR))
       if (Object.keys(error).length === 0) {
-        console.log();
         HitApi(AuthReducer?.doc, LoginApi).then((res) => {
-          console.log("response", res);
+
           if (res.statusCode === 200) {
             setAuthenticatedUser(res?.jwtToken)
             window.location.reload()

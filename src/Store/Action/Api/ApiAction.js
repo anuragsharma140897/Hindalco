@@ -18,19 +18,19 @@ export const HitApi = (json, api) => {
             body: JSON.stringify(json)
         };
 
-        console.log(requestOptions);
+
 
         fetch(api, requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('result', result);
+
                     if (result) {
                         resolve(result);
                     }
                 },
                 (error) => {
-                    console.log("error ---- ", error);
+
                     resolve(error);
                 }
             )

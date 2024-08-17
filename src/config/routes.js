@@ -19,6 +19,12 @@ export const routes = {
       createSupplier : '/master/supplier/create',
       generalMaster : '/master/general',
       // readerBuildingMappingMaster : '/master/reader-builing-mapping',
+      zomeMaster: '/master/zone',
+      locationMaster: '/master/location',
+      tagMaster: '/master/tag',
+      configurationMaster: '/master/configuration',
+      vehicleMaster: '/master/vehicle',
+
     },
     device: {
       readerMaster : '/device/reader',
@@ -34,12 +40,12 @@ export const routes = {
     inbond: {
       inboundOrder: '/inbond/inbound-order',
       webReceiving: '/inbond/web-receiving',
-      inboundCreate : '/inbond/inbound-create',
+      inboundCreate: '/inbond/inbound-create',
     },
     outbond: {
       outboundOrder: '/outbond/outbound-order',
       webPicking: '/outbond/web-picking',
-      outboundCreate : '/outbond/outbound-create',
+      outboundCreate: '/outbond/outbound-create',
     },
   },
 };

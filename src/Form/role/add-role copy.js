@@ -28,7 +28,7 @@ const AddRole = ({ closeModal, row }) => {
     if (row?.id) {
       loadDefault(row)
   }
-    console.log('row', row);
+
 
   }, [])
 
@@ -36,11 +36,11 @@ const AddRole = ({ closeModal, row }) => {
     // var json = reduxRolesAndPermission?.apiJson
     // Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
 
-    // console.log('eidt json', json);
+
     // // setData(json)
     // dispatch(setRolesAndPermissionApiJson(json))
     ReCompileJsonForEdit(row).then((Result)=>{
-      console.log('Result', Result);
+
       dispatch(setRolesAndPermissionApiJson(Result))
     })
 }
@@ -55,7 +55,7 @@ const AddRole = ({ closeModal, row }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log('reduxRolesAndPermission', reduxRolesAndPermission?.apiJson);
+
     e.preventDefault();
     const validationErrors = validate(reduxRolesAndPermission?.apiJson);
     if (Object.keys(validationErrors).length === 0) {
@@ -66,14 +66,14 @@ const AddRole = ({ closeModal, row }) => {
             allowedEndPoints : FinalJson?.allowedEndPoints,
             permission: FinalJson?.permission,
           }
-          console.log('final sending json', json);
+
           HitApi(json, addRole).then((result)=>{
-            console.log('result', result);
+
           })
         }
       })
     } else {
-      console.log('Form has errors');
+
     }
   };
 
