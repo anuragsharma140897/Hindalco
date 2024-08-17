@@ -103,6 +103,6 @@ export const getUserColumns = ({ openModal, closeModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteUser).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

@@ -34,7 +34,7 @@ export default function AddUserMaster({ row, closeModal }) {
             handleLoadRole()
         }
 
-        console.log(reduxUser?.apiJson);
+
 
     }, [])
 
@@ -51,21 +51,21 @@ export default function AddUserMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateUser).then((result) => {
-                    console.log(result);
+
 
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
 
-                console.log('sjosn', json);
+
 
                 HitApi(json, addUser).then((result) => {
-                    console.log(result);
+
                 })
             }
-            console.log('json', json);
+
         } else {
-            console.log('Form has error');
+
         }
     };
 
@@ -79,7 +79,7 @@ export default function AddUserMaster({ row, closeModal }) {
         HitApi(json, searchRole).then((result) => {
             if (result) {
                 CompileRoleForSelect(result).then((CompiledData) => {
-                    console.log('CompiledData', CompiledData);
+
                     dispatch(setRolesAndPermissionMainData(CompiledData))
                 })
             }

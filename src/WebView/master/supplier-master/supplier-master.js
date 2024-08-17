@@ -35,7 +35,7 @@ export default function SupplierMaster() {
     var json = reduxSupplier?.searchJson
     HitApi(json, searchSupplier).then((result) => {
       if(result){
-        console.log('result', result);
+
         CompileSupplierMaster(result).then((CompiledData)=>{
           dispatch(setSupplierData(CompiledData))
         })

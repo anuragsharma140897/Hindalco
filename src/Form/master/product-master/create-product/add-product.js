@@ -83,7 +83,7 @@ export default function AddProduct() {
         })
       }
     } else {
-      console.log('Form has errors');
+
     }
   };
 

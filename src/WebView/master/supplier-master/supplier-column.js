@@ -82,6 +82,6 @@ export const getSupplierMasterColumns = ({ onDeleteItem, openModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteSupplier).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

@@ -26,7 +26,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxGeneral?.apiJson
 
-        console.log("json111111",json);
+
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setGeneralMasterApiJson(json))
     }
@@ -38,20 +38,20 @@ export default function AddGeneralMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateGeneral).then((result) => {
-                    console.log('result', result);
+
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addGeneral).then((result) => {
-                    console.log('result', result);
+
                 })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
 
-    console.log("reduxGeneral++++++",reduxGeneral);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

@@ -21,8 +21,6 @@ export default function TablePagination({ total, paginatorClassName = 'mt-5 xs:m
     if(ApitHit) ApitHit()
   }
 
-  console.log('reduxPagination', reduxPagination);
-
   return (
     <div className={cn('table-pagination flex items-center justify-center sm:justify-between px-5', paginatorClassName)}>
       <div className="hidden items-center sm:flex">

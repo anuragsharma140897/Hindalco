@@ -81,6 +81,6 @@ export const getGeneralMasterColumns = ({ openModal, closeModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteGeneral).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

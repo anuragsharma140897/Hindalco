@@ -28,7 +28,7 @@ export default function AddCustomeMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxCustomer?.apiJson
 
-        console.log("json111111", json);
+
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setCustomerMasterApiJson(json))
     }
@@ -40,16 +40,16 @@ export default function AddCustomeMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateCustomer).then((result) => {
-                    console.log('result', result);
+
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addCustomer).then((result) => {
-                    console.log('result', result);
+
                 })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
 
