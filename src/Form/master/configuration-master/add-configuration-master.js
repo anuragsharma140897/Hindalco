@@ -1,8 +1,11 @@
 import React from 'react'
+import ConfigTabs from '../../../WebView/master/configuration-master/config-tabs'
 
 function AddConfigurationMaster() {
   return (
-    <div>add-cration-master</div>
+    <div>
+      <ConfigTabs />
+    </div>
   )
 }
 
