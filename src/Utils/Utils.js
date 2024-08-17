@@ -133,11 +133,18 @@ export const getHeadingFromPathname = () => {
             return "Product Master / Create";
         case "/master/customer/create":
             return "Coustomer Master / Create";
+        case "/master/vehicle":
+            return "Vehicle Master";
+        case "/master/zone":
+            return "Zone Master";
+        case "/master/location":
+            return "Location Master";
+        case "/master/tag":
+            return "Tag Master";
         default:
             return "";
     }
 }
-
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],
@@ -151,8 +158,8 @@ const endpointBasedOnPermissions = {
     }
 };
 
-const checkPermissions = (perms)=>{
-    const allowedEndPoints = [] 
+const checkPermissions = (perms) => {
+    const allowedEndPoints = []
     const { value, permission } = perms;
     permission.forEach((permissionItem) => {
         const permissionKeys = Object.keys(permissionItem);
@@ -164,10 +171,10 @@ const checkPermissions = (perms)=>{
     })
     return allowedEndPoints
 }
-export const getEnpointsToPermissons =(doc) =>{
-    
-    let allowedEndPoints = [] ;
-    doc.forEach((perms,index)=>{
+export const getEnpointsToPermissons = (doc) => {
+
+    let allowedEndPoints = [];
+    doc.forEach((perms, index) => {
 
         allowedEndPoints.push(...checkPermissions(perms))
         if (perms.child.length > 0) {

@@ -22,6 +22,10 @@ import OutboundWebPicking from '../WebView/outbound/web-picking/outbound-web-pic
 import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
+import VehicleMaster from '../WebView/master/vehicle-master/vehicle-master'
+import ZoneMaster from '../WebView/master/zone-master/zone-master'
+import LocationMaster from '../WebView/master/location-master/location-master'
+import TagMaster from '../WebView/master/tag-master/tag-master'
 
 export default function CustomRoutes() {
 
@@ -38,7 +42,6 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
-            {/* <Route path={routes?.panel?.master?.createCustomer} exact element={<CreateCustomer />} /> */}
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
@@ -49,6 +52,13 @@ export default function CustomRoutes() {
             <Route path={routes.panel?.outbond?.outboundOrder} exact element={<OutboundOrder />} />
             <Route path={routes?.panel?.outbond?.webPicking} exact element={<OutboundWebPicking />} />
             <Route path={routes?.panel?.outbond?.outboundCreate} exact element={<CreateOutbound />} />
+            <Route path={routes?.panel?.master?.vehicleMaster} exact element={<VehicleMaster />} />
+            <Route path={routes?.panel?.master?.zomeMaster} exact element={<ZoneMaster />} />
+            <Route path={routes?.panel?.master?.locationMaster} exact element={<LocationMaster />} />
+            <Route path={routes?.panel?.master?.tagMaster} exact element={<TagMaster />} />
+
+
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

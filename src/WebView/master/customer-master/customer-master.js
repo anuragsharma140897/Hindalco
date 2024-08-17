@@ -1,13 +1,9 @@
 import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../shared/modal-views/use-modal';
-import { getGeneralMasterColumns } from '../general-master/general-column';
 import { useColumn } from '../../../Hooks/use-column';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { searchCustomer, searchGeneral } from '../../../Constant/Api/Api';
-import { CompileGeneralMaster } from '../general-master/promise/general-master-promise';
-import { setGeneralMasterData } from '../../../Store/Action/master/general-master/general-master-action';
-import AddGeneralMaster from '../../../Form/master/general-master/add-general-master';
+import { searchCustomer } from '../../../Constant/Api/Api';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import PageHeader from '../../../shared/page-header'
@@ -46,7 +42,7 @@ export default function CustomerMaster() {
 
   return (
     <div>
-    <PageHeader  btnText={'Add Customer Master'} children={<AddCustomeMaster closeModal={closeModal} />} title={'Add Custoomer Master'} customSize={1200} />
+    <PageHeader  btnText={'Add Customer'} children={<AddCustomeMaster closeModal={closeModal} />} title={'Add Customer'} customSize={1200} />
     <ControlledTable
         variant="modern"
         isLoading={false}
