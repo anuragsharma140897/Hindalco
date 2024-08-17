@@ -23,6 +23,7 @@ export const routes = {
       locationMaster: '/master/location',
       tagMaster: '/master/tag',
       configurationMaster: '/master/configuration',
+      createConfigurationMaster: '/master/configuration/create',
       vehicleMaster: '/master/vehicle',
 
     },
