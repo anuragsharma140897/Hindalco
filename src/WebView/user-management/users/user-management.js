@@ -55,6 +55,7 @@ export default function UserManagement() {
         <div>
             <PageHeader btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
             <ControlledTable
+                screen={'user'}
                 variant="modern"
                 isLoading={false}
                 showLoadingText={true}

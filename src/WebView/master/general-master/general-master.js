@@ -37,7 +37,7 @@ export default function GeneralMaster() {
       }
     })
   }
-  console.log("reduxGeneral",reduxGeneral);
+
 
 
   return (
