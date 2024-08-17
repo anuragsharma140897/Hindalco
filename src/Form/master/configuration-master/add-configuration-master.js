@@ -2,7 +2,7 @@ import React from 'react'
 
 function AddConfigurationMaster() {
   return (
-    <div>add-configuration-master</div>
+    <div>add-cration-master</div>
   )
 }
 
