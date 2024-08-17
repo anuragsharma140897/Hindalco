@@ -24,6 +24,13 @@ import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
 import ReaderConfiguraiton from '../WebView/configuration/reader-configuraiton'
 import CreateDeviceReader from '../Form/device/create-device-reader/create-device-reader'
+import WeighingScale from '../WebView/device/weighing-scale/weighing-scale'
+import CreateWeighingScale from '../Form/device/create-weighing-scale/create-weighing-scale'
+import VehicleMaster from '../WebView/master/vehicle-master/vehicle-master'
+import ZoneMaster from '../WebView/master/zone-master/zone-master'
+import LocationMaster from '../WebView/master/location-master/location-master'
+import TagMaster from '../WebView/master/tag-master/tag-master'
+import ConfigurationMaster from '../WebView/master/configuration-master/configuration-master'
 
 export default function CustomRoutes() {
 
@@ -39,11 +46,14 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.device?.editReader} exact element={<CreateDeviceReader />} />
             <Route path={routes?.panel?.device?.readerConfiguration} exact element={<ReaderConfiguraiton />} />
             <Route path={routes?.panel?.device?.readerHealthMaster} exact element={<ReaderHealthMaster />} />
+            <Route path={routes?.panel?.device?.weighingScale} exact element={<WeighingScale />} />
+            <Route path={routes?.panel?.device?.createWeighingScale} exact element={<CreateWeighingScale />} />
+            <Route path={routes?.panel?.device?.createWeighingScale} exact element={<CreateWeighingScale />} />
+            <Route path={routes?.panel?.device?.editWeighingScale} exact element={<CreateWeighingScale />} />
             <Route path={routes?.panel?.master?.productMaster} exact element={<ProductMaster />} />
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
-            {/* <Route path={routes?.panel?.master?.createCustomer} exact element={<CreateCustomer />} /> */}
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
@@ -54,6 +64,15 @@ export default function CustomRoutes() {
             <Route path={routes.panel?.outbond?.outboundOrder} exact element={<OutboundOrder />} />
             <Route path={routes?.panel?.outbond?.webPicking} exact element={<OutboundWebPicking />} />
             <Route path={routes?.panel?.outbond?.outboundCreate} exact element={<CreateOutbound />} />
+            <Route path={routes?.panel?.master?.vehicleMaster} exact element={<VehicleMaster />} />
+            <Route path={routes?.panel?.master?.zomeMaster} exact element={<ZoneMaster />} />
+            <Route path={routes?.panel?.master?.locationMaster} exact element={<LocationMaster />} />
+            <Route path={routes?.panel?.master?.tagMaster} exact element={<TagMaster />} />
+            <Route path={routes?.panel?.master?.configurationMaster} exact element={<ConfigurationMaster />} />
+
+
+
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

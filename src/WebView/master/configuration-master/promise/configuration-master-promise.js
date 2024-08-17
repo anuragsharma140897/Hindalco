@@ -1,4 +1,4 @@
-export const CompileGeneralMaster = (data) => {
+export const CompileConfigurationMaster = (data) => {
     return new Promise((resolve, reject) => {
         var td = {
             content: data?.content?.map((ele, index) => Object.assign(ele, { index: index + 1 })),

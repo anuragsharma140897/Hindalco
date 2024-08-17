@@ -1,11 +1,11 @@
 import React from 'react';
-import {createRoot} from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {BrowserRouter} from "react-router-dom";
-import { legacy_createStore as createStore,combineReducers ,applyMiddleware} from 'redux'
+import { BrowserRouter } from "react-router-dom";
+import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux';
-import {thunk} from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 import SampleReducer from './Store/Reducer/Auth/Sample/SampleReducer';
 import PaginationReducer from './Store/Reducer/Pagination/PaginationReducer';
 import RolesAndPermissionReducer from './Store/Reducer/RolesAndPermission/RolesAndPermissionReducer';
@@ -19,9 +19,13 @@ import SupplierMasterReducer from './Store/Reducer/master/supplier-master/suppli
 import GeneralMasterReducer from './Store/Reducer/master/general-master/general-master-reducer';
 import CustomerMasterReducer from './Store/Reducer/master/customer-master/customer-master-reducer';
 import ProductMasterReducer from './Store/Reducer/master/product-master/product-master-reducer';
+import VehicleMasterReducer from './Store/Reducer/master/vehicle-master/vehicle-master-reducer';
+import ZoneMasterReducer from './Store/Reducer/master/zone-master/zone-master-reducer';
+import LocationMasterReducer from './Store/Reducer/master/location-master/location-master-reducer';
+import TagMasterReducer from './Store/Reducer/master/tag-master/tag-master-reducer';
 import DeviceReaderReducer from './Store/Reducer/device/device-reader/device-reader-action';
 import ReaderConfigurationReducer from './Store/Reducer/device/reader-configuration/reader-configuration-reducer';
-
+import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing-scale-action';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -38,17 +42,23 @@ const rootReducer = combineReducers({
   CustomerMasterReducer : CustomerMasterReducer,
   ProductMasterReducer : ProductMasterReducer,
   DeviceReaderReducer : DeviceReaderReducer,
-  ReaderConfigurationReducer : ReaderConfigurationReducer
+  ReaderConfigurationReducer : ReaderConfigurationReducer,
+  WeighingScaleReducer:WeighingScaleReducer,
+  VehicleMasterReducer: VehicleMasterReducer,
+  ZoneMasterReducer: ZoneMasterReducer,
+  LocationMasterReducer: LocationMasterReducer,
+  TagMasterReducer:TagMasterReducer,
+
 })
 
-const store = createStore(rootReducer,applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
   </Provider>
 );
