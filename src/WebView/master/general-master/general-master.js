@@ -11,11 +11,13 @@ import { getGeneralMasterColumns } from './general-column'
 import { CompileGeneralMaster } from './promise/general-master-promise'
 import { setGeneralMasterData } from '../../../Store/Action/master/general-master/general-master-action'
 import AddGeneralMaster from '../../../Form/master/general-master/add-general-master'
+import { setPagination } from '../../../Store/Action/Pagination/PaginationAction'
 
 
 export default function GeneralMaster() {
   const dispatch = useDispatch()
-  const reduxGeneral = useSelector(state=>state.GeneralMasterReducer)
+  const reduxGeneral = useSelector(state => state.GeneralMasterReducer)
+  const reduxPagination = useSelector(state => state.PaginationReducer)
 
 
   const { openModal, closeModal } = useModal();
@@ -23,34 +25,45 @@ export default function GeneralMaster() {
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
-    if(reduxGeneral?.doc === null){
-      loadData()
+    if (reduxGeneral?.doc === null) {
+      loadData('init')
     }
   }, [])
-  const loadData = () => {
+  const loadData = (type) => {
     var json = reduxGeneral?.searchJson
+    if (type === 'init') {
+      Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit })
+    } else {
+      Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
+    }
+
+    console.log('json', json);
     HitApi(json, searchGeneral).then((result) => {
-      if(result){
-        CompileGeneralMaster(result).then((CompiledData)=>{
+      if (result) {
+        CompileGeneralMaster(result).then((CompiledData) => {
           dispatch(setGeneralMasterData(CompiledData))
+          var tp = { limit: json?.limit, totalPages: CompiledData?.totalPages, number: CompiledData?.number, totalElements: CompiledData?.totalElements }
+          dispatch(setPagination(tp))
         })
       }
     })
   }
-  console.log("reduxGeneral",reduxGeneral);
+  console.log("reduxGeneral", reduxGeneral);
 
 
   return (
     <div>
-    <PageHeader  btnText={'Add General Master'} children={<AddGeneralMaster closeModal={closeModal} />} title={'Add General Master'} customSize={400} />
-    <ControlledTable
+      <PageHeader btnText={'Add General Master'} children={<AddGeneralMaster closeModal={closeModal} />} title={'Add General Master'} customSize={400} />
+      <ControlledTable
         variant="modern"
         isLoading={false}
         showLoadingText={true}
         data={reduxGeneral?.doc?.content}
         columns={visibleColumns}
         className={TableClass}
+        ApitHit={loadData}
+
       />
-  </div>
+    </div>
   )
 }

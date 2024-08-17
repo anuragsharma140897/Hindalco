@@ -23,6 +23,7 @@ export const routes = {
       zomeMaster: '/master/zone',
       locationMaster: '/master/location',
       tagMaster: '/master/tag',
+      configurationMaster: '/master/configuration',
 
 
     },

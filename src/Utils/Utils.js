@@ -141,6 +141,8 @@ export const getHeadingFromPathname = () => {
             return "Location Master";
         case "/master/tag":
             return "Tag Master";
+        case "/master/configuration":
+            return "Configuration Master";
         default:
             return "";
     }

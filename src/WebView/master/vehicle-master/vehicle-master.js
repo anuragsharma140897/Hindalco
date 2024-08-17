@@ -12,6 +12,7 @@ import { searchVehicle } from '../../../Constant/Api/Api'
 import { setVehicleMasterData } from '../../../Store/Action/master/vehicle-master/vehicle-master-action'
 import { CompileVehicleMaster } from './promise/vehicle-master-promise'
 import { HitApi } from '../../../Store/Action/Api/ApiAction'
+import { setPagination } from '../../../Store/Action/Pagination/PaginationAction'
 
 
 
@@ -19,21 +20,30 @@ import { HitApi } from '../../../Store/Action/Api/ApiAction'
 function Vehiclemaster() {
   const dispatch = useDispatch()
   const reduxVehicle = useSelector(state => state.VehicleMasterReducer)
+  const reduxPagination = useSelector(state => state.PaginationReducer)
+
   const { openModal, closeModal } = useModal();
   const columns = useMemo(() => getVehicleMasterColumns({ openModal, closeModal }))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
     if(reduxVehicle?.doc === null){
-      loadData()
+      loadData('init')
     }
   }, [])
-  const loadData = () => {
+  const loadData = (type) => {
     var json = reduxVehicle?.searchJson
+    if (type === 'init') {
+      Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit })
+    } else {
+      Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
+    }
     HitApi(json, searchVehicle).then((result) => {
       if(result){
         CompileVehicleMaster(result).then((CompiledData)=>{
           dispatch(setVehicleMasterData(CompiledData))
+          var tp = { limit: json?.limit, totalPages: CompiledData?.totalPages, number: CompiledData?.number, totalElements: CompiledData?.totalElements }
+          dispatch(setPagination(tp))
         })
       }
     })
@@ -50,6 +60,7 @@ function Vehiclemaster() {
         data={reduxVehicle?.doc?.content}
         columns={visibleColumns}
         className={TableClass}
+        ApitHit={loadData}
       />
     </div>
   )
