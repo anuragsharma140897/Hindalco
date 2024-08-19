@@ -3,7 +3,7 @@ import CustomInput from '../../../../../Component/ui/form/input/custom-input'
 
 function Certificates() {
   return (
-    <div className='mt-10 p-10 bg-white'>
+    <div className='p-10 bg-white'>
     <div >
         <div>
             <div className='font-bold text-base'>Use Instaaled Certificates</div>

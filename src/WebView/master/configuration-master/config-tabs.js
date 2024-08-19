@@ -18,8 +18,8 @@ export default function ConfigTabs() {
     }
 
     return (
-        <div>
-            <div className={cn('sticky z-20 -mx-4 -mt-4 border-b border-muted  px-4 py-0 font-medium text-gray-500 sm:-mt-2 md:-mx-5 md:px-5 lg:-mx-8 lg:mt-0 lg:px-8 xl:-mx-6 xl:px-6 2xl:top-20 3xl:-mx-[33px] 3xl:px-[33px] 4xl:-mx-10 4xl:px-10 dark:bg-gray-50', 'xl:-ms-1 xl:px-0 3xl:-ms-2 3xl:ps-0 4xl:-ms-2')}>
+        <div className='bg-white p-5 rounded-xl'>
+            <div className='bg-white border-b'>
                 <div className="relative flex items-center overflow-hidden">
 
                     <div className="flex h-[52px] items-start overflow-hidden">

@@ -3,7 +3,7 @@ import CustomInput from '../../../../../Component/ui/form/input/custom-input'
 
 function Connection() {
     return (
-        <div className='mt-10 p-10 bg-white'>
+        <div className='p-10 bg-white'>
            <div className='grid grid-cols-4 gap-x-4'>
            <CustomInput important={true} name="value" label="Server" />
            <CustomInput important={true} name="value" label="Port" />
