@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PageHeader from '../../../shared/page-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { useColumn } from '../../../Hooks/use-column'
@@ -20,9 +20,11 @@ function ZoneMaster() {
   const dispatch = useDispatch()
   const reduxZone = useSelector(state => state.ZoneMasterReducer)
   const reduxPagination = useSelector(state => state.PaginationReducer)
+  const [loading, setLoading] = useState(false)
+
 
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getZoneMasterColumns({ openModal, closeModal }))
+  const columns = useMemo(() => getZoneMasterColumns({ openModal, closeModal,loading ,setLoading }))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ function ZoneMaster() {
   }
   return (
     <div>
-      <PageHeader btnText={'Add Zone'} children={<AddZoneMaster closeModal={closeModal} />} title={'Add Zone'} customSize={400} />
+      <PageHeader btnText={'Add Zone'} children={<AddZoneMaster closeModal={closeModal} />} title={'Add Zone'} customSize={1200} />
       <ControlledTable
         variant="modern"
         isLoading={false}

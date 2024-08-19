@@ -26,8 +26,6 @@ export default function AddGeneralMaster({ row, closeModal }) {
 
     const loadDefault = (row) => {
         var json = reduxGeneral?.apiJson
-
-
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setGeneralMasterApiJson(json))
     }
@@ -42,7 +40,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
                 HitApi(json, updateGeneral).then((result) => {
                     setLoading(false)
 
-                    if (result && result.status === 201) {
+                    if (result && result.status === 200) {
                         alert(result.message);
                         window.location.pathname = '/master/general';
                     }
