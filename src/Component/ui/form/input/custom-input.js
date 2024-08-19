@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 export default function CustomInput({ type, name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate }) {
 
-    console.log("error",error);
     const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
 

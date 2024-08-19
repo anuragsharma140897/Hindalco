@@ -9,6 +9,7 @@ import CustomButton from '../../../Component/ui/buttons/custom-button';
 import { setConfigurationError, setConfigurationMasterApiJson } from '../../../Store/Action/master/configuration-master/configuration-master-action';
 import { useDispatch, useSelector } from 'react-redux';
 import { configurationMasterSchema } from '../../../Utils/validators/master/configuration-master/configuration-master-scheema';
+import { CompileConfigurationJson } from './tabs-summary/CompileJson';
 
 
 export default function ConfigTabs() {
@@ -29,36 +30,42 @@ export default function ConfigTabs() {
         { id: 'female', label: 'Female', value: 'female' },
         { id: 'other', label: 'Other', value: 'other' },
     ]
-  
 
-  
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxConfiguration?.apiJson
         console.log("json", json);
         const validationErrors = validate(json);
         dispatch(setConfigurationError(validationErrors))
-        console.log("validationErrors", );
-        // if (Object.keys(validationErrors).length === 0) {
-        //     if (row?.id) {
-        //         Object.assign(json, { id: row?.id })
-        //         HitApi(json, updateGeneral).then((result) => {
+        console.log("validationErrors",);
+        if (Object.keys(validationErrors).length === 0) {
 
-        //         })
-        //     } else {
-        //         Object.assign(json, { status: json?.status || 'active' })
-        //         HitApi(json, addGeneral).then((result) => {
+            CompileConfigurationJson(reduxConfiguration?.apiJson).then(compiledData => {
+                console.log(compiledData);
+                // if (row?.id) {
+                //     Object.assign(json, { id: row?.id })
+                //     HitApi(json, updateGeneral).then((result) => {
 
-        //         })
-        //     }
-        // } else {
-        // }
+                //     })
+                // } else {
+                //     Object.assign(json, { status: json?.status || 'active' })
+                //     HitApi(json, addGeneral).then((result) => {
+
+                //     })
+                // }
+            })
+
+
+        } else {
+        }
     };
 
 
-    console.log('reduxConfiguration',reduxConfiguration);
+    console.log('reduxConfiguration', reduxConfiguration);
 
-  
+
 
     return (
         <div>
@@ -67,7 +74,7 @@ export default function ConfigTabs() {
                 <div className='grid grid-cols-3 gap-x-4'>
                     <CustomInput important={true} name="name" label="End point name" value={reduxConfiguration?.apiJson?.name} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
                     <CustomInput important={true} name="description" label="End point Description" value={reduxConfiguration?.apiJson?.description} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
-                    <CustomSelect name="type" label="End point type" options={GenderOption} value={reduxConfiguration?.apiJson?.type} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson}  />
+                    <CustomSelect name="type" label="End point type" options={GenderOption} value={reduxConfiguration?.apiJson?.type} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
                 </div>
             </div>
             <div className='bg-white p-5 rounded-xl'>
