@@ -43,7 +43,7 @@ function TagMaster() {
 
   return (
     <div>
-      <PageHeader btnText={'Add Tag'} children={<AddTagMaster closeModal={closeModal} />} title={'Add Tag'} customSize={1200} />
+      <PageHeader btnText={'Add Tag'} children={<AddTagMaster closeModal={closeModal} />} title={'Add Tag'} customSize={800} />
       <ControlledTable
         variant="modern"
         isLoading={false}

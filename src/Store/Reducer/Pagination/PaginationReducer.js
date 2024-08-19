@@ -1,7 +1,7 @@
 import { SET_PAGINATION } from "../../Action/Pagination/PaginationAction";
 
 const initialState = {
-    doc: {current:1, total : 0, limit : 1 },
+    doc: {current:1, total : 0, limit : 10 },
     timestamp: Date.now()
 }
 

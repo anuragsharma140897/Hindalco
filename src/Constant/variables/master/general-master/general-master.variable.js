@@ -1,5 +1,5 @@
 export const generalMasterVariable = {
     value : 'value',
-    status : 'status',
+    fieldName : 'fieldName',
     usedBy : 'usedBy',
 }

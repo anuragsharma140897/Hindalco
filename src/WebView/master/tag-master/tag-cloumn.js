@@ -120,7 +120,7 @@ export const getTagMasterColumns = ({ openModal, closeModal }) => [
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit Tag Master'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Tag Master' , AddTagMaster, 1200)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Tag Master' , AddTagMaster, 800)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
