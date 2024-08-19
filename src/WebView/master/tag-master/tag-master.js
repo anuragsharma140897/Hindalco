@@ -39,9 +39,11 @@ function TagMaster() {
   }
 
 
+  console.log("reduxTag",reduxTag);
+
   return (
     <div>
-      <PageHeader btnText={'Add Tag'} children={<AddTagMaster closeModal={closeModal} />} title={'Add Tag'} customSize={500} />
+      <PageHeader btnText={'Add Tag'} children={<AddTagMaster closeModal={closeModal} />} title={'Add Tag'} customSize={1200} />
       <ControlledTable
         variant="modern"
         isLoading={false}

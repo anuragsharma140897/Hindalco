@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import {  addTag, updateTag } from '../../../Constant/Api/Api';
+import { addTag, updateTag } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { TagMasterVariable as variable } from '../../../Constant/variables/master/tag-master/tag-master.variable';
-import { setGeneralMasterApiJson } from '../../../Store/Action/master/general-master/general-master-action';
 import { setTagMasterApiJson } from '../../../Store/Action/master/tag-master/tag-master-action';
 import { tagMasterSchema } from '../../../Utils/validators/master/tag-master/tag-mster-schema';
 
@@ -15,7 +14,6 @@ import { tagMasterSchema } from '../../../Utils/validators/master/tag-master/tag
 export default function AddTagMaster({ row, closeModal }) {
     var dispatch = useDispatch()
     const reduxTag = useSelector(state => state.TagMasterReducer)
-
     const { errors, validate } = useValidation(tagMasterSchema);
 
     useEffect(() => {
@@ -28,7 +26,7 @@ export default function AddTagMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxTag?.apiJson
 
-        console.log("json111111",json);
+        console.log("json111111", json);
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setTagMasterApiJson(json))
     }
@@ -53,16 +51,22 @@ export default function AddTagMaster({ row, closeModal }) {
         }
     };
 
-    console.log("reduxTag++++++",reduxTag);
+    console.log("reduxTag++++++", reduxTag);
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <CustomInput important={true} name="tagNumber" label="Tag Number" value={reduxTag?.apiJson?.value} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
-                    <CustomInput important={true} name="tagPlacement" label="Tag Placement" value={reduxTag?.apiJson?.status} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
-                    <CustomInput important={true} name="tagUsedFor" label="Tag Used For" value={reduxTag?.apiJson?.usedBy} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
-                    <CustomInput important={true} name="status" label="Status" value={reduxTag?.apiJson?.usedBy} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
-
+                    <div className='grid grid-cols-2 gap-x-4'>
+                        <CustomInput important={true} name="identification" label="Identification" value={reduxTag?.apiJson?.identification} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="typeName" label="Type Name" value={reduxTag?.apiJson?.typeName} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="typeId" label="Type Id" value={reduxTag?.apiJson?.typeId} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="locationName" label="Location Name" value={reduxTag?.apiJson?.locationName} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="locationId" label="Location Id" value={reduxTag?.apiJson?.locationId} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="tagNo" label="Tag No" value={reduxTag?.apiJson?.tagNo} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="tagUsedForName" label="Tag Used For Name" value={reduxTag?.apiJson?.tagUsedForName} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="tagUsedForId" label="Tag Used For Id" value={reduxTag?.apiJson?.tagUsedForId} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                        <CustomInput important={true} name="status" label="Status" value={reduxTag?.apiJson?.status} error={errors} reduxState={reduxTag?.apiJson} setAction={setTagMasterApiJson} />
+                    </div>
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                         <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />

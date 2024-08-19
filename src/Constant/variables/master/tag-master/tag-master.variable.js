@@ -1,6 +1,12 @@
 export const TagMasterVariable = {
-    tagNumber : 'tagNumber',
-    tagPlacement : 'tagPlacement',
-    tagUsedFor : 'tagUsedFor',
-    stauts : 'stauts',
+    identification : 'identification',
+    typeName : 'typeName',
+    typeId : 'typeId',
+    locationName : 'locationName',
+    locationId : 'locationId',
+    tagNo : 'tagNo',
+    tagUsedForName : 'tagUsedForName',
+    tagUsedForId : 'tagUsedForId',
+    status : 'status',
+    
 }
