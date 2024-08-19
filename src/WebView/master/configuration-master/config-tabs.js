@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
-// import cn from '../../Utils/class-names';
 import { Text } from 'rizzui';
 import cn from '../../../Utils/class-names';
-import { menuItems } from '../../configuration/menu-item';
+import useValidation from '../../..//Hooks/useValidation';
 import { ConfigmenuItems } from './config-menu-tems';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
 import CustomSelect from '../../../Component/ui/form/select/custom-select';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
+import { setConfigurationError, setConfigurationMasterApiJson } from '../../../Store/Action/master/configuration-master/configuration-master-action';
+import { useDispatch, useSelector } from 'react-redux';
+import { configurationMasterSchema } from '../../../Utils/validators/master/configuration-master/configuration-master-scheema';
 
 
 export default function ConfigTabs() {
-    const pathname = window.location.pathname
-    const [selected, setSelected] = useState(0)
 
+    const [selected, setSelected] = useState(0)
+    const dispatch = useDispatch()
+    const reduxConfiguration = useSelector(state => state.ConfigurationMasterReducer)
+
+    const { errors, validate } = useValidation(configurationMasterSchema);
 
 
     const handleClick = (index) => {
@@ -23,14 +29,45 @@ export default function ConfigTabs() {
         { id: 'female', label: 'Female', value: 'female' },
         { id: 'other', label: 'Other', value: 'other' },
     ]
+  
+
+  
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var json = reduxConfiguration?.apiJson
+        console.log("json", json);
+        const validationErrors = validate(json);
+        dispatch(setConfigurationError(validationErrors))
+        console.log("validationErrors", );
+        // if (Object.keys(validationErrors).length === 0) {
+        //     if (row?.id) {
+        //         Object.assign(json, { id: row?.id })
+        //         HitApi(json, updateGeneral).then((result) => {
+
+        //         })
+        //     } else {
+        //         Object.assign(json, { status: json?.status || 'active' })
+        //         HitApi(json, addGeneral).then((result) => {
+
+        //         })
+        //     }
+        // } else {
+        // }
+    };
+
+
+    console.log('reduxConfiguration',reduxConfiguration);
+
+  
 
     return (
         <div>
+
             <div className='bg-white p-5 mb-5 rounded-xl'>
                 <div className='grid grid-cols-3 gap-x-4'>
-                    <CustomSelect name="gender" label="End point type" options={GenderOption} />
-                    <CustomInput important={true} name="value" label="End point name" />
-                    <CustomInput important={true} name="value" label="End point Description" />
+                    <CustomInput important={true} name="name" label="End point name" value={reduxConfiguration?.apiJson?.name} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
+                    <CustomInput important={true} name="description" label="End point Description" value={reduxConfiguration?.apiJson?.description} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
+                    <CustomSelect name="type" label="End point type" options={GenderOption} value={reduxConfiguration?.apiJson?.type} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson}  />
                 </div>
             </div>
             <div className='bg-white p-5 rounded-xl'>
@@ -63,6 +100,9 @@ export default function ConfigTabs() {
                 </div>
 
                 <div>{ConfigmenuItems?.[selected]?.Screen}</div>
+            </div>
+            <div className='flex  mt-5'>
+                <CustomButton type={'submit'} className={'w-[15vw]'} text={'Submit'} onClick={handleSubmit} />
             </div>
         </div>
     )
