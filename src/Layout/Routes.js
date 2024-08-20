@@ -32,6 +32,7 @@ import LocationMaster from '../WebView/master/location-master/location-master'
 import TagMaster from '../WebView/master/tag-master/tag-master'
 import ConfigurationMaster from '../WebView/master/configuration-master/configuration-master'
 import AddConfigurationMaster from '../Form/master/configuration-master/add-configuration-master'
+import InventoryMaster from '../WebView/master/inventory-master/inventory-master'
 
 export default function CustomRoutes() {
 
@@ -71,6 +72,8 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.tagMaster} exact element={<TagMaster />} />
             <Route path={routes?.panel?.master?.configurationMaster} exact element={<ConfigurationMaster />} />
             <Route path={routes?.panel?.master?.createConfigurationMaster} exact element={<AddConfigurationMaster />} />
+            <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

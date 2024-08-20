@@ -25,6 +25,7 @@ export const routes = {
       configurationMaster: '/master/configuration',
       createConfigurationMaster: '/master/configuration/create',
       vehicleMaster: '/master/vehicle',
+      innventoryMaster: '/master/inventory'
 
     },
     device: {

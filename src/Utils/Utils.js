@@ -153,6 +153,8 @@ export const getHeadingFromPathname = () => {
             return "Create / Configuration Master";
         case "/inbond/inbound-create":
             return "Inbound Order / Create";
+        case "/master/inventory":
+            return "Inventory Master"
         default:
             return "";
     }
