@@ -20,42 +20,45 @@ export default function UserManagement() {
     const dispatch = useDispatch()
     const reduxUser = useSelector(state => state.UserReducer)
     const reduxPagination = useSelector(state => state.PaginationReducer)
-    
     const { openModal, closeModal } = useModal();
-    const columns = useMemo(() => getUserColumns({ openModal, closeModal }))
-    const { visibleColumns } = useColumn(columns);
-
-    useEffect(() => {
-        if (reduxUser?.doc === null) {
-            loadData('init')
-        }
-
-       
-
-    }, [])
 
     const loadData = (type) => {
         var json = reduxUser?.searchJson
-        if(type === 'init'){
-            Object.assign(json,{page:1, limit : reduxPagination?.doc?.limit})
-        }else{
-            Object.assign(json,{page:reduxPagination?.doc?.number, limit : reduxPagination?.doc?.limit})
+        if (type === 'init') {
+            Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit })
+            // Object.assign(json.search, {status : 'blocked'})
+        } else {
+            Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
         }
+
+
 
         HitApi(json, searchUser).then((result) => {
             if (result) {
                 CompileUserMaster(result).then((CompiledData) => {
                     dispatch(setUserData(CompiledData))
-                    var tp = { limit : json?.limit, totalPages : CompiledData?.totalPages, number : CompiledData?.number, totalElements : CompiledData?.totalElements}
+                    var tp = { limit: json?.limit, totalPages: CompiledData?.totalPages, number: CompiledData?.number, totalElements: CompiledData?.totalElements }
                     dispatch(setPagination(tp))
                 })
             }
         })
     }
 
+
+    const columns = useMemo(() => getUserColumns(openModal, closeModal, loadData))
+    const { visibleColumns } = useColumn(columns);
+
+    useEffect(() => {
+        if (reduxUser?.doc === null) {
+            loadData('init')
+        }
+    }, [])
+
+
+
     return (
         <div>
-            <PageHeader btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
+            <PageHeader btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} ApiHit={loadData} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
             <ControlledTable
                 screen={'user'}
                 variant="modern"

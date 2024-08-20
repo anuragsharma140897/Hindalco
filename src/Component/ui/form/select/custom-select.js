@@ -36,6 +36,9 @@ export default function CustomSelect({
          if (onChange) onChange(e, updatedJson);
     };
 
+
+
+
     return (
         <div className="mb-6 relative">
             <label className="block font-bold mb-2">{label}{important === false ? ' (Optional)' : ''}</label>
@@ -50,12 +53,12 @@ export default function CustomSelect({
                     ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
                 >
                     <option value="" disabled>{placeholder || `Select ${label}`}</option>
-                    {options.map((option, index) => (
+                    {options?.map((option, index) => (
                         <option key={index} id={option?.id} value={option?.value}>
                             {option.label}
                         </option>
                         
-                    ))}
+                    )) }
                 </select>
             </div>
             {disabled && <span className='text-red-500 text-xs tracking-wide'>This field cannot be edited</span>}

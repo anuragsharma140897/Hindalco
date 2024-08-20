@@ -17,7 +17,7 @@ export default function Configuration() {
             loadConnection(reduxDevice?.doc)
         }
 
-        console.log('reduxReaderConfiguration', reduxReaderConfiguration);
+
 
     }, [reduxReaderConfiguration])
 
@@ -29,7 +29,7 @@ export default function Configuration() {
         }
 
         HitApiXML(json, getAccessInMqtt).then((result) => {
-            console.log('result', result);
+
             if (result) {
                 const parser = new DOMParser();
                 const xmlDoc = parser?.parseFromString(result, "application/xml");
@@ -48,10 +48,10 @@ export default function Configuration() {
             "sessionId": sessionIDValue
         }
 
-        console.log(json);
+
 
         HitApiXML(json, viewTopics).then((result) => {
-            console.log('result', result);
+
             if (result) {
                 // dispatch(setReaderConfigurationData(result))
             }

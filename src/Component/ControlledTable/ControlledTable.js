@@ -9,12 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 import CustomFilter from '../ui/filter/custom-filter';
 
-export default function ControlledTable({ columns, className, data, ApitHit, screen }) {
+export default function ControlledTable({ columns, className, data, ApitHit, screen, DynamicFilterData }) {
   const dispatch = useDispatch()
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const handlePaginate = (page) => {
-
-
     var json = reduxPagination?.doc
     json.number = page
     dispatch(setPagination(json))
@@ -23,7 +21,7 @@ export default function ControlledTable({ columns, className, data, ApitHit, scr
 
   return (
     <div className=''>
-      <div className='my-2'>{screen ? <CustomFilter screen={screen}/> : null}</div>
+      {/* <div className='my-2'>{screen ? <CustomFilter screen={screen} DynamicFilterData={DynamicFilterData}/> : null}</div> */}
       <div className="relative ">
         <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>

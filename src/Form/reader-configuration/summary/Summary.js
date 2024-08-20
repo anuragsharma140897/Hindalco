@@ -18,7 +18,7 @@ export default function Summary() {
             loadSummary()
         }
 
-        console.log('reduxReaderConfiguration', reduxReaderConfiguration);
+
 
     },[reduxReaderConfiguration])
 
@@ -28,11 +28,11 @@ export default function Summary() {
             ip : reduxDevice?.doc?.readerIp,
         }
 
-        console.log('json : ', json);
+
 
         HitApi(json, readerStatus).then((result)=>{
 
-            console.log('result', result);
+
 
             if(result){
                 dispatch(setReaderConfigurationSummaryJson(result))

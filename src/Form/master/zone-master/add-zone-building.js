@@ -90,7 +90,8 @@ function AddZoneBuilding({ row }) {
         <div className='p-10 mb-40'>
             <form onSubmit={handleSubmit}>
                 <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} />
-                <div className='flex gap-3 justify-end'>
+                
+                <div className='flex gap-3 justify-end mb-5'>
                     <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                     <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} />
                 </div>

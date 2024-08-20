@@ -18,23 +18,21 @@ export const HitApi = (json, api) => {
             },
             body: JSON.stringify(json)
         };
-
-
-
         fetch(api, requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
-
                     if (result) {
                         resolve(result);
                     }
                 },
                 (error) => {
-
-                    resolve(error);
+                    resolve('error -- ', error);
                 }
-            )
+            ).catch(function(err) {
+                // some error here
+                resolve('error catch -- ', err);
+            });
     });
 
     return MyPromise;
@@ -59,7 +57,7 @@ export const HitApiXML = (json, api) => {
                     }
                 },
                 (error) => {
-                    console.log('error xml', error);
+
                     resolve(error);
                 }
             )

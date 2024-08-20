@@ -137,6 +137,6 @@ export const getTagMasterColumns = ({ openModal, closeModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteTag).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

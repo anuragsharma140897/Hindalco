@@ -62,7 +62,7 @@ export const CompileConfigurationJson = (data) => {
         }
 
         resolve(json)
-        console.log('json',json);
+
 
     })
 

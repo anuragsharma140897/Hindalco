@@ -38,7 +38,7 @@ export default function GeneralMaster() {
       Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
     }
 
-    console.log('json', json);
+
     HitApi(json, searchGeneral).then((result) => {
       if (result) {
         CompileGeneralMaster(result).then((CompiledData) => {

@@ -76,7 +76,7 @@ export default function CreateWeighingScale() {
         })
       }
     } else {
-      console.log('Form has errors');
+
     }
   };
 

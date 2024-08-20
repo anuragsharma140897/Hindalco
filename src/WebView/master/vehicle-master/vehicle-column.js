@@ -118,6 +118,6 @@ export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
 export const DeleteItem = (id) =>{
   var json = {id:id}
   HitApi(json, deleteVehicle).then((Result)=>{
-    console.log('Result', Result);
+
   })
 }

@@ -26,7 +26,7 @@ export default function AddTagMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxTag?.apiJson
 
-        console.log("json111111", json);
+
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setTagMasterApiJson(json))
     }
@@ -38,20 +38,20 @@ export default function AddTagMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateTag).then((result) => {
-                    console.log('result', result);
+
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addTag).then((result) => {
-                    console.log('result', result);
+
                 })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
 
-    console.log("reduxTag++++++", reduxTag);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

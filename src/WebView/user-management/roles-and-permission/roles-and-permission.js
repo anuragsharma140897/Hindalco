@@ -55,12 +55,12 @@ export default function RolesAndPermission() {
   const loadData = () => {
     var json = reduxRolesAndPermission?.searchJson
 
-    HitApi(json, searchRole).then((result) => {
-      if (result?.content?.length > 0)
-        CompileRolesAndPermission(result).then((CompiledData) => {
-          dispatch(setRolesAndPermissionMainData(CompiledData))
-        })
-    })
+    // HitApi(json, searchRole).then((result) => {
+    //   if (result?.content?.length > 0)
+    //     CompileRolesAndPermission(result).then((CompiledData) => {
+    //       dispatch(setRolesAndPermissionMainData(CompiledData))
+    //     })
+    // })
 
   }
 
