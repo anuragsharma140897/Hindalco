@@ -1,0 +1,102 @@
+import { ActionIcon, Button, Text, Tooltip } from "rizzui";
+import { HeaderCell } from "../../../../Component/ui/table";
+import { PiInfoFill } from "react-icons/pi";
+import BuildingReaderInfo from "../../../../InfoModal/building-reader-info/building-reader-info";
+import { EditScreen } from "../../../../shared/edit-screen";
+import AddBuildingMaster from '../../../../Form/master/building-master/add-building-master';
+import PencilIcon from "../../../../Constant/Icons/pencil";
+import DeletePopover from "../../../../shared/delete-popover";
+import SearchUser from "../../../../shared/common/search-user";
+import { FaUserPlus } from "react-icons/fa";
+import { deleteBuilding, removeBuildingFromZone } from "../../../../Constant/Api/Api";
+import { HitApi } from "../../../../Store/Action/Api/ApiAction";
+import DeletePopover2 from "../../../../shared/delete-popover2";
+import { result } from "underscore";
+import { useSelector } from "react-redux";
+
+export const getBuildingZoneMasterColumns = ({zoneid}) => {
+  console.log("zoneid",zoneid);
+
+  const columns = [
+    {
+      title: <HeaderCell title="#" />,
+      dataIndex: 'index',
+      key: 'index',
+      width: 30,
+      render: (_, __, index) => <Text>{index + 1}</Text>,
+    },
+    {
+      title: <HeaderCell title="Building Name" className="font-extrabold" />,
+      dataIndex: 'buildingName',
+      key: 'buildingName',
+      width: 150,
+      render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
+    },
+    {
+      title: <HeaderCell title="Building No" className="font-extrabold" />,
+      dataIndex: 'buildingNo',
+      key: 'buildingNo',
+      width: 150,
+      render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
+    },
+    {
+      title: <HeaderCell title="Plant" className="font-extrabold" />,
+      dataIndex: 'unit',
+      key: 'unit',
+      width: 150,
+      render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
+    },
+    {
+      title: <HeaderCell title="Actions1" className="font-extrabold" />,
+      dataIndex: 'action',
+      key: 'action',
+      width: 130,
+      render: (_, row) => (
+        // <DeletePopover2 title={`Delete Vehicle Master`}  description={`Are you sure you want to delete this employee?`} 
+        //   onDelete={() => DeleteItem(row.id)} 
+        // />
+      <div className="flex">
+          <div onClick={() => DeleteItem(row.id,zoneid)} className="border px-2 py-1 rounded cursor-pointer" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+      </svg>
+      </div>
+      </div>
+      ),
+    },
+  ];
+
+  return columns;
+};
+
+export const DeleteItem =  (id, zoneid) => {
+  console.log("zoneid______",zoneid);
+
+
+  var json = {
+    buildingId: id,
+    zoneId :zoneid,
+}
+console.log("json____________",json);
+
+HitApi(json,removeBuildingFromZone).then((result)=>{
+  console.log('result',result);
+})
+
+ 
+  // setLoading(true);
+  // try {
+  //   const json = { id };
+  //   const result = await HitApi(json, removeBuildingFromZone);
+
+  //   if (result && result.status === 200) {
+  //     alert('Building deleted successfully');
+  //   } else {
+  //     alert('Failed to delete the building');
+  //   }
+  // } catch (error) {
+  //   console.error('Error deleting item:', error);
+  //   alert('An error occurred while deleting the building.');
+  // } finally {
+  //   setLoading(false);
+  // }
+};

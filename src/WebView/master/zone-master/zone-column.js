@@ -10,7 +10,7 @@ import { HiOutlinePlusCircle } from "react-icons/hi";
 import AddZoneMaster from '../../../Form/master/zone-master/add-zone-master';
 import AddZoneBuilding from '../../../Form/master/zone-master/add-zone-building';
 
-export const getZoneMasterColumns = ({ openModal, closeModal ,loading ,setLoading}) => [
+export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoading }) => [
 
   {
     title: (
@@ -40,6 +40,17 @@ export const getZoneMasterColumns = ({ openModal, closeModal ,loading ,setLoadin
     ),
   },
   {
+    title: <HeaderCell title="Buildings Added" className={'font-extrabold'} />,
+    dataIndex: 'usedBy',
+    key: 'usedBy',
+    width: 100,
+    render: (usedBy) => (
+      <Text className="font-medium text-gray-700">
+        {usedBy?.length || 0}
+      </Text>
+    ),
+  },
+  {
     title: <HeaderCell title="Actions" className={'font-extrabold'} />,
     dataIndex: 'action',
     key: 'action',
@@ -54,12 +65,12 @@ export const getZoneMasterColumns = ({ openModal, closeModal ,loading ,setLoadin
           </label>
         </Tooltip>
         <DeletePopover loading={loading} title={`Delete Zone Master`} description={`Are you sure you want to delete`}
-          onDelete={() => DeleteItem(row.id,setLoading)}
+          onDelete={() => DeleteItem(row.id, setLoading)}
         />
-          <Tooltip size="sm" content={'Add Building'} placement="top" color="invert">
+        <Tooltip size="sm" content={'Add Building'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Add Building', AddZoneBuilding, 800)}>
-            <HiOutlinePlusCircle size={20} />
+              <HiOutlinePlusCircle size={20} />
             </ActionIcon>
           </label>
         </Tooltip>
