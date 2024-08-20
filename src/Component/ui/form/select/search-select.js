@@ -16,12 +16,14 @@ export default function SearchSelect({
     options = []
 }) {
     const dispatch = useDispatch();
-    
+
+    console.log("error",error);
+
     const value = options.find(option => option.value === reduxState?.[name]) || null;
 
     const handleChange = (selectedValue) => {
         let updatedJson = { ...reduxState };
-        updatedJson[name] = selectedValue?.value || ''; 
+        updatedJson[name] = selectedValue?.value || '';
         dispatch(setAction(updatedJson));
 
         if (validate) validate({ ...updatedJson });

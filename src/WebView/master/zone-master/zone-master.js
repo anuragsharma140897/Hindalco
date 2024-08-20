@@ -51,7 +51,7 @@ function ZoneMaster() {
   }
   return (
     <div>
-      <PageHeader btnText={'Add Zone'} children={<AddZoneMaster closeModal={closeModal} />} title={'Add Zone'} customSize={1200} />
+      <PageHeader btnText={'Add Zone'} children={<AddZoneMaster closeModal={closeModal} />} title={'Add Zone'} customSize={400} />
       <ControlledTable
         variant="modern"
         isLoading={false}

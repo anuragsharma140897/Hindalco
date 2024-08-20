@@ -149,8 +149,10 @@ export const getHeadingFromPathname = () => {
             return "Tag Master";
         case "/master/configuration":
             return "Configuration Master";
-            case "/master/configuration/create":
-                return "Create / Configuration Master";
+        case "/master/configuration/create":
+            return "Create / Configuration Master";
+        case "/inbond/inbound-create":
+            return "Inbound Order / Create";
         default:
             return "";
     }

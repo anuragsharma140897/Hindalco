@@ -91,5 +91,8 @@ export const updateTag = PlantMicroService + 'updateTag'
 export const searchTag = PlantMicroService + 'searchTag'
 export const deleteTag = PlantMicroService + 'deleteTag'
 
-//LocationMaster
+//addbuildToZone
+
+export const addBuildingToZone = PlantMicroService + 'addBuildingToZone'
+export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZone'
 
