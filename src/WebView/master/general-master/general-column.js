@@ -22,15 +22,6 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
     render: (value, row, index) => <Text>{index + 1 || '---'}</Text>,
   },
   {
-    title: <HeaderCell title="id" className={'font-extrabold'} />,
-    dataIndex: 'id',
-    key: 'id',
-    width: 100,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
     title: <HeaderCell title="Value" className={'font-extrabold'} />,
     dataIndex: 'value',
     key: 'value',
@@ -74,6 +65,7 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
         <DeletePopover loading={loading} title={`Delete General Master`} description={`Are you sure you want to delete`}
           onDelete={() => DeleteItem(row.id, setLoading)}
         />
+        
       </div>
     ),
   },

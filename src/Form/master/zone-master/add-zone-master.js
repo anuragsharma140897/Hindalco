@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
@@ -6,7 +6,6 @@ import CustomInput from '../../../Component/ui/form/input/custom-input';
 import { addZone, updateZone } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { generalMasterVariable as variable } from '../../../Constant/variables/master/general-master/general-master.variable';
-import { setGeneralMasterApiJson } from '../../../Store/Action/master/general-master/general-master-action';
 import { setZoneMasterApiJson } from '../../../Store/Action/master/zone-master/zone-master-action';
 import { zoneMasterSchema } from '../../../Utils/validators/master/zone-master/zone-master-scheema';
 
@@ -15,6 +14,7 @@ import { zoneMasterSchema } from '../../../Utils/validators/master/zone-master/z
 export default function AddZoneMaster({ row, closeModal }) {
     var dispatch = useDispatch()
     const reduxZone = useSelector(state => state.ZoneMasterReducer)
+    const [loading, setLoading] = useState(false)
 
     const { errors, validate } = useValidation(zoneMasterSchema);
 
@@ -27,42 +27,61 @@ export default function AddZoneMaster({ row, closeModal }) {
 
     const loadDefault = (row) => {
         var json = reduxZone?.apiJson
-        console.log("json111111", json);
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setZoneMasterApiJson(json))
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        var json = reduxZone?.apiJson
+    
+        const json = { ...reduxZone?.apiJson }; 
         const validationErrors = validate(json);
+    
         if (Object.keys(validationErrors).length === 0) {
+            setLoading(true);
+    
+            const apiCall = row?.id ? updateZone : addZone;
             if (row?.id) {
-                Object.assign(json, { id: row?.id })
-                HitApi(json, updateZone).then((result) => {
-                    console.log('result', result);
-                })
+                Object.assign(json, { id: row.id });
             } else {
-                Object.assign(json, { status: json?.status || 'active' })
-                HitApi(json, addZone).then((result) => {
-                    console.log('result', result);
-                })
+                Object.assign(json, { status: json?.status || 'active' });
             }
+    
+            HitApi(json, apiCall)
+                .then((result) => {
+                    setLoading(false); 
+                    console.log('result', result);
+    
+                    if (row?.id && result?.status === 200) {
+                        alert(result.message);
+                        window.location.pathname = '/master/zone';
+                    } else if (!row?.id && result?.status === 201) {
+                        alert(result.message);
+                        window.location.pathname = '/master/zone';
+                    } else {
+                        console.error("API Error", result);
+                        alert(result.message || 'Something went wrong');
+                    }
+                })
+                .catch((error) => {
+                    setLoading(false)
+                    console.error("Network error:", error);
+                    alert('An error occurred. Please try again.');
+                });
         } else {
-            console.log('Form has errors');
+           
         }
     };
+    
 
-    console.log("reduxZone++++++", reduxZone);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <CustomInput important={true} name="value" label="Value" value={reduxZone?.apiJson?.value} error={errors} reduxState={reduxZone?.apiJson} setAction={setZoneMasterApiJson} />
-                    <CustomInput important={true} name="status" label="Status" value={reduxZone?.apiJson?.status} error={errors} reduxState={reduxZone?.apiJson} setAction={setZoneMasterApiJson} />
-                    <CustomInput important={true} name="usedBy" label="Used By" value={reduxZone?.apiJson?.usedBy} error={errors} reduxState={reduxZone?.apiJson} setAction={setZoneMasterApiJson} />
+                    <CustomInput important={true} name="value" label="Zone Name" value={reduxZone?.apiJson?.value} error={errors} reduxState={reduxZone?.apiJson} setAction={setZoneMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>

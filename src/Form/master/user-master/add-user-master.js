@@ -111,7 +111,6 @@ export default function AddUserMaster({ row, closeModal }) {
                         <CustomInput name="email" label="Email Id" value={reduxUser?.apiJson?.email} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput name="employeeId" label="Employee Id" value={reduxUser?.apiJson?.employeeId} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                     </div>
-
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={() => handleClose()} />
                         <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
