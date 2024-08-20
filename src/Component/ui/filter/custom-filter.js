@@ -1,20 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FilterCondition } from '../../../Constant/filters/Filter'
 import { Badge, Select, Text } from 'rizzui'; // Import the status classes
 import { STATUS_CLASSES } from '../../../Constant/Colors/Color';
 
-
-export default function CustomFilter({ screen }) {
-    let FilterItem = FilterCondition?.find(Obj => Obj?.screen === screen);
-
+export default function CustomFilter({ screen, DynamicFilterData }) {
+    const [filterOptions, setFilterOptions] = useState([]);
+    
     useEffect(() => {
-        console.log('FilterItem', FilterItem);
-    }, [FilterItem]);
+       
+        const FilterItem = FilterCondition?.find(Obj => Obj?.screen === screen);
+        if(DynamicFilterData){
+            
+        }else{
+            setFilterOptions(FilterItem?.condition || []);
+        }
+
+        
+
+    }, [DynamicFilterData, screen]);
 
     return (
         <div className='grid grid-cols-4 gap-4'>
             {
-                FilterItem?.condition?.map((ele, index) => (
+                filterOptions?.map((ele, index) => (
                     <div key={index}>
                         <Select
                             options={ele?.Options}

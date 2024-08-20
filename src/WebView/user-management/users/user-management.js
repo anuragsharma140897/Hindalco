@@ -38,9 +38,12 @@ export default function UserManagement() {
         var json = reduxUser?.searchJson
         if(type === 'init'){
             Object.assign(json,{page:1, limit : reduxPagination?.doc?.limit})
+            // Object.assign(json.search, {status : 'blocked'})
         }else{
             Object.assign(json,{page:reduxPagination?.doc?.number, limit : reduxPagination?.doc?.limit})
         }
+
+        console.log('user search', json);
 
         HitApi(json, searchUser).then((result) => {
             if (result) {

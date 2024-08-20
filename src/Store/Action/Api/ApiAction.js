@@ -18,23 +18,22 @@ export const HitApi = (json, api) => {
             },
             body: JSON.stringify(json)
         };
-
-
-
         fetch(api, requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
-
+                    console.log('result success', result);
                     if (result) {
                         resolve(result);
                     }
                 },
                 (error) => {
-
-                    resolve(error);
+                    resolve('error -- ', error);
                 }
-            )
+            ).catch(function(err) {
+                // some error here
+                resolve('error catch -- ', err);
+            });
     });
 
     return MyPromise;

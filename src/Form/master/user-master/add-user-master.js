@@ -57,10 +57,10 @@ export default function AddUserMaster({ row, closeModal }) {
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
 
-
+                console.log('user json', json);
 
                 HitApi(json, addUser).then((result) => {
-
+                    console.log('result', result);
                 })
             }
 
