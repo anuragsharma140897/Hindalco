@@ -36,6 +36,7 @@ export default function SearchableSelect({
       const json = { page: 1, limit: limit || 30, search: {} };
       HitApi(json, api).then((result) => {
         CompileSelectData(result?.content, serverKey, serverValue, getFieldLabel, getFieldValue).then((CompiledData) => {
+          console.log('CompiledData', CompiledData);
           if (CompiledData) {
             setOptions(CompiledData);
           }
@@ -49,8 +50,6 @@ export default function SearchableSelect({
     // Automatically insert the selected value (e.g., ID) into the Redux state
     let updatedJson = { ...reduxState };
     updatedJson[name] = value; // This assumes 'value' is the ID or relevant data
-
-
 
     dispatch(setAction(updatedJson));
     // Validate the current field (if needed)

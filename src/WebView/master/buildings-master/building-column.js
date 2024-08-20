@@ -13,7 +13,7 @@ import { deleteBuilding } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { FaUserPlus } from "react-icons/fa";
 
-export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal, hide }) => {
+export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
   const columns = [
     {
       title: (
@@ -42,9 +42,36 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal, 
         <Text className="font-medium text-gray-700">{value || '---'}</Text>
       ),
     },
+    {
+      title: <HeaderCell title="Actions" className={'font-extrabold'} />,
+      dataIndex: 'action',
+      key: 'action',
+      width: 130,
+      render: (_, row) => (
+        <div className="flex items-center gap-3 pe-4">
+          <Tooltip size="sm" content={'Edit Building'} placement="top" color="invert">
+            <label>
+              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Building Master', AddBuildingMaster, 800)}>
+                <PencilIcon className="h-4 w-4" />
+              </ActionIcon>
+            </label>
+          </Tooltip>
+          <DeletePopover title={`Delete Building`} description={`Are you sure you want to delete this employee?`}
+            onDelete={() => DeleteItem(row.id)}
+          />
+          <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
+            <label>
+              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
+                <FaUserPlus className="h-4 w-4" />
+              </ActionIcon>
+            </label>
+          </Tooltip>
+        </div>
+      ),
+    }
   ];
 
-  if (!hide) {
+  if (!true) {
     columns.push(
       {
         title: <HeaderCell title="Readers" className={'font-extrabold'} />,
@@ -78,33 +105,7 @@ export const getBuildingMasterColumns = ({ onDeleteItem, openModal, closeModal, 
           <Text className="font-medium text-gray-700">{value ? 'Yes' : 'No' || '---'}</Text>
         ),
       },
-      {
-        title: <HeaderCell title="Actions" className={'font-extrabold'} />,
-        dataIndex: 'action',
-        key: 'action',
-        width: 130,
-        render: (_, row) => (
-          <div className="flex items-center gap-3 pe-4">
-            <Tooltip size="sm" content={'Edit Building'} placement="top" color="invert">
-              <label>
-                <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Building Master', AddBuildingMaster, 800)}>
-                  <PencilIcon className="h-4 w-4" />
-                </ActionIcon>
-              </label>
-            </Tooltip>
-            <DeletePopover title={`Delete Building`} description={`Are you sure you want to delete this employee?`}
-              onDelete={() => DeleteItem(row.id)}
-            />
-            <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
-              <label>
-                <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
-                  <FaUserPlus className="h-4 w-4" />
-                </ActionIcon>
-              </label>
-            </Tooltip>
-          </div>
-        ),
-      }
+      
     );
   }
 

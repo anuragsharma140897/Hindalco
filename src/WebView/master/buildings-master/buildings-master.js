@@ -17,14 +17,6 @@ export default function BuildingsMaster() {
   const dispatch = useDispatch();
   const reduxBuilding = useSelector(state=>state.BuildingMasterReducer)
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getBuildingMasterColumns({ buildingData, openModal, closeModal }))
-  const { visibleColumns } = useColumn(columns);
-
-  useEffect(() => {
-    if(reduxBuilding?.doc === null){
-      loadData()
-    }
-  }, [])
 
   const loadData = () => {
     var json = reduxBuilding?.searchJson
@@ -37,9 +29,20 @@ export default function BuildingsMaster() {
     })
   }
 
+  const columns = useMemo(() => getBuildingMasterColumns(openModal, closeModal, loadData))
+  const { visibleColumns } = useColumn(columns);
+
+  useEffect(() => {
+    if(reduxBuilding?.doc === null){
+      loadData()
+    }
+  }, [])
+
+  
+
   return (
     <div>
-      <PageHeader metaTitle={'Building Master'} btnText={'Add Building'} children={<AddBuildingMaster closeModal={closeModal} />} title={'Add Building'} titleClass={'text-center'} customSize={700} />
+      <PageHeader metaTitle={'Building Master'} btnText={'Add Building'} children={<AddBuildingMaster closeModal={closeModal} ApiHit={loadData} />} title={'Add Building'} titleClass={'text-center'} customSize={700} />
       <ControlledTable
         variant="modern"
         isLoading={false}

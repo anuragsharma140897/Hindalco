@@ -8,8 +8,9 @@ import { isEmpty } from 'underscore';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 import CustomFilter from '../ui/filter/custom-filter';
+import { Loader, Title } from 'rizzui';
 
-export default function ControlledTable({ columns, className, data, ApitHit, screen, DynamicFilterData }) {
+export default function ControlledTable({ columns, className, data, ApitHit, screen, isLoading, showLoadingText }) {
   const dispatch = useDispatch()
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const handlePaginate = (page) => {
@@ -17,6 +18,19 @@ export default function ControlledTable({ columns, className, data, ApitHit, scr
     json.number = page
     dispatch(setPagination(json))
     if (ApitHit) ApitHit()
+  }
+
+  if (isLoading) {
+    return (
+      <div className="grid h-full min-h-[128px] flex-grow place-content-center items-center justify-center">
+        <Loader variant="spinner" size="xl" />
+        {showLoadingText ? (
+          <Title as="h6" className="-me-2 mt-4 font-medium text-gray-500">
+            Loading...
+          </Title>
+        ) : null}
+      </div>
+    );
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PageHeader from '../../../shared/page-header'
 import { useModal } from '../../../shared/modal-views/use-modal';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
@@ -21,30 +21,31 @@ export default function UserManagement() {
     const reduxUser = useSelector(state => state.UserReducer)
     const reduxPagination = useSelector(state => state.PaginationReducer)
     const { openModal, closeModal } = useModal();
+    const [loading, setLoading] = useState(false)
 
     const loadData = (type) => {
         var json = reduxUser?.searchJson
         if (type === 'init') {
             Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit })
-            // Object.assign(json.search, {status : 'blocked'})
+            // Object.assign(json.search, { status: 'blocked' })
         } else {
             Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
         }
-
-
+        setLoading(true)
 
         HitApi(json, searchUser).then((result) => {
-            if (result) {
+            if (result?.success!==false) {
                 CompileUserMaster(result).then((CompiledData) => {
                     dispatch(setUserData(CompiledData))
                     var tp = { limit: json?.limit, totalPages: CompiledData?.totalPages, number: CompiledData?.number, totalElements: CompiledData?.totalElements }
                     dispatch(setPagination(tp))
+                    setLoading(false)
                 })
+            } else {
+                setLoading(false)
             }
         })
     }
-
-
     const columns = useMemo(() => getUserColumns(openModal, closeModal, loadData))
     const { visibleColumns } = useColumn(columns);
 
@@ -54,15 +55,13 @@ export default function UserManagement() {
         }
     }, [])
 
-
-
     return (
         <div>
             <PageHeader btnText={'Add User'} children={<AddUserMaster closeModal={closeModal} ApiHit={loadData} />} title={'Add User'} titleClass={'text-center'} customSize={700} />
             <ControlledTable
                 screen={'user'}
                 variant="modern"
-                isLoading={false}
+                isLoading={loading}
                 showLoadingText={true}
                 data={reduxUser?.doc?.content}
                 columns={visibleColumns}
