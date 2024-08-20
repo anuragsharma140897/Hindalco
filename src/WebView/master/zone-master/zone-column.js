@@ -56,7 +56,10 @@ export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoadin
     key: 'action',
     width: 600,
     render: (_, row) => (
+
+
       <div className="flex items-center gap-3 pe-4">
+        {console.log("row+++++++++++++", row)}
         <Tooltip size="sm" content={'Edit Zone Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Zone Master', AddZoneMaster, 400)}>
@@ -64,9 +67,23 @@ export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoadin
             </ActionIcon>
           </label>
         </Tooltip>
-        <DeletePopover loading={loading} title={`Delete Zone Master`} description={`Are you sure you want to delete`}
+        {(row?.usedBy === null || (Array.isArray(row?.usedBy) && row.usedBy.length === 0)) ? (
+          <DeletePopover
+            loading={loading}
+            title={`Delete Zone Master`}
+            description={`Are you sure you want to delete?`}
+            onDelete={() => DeleteItem(row.id, setLoading)}
+          />
+        ) : (
+          <DeletePopover
+          loading={loading}
+          title={`You cannot delete zone`}
+          description={`This zone is already assigned`}
           onDelete={() => DeleteItem(row.id, setLoading)}
+          disable={true}
         />
+        )}
+
         <Tooltip size="sm" content={'Add Building'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Add Building', AddZoneBuilding, 800)}>

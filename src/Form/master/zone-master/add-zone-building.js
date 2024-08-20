@@ -42,11 +42,9 @@ function AddZoneBuilding({ row }) {
     }, [])
 
     const loadData = () => {
-       var json ={ 
-            "page": 1,
-            "limit": 10,
-            "search": {}
-        }
+        var json = reduxBuilding?.searchJson
+        json.page = 1
+        json.limit = 1000
         HitApi(json, searchBuilding).then((result) => {
             if (result) {
                 CompileBuildingMaster(result).then((CompiledData) => {
