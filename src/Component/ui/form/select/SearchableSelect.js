@@ -9,7 +9,8 @@ export default function SearchableSelect({
   api,
   serverKey ,
   serverValue = null,
-  getFieldName = 'id',
+  getFieldLabel = 'id',
+  getFieldValue,
   label,
   name,
   limit,
@@ -34,7 +35,7 @@ export default function SearchableSelect({
     if (api) {
       const json = { page: 1, limit: limit || 30, search: {} };
       HitApi(json, api).then((result) => {
-        CompileSelectData(result?.content, serverKey, serverValue, getFieldName).then((CompiledData) => {
+        CompileSelectData(result?.content, serverKey, serverValue, getFieldLabel, getFieldValue).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
           }
