@@ -14,6 +14,7 @@ import CustomButton from '../../../Component/ui/buttons/custom-button';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { addBuildingToZone, searchBuilding } from '../../../Constant/Api/Api';
 import { CompileBuildingMaster } from '../../../WebView/master/buildings-master/promiss/building-master.promiss';
+import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
 
 
 function AddZoneBuilding({ row }) {
@@ -60,24 +61,27 @@ function AddZoneBuilding({ row }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (reduxZone?.apiJson?.id) {
+        if (reduxZone?.apiJson?.buildingId) {
             setLoading(true)
             var json = {
-                zoneId: row?.id,
-                buildingId: reduxZone?.apiJson?.id,
+                zoneId: row?.id, // selected zone ki id
+                buildingId: reduxZone?.apiJson?.buildingId, // 
             }
-            HitApi(json, addBuildingToZone).then((result) => {
-                setLoading(false)
-                console.log("result", result);
-                if(result?.status === 200){
-                    alert(result.message)
-                    window.location.pathname = '/master/zone'
-                }
-                else{
-                    alert(result.message)
-                }
+
+            console.log(json);
+
+            // HitApi(json, addBuildingToZone).then((result) => {
+            //     setLoading(false)
+            //     console.log("result", result);
+            //     if(result?.status === 200){
+            //         alert(result.message)
+            //         window.location.pathname = '/master/zone'
+            //     }
+            //     else{
+            //         alert(result.message)
+            //     }
                 
-            })
+            // })
         }
         else {
             setEror("Please select Building")
@@ -89,7 +93,8 @@ function AddZoneBuilding({ row }) {
     return (
         <div className='p-10 mb-40'>
             <form onSubmit={handleSubmit}>
-                <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} />
+                {/* <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} /> */}
+                <SearchableSelect name="buildingId" label="Select Building" api={searchBuilding} getFieldLabel={'buildingName'} getFieldValue={'id'}  error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} />
                 
                 <div className='flex gap-3 justify-end mb-5'>
                     <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />

@@ -40,7 +40,8 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        openAlert("success", "Success", "User Updated Successfully")
+        var json = reduxUser?.apiJson
+        console.log('jsn', json);
         // e.preventDefault();
         // var json = reduxUser?.apiJson
         // const validationErrors = validate(json);
@@ -103,11 +104,12 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
                         <CustomInput name="username" label="Username" value={reduxUser?.apiJson?.username} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput type={'password'} name="password" label="Password" value={reduxUser?.apiJson?.password} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} disabled={row?.id ? true : false} />
                         <SearchableSelect name="gender" label="Gender" api={searchGeneral} serverKey={'fieldName'} serverValue={'gender'} getFieldLabel={'value'} getFieldValue={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
-                        <SearchableSelect name="roleName" label="Role" api={searchRole} getFieldLabel={'roleName'} getFieldValue={'roleName'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleCustomChange} />
+                        <SearchableSelect name="roleName" label="Role" api={searchRole} getFieldLabel={'roleName'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleCustomChange} />
                         <CustomInput name="contact" label="Contact No" value={reduxUser?.apiJson?.contact} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput name="address" label="Address" value={reduxUser?.apiJson?.address} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput name="email" label="Email Id" value={reduxUser?.apiJson?.email} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput name="employeeId" label="Employee Id" value={reduxUser?.apiJson?.employeeId} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+                        <SearchableSelect name="status" label="Status" api={searchGeneral} serverKey={'fieldName'} serverValue={'status'} getFieldLabel={'value'} getFieldValue={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
 
                     </div>
                     <div className='flex gap-3 justify-end'>

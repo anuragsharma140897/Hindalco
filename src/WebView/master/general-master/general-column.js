@@ -31,6 +31,15 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
     ),
   },
   {
+    title: <HeaderCell title="fieldName" className={'font-extrabold'} />,
+    dataIndex: 'fieldName',
+    key: 'fieldName',
+    width: 100,
+    render: (value) => (
+      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    ),
+  },
+  {
     title: <HeaderCell title="Status" className={'font-extrabold'} />,
     dataIndex: 'status',
     key: 'status',
