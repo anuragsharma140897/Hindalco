@@ -1,0 +1,54 @@
+{
+  "name": "MQTT Config #1",
+  "description": "MQTT Test Broker Configuration",
+  "type": "MQTT",
+  "configuration": {
+    "endpoint": {
+      "hostname": "mqtt.example.com",
+      "port": 1883,
+      "protocol": "tcp"
+    },
+    "additional": {
+      "clientId": "device-{{deviceId}}",
+      "cleanSession": true,
+      "keepAlive": 60,
+      "debug": false
+    },
+    "topics": {
+      "tagEvents": {
+        "topic": "/tagEvents/{{deviceId}}",
+        "qos": 1,
+        "retain": false
+      },
+      "managementEvents": {
+        "topic": "/events/{{deviceId}}",
+        "qos": 1,
+        "retain": true
+      },
+      "management": {
+        "command": {
+          "topic": "/management/command/{{deviceId}}",
+          "qos": 2,
+          "retain": false
+        },
+        "response": {
+          "topic": "/management/response/{{deviceId}}",
+          "qos": 2,
+          "retain": false
+        }
+      },
+      "control": {
+        "command": {
+          "topic": "/control/command/{{deviceId}}",
+          "qos": 2,
+          "retain": false
+        },
+        "response": {
+          "topic": "/control/response/{{deviceId}}",
+          "qos": 2,
+          "retain": false
+        }
+      }
+    }
+  }
+}
