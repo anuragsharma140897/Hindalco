@@ -37,7 +37,7 @@ export default function CustomSelect({
     };
 
 
-    console.log('options', options);
+
 
     return (
         <div className="mb-6 relative">

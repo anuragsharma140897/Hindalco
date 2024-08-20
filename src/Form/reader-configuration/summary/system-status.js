@@ -8,7 +8,7 @@ import { FaMicrochip } from 'react-icons/fa';
 
 export default function SystemStatus({ title, data, activeIcon, InactiveIcon }) {
 
-    console.log('data', data);
+
 
 
     return (

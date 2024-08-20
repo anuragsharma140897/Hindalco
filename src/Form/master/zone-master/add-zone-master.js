@@ -49,7 +49,7 @@ export default function AddZoneMaster({ row, closeModal }) {
             HitApi(json, apiCall)
                 .then((result) => {
                     setLoading(false); 
-                    console.log('result', result);
+
     
                     if (row?.id && result?.status === 200) {
                         alert(result.message);

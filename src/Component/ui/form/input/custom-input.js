@@ -34,7 +34,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
                 onChange={handleChange} 
                 placeholder={placeholder || `Enter ${label} ${important === false?'(Optional)':''}`} 
                 style={{ border: error?.[name] ? '2px solid red' : '1px solid #ccc', outline: 'none' }}
-                className={`w-full p-3 text-lg rounded-lg border 
+                className={`w-full py-1.5 px-3 text-lg rounded-lg border 
                 disabled:bg-gray-200
                 ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
                 disabled={disabled}

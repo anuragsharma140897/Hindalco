@@ -29,7 +29,7 @@ export default function AddLocationMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxLocation?.apiJson
 
-        console.log("json111111",json);
+
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setLocationMasterApiJson(json))
     }
@@ -41,20 +41,20 @@ export default function AddLocationMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateLocation).then((result) => {
-                    console.log('result', result);
+
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addLocation).then((result) => {
-                    console.log('result', result);
+
                 })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
 
-    console.log("reduxLocation++++++",reduxLocation);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

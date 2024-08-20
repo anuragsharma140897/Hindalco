@@ -61,7 +61,7 @@ function AddZoneBuilding() {
         const json = { ...reduxZone?.apiJson };
         const validationErrors = validate(json);
 
-        console.log("validationErrors", validationErrors);
+
 
         setLoading(true);
         HitApi(json, updateZone).then((result) => {
@@ -76,7 +76,7 @@ function AddZoneBuilding() {
 
     };
 
-    console.log(reduxBuilding);
+
 
     return (
         <div className='p-10'>

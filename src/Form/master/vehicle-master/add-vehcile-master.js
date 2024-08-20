@@ -26,7 +26,7 @@ export default function AddVehicleMaster({ row, closeModal }) {
     const loadDefault = (row) => {
         var json = reduxVehicle?.apiJson
 
-        console.log("json111111",json);
+
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setVehicleMasterApiJson(json))
     }
@@ -38,20 +38,20 @@ export default function AddVehicleMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateVehicle).then((result) => {
-                    console.log('result', result);
+
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addVehicle).then((result) => {
-                    console.log('result', result);
+
                 })
             }
         } else {
-            console.log('Form has errors');
+
         }
     };
 
-    console.log("reduxVehicle++++++",reduxVehicle);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

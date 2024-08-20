@@ -10,7 +10,7 @@ import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddUserMaster from '../../../Form/master/user-master/add-user-master';
 
-export const getUserColumns = ({ openModal, closeModal }) => [
+export const getUserColumns = (openModal, closeModal, ApiHit) => [
   {
     title: (
       <HeaderCell title="SR No." />
@@ -30,6 +30,15 @@ export const getUserColumns = ({ openModal, closeModal }) => [
         <Text className="font-semibold text-gray-700">{row?.firstName + ' ' +  row?.lastName}</Text>
         <Text className="text-xs font-medium text-gray-700">{row?.username}</Text>
       </div>
+    ),
+  },
+  {
+    title: <HeaderCell title="Gender" />,
+    dataIndex: 'gender',
+    key: 'gender',
+    width: 150,
+    render: (value, row) => (
+      <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
@@ -79,7 +88,7 @@ export const getUserColumns = ({ openModal, closeModal }) => [
       <div className="flex items-center justify-end gap-3 pe-4">
         <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddUserMaster, 800)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddUserMaster, 800, ApiHit)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>

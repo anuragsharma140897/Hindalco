@@ -36,14 +36,14 @@ export default function ConfigTabs() {
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxConfiguration?.apiJson
-        console.log("json", json);
+
         const validationErrors = validate(json);
         dispatch(setConfigurationError(validationErrors))
-        console.log("validationErrors",);
+
         if (Object.keys(validationErrors).length === 0) {
 
             CompileConfigurationJson(reduxConfiguration?.apiJson).then(compiledData => {
-                console.log(compiledData);
+
                 // if (row?.id) {
                 //     Object.assign(json, { id: row?.id })
                 //     HitApi(json, updateGeneral).then((result) => {
@@ -63,7 +63,7 @@ export default function ConfigTabs() {
     };
 
 
-    console.log('reduxConfiguration', reduxConfiguration);
+
 
 
 

@@ -39,7 +39,7 @@ function TagMaster() {
   }
 
 
-  console.log("reduxTag",reduxTag);
+
 
   return (
     <div>

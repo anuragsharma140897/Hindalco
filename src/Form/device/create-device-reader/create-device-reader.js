@@ -80,7 +80,7 @@ export default function CreateDeviceReader() {
         })
       }
     } else {
-      console.log('Form has errors');
+
     }
   };
 

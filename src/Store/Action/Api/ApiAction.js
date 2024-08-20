@@ -22,7 +22,6 @@ export const HitApi = (json, api) => {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log('result success', result);
                     if (result) {
                         resolve(result);
                     }
@@ -58,7 +57,7 @@ export const HitApiXML = (json, api) => {
                     }
                 },
                 (error) => {
-                    console.log('error xml', error);
+
                     resolve(error);
                 }
             )
