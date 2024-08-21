@@ -1,12 +1,11 @@
 
-export const IP = '137.184.74.218'
-// export const IP = '192.168.0.119:9090'
+// export const IP = '137.184.74.218'
+export const IP = '192.168.0.114:9090'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
 export const PlantMicroService = `http://${IP}/plant/api/`
 export const DeviceMicroService = `http://${IP}/device/api/`
-
 
 export const LoginApi = BaseUrl + 'login'
 // User
@@ -100,4 +99,5 @@ export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZon
 
 export const addZoneToLocation = PlantMicroService + 'addZoneToLocation'
 export const removeZoneFromLocation = PlantMicroService + 'removeZoneFromLocation'
+export const mapping = PlantMicroService + 'mapping'
 

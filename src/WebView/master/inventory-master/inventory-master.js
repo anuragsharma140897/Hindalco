@@ -13,7 +13,6 @@ function InventoryMaster() {
   return (
     <div>
       <PageHeader btnText={'Add Batch'} children={<AddInventoryMaster closeModal={closeModal} />} title={'Add Batch'} customSize={400} />
-
     </div>
   )
 }

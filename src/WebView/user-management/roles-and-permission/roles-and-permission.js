@@ -13,7 +13,7 @@ import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { searchRole } from '../../../Constant/Api/Api';
 import { setRolesAndPermissionMainData } from '../../../Store/Action/RolesAndPermission/RolesAndPermissionAction';
 import { CompileRolesAndPermission } from './promiss/roles-and-permission.promiss';
-import data from './data.json'
+import useAlertController from '../../../Hooks/use-alert-controller';
 
 export const PermissionTypes = () => {
   return <div className='flex items-center gap-5'>
@@ -40,8 +40,9 @@ export default function RolesAndPermission() {
   const dispatch = useDispatch()
   const reduxRolesAndPermission = useSelector(state => state.RolesAndPermissionReducer)
   let rd = reduxRolesAndPermission?.mainData || []
-  const columns = useMemo(() => getRolesAndPermissionColumns({ openModal, closeModal }))
-
+  const { showCustomAlert } = useAlertController();
+  const columns = useMemo(() => getRolesAndPermissionColumns({ openModal, closeModal, showCustomAlert }))
+  
   const { visibleColumns } = useColumn(columns);
   const reduxPagination = useSelector(state => state.PaginationReducer)
 
@@ -55,12 +56,14 @@ export default function RolesAndPermission() {
   const loadData = () => {
     var json = reduxRolesAndPermission?.searchJson
 
-    // HitApi(json, searchRole).then((result) => {
-    //   if (result?.content?.length > 0)
-    //     CompileRolesAndPermission(result).then((CompiledData) => {
-    //       dispatch(setRolesAndPermissionMainData(CompiledData))
-    //     })
-    // })
+    HitApi(json, searchRole).then((result) => {
+      if (result?.content?.length > 0)
+        CompileRolesAndPermission(result).then((CompiledData) => {
+          dispatch(setRolesAndPermissionMainData(CompiledData))
+        })
+    }).catch(err=>{
+      console.log('eeee err', err);
+    })
 
   }
 
@@ -72,7 +75,7 @@ export default function RolesAndPermission() {
         variant="modern"
         isLoading={false}
         showLoadingText={true}
-        data={reduxRolesAndPermission?.mainData?.docs}
+        data={reduxRolesAndPermission?.mainData?.content}
         columns={visibleColumns}
         className={TableClass}
       />

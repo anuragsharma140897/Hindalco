@@ -25,7 +25,6 @@ const classes = {
 
 export default function Table({ striped, variant = 'elegant', emptyText, className, ...props }) {
   return (
-    // <RcTable className={cn(classes.table, classes.thead, classes.tCell, classes.variants[variant], striped && classes.striped, className,' rounded-2xl')}
     <RcTable className={cn(classes?.table, classes?.thead, classes?.tcell, classes.variants[variant], classes?.striped)}
       emptyText={
         emptyText || (
@@ -34,6 +33,7 @@ export default function Table({ striped, variant = 'elegant', emptyText, classNa
           </div>
         )
       }
+    
       {...props}
     />
   );

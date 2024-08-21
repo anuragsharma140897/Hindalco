@@ -1,50 +1,25 @@
-import { useState } from "react";
-import { Alert } from "rizzui";
+import { toast } from 'react-hot-toast';
+import cn from '../Utils/class-names';
+import { IoAlertCircleOutline } from "react-icons/io5";
+import { Text, Title } from 'rizzui';
+import { PiAlarm, PiTrashFill } from 'react-icons/pi';
 
-export function useAlertController() {
-  const [alertConfig, setAlertConfig] = useState({
-    isOpen: false,
-    type: "info", // could be 'success', 'error', 'warning', etc.
-    title: "Alert",
-    message: "This is an alert message.",
-  });
 
-  const openAlert = (type, title, message) => {
-    setAlertConfig({
-      isOpen: true,
-      type: type || "info",
-      title: title || "Alert",
-      message: message || "This is an alert message.",
-    });
+const useAlertController = () => {
+  const showCustomAlert = ({ type, title, message, onClose }) => {
+    const bgColor = type === 'success' ? 'bg-green-500' : 'text-red-main';
+
+    toast.custom((t) => (
+      <div className="w-auto px-4 py-2 text-left rtl:text-right bg-white rizzui-popover-content min-w-max dark:bg-muted/80 dark:backdrop-blur-3xl border border-muted p-4 rounded-md drop-shadow-lg z-0">
+        <Title as="h6" className={cn('mb-0.5 flex items-start text-sm sm:items-center', type === 'success'? ' text-green-600' :' text-red-600 ')}>
+          <IoAlertCircleOutline className="me-1 h-[17px] w-[17px]" /> {title}
+        </Title>
+        <Text className="mb-2 leading-relaxed text-gray-500 font-bold tracking-wide"> {message} </Text>
+      </div>
+    ));
   };
 
-  const closeAlert = () => {
-    setAlertConfig((prevState) => ({
-      ...prevState,
-      isOpen: false,
-    }));
-  };
+  return { showCustomAlert };
+};
 
-  const AlertComponent = () => (
-    alertConfig.isOpen && (
-      <Alert
-        color={alertConfig.type}
-        variant="flat"
-        closable
-        onClose={closeAlert}
-      >
-        <span className="font-semibold">{alertConfig.title}</span>
-        <span>{alertConfig.message}</span>
-      </Alert>
-    )
-  );
-
-  console.log('alertConfig', alertConfig);
-
-  return {
-    alertConfig,
-    openAlert,
-    closeAlert,
-    AlertComponent,
-  };
-}
+export default useAlertController;

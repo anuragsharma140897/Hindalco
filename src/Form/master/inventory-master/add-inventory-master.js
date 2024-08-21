@@ -77,11 +77,9 @@ export default function AddInventoryMaster({ row, closeModal }) {
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <SearchableSelect name="product_id" label="Product" api={searchProduct} getFieldLabel={'id'}  />
+                    <SearchableSelect name="product_id" label="Product" api={searchProduct} getFieldName={'productName'}  />
                     <CustomInput important={true} name="batchNumber" label="Batch Number" value={reduxInventory?.apiJson?.value} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} />
                     <CustomInput important={true} name="lotNumber" label="Lot Number" value={reduxInventory?.apiJson?.value} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} />
-
-
 
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />

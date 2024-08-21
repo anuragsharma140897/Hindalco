@@ -1,31 +1,22 @@
 import React from "react";
 import { Alert, Button, Text } from "rizzui";
+import useAlertController from "../../Hooks/use-alert-controller";
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState(true);
+  const { showCustomAlert } = useAlertController();
+  const handleClick = () => {
+    showCustomAlert({
+      type : 'error',
+      name: 'Success',
+      message: 'User Details Updated Successfully',
+      onClose: () => console.log('Alert closed'), // Optional callback on close
+    });
+  };
+
   return (
-    <>
-      <Button
-        color="info"
-        onClick={() => setIsOpen(true)}
-        className="tracking-wider"
-      >
-        Info Alert
-      </Button>
-      {isOpen && (
-        <Alert
-          color="info"
-          variant="flat"
-          closable
-          onClose={() => setIsOpen(false)}
-        >
-          <Text className="font-semibold">Alert with info</Text>
-          <Text>
-            Attention All! We are excited to announce the launch of our new
-            product/service.
-          </Text>
-        </Alert>
-      )}
+    <>  
+       <button onClick={handleClick}>Show Custom Alert</button>
     </>
   );
 }
