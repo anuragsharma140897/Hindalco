@@ -12,6 +12,8 @@ import useAlertController from '../../../../Hooks/use-alert-controller'
 import { setLocationMasterData } from '../../../../Store/Action/master/location-master/location-master-action'
 import cn from '../../../../Utils/class-names'
 import { Title } from 'rizzui'
+import { setLoading } from '../../../../Store/Action/loading/loading-action'
+import useDynamicLoading from '../../../../Hooks/use-dynamic-loading'
 
 
 export default function Zone() {
@@ -21,6 +23,7 @@ export default function Zone() {
   const { openModal, closeModal } = useModal();
   const [selected, setSelected] = useState(null)
   const { showCustomAlert } = useAlertController();
+  const { loadingState, setDynamicLoading } = useDynamicLoading();
 
   useEffect(() => {
     if (reduxMappingMaster?.mappingJson?.selectedBuildingID !== null && reduxZone?.doc === null) {
@@ -29,10 +32,9 @@ export default function Zone() {
   }, [reduxZone, reduxMappingMaster])
 
   const loadData = () => {
-    var json = { page: 1, limit: 50, search: { buildingIds: { $in: [reduxMappingMaster?.mappingJson?.selectedBuildingID] } } }
-    console.log('laoding zone data', json);
+    var json = { page: 1, limit: 5000, search: { buildingIds: { $in: [reduxMappingMaster?.mappingJson?.selectedBuildingID] } } }
     HitApi(json, searchZone).then((result) => {
-      console.log('result', result);
+      console.log('result Zone oading', result);
       if (result?.success !== false) {
         dispatch(setZoneMasterData(result))
       }
@@ -50,8 +52,8 @@ export default function Zone() {
 
   const handleAddZone = () => {
     var json = reduxMappingMaster?.mappingJson
-
-    console.log('json', json);
+    
+    setDynamicLoading({ 'zone': true})
 
     var finalJson = {
       sourceId: json?.selectedBuildingID,
@@ -62,21 +64,23 @@ export default function Zone() {
       "mapping": "zoneIds"
     }
 
-    console.log('final hit json', finalJson);
+    console.log('finalJson', finalJson);
 
     HitApi(finalJson, mapping).then((result) => {
-
-      console.log('result', result);
-
       if (result?.success !== false) {
+        setDynamicLoading({ 'zone': false})
         showCustomAlert({
           type: 'success',
           title: 'Success!',
-          message: 'Zone Mapping Added Successfully',
+          message: 'Zone to Building Mapping Successfully',
         });
+        // laoding and closing modal
+        loadData()
+        closeModal()
       }
     })
   }
+
 
   const handleZoneClick = (ele) => {
     console.log('zone ele : ', ele);
@@ -116,7 +120,7 @@ export default function Zone() {
     <div>
       <Title as='h5'>Zone</Title>
       <div>
-        <CustomButton title={'Add Zone'} LeftIcon={<FaPlus />} onClick={() => handleClick()} disabled={!reduxMappingMaster?.mappingJson?.selectedBuildingID} />
+        {loadingState?.doc?.zone ? <CustomButton title={'Loading...'} /> : <CustomButton title={'Add Zone'} LeftIcon={<FaPlus />} onClick={() => handleClick()} disabled={!reduxMappingMaster?.mappingJson?.selectedBuildingID} />}
         <div>
           {item || 'No Data Found'}
         </div>

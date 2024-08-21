@@ -11,6 +11,7 @@ import { setSelectedMappingMasterJson, setSelectedMappingMasterReaderData } from
 import { setDeviceReaderData } from '../../../../Store/Action/device/device-reader/device-reader-action'
 import cn from '../../../../Utils/class-names'
 import { Title } from 'rizzui'
+import useDynamicLoading from '../../../../Hooks/use-dynamic-loading'
 
 
 
@@ -21,6 +22,7 @@ export default function Reader() {
   const { openModal, closeModal } = useModal();
   const [selected, setSelected] = useState(null)
   const { showCustomAlert } = useAlertController();
+  const { loadingState, setDynamicLoading } = useDynamicLoading();
 
   useEffect(() => {
     if (reduxMappingMaster?.mappingJson?.selectedLocationID !== null && reduxReader?.doc === null) {
@@ -62,7 +64,7 @@ export default function Reader() {
     openModal({
       view: <div className='p-10 h-96 flex flex-col justify-between'>
         <SearchableSelect name="readerId" label="Reader" api={searchReader} getFieldName={'placementName'} onChange={handleOnChange} dynamicSearch={{}} />
-        <CustomButton title={'Add Zone'} onClick={() => handleAddReader()} />
+        <CustomButton title={'Add Reader'} onClick={() => handleAddReader()} />
       </div>
     })
   }
@@ -78,8 +80,7 @@ export default function Reader() {
       "source": "locationIds",
       "mapping": "readerIds"
     }
-
-    console.log('readerToLocationMappingJson', readerToLocationMappingJson);
+    setDynamicLoading({'zone': true, 'location':true, 'reader':true})
 
     HitApi(readerToLocationMappingJson, mapping).then((readerToLocationMappingResult) => {
       console.log('readerToLocationMappingResult', readerToLocationMappingResult);
@@ -92,6 +93,11 @@ export default function Reader() {
           "source": "zoneIds",
           "mapping": "readerIds"
         }
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Reader to Location Mapping Successfully',
+        });
         console.log('readerToZoneMappingJson', readerToZoneMappingJson);
         HitApi(readerToZoneMappingJson, mapping).then((readerToZoneMappingREsult) => {
           console.log('readerToZoneMappingREsult', readerToZoneMappingREsult);
@@ -105,6 +111,11 @@ export default function Reader() {
               "source": "buildingIds",
               "mapping": "readerIds"
             }
+            showCustomAlert({
+              type: 'success',
+              title: 'Success!',
+              message: 'Reader to Zone Mapping Successfully',
+            });
             console.log('readerToBuildingMappingJson', readerToBuildingMappingJson);
             HitApi(readerToBuildingMappingJson, mapping).then((readerToBuildingMappingResult) => {
               console.log('readerToBuildingMappingResult', readerToBuildingMappingResult);
@@ -112,8 +123,12 @@ export default function Reader() {
                 showCustomAlert({
                   type: 'success',
                   title: 'Success!',
-                  message: 'Reader Mapping Added Successfully',
+                  message: 'Reader to Building Mapping Successfully',
                 });
+                // laoding and closing modal
+                setDynamicLoading({'zone': false, 'location':false, 'reader':false})
+                closeModal()
+                loadData()
               } else {
                 console.log('error');
               }
@@ -154,7 +169,7 @@ export default function Reader() {
     <div>
       <Title as='h5'>Reader</Title>
       <div>
-        <CustomButton title={'Add Reader'} LeftIcon={<FaPlus />} onClick={handleClick} disabled={!reduxMappingMaster?.mappingJson?.selectedBuildingID} />
+        {loadingState?.doc?.reader ? <CustomButton title={'Loading...'} /> : <CustomButton title={'Add Reader'} LeftIcon={<FaPlus />} onClick={handleClick} disabled={!reduxMappingMaster?.mappingJson?.selectedBuildingID} />}
         <div>
           {item || 'No Data Found'}
         </div>

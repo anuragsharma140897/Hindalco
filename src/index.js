@@ -28,6 +28,7 @@ import ReaderConfigurationReducer from './Store/Reducer/device/reader-configurat
 import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing-scale-action';
 import ConfigurationMasterReducer from './Store/Reducer/master/configuration-master/configuration-master-reducer';
 import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-master-reducer';
+import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -51,7 +52,8 @@ const rootReducer = combineReducers({
   LocationMasterReducer: LocationMasterReducer,
   TagMasterReducer:TagMasterReducer,
   ConfigurationMasterReducer :ConfigurationMasterReducer,
-  MappingMasterReducer : MappingMasterReducer
+  MappingMasterReducer : MappingMasterReducer,
+  LoadingReducer : LoadingReducer
 
 })
 

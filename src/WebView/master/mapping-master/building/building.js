@@ -25,9 +25,7 @@ export default function Building() {
 
     const loadData = () => {
         var json = reduxBuilding?.searchJson
-        console.log('json builgin', json);
         HitApi(json, searchBuilding).then((result) => {
-            console.log('result', result);
             if (result?.success !== false) {
                 CompileBuildingMaster(result).then((CompiledData) => {
                     dispatch(setBuildingMasterData(CompiledData))
@@ -37,7 +35,6 @@ export default function Building() {
     }
 
     const handleClick = (ele) => {
-        console.log('building ele : ', ele);
         var json = reduxMappingMaster?.mappingJson
         Object.assign(json, { selectedBuildingID: ele?.id })
         dispatch(setZoneMasterData(null))
@@ -47,8 +44,6 @@ export default function Building() {
         delete json?.selectedZoneID;
         delete json?.selectedLocationID;
         delete json?.selectedReaderID;
-
-
     }
 
     let item;

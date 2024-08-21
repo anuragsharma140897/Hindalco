@@ -11,21 +11,25 @@ import { setLocationMasterData } from '../../../../Store/Action/master/location-
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
 import cn from '../../../../Utils/class-names'
 import { Title } from 'rizzui'
+import useDynamicLoading from '../../../../Hooks/use-dynamic-loading'
+import { setDeviceReaderData } from '../../../../Store/Action/device/device-reader/device-reader-action'
 
 export default function Location() {
   const dispatch = useDispatch()
   const reduxLocation = useSelector(state => state.LocationMasterReducer)
+  const reduxLoading = useSelector(state => state.LoadingReducer)
   const reduxMappingMaster = useSelector(state => state.MappingMasterReducer)
   const { openModal, closeModal } = useModal();
   const [selected, setSelected] = useState(null)
   const { showCustomAlert } = useAlertController();
+  const { loadingState, setDynamicLoading } = useDynamicLoading();
 
   useEffect(() => {
     if (reduxMappingMaster?.mappingJson?.selectedZoneID !== null && reduxLocation?.doc === null) {
       loadData()
     }
 
-    console.log('reduxMappingMaster in location', reduxLocation);
+    console.log('reduxLoading********', reduxLoading?.doc);
 
   }, [reduxMappingMaster])
 
@@ -53,7 +57,7 @@ export default function Location() {
     openModal({
       view: <div className='p-10 h-96 flex flex-col justify-between'>
         <SearchableSelect name="zoneId" label="Zone" api={searchLocation} getFieldName={'value'} onChange={handleOnChange} dynamicSearch={{}} />
-        <CustomButton title={'Add Zone'} onClick={() => handleAddLocation()} />
+        <CustomButton title={'Add Location'} onClick={() => handleAddLocation()} />
       </div>
     })
   }
@@ -77,8 +81,15 @@ export default function Location() {
       "source": "zoneIds",
       "mapping": "locationIds"
     }
+    setDynamicLoading({ 'zone': true, 'location': true })
     HitApi(locationToZoneMappingJson, mapping).then((result) => {
       if (result?.success !== false) {
+        closeModal()
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Location to Zone Mapping Successfully',
+        });
         var locationToBuilginMappingJson = {
           sourceId: json?.selectedBuildingID,
           mappingId: json?.selectedLocationIdFromDropdown,
@@ -92,8 +103,11 @@ export default function Location() {
             showCustomAlert({
               type: 'success',
               title: 'Success!',
-              message: 'Zone Mapping Added Successfully',
+              message: 'Location to Building Mapping Successfully',
             });
+            // laoding and closing modal
+            setDynamicLoading({ 'zone': false, 'location': false })
+            loadData()
           }
         })
       }
@@ -104,7 +118,7 @@ export default function Location() {
     console.log('location ele : ', ele);
     var json = reduxMappingMaster?.mappingJson
     Object.assign(json, { selectedLocationID: ele?.id })
-    // dispatch(setLocationMasterData(null))
+    dispatch(setDeviceReaderData(null))
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterLocationData(ele))
     console.log('handleZoneClick json', json);
@@ -129,7 +143,7 @@ export default function Location() {
     <div>
       <Title as='h5'>Location</Title>
       <div>
-        <CustomButton title={'Add Location'} LeftIcon={<FaPlus />} onClick={() => handleClick()} disabled={!reduxMappingMaster?.mappingJson?.selectedZoneID} />
+        {loadingState?.doc?.location ? <CustomButton title={'Loading...'} /> : <CustomButton title={'Add Location'} LeftIcon={<FaPlus />} onClick={() => handleClick()} disabled={!reduxMappingMaster?.mappingJson?.selectedZoneID} />}
         <div>
           {item || 'No Data Found'}
         </div>
