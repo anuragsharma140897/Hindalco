@@ -33,6 +33,7 @@ import TagMaster from '../WebView/master/tag-master/tag-master'
 import ConfigurationMaster from '../WebView/master/configuration-master/configuration-master'
 import AddConfigurationMaster from '../Form/master/configuration-master/add-configuration-master'
 import InventoryMaster from '../WebView/master/inventory-master/inventory-master'
+import MappingMaster from '../WebView/master/mapping-master/mapping-master'
 
 export default function CustomRoutes() {
 
@@ -59,6 +60,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
+            <Route path={routes?.panel?.master?.mappingMaster} exact element={<MappingMaster />} />
             <Route path={routes?.panel?.device?.readerBuildingMappingMaster} exact element={<ReaderBuildingMappingMaster />} />
             <Route path={routes?.panel?.inbond?.inboundOrder} exact element={<InboundOrder />} />
             <Route path={routes?.panel?.inbond?.webReceiving} exact element={<InboundWebReceiving />} />

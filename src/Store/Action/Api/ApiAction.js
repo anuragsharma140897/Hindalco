@@ -18,25 +18,45 @@ export const HitApi = (json, api) => {
             },
             body: JSON.stringify(json)
         };
+
         fetch(api, requestOptions)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    if (result) {
-                        resolve(result);
-                    }
-                },
-                (error) => {
-                    resolve('error -- ', error);
+            .then(res => {
+                // Check if the response status is not OK (e.g., 404)
+                if (!res.ok) {
+                    return res.json().then(err => {
+                        console.log('err ---- ', err);
+                        // Resolve with an error object instead of rejecting
+                        resolve({
+                            success: false,
+                            status: res.status,
+                            statusText: res.statusText,
+                            error: err,
+                        });
+                    });
                 }
-            ).catch(function(err) {
-                // some error here
-                resolve('error catch -- ', err);
+                return res.json();
+            })
+            .then(result => {
+                if (result) {
+                    // Resolve with success status
+                    resolve(result)
+                }
+            })
+            .catch(err => {
+                console.log('Error caught: ', err);
+                // Resolve with an error object
+                resolve({
+                    success: false,
+                    message: 'An error occurred during the API call.',
+                    error: err,
+                });
             });
     });
 
     return MyPromise;
 }
+
+
 
 export const HitApiXML = (json, api) => {
     const MyPromise = new Promise((resolve, reject) => {

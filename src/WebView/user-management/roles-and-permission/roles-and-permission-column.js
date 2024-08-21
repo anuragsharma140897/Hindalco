@@ -5,27 +5,18 @@ import Permission from '../permission/permission';
 import PencilIcon from '../../../Constant/Icons/pencil';
 import DeletePopover from '../../../shared/delete-popover';
 import React from 'react';
-import { deleteRole } from '../../../Constant/Api/Api';
+import { deleteRole, searchUser } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddRolesAndPermission from './add/add-roles-and-permission';
 
-export const getRolesAndPermissionColumns = ({ openModal, closeModal }) => [
+export const getRolesAndPermissionColumns = ({ openModal, closeModal, showCustomAlert }) => [
   {
     title: (
       <HeaderCell title="SR No." />
     ),
     dataIndex: 'index',
     key: 'index',
-    width: 10,
-    render: (value) => <Text>{value || '---'}</Text>,
-  },
-  {
-    title: (
-      <HeaderCell title="id" />
-    ),
-    dataIndex: 'id',
-    key: 'id',
     width: 10,
     render: (value) => <Text>{value || '---'}</Text>,
   },
@@ -52,6 +43,13 @@ export const getRolesAndPermissionColumns = ({ openModal, closeModal }) => [
     width: 130,
     render: (_, row) => (
       <div className="flex items-center justify-end gap-3 pe-4">
+        <Tooltip size="sm" content={'Check Users'} placement="top" color="invert">
+          <label>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+              <PencilIcon className="h-4 w-4" />
+            </ActionIcon>
+          </label>
+        </Tooltip>
         <Tooltip size="sm" content={'Edit Site Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Roles And Permission' , AddRolesAndPermission, 800)}>
@@ -60,7 +58,7 @@ export const getRolesAndPermissionColumns = ({ openModal, closeModal }) => [
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Role`} description={`Are you sure you want to delete this Role?`}
-          onDelete={() => DeleteItem(row.id)}
+          onDelete={() => DeleteItem(row.id, showCustomAlert)}
         />
       </div>
     ),
@@ -118,9 +116,23 @@ export const GenerateBadge = (items) => {
 };
 
 
-export const DeleteItem = (id) => {
-  var json = { id: id }
-  HitApi(json, deleteRole).then((Result) => {
+export const DeleteItem = (id, showCustomAlert) => {
+  var json = { page:1, limit : 1, search : {roleId: id} }
+  HitApi(json, searchUser).then((Result)=>{
+    if(Result?.content?.length>0){
+      showCustomAlert({
+        type : 'error',
+        title : "Delete Error",
+        message : "Unable to delete this role, This role is already linked with the User"
+      })
+      console.log('Result', Result);
 
+    }
+  }).catch(err=>{
+    console.log('Unexpected error:', err);
   })
+  
+  // HitApi(json, deleteRole).then((Result) => {
+
+  // })
 }

@@ -13,14 +13,10 @@ import Login from './WebView/login/login';
 import GlobalConfirmBox from './shared/confirm/container';
 import "./i18n";
 import { getAuthenticatedUser } from './Storage/Storage';
-
+import { Toaster } from 'react-hot-toast';
 export default function App() {
 
  let user = getAuthenticatedUser()
-
-
- 
-
 
   return (
     <div>
@@ -30,6 +26,7 @@ export default function App() {
           <GlobalDrawer />
           <GlobalModal />
           <GlobalConfirmBox />
+          <Toaster position='top-right' />
         </> :
           <Login />
       }

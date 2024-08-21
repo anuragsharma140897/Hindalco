@@ -12,12 +12,31 @@ import { searchSite } from '../../../Constant/Api/Api';
 import { useDispatch, useSelector } from 'react-redux';
 import { CompileSiteMaster } from './promiss/site-master.promiss';
 import { setSiteMasterData } from '../../../Store/Action/master/site-master/site-master-action';
+import useAlertController from '../../../Hooks/use-alert-controller';
 
 export default function SiteMaster() {
   const dispatch = useDispatch()
   const reduxSite = useSelector(state=>state.SiteMasterReducer)
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getSiteMasterColumns({ openModal, closeModal }))
+  const { showCustomAlert } = useAlertController();
+  const [loading, setLoading] = useState(false)
+
+  const loadData = () => {
+    var json = reduxSite?.searchJson
+
+    console.log('json', json);
+    setLoading(true)
+    HitApi(json, searchSite).then((result) => {
+      if(result){
+        CompileSiteMaster(result).then((CompiledData)=>{
+          dispatch(setSiteMasterData(CompiledData))
+          setLoading(false)
+        })
+      }
+    })
+  }
+
+  const columns = useMemo(() => getSiteMasterColumns(openModal, closeModal, loadData, showCustomAlert))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
@@ -26,23 +45,12 @@ export default function SiteMaster() {
     }
   }, [])
 
-  const loadData = () => {
-    var json = reduxSite?.searchJson
-    HitApi(json, searchSite).then((result) => {
-      if(result){
-        CompileSiteMaster(result).then((CompiledData)=>{
-          dispatch(setSiteMasterData(CompiledData))
-        })
-      }
-    })
-  }
-
   return (
     <div>
-      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal} />} title={'Add Site'} customSize={400} />
+      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal} ApiHit={loadData} />} title={'Add Site'} customSize={400} />
       <ControlledTable
         variant="modern"
-        isLoading={false}
+        isLoading={loading}
         showLoadingText={true}
         data={reduxSite?.doc?.content}
         columns={visibleColumns}

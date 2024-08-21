@@ -46,6 +46,9 @@ function AddZoneBuilding({ row }) {
         json.page = 1
         json.limit = 1000
         HitApi(json, searchBuilding).then((result) => {
+
+            console.log('result searchBuilding  ', result);
+
             if (result) {
                 CompileBuildingMaster(result).then((CompiledData) => {
                     console.log("CompiledData", CompiledData)

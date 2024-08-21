@@ -23,5 +23,5 @@ import { validationSchema } from "../validationSchema";
 
 
 export const addUserSchema = {
-   
+    
 };

@@ -1,9 +1,7 @@
 
 export const CompileConfigurationJson = (data) => {
 
-
     const MyPromiss = new Promise((resolve, reject) => {
-
 
         var json = {
             "name": data?.name,
@@ -17,10 +15,9 @@ export const CompileConfigurationJson = (data) => {
                 },
                 "additional": {
                     "clientId":  data?.additionalclientId,
-                    "cleanSession":  data?.additionalcleanSession,
+                    "cleanSession":  data?.additionalcleanSession === undefined?false:data?.additionalcleanSession,
                     "keepAlive":  data?.additionalalive,
-                    "debug":  data?.additionaldebug,
-
+                    "debug":  data?.additionaldebug === undefined ? false : data?.additionaldebug,
                 },
                 "topics": {
                     "tagEvents": {
@@ -63,9 +60,7 @@ export const CompileConfigurationJson = (data) => {
 
         resolve(json)
 
-
     })
 
     return MyPromiss;
 }
-

@@ -7,7 +7,6 @@ export const HelperMicroService = `http://${IP}/helper/api/`
 export const PlantMicroService = `http://${IP}/plant/api/`
 export const DeviceMicroService = `http://${IP}/device/api/`
 
-
 export const LoginApi = BaseUrl + 'login'
 // User
 export const addUser = UserMicroService + 'addUser'
@@ -100,4 +99,5 @@ export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZon
 
 export const addZoneToLocation = PlantMicroService + 'addZoneToLocation'
 export const removeZoneFromLocation = PlantMicroService + 'removeZoneFromLocation'
+export const mapping = PlantMicroService + 'mapping'
 

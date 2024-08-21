@@ -30,8 +30,8 @@ export const getBuildingZoneMasterColumns = ({ zoneid }) => {
     },
     {
       title: <HeaderCell title="Plant" className="font-extrabold" />,
-      dataIndex: 'unit',
-      key: 'unit',
+      dataIndex: 'unitName',
+      key: 'unitName',
       width: 150,
       render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
     },

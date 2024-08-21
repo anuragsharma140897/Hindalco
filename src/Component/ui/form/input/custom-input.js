@@ -3,7 +3,7 @@ import { useMedia } from '../../../../Hooks/use-media';
 import cn from '../../../../Utils/class-names';
 import { useDispatch } from 'react-redux';
 
-export default function CustomInput({ type, name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate }) {
+export default function CustomInput({ type, name, label, onChange, error, placeholder, reduxState, setAction, important, disabled, validate, helperText}) {
 
     const dispatch = useDispatch()
     const isMedium = useMedia('(max-width: 1200px)', false);
@@ -40,6 +40,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
                 disabled={disabled}
             />
             {disabled?<span className='text-red-500 text-xs tracking-wide'>This field cannot be edited</span> : null}
+            {helperText?<span className='text-red-500 font-bold text-xs tracking-wide'>{helperText}</span> : null}
             {error?.[name] && <span className="text-red-500 text-sm mt-2 block">{error?.[name]}</span>}
         </div>
     );
