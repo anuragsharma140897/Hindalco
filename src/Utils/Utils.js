@@ -95,11 +95,13 @@ export const AddChildRolePermission = (arr, itemKey) => {
     return null;
 };
 
-
-
 export const getHeadingFromPathname = () => {
     const pathname = window.location.pathname;
+    const segments = pathname.split('/');
 
+    if (pathname.startsWith("/master/inventory/")) {
+        return "Inventory / Inventories";
+    }
     switch (pathname) {
         case "/":
             return "Dashboard"
@@ -159,14 +161,7 @@ export const getHeadingFromPathname = () => {
             return "";
     }
 }
-
-
-
-
-
-
-
-
+// /master/inventory/inventories/
 // not used
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {

@@ -1,6 +1,8 @@
 export const inventoryMasterVariable = {
     batchNumber : 'batchNumber',
-    lotNumber:'lotNumber',
+    batchName:'batchName',
+    totalInventory:'totalInventory'
+
 
 
 }

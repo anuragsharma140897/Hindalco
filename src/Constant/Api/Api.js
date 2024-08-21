@@ -112,3 +112,14 @@ export const searchBatch = IOTMicroService + 'searchBatch'
 export const updateBatch = IOTMicroService + 'updateBatch'
 export const deleteBatchCollection = IOTMicroService + 'deleteBatchCollection'
 
+
+// mqtt
+export const addMqttConfig = DeviceMicroService + 'addMqttConfig'
+export const updateMqttConfig = DeviceMicroService + 'updateMqttConfig'
+export const searchMqttConfig = DeviceMicroService + 'searchMqttConfig'
+export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
+
+//rfidTags
+
+
+export const searchRfidTag = IOTMicroService + 'searchRfidTag'

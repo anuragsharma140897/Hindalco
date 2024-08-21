@@ -26,7 +26,7 @@ export default function CustomCheckBox({ name, label, onChange, error, reduxStat
   return (
     <div className="mb-6">
       <label className="block font-bold mb-2">{label}{important === false ? ' (Optional)' : ''}</label>
-      <div className='mt-8 flex items-center'>
+      <div className='mt-4 flex items-center'>
         <Checkbox label={label} name={name} checked={value} onChange={handleChange} disabled={disabled} />
       </div>
       {disabled && <span className='text-red-500 text-xs tracking-wide'>This field cannot be edited</span>}

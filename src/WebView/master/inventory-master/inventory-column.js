@@ -5,11 +5,12 @@ import PencilIcon from '../../../Constant/Icons/pencil';
 import AddSiteMaster from '../../../Form/master/site-master/add-site-master';
 import { EditScreen } from '../../../shared/edit-screen';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { deleteGeneral, deleteSite, deleteZone } from '../../../Constant/Api/Api';
+import { deleteBatchCollection, deleteGeneral, deleteSite, deleteZone } from '../../../Constant/Api/Api';
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import AddZoneMaster from '../../../Form/master/zone-master/add-zone-master';
 import AddZoneBuilding from '../../../Form/master/zone-master/add-zone-building';
 import AddInventoryMaster from '../../../Form/master/inventory-master/add-inventory-master';
+import EyeIcon from '../../../Constant/Icons/eye';
 
 export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setLoading }) => [
 
@@ -28,8 +29,8 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
     key: 'product_id',
     width: 100,
     render: (value) => (
-        <Text className="font-medium text-gray-700">{value?.productName || '---'}</Text>
-      ),
+      <Text className="font-medium text-gray-700">{value?.productName || '---'}</Text>
+    ),
   },
   {
     title: <HeaderCell title="Batch Name" className={'font-extrabold'} />,
@@ -40,7 +41,7 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
-  
+
   {
     title: <HeaderCell title="Batch Number" className={'font-extrabold'} />,
     dataIndex: 'batchNumber',
@@ -51,9 +52,9 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
     ),
   },
   {
-    title: <HeaderCell title="Batch Number" className={'font-extrabold'} />,
-    dataIndex: 'batchNumber',
-    key: 'batchNumber',
+    title: <HeaderCell title="Total Inventory" className={'font-extrabold'} />,
+    dataIndex: 'totalInventory',
+    key: 'totalInventory',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -94,29 +95,21 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
             </ActionIcon>
           </label>
         </Tooltip>
-        {(row?.usedBy === null || (Array.isArray(row?.usedBy) && row.usedBy.length === 0)) ? (
-          <DeletePopover
-            loading={loading}
-            title={`Delete Zone Master`}
-            description={`Are you sure you want to delete?`}
-            onDelete={() => DeleteItem(row.id, setLoading)}
-          />
-        ) : (
-          <DeletePopover
-          loading={loading}
-          title={`You cannot delete zone`}
-          description={`This zone is already assigned`}
-          onDelete={() => DeleteItem(row.id, setLoading)}
-          disable={true}
-        />
-        )}
 
-        <Tooltip size="sm" content={'Add Building'} placement="top" color="invert">
-          <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Add Building', AddZoneBuilding, 800)}>
-              <HiOutlinePlusCircle size={20} />
+        <DeletePopover
+          loading={loading}
+          title={`Delete Batch Master`}
+          description={`Are you sure you want to Batch?`}
+          onDelete={() => DeleteItem(row.id, setLoading)}
+        />
+
+
+        <Tooltip size="sm" content={'View Inventories'} placement="top" color="invert">
+          <a href={`/master/inventory/${row.id}`}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
+              <EyeIcon className="h-4 w-4" />
             </ActionIcon>
-          </label>
+          </a>
         </Tooltip>
       </div>
     ),
@@ -128,11 +121,11 @@ const DeleteItem = async (id, setLoading) => {
   setLoading(true);
   try {
     const json = { id };
-    const result = await HitApi(json, deleteZone);
+    const result = await HitApi(json, deleteBatchCollection);
 
     if (result.status === 200) {
       alert(result.message);
-      window.location.pathname = '/master/zone';
+      window.location.pathname = '/master/inventory';
     } else {
       alert(result.message);
     }

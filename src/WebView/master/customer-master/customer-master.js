@@ -16,8 +16,6 @@ export default function CustomerMaster() {
   const dispatch = useDispatch()
   const reduxCustomer = useSelector(state=>state.CustomerMasterReducer)
 
-
-
   const { openModal, closeModal } = useModal();
   const columns = useMemo(() => getCustomerMasterColumns({ openModal, closeModal }))
   const { visibleColumns } = useColumn(columns);
