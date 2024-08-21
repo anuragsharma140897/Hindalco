@@ -44,6 +44,8 @@ export default function ConfigTabs() {
 
             CompileConfigurationJson(reduxConfiguration?.apiJson).then(compiledData => {
 
+                console.log('compiledData',compiledData);
+
                 // if (row?.id) {
                 //     Object.assign(json, { id: row?.id })
                 //     HitApi(json, updateGeneral).then((result) => {
@@ -61,11 +63,6 @@ export default function ConfigTabs() {
         } else {
         }
     };
-
-
-
-
-
 
     return (
         <div>
