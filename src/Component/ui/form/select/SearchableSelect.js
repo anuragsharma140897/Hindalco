@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { HitApi } from '../../../../Store/Action/Api/ApiAction';
 import { CompileSelectData } from './select-promiss';
 
-export default function SearchableSelect({ label,important,  api, name, error, disabled, getFieldName, onChange, limit, checkServerKey, checkServerValue }) {
+export default function SearchableSelect({ label,important,  api, name, error, disabled, getFieldName, onChange, limit, checkServerKey, checkServerValue, dynamicSearch }) {
   const [options, setOptions] = useState(null);
 
   useEffect(() => {
@@ -14,8 +14,11 @@ export default function SearchableSelect({ label,important,  api, name, error, d
 
   const loadData = () => {
     if (api) {
-      const json = { page: 1, limit: limit || 30, search: {} };
+      const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
+      console.log('json', json);
       HitApi(json, api).then((result) => {
+        console.log('result', result);
+
         CompileSelectData(result?.content, getFieldName, checkServerKey, checkServerValue).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
