@@ -95,3 +95,5 @@ export const deleteTag = PlantMicroService + 'deleteTag'
 export const addBuildingToZone = PlantMicroService + 'addBuildingToZone'
 export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZone'
 
+export const mapping = 'mapping'
+

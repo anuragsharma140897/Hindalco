@@ -5,7 +5,7 @@ import { CompileBuildingMaster } from '../../buildings-master/promiss/building-m
 import { HitApi } from '../../../../Store/Action/Api/ApiAction'
 import { searchBuilding } from '../../../../Constant/Api/Api'
 import { FaAngleRight, FaPlus } from 'react-icons/fa'
-import { setSelectedMappingMasterBuildingData } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
+import { setMappingMasterZoneData, setSelectedMappingMasterBuildingData, setSelectedMappingMasterJson } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
 import CustomButton from '../../../../Component/ui/form/button/custom-button'
 
 export default function Building() {
@@ -35,7 +35,11 @@ export default function Building() {
 
     const handleClick = (ele) => {
         console.log('ele', ele);
+        var json = reduxMappingMaster?.mappingJson
+        Object.assign(json, {sourceId : ele?.id})
+        dispatch(setSelectedMappingMasterJson(json))
         dispatch(setSelectedMappingMasterBuildingData(ele))
+
     }
 
     let item;

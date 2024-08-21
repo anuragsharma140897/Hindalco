@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HitApi } from '../../../../Store/Action/Api/ApiAction'
-import { searchGeneral, searchZone } from '../../../../Constant/Api/Api'
+import { mapping, searchGeneral, searchZone } from '../../../../Constant/Api/Api'
 import CustomButton from '../../../../Component/ui/form/button/custom-button'
 import { FaAngleRight, FaPlus } from 'react-icons/fa'
 import AddScreen from '../AddScreen'
 import { useModal } from '../../../../shared/modal-views/use-modal'
 import { setZoneMasterData } from '../../../../Store/Action/master/zone-master/zone-master-action'
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
-import { setMappingMasterZoneData } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
+import { setMappingMasterZoneData, setSelectedMappingMasterJson } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
+import useAlertController from '../../../../Hooks/use-alert-controller'
 
 
 export default function Zone() {
@@ -16,13 +17,13 @@ export default function Zone() {
   const reduxZone = useSelector(state => state.ZoneMasterReducer)
   const reduxMappingMaster = useSelector(state => state.MappingMasterReducer)
   const { openModal, closeModal } = useModal();
+  const [selected, setSelected] = useState(null)
+  const { showCustomAlert } = useAlertController();
 
   useEffect(() => {
     if (reduxMappingMaster?.building !== null && reduxMappingMaster?.zoneData === null) {
       loadData()
     }
-
-    console.log('reduxMappingMaster?.zoneData?.content', reduxMappingMaster?.zoneData);
 
   }, [reduxZone, reduxMappingMaster])
 
@@ -37,18 +38,43 @@ export default function Zone() {
     })
   }
 
-  const handleOnChange = (e) =>{
-    const {id, label, value} = e
+  const handleOnChange = (e) => {
+    var json = reduxMappingMaster?.mappingJson
+    const { id, label, value } = e
+    Object.assign(json, { mappingId: id })
+    dispatch(setSelectedMappingMasterJson(json))
+  }
 
-    console.log('id', id);
+  const handleAddZone = () => {
+    var json = reduxMappingMaster?.mappingJson
+    Object.assign(json, {
+      "sourceCollection": "buildingMaster",
+      "destinationCollection": "zoneMaster",
+      "source": "buildingIds",
+      "mapping": "zoneIds"
+    })
 
+    HitApi(json, mapping).then((result) => {
+
+      console.log('result', result);
+
+      if (result?.success !== false) {
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Zone Mapping Added Successfully', 
+        });
+      }
+    })
+
+    console.log('json', json);
   }
 
   const handleClick = () => {
     openModal({
       view: <div className='p-10 h-96 flex flex-col justify-between'>
-        <SearchableSelect name="zoneId" label="Zone" api={searchZone} getFieldName={'value'} onChange={handleOnChange}/>
-        <CustomButton title={'Add Zone'} onClick={() => handleClick()} />
+        <SearchableSelect name="zoneId" label="Zone" api={searchZone} getFieldName={'value'} onChange={handleOnChange} />
+        <CustomButton title={'Add Zone'} onClick={() => handleAddZone()} />
       </div>
     })
   }
@@ -67,7 +93,7 @@ export default function Zone() {
 
   return (
     <div>
-      <CustomButton title={'Add Zone'} LeftIcon={<FaPlus />} onClick={() => handleClick()} />
+      <CustomButton title={'Add Zone'} LeftIcon={<FaPlus />} onClick={() => handleClick()} disabled={!reduxMappingMaster?.building?.id} />
       {item}
     </div>
   )
