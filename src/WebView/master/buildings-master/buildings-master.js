@@ -22,7 +22,6 @@ export default function BuildingsMaster() {
     var json = reduxBuilding?.searchJson
     HitApi(json, searchBuilding).then((result) => {
 
-      console.log('result BuildingsMaster', result);
       if(result){
         CompileBuildingMaster(result).then((CompiledData)=>{
           dispatch(setBuildingMasterData(CompiledData))

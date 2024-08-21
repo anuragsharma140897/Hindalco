@@ -18,6 +18,7 @@ export const routes = {
       supplierMaster : '/master/supplier',
       createSupplier : '/master/supplier/create',
       generalMaster : '/master/general',
+      mappingMaster : '/master/mapping-master',
       // readerBuildingMappingMaster : '/master/reader-builing-mapping',
       zomeMaster: '/master/zone',
       locationMaster: '/master/location',

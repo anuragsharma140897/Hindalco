@@ -8,13 +8,15 @@ import CustomInput from '../../../Component/ui/form/input/custom-input';
 import { addSite, updateSite } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { siteMasterVariable as variable } from '../../../Constant/variables/master/site-master/site-master.variable';
+import useAlertController from '../../../Hooks/use-alert-controller';
 
 
 
-export default function AddSiteMaster({ row, closeModal }) {
+export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     var dispatch = useDispatch()
     const reduxSite = useSelector(state => state.SiteMasterReducer)
     const { errors, validate } = useValidation(siteMasterSchema);
+    const { showCustomAlert } = useAlertController();
 
     useEffect(() => {
         if (row?.id) {
@@ -37,12 +39,28 @@ export default function AddSiteMaster({ row, closeModal }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateSite).then((result) => {
-
+                    if (result?.success!==false) {
+                        showCustomAlert({
+                            type: 'success',
+                            title: 'Success!',
+                            message: 'Site Details Updated Successfully',// Example Tailwind CSS classes
+                        });
+                        if (ApiHit) { ApiHit() }
+                        handleClose()
+                    }
                 })
               } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addSite).then((result) => {
-
+                    if (result?.success!==false) {
+                        showCustomAlert({
+                            type: 'success',
+                            title: 'Success!',
+                            message: 'Site Details Added Successfully',// Example Tailwind CSS classes
+                        });
+                        if (ApiHit) { ApiHit() }
+                        handleClose()
+                    }
                 })
               }
         } else {
@@ -50,13 +68,17 @@ export default function AddSiteMaster({ row, closeModal }) {
         }
     };
 
+    const handleClose = () =>{
+        closeModal()
+    }
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <CustomInput name="siteName" label="Site Name" value={reduxSite?.apiJson?.siteName} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} disabled={row?.id?true : false} />
-                    <CustomInput important={false} name="buildings" label="Building" value={reduxSite?.apiJson?.buildings} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
-                    <CustomInput important={false} name="area" label="Site Name" value={reduxSite?.apiJson?.area} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
+                    <CustomInput name="siteName" label="Site Name" validate={validate} value={reduxSite?.apiJson?.siteName} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} disabled={row?.id?true : false} />
+                    <CustomInput important={false} name="buildings" label="Building " value={reduxSite?.apiJson?.buildings} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
+                    <CustomInput important={false} name="area" label="Area " helperText={'Type area in sqft only'} value={reduxSite?.apiJson?.area} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                         <CustomButton type={'submit'} className={''} text={row?.id?'Update' : 'Submit'} />

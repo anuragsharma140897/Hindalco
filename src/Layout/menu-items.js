@@ -39,6 +39,7 @@ export const menuItems = [
       { name: 'Vehicle Master', href: routes?.panel?.master?.vehicleMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'Configuration Master', href: routes?.panel?.master?.configurationMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'General Master', href: routes?.panel?.master?.generalMaster,icon : <GeneralMasterIcon /> },
+      { name: 'Mapping Master', href: routes?.panel?.master?.mappingMaster, icon : <GeneralMasterIcon /> },
       // { name: 'Reader Building Mapping Master', href: routes?.panel?.master?.readerBuildingMappingMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
     ],
   },

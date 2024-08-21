@@ -26,7 +26,7 @@ export default function App() {
           <GlobalDrawer />
           <GlobalModal />
           <GlobalConfirmBox />
-          <Toaster />
+          <Toaster position='top-right' />
         </> :
           <Login />
       }
