@@ -1,6 +1,6 @@
 
 export const IP = '137.184.74.218'
-// export const IP = '192.168.0.119:9090'
+// export const IP = '192.168.1.15:9090'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
@@ -101,3 +101,9 @@ export const addZoneToLocation = PlantMicroService + 'addZoneToLocation'
 export const removeZoneFromLocation = PlantMicroService + 'removeZoneFromLocation'
 export const mapping = PlantMicroService + 'mapping'
 
+
+// mqtt
+export const addMqttConfig = DeviceMicroService + 'addMqttConfig'
+export const updateMqttConfig = DeviceMicroService + 'updateMqttConfig'
+export const searchMqttConfig = DeviceMicroService + 'searchMqttConfig'
+export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'

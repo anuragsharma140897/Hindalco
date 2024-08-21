@@ -15,8 +15,18 @@ export default function SearchableSelect({ label,important,  api, name, error, d
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: {} };
+      if (checkServerKey && checkServerValue) {
+        Object.assign(json.search,{[checkServerKey]:checkServerValue})
+      }
+
+      console.log('json', json);
+
       HitApi(json, api).then((result) => {
+
+        console.log('result', result);
+
         CompileSelectData(result?.content, getFieldName, checkServerKey, checkServerValue).then((CompiledData) => {
+          console.log('CompiledData', CompiledData);
           if (CompiledData) {
             setOptions(CompiledData);
           }

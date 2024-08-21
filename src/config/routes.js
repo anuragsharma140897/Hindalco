@@ -25,6 +25,7 @@ export const routes = {
       tagMaster: '/master/tag',
       configurationMaster: '/master/configuration',
       createConfigurationMaster: '/master/configuration/create',
+      editConfigurationMaster: '/master/configuration/edit/:id',
       vehicleMaster: '/master/vehicle',
       innventoryMaster: '/master/inventory'
 

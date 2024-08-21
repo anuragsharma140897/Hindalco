@@ -74,6 +74,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.tagMaster} exact element={<TagMaster />} />
             <Route path={routes?.panel?.master?.configurationMaster} exact element={<ConfigurationMaster />} />
             <Route path={routes?.panel?.master?.createConfigurationMaster} exact element={<AddConfigurationMaster />} />
+            <Route path={routes?.panel?.master?.editConfigurationMaster} exact element={<AddConfigurationMaster />} />
             <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
 
             <Route path={'/test'} exact element={<Test />} />

@@ -10,48 +10,48 @@ export const CompileConfigurationJson = (data) => {
             "configuration": {
                 "endpoint": {
                     "hostname": data?.endpointhostname,
-                    "port":  data?.endpointhostport,
-                    "protocol":  data?.endpointhostprotocol,
+                    "port": parseInt(data?.endpointhostport),
+                    "protocol": data?.endpointhostprotocol,
                 },
                 "additional": {
-                    "clientId":  data?.additionalclientId,
-                    "cleanSession":  data?.additionalcleanSession === undefined?false:data?.additionalcleanSession,
-                    "keepAlive":  data?.additionalalive,
-                    "debug":  data?.additionaldebug === undefined ? false : data?.additionaldebug,
+                    "clientId": data?.additionalclientId,
+                    "cleanSession": data?.additionalcleanSession === undefined ? false : data?.additionalcleanSession,
+                    "keepAlive": parseInt(data?.additionalalive),
+                    "debug": data?.additionaldebug === undefined ? false : data?.additionaldebug,
                 },
                 "topics": {
                     "tagEvents": {
                         "topic": data?.tagEventsTopic,
-                        "qos":  data?.tagEventsqos,
-                        "retain":  data?.tagEventsretain,
+                        "qos": parseInt(data?.tagEventsqos),
+                        "retain": data?.tagEventsretain === undefined ? false : data?.tagEventsretain,
                     },
                     "managementEvents": {
                         "topic": data?.managementEventsTopic,
-                        "qos": data?.managementEventsqos,
-                        "retain": data?.managementEventsretain,
+                        "qos": parseInt(data?.managementEventsqos),
+                        "retain": data?.managementEventsretain === undefined ? false : data?.managementEventsretain,
                     },
                     "management": {
                         "command": {
                             "topic": data?.managementcommandTopic,
-                            "qos": data?.managementcommandTopic,
-                            "retain": data?.managementcommandretain,
+                            "qos": parseInt(data?.managementcommandqos),
+                            "retain": data?.managementcommandretain === undefined ? false : data?.managementcommandretain,
                         },
                         "response": {
                             "topic": data?.managementresponseTopic,
-                            "qos": data?.managementresponseTopic,
-                            "retain": data?.managementresponseretain,
+                            "qos": parseInt(data?.managementresponseqos),
+                            "retain": data?.managementresponseretain === undefined ? false : data?.managementresponseretain,
                         }
                     },
                     "control": {
                         "command": {
                             "topic": data?.controlcommandTopic,
-                            "qos": data?.controlcommandqos,
-                            "retain": data?.controlcommandretain,
+                            "qos": parseInt(data?.controlcommandqos),
+                            "retain": data?.controlcommandretain === undefined ? false : data?.controlcommandretain,
                         },
                         "response": {
-                            "topic": data?.managementresponseTopic,
-                            "qos": data?.managementresponseTopic,
-                            "retain": data?.managementresponseretain,
+                            "topic": data?.controlresponseTopic,
+                            "qos": parseInt(data?.controlresponseqos),
+                            "retain": data?.controlresponseretain === undefined ? false : data?.controlresponseretain,
                         }
                     }
                 }

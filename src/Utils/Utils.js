@@ -95,8 +95,6 @@ export const AddChildRolePermission = (arr, itemKey) => {
     return null;
 };
 
-
-
 export const getHeadingFromPathname = () => {
     const pathname = window.location.pathname;
 
@@ -159,13 +157,6 @@ export const getHeadingFromPathname = () => {
             return "";
     }
 }
-
-
-
-
-
-
-
 
 // not used
 const endpointBasedOnPermissions = {
