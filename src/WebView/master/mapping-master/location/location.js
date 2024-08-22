@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CustomButton from '../../../../Component/ui/form/button/custom-button'
-import { FaAngleRight, FaPlus } from 'react-icons/fa'
+import { FaAngleRight, FaPlus, FaTimes } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../../../shared/modal-views/use-modal'
 import useAlertController from '../../../../Hooks/use-alert-controller'
 import { HitApi } from '../../../../Store/Action/Api/ApiAction'
-import { mapping, searchLocation } from '../../../../Constant/Api/Api'
+import { mapping, removeMapping, searchLocation } from '../../../../Constant/Api/Api'
 import { setSelectedMappingMasterJson, setSelectedMappingMasterLocationData } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
 import { setLocationMasterData } from '../../../../Store/Action/master/location-master/location-master-action'
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
@@ -114,6 +114,56 @@ export default function Location() {
     })
   }
 
+  const handleRemove = (ele) => {
+    var r = window.confirm('Are you sure to demap?')
+    if(r){
+      var json = reduxMappingMaster?.mappingJson
+    var locationToZoneMappingJson = {
+      sourceId: json?.selectedZoneID,
+      mappingId: ele?.id,
+      "sourceCollection": "zoneCollection",
+      "destinationCollection": "locationCollection",
+      "source": "zoneIds",
+      "mapping": "locationIds"
+    }
+
+    console.log('locationToZoneMappingJson', locationToZoneMappingJson);
+
+    setDynamicLoading({ 'zone': true, 'location': true })
+    HitApi(locationToZoneMappingJson, removeMapping).then((result) => {
+      if (result?.success !== false) {
+        closeModal()
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Location to Zone Demapping Successfully',
+        });
+        var locationToBuilginMappingJson = {
+          sourceId: json?.selectedBuildingID,
+          mappingId: ele?.id,
+          "sourceCollection": "buildingCollection",
+          "destinationCollection": "locationCollection",
+          "source": "buildingIds",
+          "mapping": "locationIds"
+        }
+        HitApi(locationToBuilginMappingJson, removeMapping).then((result) => {
+          if (result?.success !== false) {
+            showCustomAlert({
+              type: 'success',
+              title: 'Success!',
+              message: 'Location to Building Demapping Successfully',
+            });
+            // laoding and closing modal
+            setDynamicLoading({ 'zone': false, 'location': false })
+            loadData()
+          }
+        })
+      }
+    })
+    }
+  }
+
+
   const handleLocationClick = (ele) => {
     console.log('location ele : ', ele);
     var json = reduxMappingMaster?.mappingJson
@@ -129,15 +179,21 @@ export default function Location() {
   let item;
   if (reduxLocation?.doc !== null) {
     item = reduxLocation?.doc?.content?.map((ele, index) => {
-      return <div key={index} className='group' onClick={() => handleLocationClick(ele)}>
-        <div className={cn('py-3 px-2 my-1.5 shadow-sm rounded-lg flex items-center justify-between group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedLocationID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
-          <label className='group-hover:cursor-pointer'>{ele?.value}</label>
-          <label className='group-hover:cursor-pointer'><FaAngleRight /></label>
+      return <div key={index} className='group my-1.5'>
+         <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedLocationID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+          <div className='flex justify-between'>
+            <div className='flex items-center p-3 border w-full' onClick={() => handleLocationClick(ele)}>
+              <div><label className='group-hover:cursor-pointer'>{ele?.value}</label></div>
+            </div>
+            {ele?.readerIds?.length === 0 ? <div className='bg-red-main text-white flex items-center p-2 rounded-r-lg' onClick={() => handleRemove(ele)}>
+              <label className='group-hover:cursor-pointer'><FaTimes /></label>
+            </div> : null}
+          </div>
         </div>
+        <label className='group-hover:cursor-pointer'>{ele?.id}</label>
       </div>
     })
   }
-
 
   return (
     <div>

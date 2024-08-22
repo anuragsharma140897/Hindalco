@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import CustomButton from '../../../../Component/ui/form/button/custom-button'
-import { FaAngleRight, FaPlus } from 'react-icons/fa'
+import { FaAngleRight, FaPlus, FaTimes } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../../../shared/modal-views/use-modal'
 import useAlertController from '../../../../Hooks/use-alert-controller'
 import { HitApi } from '../../../../Store/Action/Api/ApiAction'
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
-import { mapping, searchReader } from '../../../../Constant/Api/Api'
+import { mapping, removeMapping, searchReader } from '../../../../Constant/Api/Api'
 import { setSelectedMappingMasterJson, setSelectedMappingMasterReaderData } from '../../../../Store/Action/master/mapping-master/mapping-master-action'
 import { setDeviceReaderData } from '../../../../Store/Action/device/device-reader/device-reader-action'
 import cn from '../../../../Utils/class-names'
@@ -57,7 +57,6 @@ export default function Reader() {
     console.log(id);
     Object.assign(json, { selectedReaderIdFromDropdown: id })
     dispatch(setSelectedMappingMasterJson(json))
-
   }
 
   const handleClick = () => {
@@ -69,7 +68,6 @@ export default function Reader() {
     })
   }
 
-
   const handleAddReader = () => {
     var json = reduxMappingMaster?.mappingJson
     var readerToLocationMappingJson = {
@@ -80,7 +78,7 @@ export default function Reader() {
       "source": "locationIds",
       "mapping": "readerIds"
     }
-    setDynamicLoading({'zone': true, 'location':true, 'reader':true})
+    setDynamicLoading({ 'zone': true, 'location': true, 'reader': true })
 
     HitApi(readerToLocationMappingJson, mapping).then((readerToLocationMappingResult) => {
       console.log('readerToLocationMappingResult', readerToLocationMappingResult);
@@ -126,7 +124,7 @@ export default function Reader() {
                   message: 'Reader to Building Mapping Successfully',
                 });
                 // laoding and closing modal
-                setDynamicLoading({'zone': false, 'location':false, 'reader':false})
+                setDynamicLoading({ 'zone': false, 'location': false, 'reader': false })
                 closeModal()
                 loadData()
               } else {
@@ -141,24 +139,105 @@ export default function Reader() {
         console.log('error');
       }
     })
-
   }
+
+  const handleRemove = (ele) => {
+    var r = window.confirm('Are you sure to demap?')
+    if (r) {
+      var json = reduxMappingMaster?.mappingJson
+      var readerToLocationMappingJson = {
+        sourceId: json?.selectedLocationID,
+        mappingId: ele?.id,
+        "sourceCollection": "locationCollection",
+        "destinationCollection": "readerCollection",
+        "source": "locationIds",
+        "mapping": "readerIds"
+      }
+
+      setDynamicLoading({ 'zone': true, 'location': true, 'reader': true })
+      HitApi(readerToLocationMappingJson, removeMapping).then((readerToLocationMappingResult) => {
+        console.log('readerToLocationMappingResult', readerToLocationMappingResult);
+        if (readerToLocationMappingResult?.success !== false) {
+          var readerToZoneMappingJson = {
+            sourceId: json?.selectedZoneID,
+            mappingId: ele?.id,
+            "sourceCollection": "zoneCollection",
+            "destinationCollection": "readerCollection",
+            "source": "zoneIds",
+            "mapping": "readerIds"
+          }
+          showCustomAlert({
+            type: 'success',
+            title: 'Success!',
+            message: 'Reader to Location Demapping Successfully',
+          });
+          console.log('readerToZoneMappingJson', readerToZoneMappingJson);
+          HitApi(readerToZoneMappingJson, removeMapping).then((readerToZoneMappingREsult) => {
+            console.log('readerToZoneMappingREsult', readerToZoneMappingREsult);
+            if (readerToZoneMappingREsult?.success !== false) {
+              var readerToBuildingMappingJson = {
+                sourceId: json?.selectedBuildingID,
+                mappingId: ele?.id,
+                "sourceCollection": "buildingCollection",
+                "destinationCollection": "readerCollection",
+                "source": "buildingIds",
+                "mapping": "readerIds"
+              }
+              showCustomAlert({
+                type: 'success',
+                title: 'Success!',
+                message: 'Reader to Zone Demapping Successfully',
+              });
+              console.log('readerToBuildingMappingJson', readerToBuildingMappingJson);
+              HitApi(readerToBuildingMappingJson, removeMapping).then((readerToBuildingMappingResult) => {
+                console.log('readerToBuildingMappingResult', readerToBuildingMappingResult);
+                if (readerToBuildingMappingResult?.success !== false) {
+                  showCustomAlert({
+                    type: 'success',
+                    title: 'Success!',
+                    message: 'Reader to Building Demapping Successfully',
+                  });
+                  // laoding and closing modal
+                  setDynamicLoading({ 'zone': false, 'location': false, 'reader': false })
+                  // closeModal()
+                  loadData()
+                } else {
+                  console.log('error');
+                }
+              })
+            } else {
+              console.log('error');
+            }
+          })
+        } else {
+          console.log('error');
+        }
+      })
+
+    }
+  }
+
   const handleReaderClick = (ele) => {
     console.log('reader ele : ', ele);
     var json = reduxMappingMaster?.mappingJson
     Object.assign(json, { selectedReaderID: ele?.id })
-    // dispatch(setDeviceReaderData(null))
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterReaderData(ele))
   }
 
-
   let item;
   if (reduxReader?.doc !== null) {
     item = reduxReader?.doc?.content?.map((ele, index) => {
-      return <div key={index} className='group' onClick={() => handleReaderClick(ele)}>
-        <div className={cn('py-3 px-2 my-1.5 shadow-sm rounded-lg flex items-center justify-between group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedReaderID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
-          <label className='group-hover:cursor-pointer'>Reader : {ele?.placementName}</label>
+      return <div key={index} className='group mt-1.5' >
+        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedReaderID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+          <div className='flex justify-between'>
+            <div className='flex items-center p-3 w-full' onClick={() => handleReaderClick(ele)}>
+              <div><label className='group-hover:cursor-pointer'>Reader : {ele?.placementName}</label></div>
+            </div>
+            <div className='bg-red-main text-white flex items-center p-2 rounded-r-lg' onClick={() => handleRemove(ele)}>
+              <label className='group-hover:cursor-pointer'><FaTimes /></label>
+            </div>
+          </div>
         </div>
       </div>
     })

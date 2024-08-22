@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HitApi } from '../../../../Store/Action/Api/ApiAction'
-import { mapping, searchZone } from '../../../../Constant/Api/Api'
+import { mapping, removeMapping, searchZone } from '../../../../Constant/Api/Api'
 import CustomButton from '../../../../Component/ui/form/button/custom-button'
-import { FaAngleRight, FaPlus } from 'react-icons/fa'
+import { FaAngleRight, FaPlus, FaTimes } from 'react-icons/fa'
 import { useModal } from '../../../../shared/modal-views/use-modal'
 import { setZoneMasterData } from '../../../../Store/Action/master/zone-master/zone-master-action'
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
@@ -52,9 +52,7 @@ export default function Zone() {
 
   const handleAddZone = () => {
     var json = reduxMappingMaster?.mappingJson
-    
-    setDynamicLoading({ 'zone': true})
-
+    setDynamicLoading({ 'zone': true })
     var finalJson = {
       sourceId: json?.selectedBuildingID,
       mappingId: json?.selectedZoneIdFromDropdown,
@@ -63,16 +61,43 @@ export default function Zone() {
       "source": "buildingIds",
       "mapping": "zoneIds"
     }
-
     console.log('finalJson', finalJson);
 
     HitApi(finalJson, mapping).then((result) => {
       if (result?.success !== false) {
-        setDynamicLoading({ 'zone': false})
+        setDynamicLoading({ 'zone': false })
         showCustomAlert({
           type: 'success',
           title: 'Success!',
           message: 'Zone to Building Mapping Successfully',
+        });
+        // laoding and closing modal
+        loadData()
+        closeModal()
+      }
+    })
+  }
+
+  const handleRemove = (ele) => {
+    var json = reduxMappingMaster?.mappingJson
+    setDynamicLoading({ 'zone': true })
+    var finalJson = {
+      sourceId: json?.selectedBuildingID,
+      mappingId: ele?.id,
+      "sourceCollection": "buildingCollection",
+      "destinationCollection": "zoneCollection",
+      "source": "buildingIds",
+      "mapping": "zoneIds"
+    }
+    console.log('finalJson', finalJson);
+
+    HitApi(finalJson, removeMapping).then((result) => {
+      if (result?.success !== false) {
+        setDynamicLoading({ 'zone': false })
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Zone to Building Demapping Successfully',
         });
         // laoding and closing modal
         loadData()
@@ -107,11 +132,18 @@ export default function Zone() {
   let item;
   if (reduxZone?.doc !== null) {
     item = reduxZone?.doc?.content?.map((ele, index) => {
-      return <div key={index} className='group' onClick={() => handleZoneClick(ele)}>
-        <div className={cn('py-3 px-2 my-1.5 shadow-sm rounded-lg flex items-center justify-between group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedZoneID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
-          <label className='group-hover:cursor-pointer'>{ele?.value}</label>
-          <label className='group-hover:cursor-pointer'><FaAngleRight /></label>
+      return <div key={index} className='group my-1.5'>
+        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedZoneID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+          <div className='flex justify-between'>
+            <div className='flex items-center p-3 w-full' onClick={() => handleZoneClick(ele)}>
+              <div><label className='group-hover:cursor-pointer'>{ele?.value}</label></div>
+            </div>
+            {ele?.locationIds?.length === 0 ? <div className='bg-red-main text-white flex items-center p-2 rounded-r-lg' onClick={() => handleRemove(ele)}>
+              <label className='group-hover:cursor-pointer'><FaTimes /></label>
+            </div> : null}
+          </div>
         </div>
+        <label className='group-hover:cursor-pointer'>{ele?.id}</label>
       </div>
     })
   }

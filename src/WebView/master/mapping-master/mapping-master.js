@@ -8,7 +8,7 @@ import Site from './site/site'
 
 export default function MappingMaster() {
     const reduxMappingMaster = useSelector(state => state.MappingMasterReducer)
-
+    
     return (
         <div className='grid grid-cols-5 gap-4'>
              <div><Site /></div>
