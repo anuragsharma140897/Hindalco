@@ -1,17 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Switch } from 'rizzui'
-import { setProductMasterApiJson } from '../../../Store/Action/master/product-master/product-master-action'
 
-export default function CustomSwitch({ reduxState,name, label, value }) {
+export default function CustomSwitch({ reduxState,name, label, value, disabled,setAction }) {
 
     const dispatch = useDispatch()
 
     const onClick = (value) =>{
-        var oldJson = reduxState
-        oldJson[name] = value;
-        dispatch(setProductMasterApiJson(oldJson));
+        if(disabled !== true){
+            console.log('call');
+            var oldJson = reduxState
+            oldJson[name] = value;
+            dispatch(setAction(oldJson));
+        }
     }
+
+    console.log('disabled',disabled);
 
     return (
         <div>
@@ -21,6 +25,7 @@ export default function CustomSwitch({ reduxState,name, label, value }) {
                 onClick={()=>onClick(value?false:true)}
                 variant="outline"
             />
+            {disabled ? <span className='text-red-500 text-xs tracking-wide'>This field cannot be edited</span> : null}
         </div>
     )
 }

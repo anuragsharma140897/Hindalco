@@ -13,6 +13,7 @@ export default function ReaderConfiguraiton() {
   const reduxDevice = useSelector(state => state.DeviceReaderReducer)
   const reduxReaderConfiguration = useSelector(state => state.ReaderConfigurationReducer)
   const [loading, setLoading] = useState(true);
+  const [render, setRender] = useState(Date.now());
 
   var url = window.location.pathname
   var ID = url.split('/')[4]
@@ -21,8 +22,7 @@ export default function ReaderConfiguraiton() {
     if (ID && !reduxDevice?.apiJson?.id && reduxReaderConfiguration?.readerLoginData === null) {
       loadDefault(ID)
     }
-
-  }, [])
+  }, [loading,render])
 
 
   const loadDefault = () => {
@@ -45,10 +45,17 @@ export default function ReaderConfiguraiton() {
     }
 
     HitApi(json, loginReader).then((result) => {
+      setLoading(false)
       if (result) {
-        setLoading(false)
-        Object.assign(result, {lastActive : Date.now()})
-        dispatch(setReaderConfigurationLoginData(result))
+        if(result?.message === "An error occurred during the API call."){
+          setLoading(false)
+          setRender(Date.now())
+          dispatch(setReaderConfigurationLoginData(null))
+        }
+        else{
+          Object.assign(result, {lastActive : Date.now()})
+          dispatch(setReaderConfigurationLoginData(result))
+        }
       }
     })
 
