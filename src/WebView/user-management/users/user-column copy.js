@@ -11,9 +11,12 @@ import { EditScreen } from '../../../shared/edit-screen';
 import AddUserMaster from '../../../Form/master/user-master/add-user-master';
 import Skeleton from 'react-loading-skeleton';
 
-export const GetUserColumns = (openModal, closeModal, ApiHit) => {
+export const getUserColumns = (openModal, closeModal, ApiHit) => {
+
+
 
 return [
+
   {
     title: (
       <HeaderCell title="SR No." />
@@ -69,15 +72,6 @@ return [
     ),
   },
   {
-    title: <HeaderCell title="Loading State" />,
-    dataIndex: 'loading',
-    key: 'loading',
-    width: 150,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value.toString() || '---'}</Text>
-    ),
-  },
-  {
     title: <HeaderCell title="Last Active" />,
     dataIndex: 'lastActive',
     key: 'lastActive',
@@ -119,7 +113,7 @@ return [
           </label>
         </Tooltip>
         <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
-          onDelete={() => DeleteItem(row)}
+          onDelete={() => DeleteItem(row.id)}
         />
       </div>
     ),
@@ -128,11 +122,9 @@ return [
 }
 
 
-export const DeleteItem = (row) => {
-  console.log('row', row);
-  row.setLoading(true)
-  // var json = { id: id }
-  // HitApi(json, deleteUser).then((Result) => {
+export const DeleteItem = (id) => {
+  var json = { id: id }
+  HitApi(json, deleteUser).then((Result) => {
 
-  // })
+  })
 }

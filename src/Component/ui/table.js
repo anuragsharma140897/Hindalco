@@ -33,7 +33,7 @@ export default function Table({ striped, variant = 'elegant', emptyText, classNa
           </div>
         )
       }
-    
+      
       {...props}
     />
   );

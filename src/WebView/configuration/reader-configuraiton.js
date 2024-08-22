@@ -29,7 +29,13 @@ export default function ReaderConfiguraiton() {
     var json = reduxDevice?.searchJson
     json.search.id = ID
     setLoading(true)
+
+    console.log('json', json);
+
     HitApi(json, searchReader).then((result) => {
+
+      console.log('result', result);
+
       if (result?.content?.[0]) {
         dispatch(setDeviceReaderData(result?.content?.[0]))
         CheckConnection(result?.content?.[0])
