@@ -1,4 +1,4 @@
-import { Badge, Text, Tooltip, ActionIcon } from 'rizzui';
+import { Badge, Text, Tooltip, ActionIcon, Loader } from 'rizzui';
 import { HeaderCell } from '../../../Component/ui/table';
 import { routes } from '../../../config/routes';
 import Permission from '../permission/permission';
@@ -9,8 +9,11 @@ import { deleteUser } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddUserMaster from '../../../Form/master/user-master/add-user-master';
+import Skeleton from 'react-loading-skeleton';
 
-export const getUserColumns = (openModal, closeModal, ApiHit) => [
+export const GetUserColumns = (openModal, closeModal, ApiHit) => {
+
+return [
   {
     title: (
       <HeaderCell title="SR No." />
@@ -25,21 +28,27 @@ export const getUserColumns = (openModal, closeModal, ApiHit) => [
     dataIndex: 'firstName',
     key: 'firstName',
     width: 150,
-    render: (value, row) => (
-      <div>
-        <Text className="font-semibold text-gray-700">{row?.firstName + ' ' +  row?.lastName}</Text>
-        <Text className="text-xs font-medium text-gray-700">{row?.username}</Text>
-      </div>
-    ),
+    render: (value, row) => {
+      return (
+        row.loading ? <Skeleton /> : <div>
+          <Text className="font-semibold text-gray-700">{row?.firstName + ' ' + row?.lastName}</Text>
+          <Text className="text-xs font-medium text-gray-700">{row?.username}</Text>
+        </div>
+      )
+    },
   },
   {
     title: <HeaderCell title="Gender" />,
     dataIndex: 'gender',
     key: 'gender',
     width: 150,
-    render: (value, row) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
+    render: (value, row) => {
+      return (
+        row.loading ?  <Loader variant="spinner" size="xl" /> : <div>
+          <Text className="font-medium text-gray-700">{value || '---'}</Text>
+        </div>
+      )
+    },
   },
   {
     title: <HeaderCell title="Role" />,
@@ -75,7 +84,7 @@ export const getUserColumns = (openModal, closeModal, ApiHit) => [
     width: 150,
     render: (value) => (
       <>
-        <Text className="font-medium text-gray-700"><span className='cursor-pointer'  onClick={() => openModal({ view: <Permission/> })}>View</span></Text>
+        <Text className="font-medium text-gray-700"><span className='cursor-pointer' onClick={() => openModal({ view: <Permission /> })}>View</span></Text>
       </>
     ),
   },
@@ -88,7 +97,7 @@ export const getUserColumns = (openModal, closeModal, ApiHit) => [
       <div className="flex items-center justify-end gap-3 pe-4">
         <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
           <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Site Master' , AddUserMaster, 800, ApiHit)}>
+            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Site Master', AddUserMaster, 800, ApiHit)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </label>
@@ -100,18 +109,21 @@ export const getUserColumns = (openModal, closeModal, ApiHit) => [
             </ActionIcon>
           </label>
         </Tooltip>
-        <DeletePopover title={`Delete User`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => DeleteItem(row.id)} 
+        <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
+          onDelete={() => DeleteItem(row)}
         />
       </div>
     ),
   },
-];
+]
+}
 
 
-export const DeleteItem = (id) =>{
-  var json = {id:id}
-  HitApi(json, deleteUser).then((Result)=>{
+export const DeleteItem = (row) => {
+  console.log('row', row);
+  row.setLoading(true)
+  // var json = { id: id }
+  // HitApi(json, deleteUser).then((Result) => {
 
-  })
+  // })
 }

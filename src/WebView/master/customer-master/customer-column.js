@@ -54,15 +54,6 @@ export const getCustomerMasterColumns = ({ openModal, closeModal, loading, setLo
     ),
   },
   {
-    title: <HeaderCell title="Customer Visibility" className={'font-extrabold'} />,
-    dataIndex: 'customerVisibility',
-    key: 'customerVisibility',
-    width: 150,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
     title: <HeaderCell title="Customer Type" className={'font-extrabold'} />,
     dataIndex: 'customerType',
     key: 'customerType',

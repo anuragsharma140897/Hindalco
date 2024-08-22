@@ -36,11 +36,13 @@ import InventoryMaster from '../WebView/master/inventory-master/inventory-master
 import MappingMaster from '../WebView/master/mapping-master/mapping-master'
 import Inventories from '../WebView/master/inventory-master/inventories/inventories'
 import AddCustomeMaster from '../Form/master/customer-master/add-customer-master'
+import Dashboard from '../WebView/dashboard/dashboard'
 
 export default function CustomRoutes() {
 
     return (
         <Routes>
+            <Route path={routes?.panel?.dashboard} exact element={<Dashboard />} />
             <Route path={routes?.panel?.master?.users} exact element={<UserManagement />} />
             <Route path={routes?.panel?.master?.rolesAndPermission} exact element={<RolesAndPermission />} />
             <Route path={routes?.panel?.master?.siteMaster} exact element={<SiteMaster />} />

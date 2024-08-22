@@ -1,20 +1,25 @@
-import React from 'react';
-import isEmpty from 'lodash/isEmpty';
-import { Title, Loader } from 'rizzui';
+import React, { useState } from 'react'
+import TableHeader from './table-header'
+import RcTable from 'rc-table';
 import Table from '../ui/table';
 import cn from '../../Utils/class-names';
+import TablePagination from './table-pagination';
+import { isEmpty } from 'underscore';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
+import CustomFilter from '../ui/filter/custom-filter';
+import { Loader, Title } from 'rizzui';
 
-// const TableFilter = dynamic(
-//   () => import('@/components/controlled-table/table-filter'),
-//   { ssr: false }
-// );
-// const TablePagination = dynamic(
-//   () => import('@/components/controlled-table/table-pagination'),
-//   { ssr: false }
-// );
+export default function ControlledTable({ columns, className, data, ApitHit, screen, isLoading, showLoadingText }) {
+  const dispatch = useDispatch()
+  const reduxPagination = useSelector(state => state.PaginationReducer)
+  const handlePaginate = (page) => {
+    var json = reduxPagination?.doc
+    json.number = page
+    dispatch(setPagination(json))
+    if (ApitHit) ApitHit()
+  }
 
-export default function ControlledTable({ isLoading, filterElement, filterOptions, paginatorOptions, tableFooter, showLoadingText, paginatorClassName,
-  className, ...tableProps }) {
   if (isLoading) {
     return (
       <div className="grid h-full min-h-[128px] flex-grow place-content-center items-center justify-center">
@@ -29,22 +34,21 @@ export default function ControlledTable({ isLoading, filterElement, filterOption
   }
 
   return (
-    <>
-      {/* {!isEmpty(filterOptions) && (
-        <TableFilter {...filterOptions}>{filterElement}</TableFilter>
-      )} */}
-
-      <div className="relative">
-        <Table scroll={{ x: 1300 }} rowKey={(record) => record.id} className={cn(className)} {...tableProps}/>
-        {tableFooter ? tableFooter : null}
+    <div className=''>
+      {/* <div className='my-2'>{screen ? <CustomFilter screen={screen} DynamicFilterData={DynamicFilterData}/> : null}</div> */}
+      <div className="relative ">
+        <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>
 
-      {/* {!isEmpty(paginatorOptions) && (
-        <TablePagination
-          paginatorClassName={paginatorClassName}
-          {...paginatorOptions}
-        />
-      )} */}
-    </>
-  );
+      <TablePagination
+        current={reduxPagination?.doc?.number}
+        total={reduxPagination?.doc?.totalElements}
+        pageSize={reduxPagination?.doc?.limit}
+        onChange={handlePaginate}
+        ApitHit={ApitHit}
+      // paginatorClassName={paginatorClassName}
+      />
+
+    </div>
+  )
 }

@@ -3,7 +3,7 @@ import PageHeader from '../../../shared/page-header'
 import { useModal } from '../../../shared/modal-views/use-modal';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
 import { userData } from '../../../dummyData/user-data';
-import { getUserColumns } from './user-column';
+import { GetUserColumns } from './user-column';
 import { useColumn } from '../../../Hooks/use-column';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import AddUserMaster from '../../../Form/master/user-master/add-user-master';
@@ -14,6 +14,7 @@ import { CompileUserMaster } from './promiss/user-promiss';
 import { setUserApiJson, setUserData } from '../../../Store/Action/user-management/user-action';
 import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
 import { useFilterOptions } from '../../../Hooks/user-filter-options';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 
 export default function UserManagement() {
@@ -22,6 +23,7 @@ export default function UserManagement() {
     const reduxPagination = useSelector(state => state.PaginationReducer)
     const { openModal, closeModal } = useModal();
     const [loading, setLoading] = useState(false)
+    
 
     const loadData = (type) => {
         var json = reduxUser?.searchJson
@@ -31,22 +33,23 @@ export default function UserManagement() {
         } else {
             Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit })
         }
-        setLoading(true)
+        // setLoading(true)
 
         HitApi(json, searchUser).then((result) => {
-            if (result?.success!==false) {
-                CompileUserMaster(result).then((CompiledData) => {
+            if (result?.success !== false) {
+                CompileUserMaster(result, loading, setLoading).then((CompiledData) => {
+                    console.log('CompiledData', CompiledData);
                     dispatch(setUserData(CompiledData))
                     var tp = { limit: json?.limit, totalPages: CompiledData?.totalPages, number: CompiledData?.number, totalElements: CompiledData?.totalElements }
                     dispatch(setPagination(tp))
-                    setLoading(false)
+                    // setLoading(false)
                 })
             } else {
-                setLoading(false)
+                // setLoading(false)
             }
         })
     }
-    const columns = useMemo(() => getUserColumns(openModal, closeModal, loadData))
+    const columns = useMemo(() => GetUserColumns(openModal, closeModal, loadData))
     const { visibleColumns } = useColumn(columns);
 
     useEffect(() => {
@@ -61,13 +64,14 @@ export default function UserManagement() {
             <ControlledTable
                 screen={'user'}
                 variant="modern"
-                isLoading={loading}
+                // isLoading={loading}
                 showLoadingText={true}
                 data={reduxUser?.doc?.content}
                 columns={visibleColumns}
                 className={TableClass}
                 ApitHit={loadData}
             />
+           {/* <Skeleton /> */}
         </div>
     )
 }

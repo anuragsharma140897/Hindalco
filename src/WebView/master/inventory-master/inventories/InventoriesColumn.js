@@ -36,9 +36,9 @@ export const InventoriesColumn = ({ reduxInventory }) => [
   },
 
   {
-    title: <HeaderCell title="Batch Number" className={'font-extrabold'} />,
-    dataIndex: 'batchNumber',
-    key: 'batchNumber',
+    title: <HeaderCell title="Building ID" className={'font-extrabold'} />,
+    dataIndex: 'buildingId',
+    key: 'buildingId',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>

@@ -6,6 +6,7 @@ import '@fontsource/hind-vadodara/600.css';
 import '@fontsource/hind-vadodara/700.css';
 import './App.css'
 import './custom.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 import Layout from './Layout/Layout';
 import GlobalDrawer from './shared/drawer-views/container';
 import GlobalModal from './shared/modal-views/container';

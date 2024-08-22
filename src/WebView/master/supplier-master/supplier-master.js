@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { getSupplierMasterColumns } from './supplier-column';
 import { supplierData } from '../../../dummyData/supplier-data';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable'
@@ -18,7 +18,8 @@ export default function SupplierMaster() {
   const dispatch = useDispatch()
   const reduxSupplier = useSelector(state=>state.SupplierMasterReducer)
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getSupplierMasterColumns({ supplierData, openModal }))
+  const [loading ,setLoading] = useState(false)
+  const columns = useMemo(() => getSupplierMasterColumns({ openModal, closeModal ,loading ,setLoading }))
   const { visibleColumns } = useColumn(columns);
   
 

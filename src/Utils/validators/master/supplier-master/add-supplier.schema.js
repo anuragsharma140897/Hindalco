@@ -1,22 +1,22 @@
-import { z } from 'zod';
-import { GenerateMessage } from '../../../../config/message';
-import { supplierMasterVariable } from '../../../../Constant/variables/master/supplier-master/supplier-master.variable';
+import { validationSchema } from "../../validationSchema";
 
-// form zod validation schema
-export const addSupplierSchema = z.object({
-  [supplierMasterVariable?.supplierCode]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierCode, ['required'])}),
-  [supplierMasterVariable?.supplierName]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierName, ['required'])}),
-  [supplierMasterVariable?.supplierNotes]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierNotes, ['required'])}),
-  [supplierMasterVariable?.supplierAddress1]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierAddress1, ['required'])}),
-  [supplierMasterVariable?.supplierAddress2]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierAddress2, ['required'])}),
-  [supplierMasterVariable?.supplierCity]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierCity, ['required'])}),
-  [supplierMasterVariable?.supplierState]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierState, ['required'])}),
-  [supplierMasterVariable?.supplierRegion]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierRegion, ['required'])}),
-  [supplierMasterVariable?.supplierCountry]: z.number().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierCountry, ['number'])}),
-  [supplierMasterVariable?.supplierContactPhone]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierContactPhone, ['required'])}),
-  [supplierMasterVariable?.supplierContactEmail]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierContactEmail, ['required'])}),
-  [supplierMasterVariable?.supplierClass]: z.string().min(6, {message:GenerateMessage(supplierMasterVariable?.supplierClass, ['required'])}),
-
-});
-
+export const addSupplierSchema = {
+  supplierName: validationSchema.string('Supplier Name is required'),
+  supplierCode: validationSchema.string('Supplier Code is required'),
+  supplierContactEmail: validationSchema.email('Supplier Email is required'),
+  supplierAddress1: validationSchema.string('Supplier Address1 is required'),
+  supplierAddress2: validationSchema.string('Supplier Address2 is required'),
+  supplierLandmark: validationSchema.string('Supplier Landmark is required'),
+  supplierCity: validationSchema.string('Supplier City is required'),
+  supplierState: validationSchema.string('Supplier State is required'),
+  supplierPostCode: validationSchema.number('Supplier PostCode is required'),
+  supplierCountry: validationSchema.string('Supplier Country is required'),
+  supplierContactPhone: validationSchema.number('Supplier Contact is required'),
+  supplierGst: validationSchema.gst('Supplier GST is required'),
+  supplierPan: validationSchema.pan('PAN is required'),
+  supplierVat: validationSchema.vat('Supplier VAT is required'),
+  supplierTan: validationSchema.tan('Supplier TAN is required'),
+  supplierStatus: validationSchema.string('Supplier Status is required'),
+   
+};
 
