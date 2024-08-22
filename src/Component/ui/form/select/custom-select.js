@@ -48,7 +48,7 @@ export default function CustomSelect({
                     value={value}
                     onChange={handleChange}
                     disabled={disabled}
-                    className={`w-full p-3 text-lg rounded-lg border appearance-none 
+                    className={`w-full p-2 text-lg rounded-lg border appearance-none 
                     disabled:bg-gray-200
                     ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
                 >

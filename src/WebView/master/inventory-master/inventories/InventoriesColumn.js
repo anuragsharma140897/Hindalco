@@ -54,6 +54,15 @@ export const InventoriesColumn = ({ reduxInventory }) => [
     ),
   },
   {
+    title: <HeaderCell title="Rfid Tag " className={'font-extrabold'} />,
+    dataIndex: 'rfidTag',
+    key: 'rfidTag',
+    width: 100,
+    render: (value) => (
+        <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    ),
+  },
+  {
     title: <HeaderCell title="Movement Status" className={'font-extrabold'} />,
     dataIndex: 'movementStatus',
     key: 'movementStatus',

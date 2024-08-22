@@ -35,6 +35,7 @@ import AddConfigurationMaster from '../Form/master/configuration-master/add-conf
 import InventoryMaster from '../WebView/master/inventory-master/inventory-master'
 import MappingMaster from '../WebView/master/mapping-master/mapping-master'
 import Inventories from '../WebView/master/inventory-master/inventories/inventories'
+import AddCustomeMaster from '../Form/master/customer-master/add-customer-master'
 
 export default function CustomRoutes() {
 
@@ -58,6 +59,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.createProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
+            <Route path={routes?.panel?.master?.createCustomer} exact element={<AddCustomeMaster />} />
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />

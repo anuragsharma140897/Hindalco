@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../shared/modal-views/use-modal';
 import { useColumn } from '../../../Hooks/use-column';
@@ -11,13 +11,15 @@ import { setCustomerMasterData } from '../../../Store/Action/master/customer-mas
 import { CompileCustomerMaster } from './promise/customer-master-promise';
 import { getCustomerMasterColumns } from './customer-column';
 import AddCustomeMaster from '../../../Form/master/customer-master/add-customer-master';
+import { routes } from '../../../config/routes';
 
 export default function CustomerMaster() {
   const dispatch = useDispatch()
   const reduxCustomer = useSelector(state=>state.CustomerMasterReducer)
+  const [loading ,setLoading] = useState(false)
 
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getCustomerMasterColumns({ openModal, closeModal }))
+  const columns = useMemo(() => getCustomerMasterColumns({ openModal, closeModal ,loading ,setLoading }))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
@@ -36,11 +38,12 @@ export default function CustomerMaster() {
     })
   }
 
+  console.log(reduxCustomer);
 
 
   return (
     <div>
-    <PageHeader  btnText={'Add Customer'} children={<AddCustomeMaster closeModal={closeModal} />} title={'Add Customer'} customSize={1200} />
+    <PageHeader  btnText={'Create'} href={routes?.panel?.master?.createCustomer}  customSize={1200} />
     <ControlledTable
         variant="modern"
         isLoading={false}

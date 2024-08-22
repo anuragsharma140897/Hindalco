@@ -9,7 +9,7 @@ import CustomerMaster from './customer-master';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddCustomeMaster from '../../../Form/master/customer-master/add-customer-master';
 
-export const getCustomerMasterColumns = ({ closeModal, openModal }) => [
+export const getCustomerMasterColumns = ({ openModal, closeModal, loading, setLoading  }) => [
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -117,15 +117,6 @@ export const getCustomerMasterColumns = ({ closeModal, openModal }) => [
     ),
   },
   {
-    title: <HeaderCell title="Customer Region" className={'font-extrabold'} />,
-    dataIndex: 'customerRegion',
-    key: 'customerRegion',
-    width: 150,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
     title: <HeaderCell title="Customer Postcode" className={'font-extrabold'} />,
     dataIndex: 'customerPostCode',
     key: 'customerPostCode',
@@ -212,7 +203,8 @@ export const getCustomerMasterColumns = ({ closeModal, openModal }) => [
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Customer Master`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => DeleteItem(row.id)} 
+         loading={loading}
+          onDelete={() => DeleteItem(row.id,setLoading)} 
         />
       </div>
     ),
@@ -220,9 +212,24 @@ export const getCustomerMasterColumns = ({ closeModal, openModal }) => [
 ];
 
 
-export const DeleteItem = (id) =>{
-  var json = {id:id}
-  HitApi(json, deleteCustomer).then((Result)=>{
 
-  })
-}
+
+const DeleteItem = async (id, setLoading) => {
+  setLoading(true);
+  try {
+    const json = { id };
+    const result = await HitApi(json, deleteCustomer);
+
+    if (result.status === 200) {
+      alert(result.message);
+      window.location.pathname = '/master/customer/';
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    alert("An error occurred while deleting the item.");
+  } finally {
+    setLoading(false);
+  }
+};
