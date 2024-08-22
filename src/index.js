@@ -30,6 +30,7 @@ import ConfigurationMasterReducer from './Store/Reducer/master/configuration-mas
 import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-master-reducer';
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
+import MQTTReducer from './Store/Reducer/mqtt/mqtt-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -55,7 +56,8 @@ const rootReducer = combineReducers({
   ConfigurationMasterReducer :ConfigurationMasterReducer,
   MappingMasterReducer : MappingMasterReducer,
   LoadingReducer : LoadingReducer,
-  SearchableSelectReducer : SearchableSelectReducer
+  SearchableSelectReducer : SearchableSelectReducer,
+  MQTTReducer : MQTTReducer
 
 })
 

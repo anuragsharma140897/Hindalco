@@ -33,11 +33,13 @@ import TagMaster from '../WebView/master/tag-master/tag-master'
 import ConfigurationMaster from '../WebView/master/configuration-master/configuration-master'
 import AddConfigurationMaster from '../Form/master/configuration-master/add-configuration-master'
 import MappingMaster from '../WebView/master/mapping-master/mapping-master'
+import Dashboard from '../WebView/dashboard/dashboard'
 
 export default function CustomRoutes() {
 
     return (
         <Routes>
+            <Route path={routes?.panel?.dashboard} exact element={<Dashboard />} />
             <Route path={routes?.panel?.master?.users} exact element={<UserManagement />} />
             <Route path={routes?.panel?.master?.rolesAndPermission} exact element={<RolesAndPermission />} />
             <Route path={routes?.panel?.master?.siteMaster} exact element={<SiteMaster />} />

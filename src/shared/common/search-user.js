@@ -43,7 +43,7 @@ export default function SearchUser({ row, ApiHit }) {
             sourceId: json?.sourceId,
             mappingId: json?.mappingId,
             "sourceCollection": "buildingCollection",
-            "destinationCollection": "userCollection",
+            "destinationCollection": "user",
             "source": "buildingIds",
             "mapping": "userIds"
         }
@@ -73,7 +73,7 @@ export default function SearchUser({ row, ApiHit }) {
                 sourceId: row?.id,
                 mappingId: ele?.id,
                 "sourceCollection": "buildingCollection",
-                "destinationCollection": "userCollection",
+                "destinationCollection": "user",
                 "source": "buildingIds",
                 "mapping": "userIds"
             }
