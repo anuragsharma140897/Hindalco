@@ -96,4 +96,5 @@ export const addBuildingToZone = PlantMicroService + 'addBuildingToZone'
 export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZone'
 
 export const mapping = PlantMicroService + 'mapping'
+export const removeMapping = PlantMicroService + 'removeMapping'
 

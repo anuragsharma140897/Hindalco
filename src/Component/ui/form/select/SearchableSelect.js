@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
 import { HitApi } from '../../../../Store/Action/Api/ApiAction';
 import { CompileSelectData } from './select-promiss';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchableSelectData } from '../../../../Store/Action/common/searcheable-select/searcheable-select-action';
 
 export default function SearchableSelect({ label,important,  api, name, error, disabled, getFieldName, onChange, limit, checkServerKey, checkServerValue, dynamicSearch }) {
   const [options, setOptions] = useState(null);
-
+  const dispatch = useDispatch()
   useEffect(() => {
     if (api && options === null) {
       loadData();
@@ -22,6 +24,7 @@ export default function SearchableSelect({ label,important,  api, name, error, d
         CompileSelectData(result?.content, getFieldName, checkServerKey, checkServerValue).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
+            dispatch(setSearchableSelectData(CompiledData))
           }
         });
       });

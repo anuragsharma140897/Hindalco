@@ -25,6 +25,15 @@ export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
       render: (value) => <Text>{value || '---'}</Text>,
     },
     {
+      title: (
+        <HeaderCell title="id" />
+      ),
+      dataIndex: 'id',
+      key: 'id',
+      width: 30,
+      render: (value) => <Text>{value || '---'}</Text>,
+    },
+    {
       title: <HeaderCell title="Building Name" className={'font-extrabold'} />,
       dataIndex: 'buildingName',
       key: 'buildingName',
@@ -61,7 +70,7 @@ export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
           />
           <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
             <label>
-              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
+              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser row={row} ApiHit={ApiHit}/>, title : 'Map User' })}>
                 <FaUserPlus className="h-4 w-4" />
               </ActionIcon>
             </label>

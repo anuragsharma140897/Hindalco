@@ -69,15 +69,6 @@ return [
     ),
   },
   {
-    title: <HeaderCell title="Loading State" />,
-    dataIndex: 'loading',
-    key: 'loading',
-    width: 150,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value.toString() || '---'}</Text>
-    ),
-  },
-  {
     title: <HeaderCell title="Last Active" />,
     dataIndex: 'lastActive',
     key: 'lastActive',

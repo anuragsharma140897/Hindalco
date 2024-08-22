@@ -29,6 +29,7 @@ import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing
 import ConfigurationMasterReducer from './Store/Reducer/master/configuration-master/configuration-master-reducer';
 import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-master-reducer';
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
+import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -53,7 +54,8 @@ const rootReducer = combineReducers({
   TagMasterReducer:TagMasterReducer,
   ConfigurationMasterReducer :ConfigurationMasterReducer,
   MappingMasterReducer : MappingMasterReducer,
-  LoadingReducer : LoadingReducer
+  LoadingReducer : LoadingReducer,
+  SearchableSelectReducer : SearchableSelectReducer
 
 })
 
