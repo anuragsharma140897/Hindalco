@@ -159,12 +159,13 @@ export const getHeadingFromPathname = () => {
             return "Inventory Master"
         case "/master/supplier/create":
             return "Supplier Master / Create"
+        case "/inbond/inbound-order":
+            return "Inbound Order"
         default:
             return "";
     }
 }
-// master/supplier/create
-
+// inbond/inbound-order
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],

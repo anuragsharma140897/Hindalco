@@ -1,108 +1,70 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useState } from 'react'
 import PageHeader from '../../../shared/page-header'
-import { routes } from '../../../config/routes'
-import { Form } from '../../../Component/ui/form'
-import { inboundWebRecevingScheema } from '../../../Utils/validators/Inbound/inbound-web-receving-scheema'
-import { Button, Input } from 'rizzui'
-import CustomSelect from '../../../Component/ui/form/select/custom-select'
-import { getWebRecevingColumn } from '../web-receving/web-receving-column'
-import { useColumn } from '../../../Hooks/use-column'
-import { useMedia } from 'react-use'
-import { useModal } from '../../../shared/modal-views/use-modal'
-import AddProductMaster from '../../../Form/master/product-master/add-product-master'
+import DateAndTime from '../../../Component/ui/date-and-time/date-and-time'
+import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect'
+import { searchGeneral } from '../../../Constant/Api/Api'
+import { useDispatch, useSelector } from 'react-redux'
+import { setInboundApiJson } from '../../../Store/Action/inbound/inbound-action'
 
-
-
-const initialValues = {
-    username: 'admin@',
-    password: 'admin'
-};
 function CreateInbound() {
+  const [defaultDate, setDefaultDate] = useState(new Date());
+  const dispatch = useDispatch();
+  const reduxInboud = useSelector(state => state.InboundReducer);
 
-    const { openModal, closeModal } = useModal();
+  const handleOnChange = useCallback((e, name) => {
+    const { id, value } = e;
+    const newJson = { [name]: name === 'siteIds' ? id : value };
+    const updatedJson = { ...reduxInboud?.apiJson, ...newJson };
+    dispatch(setInboundApiJson(updatedJson));
+  }, [dispatch, reduxInboud?.apiJson])
 
-    const isMedium = useMedia('(max-width: 1200px)', false);
+  console.log("reduxInboud", reduxInboud);
 
-
-    const onSubmit = (data) => {
-
-        // HitApi(initialValues, LoginApi).then((res) => {
-
-        //     if (res) {
-        //         dispatch(setAuth(res))
-        //     }
-        // })
-    };
-
-
-    const handleFunctionCall = () => {
-        
-          openModal({
-            view: <AddProductMaster closeModal={closeModal}/>,
-            customSize: 600 + 'px' || '1020px',
-            title: <div className='text-center'>Add Product</div>,
-            titleClass: false,
-            useConfirmBox: false
-          })
-        
-      }
-    return (
-        <div>
-            <PageHeader metaTitle={'Inbound / Create'} disbleExport />
-            <div>
-                {/*  Create General Form */}
-                <div className='text-base text-black font-semibold'>General</div>
-                <div className='bg-white p-10 shadow mt-5'>
-                    <Form validationSchema={inboundWebRecevingScheema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                        {({ register, formState: { errors } }) => (
-                            <div className="space-y-5 lg:space-y-6">
-                                <div className='grid grid-cols-4 gap-4 items-end'>
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <CustomSelect options={[]} title={'Line ID'} register={register} fieldName={'lineId'} errors={errors} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Product Code" placeholder=" code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <CustomSelect options={[]} title={'Condition'} register={register} fieldName={'lineId'} errors={errors} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
+  const handleDateChange = (e, name) => {
+    setDefaultDate(e)
 
 
-                                </div>
-                            </div>
-                        )}
-                    </Form>
-                </div>
-            </div>
-            <div>
-                {/*  Create Coustomer & Supplier Form */}
-                <div className='text-base text-black font-semibold mt-5'>Coustomer & Supplier</div>
-                <div className='bg-white p-10 shadow mt-5'>
-                    <Form validationSchema={inboundWebRecevingScheema} onSubmit={onSubmit} useFormProps={{ mode: 'onChange', defaultValues: initialValues, }} >
-                        {({ register, formState: { errors } }) => (
-                            <div className="space-y-5 lg:space-y-6">
-                                <div className='grid grid-cols-4 gap-4 items-end'>
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <CustomSelect options={[]} title={'Line ID'} register={register} fieldName={'lineId'} errors={errors} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Product Code" placeholder="Enter Product code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <CustomSelect options={[]} title={'Condition'} register={register} fieldName={'lineId'} errors={errors} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                    <Input type="email" size={isMedium ? 'lg' : 'xl'} label="Order Code" placeholder="Enter order code" className="[&>label>span]:font-medium " {...register('orderCode')} error={errors.orderCode?.message} />
-                                </div>
-                            </div>
-                        )}
-                    </Form>
-                </div>
-            </div>
-            {/* Create Product */}
-            <div>
-                {/*  Create Coustomer & Supplier Form */}
-                <div className='text-base text-black font-semibold mt-5'>Product</div>
-                <div className='mt-5'>
-                <Button onClick={()=>handleFunctionCall()} type="submit" size={isMedium ? 'lg' : 'xl'} >Add</Button>
-                </div>
-              
-            </div>
+    const formattedDate = e?.toISOString()?.slice(0, 19)
 
+
+
+
+    let oldJson = reduxInboud?.apiJson
+    let json = {
+      [name]: formattedDate
+    }
+
+    Object.assign(oldJson, json)
+
+    dispatch(setInboundApiJson(oldJson));
+
+  }
+
+  console.log("reduxInboud", reduxInboud);
+  return (
+    <div>
+      <PageHeader metaTitle={'Inbound / Create'} disbleExport />
+      {/* general */}
+      <div>
+        <div className='text-base text-black font-semibold'>General</div>
+        <div className='bg-white p-10 rounded-xl grid grid-cols-4 mt-5 gap-x-8'>
+          <DateAndTime label={"Order Date Time"} onChange={(e) => { handleDateChange(e, "orderDateTime") }} value={defaultDate} />
+          <DateAndTime label={"Expected Arrival"} onChange={(e) => { handleDateChange(e, "expectedArrival") }} value={defaultDate} />
+          <SearchableSelect name="orderType" label="Order Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'ordertype'} getFieldName={'value'} onChange={(e) => handleOnChange(e, 'orderType')} />
+          <SearchableSelect name="orderStatus" label="Order Status" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'ordertype'} getFieldName={'value'} onChange={(e) => handleOnChange(e, 'orderType')} />
         </div>
-    )
+      </div>
+      <div className='mt-5'>
+        <div className='text-base text-black font-semibold'>Customer </div>
+        {/* <div className='bg-white p-10 rounded-xl grid grid-cols-4 mt-5 gap-x-8'>
+          <DateAndTime label={"Order Date Time"} onChange={(e) => { handleDateChange(e, "orderDateTime") }} value={defaultDate} />
+          <DateAndTime label={"Expected Arrival"} onChange={(e) => { handleDateChange(e, "expectedArrival") }} value={defaultDate} />
+          <SearchableSelect name="orderType" label="Order Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'ordertype'} getFieldName={'value'} onChange={(e) => handleOnChange(e, 'orderType')} />
+          <SearchableSelect name="orderStatus" label="Order Status" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'ordertype'} getFieldName={'value'} onChange={(e) => handleOnChange(e, 'orderType')} />
+        </div> */}
+      </div>
+    </div>
+  )
 }
 
 export default CreateInbound

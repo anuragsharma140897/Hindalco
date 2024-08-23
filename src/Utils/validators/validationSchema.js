@@ -318,6 +318,43 @@ const tan = (requiredMessage = 'This field is required') => {
 
   return validator;
 };
+const vehicle = (requiredMessage = 'This field is required') => {
+  let validationRules = {
+    isRequired: true,
+    errorMessage: requiredMessage,
+    vehicleMessage: 'Invalid vehicle registration number format',
+  };
+
+  const validator = {
+    required: (message) => {
+      validationRules.isRequired = true;
+      validationRules.errorMessage = message || validationRules.errorMessage;
+      return validator;
+    },
+    refine: (func, options) => {
+      validationRules.refineFunc = func;
+      validationRules.refineMessage = options?.message || 'Invalid value';
+      return validator;
+    },
+    validate: (value) => {
+      if (validationRules.isRequired && (!value || !value.trim())) {
+        return validationRules.errorMessage;
+      }
+      // Generic vehicle registration format: 2 letters, 2 digits, optional letters/digits (depending on country)
+      // This is a simple example. You can adjust the regex for specific country formats.
+      const vehicleRegex = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,}$/;
+      if (!vehicleRegex.test(value)) {
+        return validationRules.vehicleMessage;
+      }
+      if (validationRules.refineFunc && !validationRules.refineFunc(value)) {
+        return validationRules.refineMessage;
+      }
+      return null;
+    }
+  };
+
+  return validator;
+};
 
 
 export const validationSchema = {
@@ -328,7 +365,8 @@ export const validationSchema = {
   pan,
   gst,
   vat,
-  tan
+  tan,
+  vehicle,
 
 };
 

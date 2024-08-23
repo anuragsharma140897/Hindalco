@@ -15,3 +15,14 @@ body{
   font-family: "Montserrat";
 }
 
+.custom-datetime-picker .react-datetime-picker__wrapper {
+  border-radius: 0.55rem; /* equivalent to rounded-xl */
+  outline: none;
+  height: 2.5rem; /* equivalent to h-10 */
+}
+
+.custom-datetime-picker .react-datetime-picker__inputGroup__input {
+  border-radius: 0.55rem;
+  outline: none;
+}
+

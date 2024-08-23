@@ -1,8 +1,8 @@
 export const vehicleMasterVariable = {
     vehicleMaker : 'vehicleMaker',
+    vehicleNumber : 'vehicleNumber',
     vehicleModel : 'vehicleModel',
     vehicleYear : 'vehicleYear',
     vehicleEngine : 'vehicleEngine',
-    vehicleGear : 'vehicleGear',
-    vendorId : 'vendorId',
+    supplierIds : 'supplierIds',
 }

@@ -33,6 +33,10 @@ import InventoryReducer from './Store/Reducer/Inventories/InventoryReducer';
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
 import MQTTReducer from './Store/Reducer/mqtt/mqtt-reducer';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import InboundReducer from './Store/Reducer/inbound/inbout-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -62,7 +66,8 @@ const rootReducer = combineReducers({
   MappingMasterReducer : MappingMasterReducer,
   LoadingReducer : LoadingReducer,
   SearchableSelectReducer : SearchableSelectReducer,
-  MQTTReducer : MQTTReducer
+  MQTTReducer : MQTTReducer,
+  InboundReducer :InboundReducer,
 
 })
 

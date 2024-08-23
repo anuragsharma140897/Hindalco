@@ -1,6 +1,6 @@
 
-// export const IP = '137.184.74.218'
-export const IP = '192.168.0.107:9090'
+export const IP = '137.184.74.218'
+// export const IP = '192.168.0.108:9090'
 export const MQTTIP = 'ws://192.168.0.114:9001'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
