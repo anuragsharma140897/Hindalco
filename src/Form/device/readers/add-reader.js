@@ -7,17 +7,22 @@ import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomSwitch from '../../../Component/ui/switch/custom-switch';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { addProduct, addReader, searchProduct, searchReader, updateProduct, updateReader } from '../../../Constant/Api/Api';
+import { addProduct, addReader, searchGeneral, searchProduct, searchReader, updateProduct, updateReader } from '../../../Constant/Api/Api';
 import { CompileProductMaster } from '../../../WebView/master/product-master/promiss/product-master.promiss';
 import { setDeviceReaderApiJson } from '../../../Store/Action/device/device-reader/device-reader-action';
 import { CompileDeviceReader } from '../../../WebView/master/reader-master/promiss/device-reader.promiss';
 import { deviceReaderSchema } from '../../../Utils/validators/device/device-reader/create-device-reader.schema';
+import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
+import useAlertController from '../../../Hooks/use-alert-controller';
+import useDynamicLoading from '../../../Hooks/use-dynamic-loading';
 
 export default function CreateDeviceReader() {
 
   const dispatch = useDispatch()
   const { errors, validate } = useValidation(deviceReaderSchema);
   const reduxDevice = useSelector(state => state.DeviceReaderReducer)
+  const { showCustomAlert } = useAlertController();
+  const { loadingState, setDynamicLoading } = useDynamicLoading();
   var url = window.location.pathname
   var ID = url.split('/')[4]
 
@@ -41,48 +46,88 @@ export default function CreateDeviceReader() {
     })
   }
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   var json = reduxDevice?.apiJson
+  //   console.log('add reader json', json);
+  //   if (!json.captureBatchNo) {
+  //     json.captureBatchNo = false
+  //   }
+  //   if (!json.captureLotNo) {
+  //     json.captureLotNo = false
+  //   }
+  //   const validationErrors = validate(json);
+
+  //   console.log('validationErrors', validationErrors);
+
+  //   if (Object.keys(validationErrors).length === 0) {
+  //     setDynamicLoading({ 'reader': true })
+  //     if (ID) {
+  //       Object.assign(json, { id: ID })
+  //       HitApi(json, updateReader).then((result) => {
+  //         if (result.status === 200) {
+  //           // var alert = window.confirm(result.message)
+  //           // if (alert || !alert) {
+  //           //   window.location.pathname = '/device/reader'
+  //           // }
+  //         }
+  //         else if (result.status === 400) {
+  //           window.alert(result.message)
+  //         }
+  //       })
+  //     } else {
+  //       Object.assign(json, { status: json?.status || 'active' })
+  //       HitApi(json, addReader).then((result) => {
+  //         if (result.success!==false) {
+  //           showCustomAlert({
+  //             type: 'success',
+  //             title: 'Success!',
+  //             message: 'Site Details Added Successfully',// Example Tailwind CSS classes
+  //         });
+  //           // var alert = window.confirm(result.message)
+  //           // if (alert || !alert) {
+  //           //   window.location.pathname = '/device/reader'
+  //           // }
+  //         }
+  //         else if (result.status === 400) {
+  //           window.alert(result.message)
+  //         }
+  //       })
+  //     }
+  //   } else {
+
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     var json = reduxDevice?.apiJson
-    if (!json.captureBatchNo) {
-      json.captureBatchNo = false
-    }
-    if (!json.captureLotNo) {
-      json.captureLotNo = false
-    }
     const validationErrors = validate(json);
-    if (Object.keys(validationErrors).length === 0) {
-      if (ID) {
-        Object.assign(json, { id: ID })
-        HitApi(json, updateReader).then((result) => {
-          if (result.status === 200) {
-            var alert = window.confirm(result.message)
-            if (alert || !alert) {
-              window.location.pathname = '/device/reader'
-            }
-          }
-          else if (result.status === 400) {
-            window.alert(result.message)
-          }
-        })
-      } else {
-        Object.assign(json, { status: json?.status || 'active' })
-        HitApi(json, addReader).then((result) => {
-          if (result.status === 200) {
-            var alert = window.confirm(result.message)
-            if (alert || !alert) {
-              window.location.pathname = '/device/reader'
-            }
-          }
-          else if (result.status === 400) {
-            window.alert(result.message)
-          }
-        })
-      }
-    } else {
 
+    if (Object.keys(validationErrors).length === 0) {
+      // Proceed with your logic if there are no validation errors
+      console.log('No validation errors. Proceeding with submission...');
+    } else {
+      // Handle validation errors
+      console.log('Validation errors occurred. Fix them before proceeding.');
     }
   };
+
+  const handleChange = (e, fieldName, no) =>{
+    const {id, label, value} = e
+    var json = reduxDevice?.apiJson
+
+    console.log('e', e);
+    var ts = {
+      [fieldName]: {
+        "antennaNumber": no,
+        "antennaAction": value,
+        "antennaStatus": "Disconnected"
+      },
+    }
+    Object.assign(json, ts)
+  }
 
   return (
     <div className='p-10 bg-white rounded-xl'>
@@ -111,9 +156,16 @@ export default function CreateDeviceReader() {
             <CustomInput name="readerUsername" label="Reader Username" value={reduxDevice?.apiJson?.readerUsername} error={errors} reduxState={reduxDevice?.apiJson} setAction={setDeviceReaderApiJson} />
             <CustomInput name="readerPassword" label="Reader Password" value={reduxDevice?.apiJson?.readerPassword} error={errors} reduxState={reduxDevice?.apiJson} setAction={setDeviceReaderApiJson} />
           </div>
+          <div className='grid grid-cols-4 gap-4'>
+            <SearchableSelect name="antenna1" label="Antenna 1" className={'uppercase'} api={searchGeneral} dynamicSearch={{'fieldName':'antenna'}} getFieldName={'value'} value={reduxDevice?.apiJson?.antenna1} error={errors} reduxState={reduxDevice?.apiJson} onChange={(e)=>handleChange(e, 'antenna1', 1)} />
+            <SearchableSelect name="antenna2" label="Antenna 2" className={'uppercase'} api={searchGeneral} dynamicSearch={{'fieldName':'antenna'}} getFieldName={'value'} value={reduxDevice?.apiJson?.antenna2} error={errors} reduxState={reduxDevice?.apiJson} onChange={(e)=>handleChange(e, 'antenna2', 2)} />
+            <SearchableSelect name="antenna3" label="Antenna 3" className={'uppercase'} api={searchGeneral} dynamicSearch={{'fieldName':'antenna'}} getFieldName={'value'} value={reduxDevice?.apiJson?.antenna3} error={errors} reduxState={reduxDevice?.apiJson} onChange={(e)=>handleChange(e, 'antenna3', 3)} />
+            <SearchableSelect name="antenna4" label="Antenna 4" className={'uppercase'} api={searchGeneral} dynamicSearch={{'fieldName':'antenna'}} getFieldName={'value'} value={reduxDevice?.apiJson?.antenna4} error={errors} reduxState={reduxDevice?.apiJson} onChange={(e)=>handleChange(e, 'antenna4', 4)} />
+          </div>
           <div className='flex items-center justify-center gap-x-2' >
-            <CustomButton text={'Back'} variant='flat' className={''} onClick={() => window.location.pathname = '/device/reader'} />
-            <CustomButton type={'submit'} className={''} text={ID ? 'Update' : 'Submit'} />
+            {loadingState?.doc?.reader ? <CustomButton title={'Loading...'} /> : <CustomButton text={'Back'} variant='flat' className={''} onClick={() => window.location.pathname = '/device/reader'} /> }
+            {loadingState?.doc?.reader ? <CustomButton title={'Loading...'} /> : <CustomButton type={'submit'} className={''} text={ID ? 'Update' : 'Submit'} /> }
+            
           </div>
         </div>
       </form>

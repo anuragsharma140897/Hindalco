@@ -25,12 +25,14 @@ export const routes = {
       tagMaster: '/master/tag',
       configurationMaster: '/master/configuration',
       createConfigurationMaster: '/master/configuration/create',
+      editConfigurationMaster: '/master/configuration/edit/:id',
       vehicleMaster: '/master/vehicle',
+      innventoryMaster: '/master/inventory'
 
     },
     device: {
       readerMaster : '/device/reader',
-      createReader : '/device/reader/create',
+      createReader : '/device/reader/add',
       editReader : '/device/reader/edit/:id',
       readerConfiguration : '/device/reader/reader-configuration/:id',
       readerReplacementMaster : '/device/reader-replacement',

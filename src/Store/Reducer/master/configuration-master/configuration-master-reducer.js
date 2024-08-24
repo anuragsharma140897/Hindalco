@@ -4,7 +4,7 @@ const initialState = {
     doc: null,
     apiJson: {},
     error : {},
-    searchJson: { page: 1, limit: 10, search: {} },
+    searchJson: { page: 1, limit: 20, search: {} },
     timestamp: Date.now()
 }
 

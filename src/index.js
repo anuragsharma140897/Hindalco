@@ -27,6 +27,7 @@ import DeviceReaderReducer from './Store/Reducer/device/device-reader/device-rea
 import ReaderConfigurationReducer from './Store/Reducer/device/reader-configuration/reader-configuration-reducer';
 import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing-scale-action';
 import ConfigurationMasterReducer from './Store/Reducer/master/configuration-master/configuration-master-reducer';
+import InventoryMasterReducer from './Store/Reducer/master/inventory-master/inventory-master-reducer';
 import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-master-reducer';
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
@@ -57,7 +58,8 @@ const rootReducer = combineReducers({
   MappingMasterReducer : MappingMasterReducer,
   LoadingReducer : LoadingReducer,
   SearchableSelectReducer : SearchableSelectReducer,
-  MQTTReducer : MQTTReducer
+  MQTTReducer : MQTTReducer,
+  MappingMasterReducer : MappingMasterReducer
 
 })
 

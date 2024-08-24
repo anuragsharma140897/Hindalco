@@ -36,6 +36,8 @@ export const menuItems = [
       { name: 'Product Master', href: routes?.panel?.master?.productMaster ,icon : <ProductMasterIcon />}, 
       { name: 'Customer Master', href: routes?.panel?.master?.customerMaster ,icon : <CustomerMasterIcon />},
       { name: 'Supplier Master', href: routes?.panel?.master?.supplierMaster ,icon : <SupplierMasterIcon />},
+      { name: 'Inventory Master', href: routes?.panel?.master?.innventoryMaster,icon : <GeneralMasterIcon /> },
+
       { name: 'Vehicle Master', href: routes?.panel?.master?.vehicleMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'Configuration Master', href: routes?.panel?.master?.configurationMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'General Master', href: routes?.panel?.master?.generalMaster,icon : <GeneralMasterIcon /> },

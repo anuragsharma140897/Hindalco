@@ -5,10 +5,12 @@ import { CompileSelectData } from './select-promiss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchableSelectData } from '../../../../Store/Action/common/searcheable-select/searcheable-select-action';
 import Skeleton from 'react-loading-skeleton';
+import cn from '../../../../Utils/class-names';
 
-export default function SearchableSelect({ label, important, api, name, error, disabled, getFieldName, onChange, limit, checkServerKey, checkServerValue, dynamicSearch, defaultValue }) {
+export default function SearchableSelect({ label, important, api, name, error, disabled, getFieldName, onChange, limit, checkServerKey, checkServerValue, dynamicSearch, defaultValue, className }) {
   const [options, setOptions] = useState(null);
   const dispatch = useDispatch()
+  
   useEffect(() => {
     if (api && options === null) {
       loadData();
@@ -18,10 +20,7 @@ export default function SearchableSelect({ label, important, api, name, error, d
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
-      console.log('json', json);
       HitApi(json, api).then((result) => {
-        console.log('result', result);
-
         CompileSelectData(result?.content, getFieldName, checkServerKey, checkServerValue).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
@@ -32,16 +31,14 @@ export default function SearchableSelect({ label, important, api, name, error, d
     }
   };
 
-  console.log('options?options[0]', options ? options[0] : '');
-
   return (
     <div className='mb-6'>
       <label className="block font-bold mb-2">{label}{important === false ? '(Optional)' : ''}</label>
       {options ? <Select
         name={name}
-        className={`w-full text-lg 
+        className={cn(className, `w-full text-lg 
             disabled:bg-gray-200
-            ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
+            ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`)}
         disabled={disabled}
         options={options || []}
         {...(defaultValue && { defaultValue })}

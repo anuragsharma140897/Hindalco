@@ -10,9 +10,10 @@ import { setConfigurationError, setConfigurationMasterApiJson } from '../../../S
 import { useDispatch, useSelector } from 'react-redux';
 import { configurationMasterSchema } from '../../../Utils/validators/master/configuration-master/configuration-master-scheema';
 import { CompileConfigurationJson } from './tabs-summary/CompileJson';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { addMqttConfig, updateMqttConfig } from '../../../Constant/Api/Api';
 
-
-export default function ConfigTabs() {
+export default function ConfigTabs({ID}) {
 
     const [selected, setSelected] = useState(0)
     const dispatch = useDispatch()
@@ -20,18 +21,15 @@ export default function ConfigTabs() {
 
     const { errors, validate } = useValidation(configurationMasterSchema);
 
-
     const handleClick = (index) => {
 
         setSelected(index)
     }
     const GenderOption = [
-        { id: 'male', label: 'Male', value: 'male' },
-        { id: 'female', label: 'Female', value: 'female' },
-        { id: 'other', label: 'Other', value: 'other' },
+        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
+        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
+        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
     ]
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,33 +41,24 @@ export default function ConfigTabs() {
         if (Object.keys(validationErrors).length === 0) {
 
             CompileConfigurationJson(reduxConfiguration?.apiJson).then(compiledData => {
-
-                // if (row?.id) {
-                //     Object.assign(json, { id: row?.id })
-                //     HitApi(json, updateGeneral).then((result) => {
-
-                //     })
-                // } else {
-                //     Object.assign(json, { status: json?.status || 'active' })
-                //     HitApi(json, addGeneral).then((result) => {
-
-                //     })
-                // }
+                if (ID) {
+                    Object.assign(compiledData, { id: ID })
+                    HitApi(compiledData, updateMqttConfig).then((result) => {
+                        console.log('result',result);
+                    })
+                } else {
+                    HitApi(compiledData, addMqttConfig).then((result) => {
+                        console.log('result',result);
+                    })
+                }
             })
-
 
         } else {
         }
     };
 
-
-
-
-
-
     return (
         <div>
-
             <div className='bg-white p-5 mb-5 rounded-xl'>
                 <div className='grid grid-cols-3 gap-x-4'>
                     <CustomInput important={true} name="name" label="End point name" value={reduxConfiguration?.apiJson?.name} error={reduxConfiguration?.error} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationMasterApiJson} />
@@ -105,7 +94,6 @@ export default function ConfigTabs() {
                         </div>
                     </div>
                 </div>
-
                 <div>{ConfigmenuItems?.[selected]?.Screen}</div>
             </div>
             <div className='flex  mt-5'>

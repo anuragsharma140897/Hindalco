@@ -1,5 +1,6 @@
 import MQTT from "../../Form/reader-configuration/MQTT";
 import Configuration from "../../Form/reader-configuration/configuraiton/configuration";
+import Mode from "../../Form/reader-configuration/mode/mode";
 import Network from "../../Form/reader-configuration/network/network";
 import Summary from "../../Form/reader-configuration/summary/Summary";
 
@@ -24,10 +25,6 @@ export const menuItems = [
         value: '/forms/profile-settings/password',
     },
     {
-        label: 'Status',
-        value: '/forms/profile-settings/team',
-    },
-    {
         label: 'Logs', // Logs, RC Logs
         value: '/forms/profile-settings/billing',
     },
@@ -38,9 +35,6 @@ export const menuItems = [
     {
         label: 'Mode',
         value: '/forms/profile-settings/integration',
-    },
-    {
-        label: 'Reboot',
-        value: '/forms/profile-settings/integration',
+        Screen : <Mode/>
     },
 ];

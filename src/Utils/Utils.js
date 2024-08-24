@@ -95,8 +95,6 @@ export const AddChildRolePermission = (arr, itemKey) => {
     return null;
 };
 
-
-
 export const getHeadingFromPathname = () => {
     const pathname = window.location.pathname;
 
@@ -153,17 +151,12 @@ export const getHeadingFromPathname = () => {
             return "Create / Configuration Master";
         case "/inbond/inbound-create":
             return "Inbound Order / Create";
+        case "/master/inventory":
+            return "Inventory Master"
         default:
             return "";
     }
 }
-
-
-
-
-
-
-
 
 // not used
 const endpointBasedOnPermissions = {

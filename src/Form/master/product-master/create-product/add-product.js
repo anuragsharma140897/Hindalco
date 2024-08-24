@@ -7,14 +7,18 @@ import useValidation from '../../../../Hooks/useValidation';
 import CustomButton from '../../../../Component/ui/buttons/custom-button';
 import CustomSwitch from '../../../../Component/ui/switch/custom-switch';
 import { HitApi } from '../../../../Store/Action/Api/ApiAction';
-import { addProduct, searchProduct, updateProduct } from '../../../../Constant/Api/Api';
+import { addProduct, searchGeneral, searchProduct, updateProduct } from '../../../../Constant/Api/Api';
 import { CompileProductMaster } from '../../../../WebView/master/product-master/promiss/product-master.promiss';
+import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect';
+import { setUserApiJson } from '../../../../Store/Action/user-management/user-action';
 
 export default function AddProduct() {
 
   const dispatch = useDispatch()
   const { errors, validate } = useValidation(productMasterSchema);
   const reduxProduct = useSelector(state => state.ProductMasterReducer)
+  const reduxUser = useSelector(state => state.UserReducer)
+  
   var url = window.location.pathname
   var ID = url.split('/')[4]
 
@@ -52,6 +56,7 @@ export default function AddProduct() {
       if (ID) {
         Object.assign(json, { id: ID })
         HitApi(json, updateProduct).then((result) => {
+          console.log('result',result);
           if (result.status === 200) {
             var alert = window.confirm(result.message)
             if (alert || !alert) {
@@ -86,28 +91,36 @@ export default function AddProduct() {
 
     }
   };
+  const handleOnChange = (e) => {
+    const { id, label, value } = e
+    console.log("dfsddsd", e);
+    let oldJson = reduxProduct?.apiJson
+    let newJson = { ...oldJson, "productGroup": e?.value }
+    dispatch(setProductMasterApiJson(newJson))
 
+}
   return (
     <div className='p-10 bg-white rounded-xl'>
       <form onSubmit={handleSubmit}>
         <div className="space-y-5 lg:space-y-6">
           <div className='grid grid-cols-4 gap-4'>
-            <CustomInput name="productName" label="Product Name" value={reduxProduct?.apiJson?.productName} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="productCode" label="Product Code" value={reduxProduct?.apiJson?.productCode} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="productDescription" label="Product Description" value={reduxProduct?.apiJson?.productDescription} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="productGroup" label="Product Group" value={reduxProduct?.apiJson?.productGroup} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={15} name="productName" label="Product Name" value={reduxProduct?.apiJson?.productName} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={15} name="productCode" label="Product Code" value={reduxProduct?.apiJson?.productCode} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={50} name="productDescription" label="Product Description" value={reduxProduct?.apiJson?.productDescription} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            {/* <CustomInput name="productGroup" label="Product Group" value={reduxProduct?.apiJson?.productGroup} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} /> */}
+            <SearchableSelect name="productGroup" label="Product Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'gender'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson}  onChange={handleOnChange} />
           </div>
           <div className='grid grid-cols-4 gap-4'>
-            <CustomInput name="height" label="Height" value={reduxProduct?.apiJson?.height} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="width" label="Width" value={reduxProduct?.apiJson?.width} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="length" label="Length" value={reduxProduct?.apiJson?.length} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="packedWeight" label="Packed Weight" value={reduxProduct?.apiJson?.packedWeight} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={6} type={'number'} name="height" label="Height" value={reduxProduct?.apiJson?.height} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={6} type={'number'} name="width" label="Width" value={reduxProduct?.apiJson?.width} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={6} type={'number'} name="length" label="Length" value={reduxProduct?.apiJson?.length} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={6} type={'number'} name="packedWeight" label="Packed Weight" value={reduxProduct?.apiJson?.packedWeight} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
           </div>
           <div className='grid grid-cols-4 gap-4'>
-            <CustomInput name="weight" label="Weight" value={reduxProduct?.apiJson?.weight} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="buyingCost" label="Buying Cost" value={reduxProduct?.apiJson?.buyingCost} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="sellingCost" label="Selling Cost" value={reduxProduct?.apiJson?.sellingCost} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            <CustomInput name="grade" label="Grade" value={reduxProduct?.apiJson?.grade} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={6} type={'number'} name="weight" label="Weight" value={reduxProduct?.apiJson?.weight} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={10} type={'number'} name="buyingCost" label="Buying Cost" value={reduxProduct?.apiJson?.buyingCost} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={10} type={'number'} name="sellingCost" label="Selling Cost" value={reduxProduct?.apiJson?.sellingCost} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
+            <CustomInput maxLength={15} name="grade" label="Grade" value={reduxProduct?.apiJson?.grade} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
           </div>
           <div className='grid grid-cols-2 gap-4'>
             <CustomSwitch name="captureBatchNo" label={'Capture Batch No'} value={reduxProduct?.apiJson?.captureBatchNo} reduxState={reduxProduct?.apiJson} errors={errors} setAction={setProductMasterApiJson} />

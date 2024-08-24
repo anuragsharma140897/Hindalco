@@ -130,10 +130,61 @@ const boolean = (requiredMessage = 'This field is required') => {
 
   return validator;
 };
+const json = (requiredMessage = 'This field is required') => {
+  let validationRules = {
+    isRequired: true,
+    errorMessage: requiredMessage,
+    refineFunc: null,
+    refineMessage: '',
+  };
+
+  const validator = {
+    required: (message) => {
+      validationRules.isRequired = true;
+      validationRules.errorMessage = message || validationRules.errorMessage;
+      return validator;
+    },
+    refine: (func, options) => {
+      validationRules.refineFunc = func;
+      validationRules.refineMessage = options?.message || 'Invalid value';
+      return validator;
+    },
+    validate: (value) => {
+      if (validationRules.isRequired && (value === undefined || value === null || value === '')) {
+        return validationRules.errorMessage;
+      }
+      
+      let parsedValue;
+
+      // Check if the value is already an object
+      if (typeof value === 'object' && value !== null) {
+        parsedValue = value;
+      } else {
+        // Try parsing the value if it's a string
+        try {
+          parsedValue = JSON.parse(value);
+        } catch (e) {
+          return 'Must be a valid JSON';
+        }
+      }
+
+      // Run the refinement function if it exists
+      if (validationRules.refineFunc && !validationRules.refineFunc(parsedValue)) {
+        return validationRules.refineMessage;
+      }
+      
+      return null;
+    }
+  };
+
+  return validator;
+};
+
 
 export const validationSchema = {
   string,
   number,
   boolean,
+  json
   // Add other validators like boolean, email, etc., here...
 };

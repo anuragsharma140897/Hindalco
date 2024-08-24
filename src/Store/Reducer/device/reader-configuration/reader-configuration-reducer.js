@@ -1,4 +1,4 @@
-import { SET_READER_CONFIGURATION_API_JSON, SET_READER_CONFIGURATION_DATA, SET_READER_CONFIGURATION_LOGIN_DATA, SET_READER_CONFIGURATION_NETWORK_DATA, SET_READER_CONFIGURATION_SEARCH_JSON, SET_READER_CONFIGURATION_SUMMARY_DATA, SET_READER_CONFIGURATION_TOPIC_DATA } from "../../../Action/device/reader-configuration/reader-configuration-action"
+import { SET_READER_CONFIGURATION_API_JSON, SET_READER_CONFIGURATION_DATA, SET_READER_CONFIGURATION_LOGIN_DATA, SET_READER_CONFIGURATION_MODE_DATA, SET_READER_CONFIGURATION_NETWORK_DATA, SET_READER_CONFIGURATION_SEARCH_JSON, SET_READER_CONFIGURATION_SUMMARY_DATA, SET_READER_CONFIGURATION_TOPIC_DATA } from "../../../Action/device/reader-configuration/reader-configuration-action"
 
 const initialState = {
     doc: null,
@@ -34,6 +34,8 @@ const ReaderConfigurationReducer = (state = initialState, action) => {
             return ({ ...state, apiJson: action.value, timestamp: Date.now() })
         case SET_READER_CONFIGURATION_SEARCH_JSON:
             return ({ ...state, searchJson: action.value, timestamp: Date.now() })
+        case SET_READER_CONFIGURATION_MODE_DATA:
+            return ({ ...state, mode: action.value, timestamp: Date.now() })
         default:
             return state;
     }

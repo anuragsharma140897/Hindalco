@@ -60,6 +60,10 @@ export const readerStatus = DeviceMicroService+'readerStatus'
 export const readerNetwork = DeviceMicroService+'readerNetwork'
 export const getAccessInMqtt = DeviceMicroService+'getAccessInMqtt'
 export const viewTopics = DeviceMicroService+'viewTopics'
+export const readerMode = DeviceMicroService+'readerMode'
+export const editReaderMode = DeviceMicroService+'editReaderMode'
+
+export const rebootReader = DeviceMicroService + 'rebootReader'
 
 
 //Weighing Scale
@@ -96,6 +100,19 @@ export const deleteTag = PlantMicroService + 'deleteTag'
 export const addBuildingToZone = PlantMicroService + 'addBuildingToZone'
 export const removeBuildingFromZone = PlantMicroService + 'removeBuildingFromZone'
 
+//addZoneToLocation
+
+export const addZoneToLocation = PlantMicroService + 'addZoneToLocation'
+export const removeZoneFromLocation = PlantMicroService + 'removeZoneFromLocation'
 export const mapping = PlantMicroService + 'mapping'
 export const removeMapping = PlantMicroService + 'removeMapping'
+
+
+// mqtt
+export const addMqttConfig = DeviceMicroService + 'addMqttConfig'
+export const updateMqttConfig = DeviceMicroService + 'updateMqttConfig'
+export const searchMqttConfig = DeviceMicroService + 'searchMqttConfig'
+export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
+
+
 

@@ -23,7 +23,7 @@ import CreateInbound from '../WebView/inbound/create-inbound/create-inbound'
 import CreateOutbound from '../WebView/outbound/create-outbound/create-outbound'
 import Test from '../WebView/test/test'
 import ReaderConfiguraiton from '../WebView/configuration/reader-configuraiton'
-import CreateDeviceReader from '../Form/device/create-device-reader/create-device-reader'
+import CreateDeviceReader from '../Form/device/readers/add-reader'
 import WeighingScale from '../WebView/device/weighing-scale/weighing-scale'
 import CreateWeighingScale from '../Form/device/create-weighing-scale/create-weighing-scale'
 import VehicleMaster from '../WebView/master/vehicle-master/vehicle-master'
@@ -32,6 +32,7 @@ import LocationMaster from '../WebView/master/location-master/location-master'
 import TagMaster from '../WebView/master/tag-master/tag-master'
 import ConfigurationMaster from '../WebView/master/configuration-master/configuration-master'
 import AddConfigurationMaster from '../Form/master/configuration-master/add-configuration-master'
+import InventoryMaster from '../WebView/master/inventory-master/inventory-master'
 import MappingMaster from '../WebView/master/mapping-master/mapping-master'
 import Dashboard from '../WebView/dashboard/dashboard'
 
@@ -75,6 +76,9 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.tagMaster} exact element={<TagMaster />} />
             <Route path={routes?.panel?.master?.configurationMaster} exact element={<ConfigurationMaster />} />
             <Route path={routes?.panel?.master?.createConfigurationMaster} exact element={<AddConfigurationMaster />} />
+            <Route path={routes?.panel?.master?.editConfigurationMaster} exact element={<AddConfigurationMaster />} />
+            <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

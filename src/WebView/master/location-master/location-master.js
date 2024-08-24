@@ -1,14 +1,10 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PageHeader from '../../../shared/page-header'
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../../shared/modal-views/use-modal';
-import { getVehicleMasterColumns } from '../vehicle-master/vehicle-column';
 import { useColumn } from '../../../Hooks/use-column';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { searchLocation, searchVehicle } from '../../../Constant/Api/Api';
-import { CompileVehicleMaster } from '../vehicle-master/promise/vehicle-master-promise';
-import { setVehicleMasterData } from '../../../Store/Action/master/vehicle-master/vehicle-master-action';
-import AddVehicleMaster from '../../../Form/master/vehicle-master/add-vehcile-master';
+import { searchLocation } from '../../../Constant/Api/Api';
 import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import { CompileLocationMaster } from './promise/location-master-promise';
@@ -23,9 +19,10 @@ import AddLocationMaster from '../../../Form/master/location-master/add-location
 function LocationMaster() {
   const dispatch = useDispatch()
   const reduxLocation = useSelector(state => state.LocationMasterReducer)
+  const [loading ,setLoading] = useState(false)
 
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getLocationMasterColumns({ openModal, closeModal }))
+  const columns = useMemo(() => getLocationMasterColumns({ openModal, closeModal ,loading ,setLoading}))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
@@ -47,7 +44,7 @@ function LocationMaster() {
 
   return (
     <div>
-      <PageHeader btnText={'Add Location'} children={<AddLocationMaster closeModal={closeModal} />} title={'Add Location'} customSize={800} />
+      <PageHeader btnText={'Add Location'} children={<AddLocationMaster closeModal={closeModal} />} title={'Add Location'} customSize={400} />
       <ControlledTable
         variant="modern"
         isLoading={false}
