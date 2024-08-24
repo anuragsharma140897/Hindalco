@@ -43,7 +43,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
                         showCustomAlert({
                             type: 'success',
                             title: 'Success!',
-                            message: 'Site Details Updated Successfully',// Example Tailwind CSS classes
+                            message: 'Site Details Updated Successfully',
                         });
                         if (ApiHit) { ApiHit() }
                         handleClose()
@@ -56,7 +56,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
                         showCustomAlert({
                             type: 'success',
                             title: 'Success!',
-                            message: 'Site Details Added Successfully',// Example Tailwind CSS classes
+                            message: 'Site Details Added Successfully',
                         });
                         if (ApiHit) { ApiHit() }
                         handleClose()

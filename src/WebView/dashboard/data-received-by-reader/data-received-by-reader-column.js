@@ -7,6 +7,15 @@ export const GetMqttReaderColumns = () => {
 return [
   {
     title: (
+      <HeaderCell title="SR. No" />
+    ),
+    dataIndex: 'index',
+    key: 'index',
+    width: 120,
+    render: (value) => <Text className="font-medium text-gray-700">{value || '---'}</Text>,
+  },
+  {
+    title: (
       <HeaderCell title="ID" />
     ),
     dataIndex: 'data',

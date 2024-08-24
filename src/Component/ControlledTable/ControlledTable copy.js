@@ -10,7 +10,7 @@ import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 import CustomFilter from '../ui/filter/custom-filter';
 import { Loader, Title } from 'rizzui';
 
-export default function ControlledTable({ columns, className, data, ApitHit, screen, isLoading, showLoadingText }) {
+export default function ControlledTable({ columns, className, data, ApitHit, screen, isLoading, showLoadingText, disablePagination }) {
   const dispatch = useDispatch()
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const handlePaginate = (page) => {
@@ -39,15 +39,16 @@ export default function ControlledTable({ columns, className, data, ApitHit, scr
       <div className="relative ">
         <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>
-
-      <TablePagination
-        current={reduxPagination?.doc?.number}
-        total={reduxPagination?.doc?.totalElements}
-        pageSize={reduxPagination?.doc?.limit}
-        onChange={handlePaginate}
-        ApitHit={ApitHit}
-      // paginatorClassName={paginatorClassName}
-      />
+      {
+        !disablePagination ? <TablePagination
+          current={reduxPagination?.doc?.number}
+          total={reduxPagination?.doc?.totalElements}
+          pageSize={reduxPagination?.doc?.limit}
+          onChange={handlePaginate}
+          ApitHit={ApitHit}
+        // paginatorClassName={paginatorClassName}
+        /> : null
+      }
 
     </div>
   )

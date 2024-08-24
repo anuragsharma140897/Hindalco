@@ -39,7 +39,6 @@ export default function ControlledTable({ columns, className, data, ApitHit, scr
       <div className="relative ">
         <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>
-
       {
         !disablePagination ? <TablePagination
           current={reduxPagination?.doc?.number}

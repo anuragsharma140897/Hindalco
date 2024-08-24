@@ -10,8 +10,6 @@ export const setApiJson = (data) => ({
 
 export const HitApi = (json, api) => {
 
-    console.log('hitting api url', api);
-
     const MyPromise = new Promise((resolve, reject) => {
         const requestOptions = {
             method: 'POST',

@@ -32,6 +32,8 @@ import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
 import MQTTReducer from './Store/Reducer/mqtt/mqtt-reducer';
+import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-batch-reducer';
+import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -59,7 +61,9 @@ const rootReducer = combineReducers({
   LoadingReducer : LoadingReducer,
   SearchableSelectReducer : SearchableSelectReducer,
   MQTTReducer : MQTTReducer,
-  MappingMasterReducer : MappingMasterReducer
+  MappingMasterReducer : MappingMasterReducer,
+  DashboardInventoryBatchReducer : DashboardInventoryBatchReducer,
+  DashboardBatchReducer : DashboardBatchReducer
 
 })
 

@@ -26,7 +26,7 @@ class MQTTService {
       this.isConnected = true;
       this.subscribers.onConnect();
 
-      this.client.subscribe('66c603e0369aa1055544e60b/recevieTagInfo', (err) => {
+      this.client.subscribe('66c8aca49acf5c2a949d7701/recevieTagInfo', (err) => {
         if (!err) {
           console.log('Subscribed to topic');
         }
