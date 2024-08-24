@@ -50,7 +50,7 @@ export default function GeneralMaster() {
     })
   }
 
-
+console.log("reduxGeneral?.doc?.content",reduxGeneral?.doc?.content);
   return (
     <div>
       <PageHeader btnText={'Add General Master'} children={<AddGeneralMaster closeModal={closeModal} />} title={'Add General Master'} customSize={400} />

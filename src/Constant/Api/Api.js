@@ -1,6 +1,6 @@
 
-export const IP = '137.184.74.218'
-// export const IP = '192.168.0.108:9090'
+// export const IP = '137.184.74.218'
+export const IP = '192.168.0.100:9090'
 export const MQTTIP = 'ws://192.168.0.114:9001'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
@@ -8,7 +8,7 @@ export const HelperMicroService = `http://${IP}/helper/api/`
 export const PlantMicroService = `http://${IP}/plant/api/`
 export const DeviceMicroService = `http://${IP}/device/api/`
 export const IOTMicroService = `http://${IP}/iot/api/`
-
+export const OrderMicroService = `http://${IP}/order/api/`
 
 
 export const LoginApi = BaseUrl + 'login'
@@ -125,3 +125,8 @@ export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
 
 
 export const searchRfidTag = IOTMicroService + 'searchRfidTag'
+
+// inbound
+
+export const addInbound = OrderMicroService + 'addInbound'
+
