@@ -1,7 +1,6 @@
 import { ActionIcon, Text, Tooltip } from 'rizzui';
 import { HeaderCell } from '../../../Component/ui/table';
 import PencilIcon from '../../../Constant/Icons/pencil';
-import DeletePopover from '../../../shared/delete-popover';
 import { routes } from '../../../config/routes';
 import SearchUser from '../../../shared/common/search-user';
 import EyeIcon from '../../../Constant/Icons/eye';
@@ -16,9 +15,9 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
         render: (value) => <Text>{value || '---'}</Text>,
       },
       {
-        title: <HeaderCell title="Order Code" className={'font-extrabold'} />,
-        dataIndex: 'orderCode',
-        key: 'orderCode',
+        title: <HeaderCell title="Vehicle Number" className={'font-extrabold'} />,
+        dataIndex: 'vehicleNumber',
+        key: 'vehicleNumber',
         width: 130,
         render: (value) => (
           <Text className="font-medium text-gray-700">{value || '---'}</Text>

@@ -3,7 +3,7 @@ import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect
 import { searchVehicle } from '../../../Constant/Api/Api';
 import { useDispatch, useSelector } from 'react-redux';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action';
+import { setOutboundAddedVehicle, setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action';
 import { useModal } from '../../../shared/modal-views/use-modal';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 
@@ -51,10 +51,12 @@ function OutboundAddVehicle() {
     HitApi(json, apiMethod).then((result) => {
       console.log('result:result ', result);
       setDetails(result?.content?.[0] || null);
-      // const oldArr = [...reduxOutbound?.productAdded]; 
-      // oldArr?.push(result?.content?.[0]);
+      const oldArr = [...reduxOutbound?.vehicleAdded]; 
 
-      // dispatch(setAddedProduct(oldArr))
+      console.log("oldArr: ", oldArr);
+      oldArr?.push(result?.content?.[0]);
+
+      dispatch( setOutboundAddedVehicle(oldArr))
     });
   };
   console.log("selectedDetails", selectedDetails);
