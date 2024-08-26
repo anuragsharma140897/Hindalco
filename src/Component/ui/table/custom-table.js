@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import cn from '../../Utils/class-names';
-import TablePagination from './table-pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 import { Loader, Title } from 'rizzui';
-import Table from '../ui/table/table';
+import Table from './table';
+import cn from '../../../Utils/class-names';
+import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
+import TablePagination from './table-pagination';
+import CustomFilter from '../filter/custom-filter';
 
-export default function CustomTable({ columns, className, data, ApitHit, screen, isLoading, showLoadingText, disablePagination }) {
+export default function ControlledTable({ columns, className, data, ApiHit, screen, isLoading, showLoadingText, disablePagination, json, setAction }) {
   const dispatch = useDispatch()
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const handlePaginate = (page) => {
     var json = reduxPagination?.doc
     json.number = page
     dispatch(setPagination(json))
-    if (ApitHit) ApitHit()
+    if (ApiHit) ApiHit()
   }
 
   if (isLoading) {
@@ -31,7 +32,7 @@ export default function CustomTable({ columns, className, data, ApitHit, screen,
 
   return (
     <div className=''>
-      {/* <div className='my-2'>{screen ? <CustomFilter screen={screen} DynamicFilterData={DynamicFilterData}/> : null}</div> */}
+      <div className='my-2'>{screen ? <CustomFilter screen={screen} json={json} setAction={setAction} ApiHit={ApiHit}/> : null}</div>
       <div className="relative ">
         <Table data={data} rowKey={(record) => record.index} className={cn(className)} columns={columns} />
       </div>
@@ -41,7 +42,7 @@ export default function CustomTable({ columns, className, data, ApitHit, screen,
           total={reduxPagination?.doc?.totalElements}
           pageSize={reduxPagination?.doc?.limit}
           onChange={handlePaginate}
-          ApitHit={ApitHit}
+          ApiHit={ApiHit}
         // paginatorClassName={paginatorClassName}
         /> : null
       }

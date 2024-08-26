@@ -24,12 +24,9 @@ export const menuItems = [
     name: 'Master', href: '#', icon: '', badge: 'New',
     dropdownItems: [
       { name: 'User Management Master', href: routes?.panel?.master?.users, icon: <UserManagementIcon /> },
-      { name: 'Role and Permission Master', href: routes?.panel?.master?.rolesAndPermission, icon: <RolePermissionIcon /> },
+      { name: 'Roles and Permission Master', href: routes?.panel?.master?.rolesAndPermission, icon: <RolePermissionIcon /> },
       { name: 'Site Master', href: routes?.panel?.master?.siteMaster ,icon : <SiteMasterIcon />},
       { name: 'Buildings Master', href: routes?.panel?.master?.buildingsMaster ,icon : <BuildingsMasterIcon />},
-      // { name: 'Reader Master', href: routes?.panel?.master?.readerMaster ,icon : <ReaderMasterIcon />},
-      // { name: 'Reader Replacement Master', href: routes?.panel?.master?.readerReplacementMaster,icon : <ReaderReplacementMasterIcon />}, 
-      // { name: 'Reader Health Master', href: routes?.panel?.master?.readerHealthMaster ,icon : <ReaderHealthMasterIcon /> },
       { name: 'Zone Master', href: routes?.panel?.master?.zomeMaster ,icon : <BuildingsMasterIcon />},
       { name: 'Tag Master', href: routes?.panel?.master?.tagMaster ,icon : <BuildingsMasterIcon />},
       { name: 'Location Master', href: routes?.panel?.master?.locationMaster ,icon : <BuildingsMasterIcon />},
@@ -37,7 +34,6 @@ export const menuItems = [
       { name: 'Customer Master', href: routes?.panel?.master?.customerMaster ,icon : <CustomerMasterIcon />},
       { name: 'Supplier Master', href: routes?.panel?.master?.supplierMaster ,icon : <SupplierMasterIcon />},
       { name: 'Inventory Master', href: routes?.panel?.master?.innventoryMaster,icon : <GeneralMasterIcon /> },
-
       { name: 'Vehicle Master', href: routes?.panel?.master?.vehicleMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'Configuration Master', href: routes?.panel?.master?.configurationMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
       { name: 'General Master', href: routes?.panel?.master?.generalMaster,icon : <GeneralMasterIcon /> },

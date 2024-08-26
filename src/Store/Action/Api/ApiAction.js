@@ -11,6 +11,9 @@ export const setApiJson = (data) => ({
 export const HitApi = (json, api) => {
 
     const MyPromise = new Promise((resolve, reject) => {
+        if(!json?.search){
+            Object.assign(json, { status: json?.status || 'active' })
+        }
         const requestOptions = {
             method: 'POST',
             headers: {
