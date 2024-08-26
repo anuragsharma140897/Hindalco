@@ -18,7 +18,7 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
     const reduxUser = useSelector(state => state.UserReducer)
     const { errors, validate } = useValidation(addUserSchema);
     const { showCustomAlert } = useAlertController();
-    const deleteKeys = useDeleteKeys();
+    
 
     useEffect(() => {
         if (row?.id && Object.keys(reduxUser?.apiJson).length === 0) {
@@ -80,7 +80,7 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
 
     const handleClose = () => {
         closeModal();
-        dispatch(setUserApiJson(deleteKeys(reduxUser?.apiJson)))
+        dispatch(setUserApiJson({}))
     }
 
     const handleCustomChange = (e) => {
@@ -97,6 +97,14 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         dispatch(setUserApiJson(json))
     }
 
+    const handleStatusChange = (e) => {
+        var json = reduxUser?.apiJson
+        const { id, value } = e
+        Object.assign(json, { status : value })
+        dispatch(setUserApiJson(json))
+    }
+
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
@@ -112,7 +120,7 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
                         <CustomInput validate={validate} name="address" label="Address" value={reduxUser?.apiJson?.address} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="email" label="Email Id" value={reduxUser?.apiJson?.email} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="employeeId" label="Employee Id" value={reduxUser?.apiJson?.employeeId} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
-                        <SearchableSelect validate={validate} name="status" label="Status" api={searchGeneral} dynamicSearch={{'fieldName':'gender'}}  getFieldName={'value'} value={reduxUser?.apiJson?.status} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} hide={!row?.id} />
+                        <SearchableSelect validate={validate} name="status" label="Status" api={searchGeneral} dynamicSearch={{'fieldName':'status'}}  getFieldName={'value'} value={reduxUser?.apiJson?.status} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleStatusChange}  hide={!row?.id} />
                     </div>
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={() => handleClose()} />

@@ -25,7 +25,7 @@ export const addUserSchema = {
     firstName: validationSchema?.string('First Name is Required').min(1, { message: 'First Name is Required' }),
     lastName: validationSchema?.string('Last Name is Required').min(1, { message: 'Last Name is Required' }),
     username: validationSchema?.string('Username is Required').min(1, { message: 'Username Name is Required' }),
-    password: validationSchema?.string('Password is Required').min(1, { message: 'Password is Required' }),
+    // password: validationSchema?.string('Password is Required').min(1, { message: 'Password is Required' }),
     gender: validationSchema?.string('Gender is Required').min(1, { message: 'Gender is Required' }),
     roleName: validationSchema?.string('Role is Required').min(1, { message: 'Role is Required' }),
     contact: validationSchema?.string('Contact No is Required').min(1, { message: 'Contact No is Required' }),

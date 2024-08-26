@@ -26,7 +26,7 @@ export const menuItems = [
     name: 'Master', href: '#', icon: '', badge: 'New',
     dropdownItems: [
       { name: 'User Management Master', href: routes?.panel?.master?.users, icon: <UserManagementIcon /> },
-      { name: 'Role and Permission Master', href: routes?.panel?.master?.rolesAndPermission, icon: <RolePermissionIcon /> },
+      { name: 'Roles and Permission Master', href: routes?.panel?.master?.rolesAndPermission, icon: <RolePermissionIcon /> },
       { name: 'Site Master', href: routes?.panel?.master?.siteMaster ,icon : <SiteMasterIcon />},
       { name: 'Buildings Master', href: routes?.panel?.master?.buildingsMaster ,icon : <BuildingsMasterIcon />},
       { name: 'Zone Master', href: routes?.panel?.master?.zomeMaster ,icon : <BuildingsMasterIcon />},

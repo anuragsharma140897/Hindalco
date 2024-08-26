@@ -11,8 +11,11 @@ import { EditScreen } from '../../../shared/edit-screen';
 import AddUserMaster from '../../../Form/master/user-master/add-user-master';
 import Skeleton from 'react-loading-skeleton';
 import { useState } from 'react';
+import useAlertController from '../../../Hooks/use-alert-controller';
+import TableActions from '../../../Component/ui/table/TableActions';
 
 export const GetUserColumns = (openModal, closeModal, ApiHit) => {
+  const { showCustomAlert } = useAlertController();
   const [loadingRows, setLoadingRows] = useState({});
 
   const handleDelete = async (row) => {
@@ -20,14 +23,21 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
 
     // API call here
 
-    // try {
-    //   await HitApi({ id: row.id }, deleteUser);
-    //   ApiHit(); // Refresh data after deletion
-    // } catch (error) {
-    //   console.error('Failed to delete user:', error);
-    // } finally {
-    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
-    // }
+    var json = {
+      id: row?.id
+    }
+
+    // HitApi(json, deleteUser).then((result) => {
+    //   if (result?.success !== false) {
+    //     showCustomAlert({
+    //       type: 'success',
+    //       title: 'Success!',
+    //       message: 'User Deleted Successfully',
+    //     });
+    //     setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    //     if (ApiHit) { ApiHit() }
+    //   }
+    // })
   };
 
   // Render cell content or loading skeleton based on loading state
@@ -100,23 +110,14 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
       key: 'action',
       width: 130,
       render: (_, row) => renderCell(null, row, (
-        <div className="flex items-center justify-end gap-3 pe-4">
-          <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Site Master', AddUserMaster, 800, ApiHit)}>
-              <PencilIcon className="h-4 w-4" />
-            </ActionIcon>
-          </Tooltip>
-          <Tooltip size="sm" content={'View User'} placement="top" color="invert">
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
-              <EyeIcon className="h-4 w-4" />
-            </ActionIcon>
-          </Tooltip>
-          <DeletePopover
-            title={`Delete User`}
-            description={`Are you sure you want to delete this employee?`}
-            onDelete={() => handleDelete(row)}
-          />
-        </div>
+        <TableActions
+          screen={'user'}
+          row={row}
+          onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Site Master', AddUserMaster, 800, ApiHit)}
+          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+          onDelete={(rowData) => handleDelete(rowData)}
+          checkKeys={['buildingIds']}
+        />
       )),
     },
   ];

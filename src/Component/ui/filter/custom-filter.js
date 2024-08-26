@@ -1,66 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { FilterCondition } from '../../../Constant/filters/Filter'
-import { Badge, Select, Text } from 'rizzui'; // Import the status classes
+import { Badge, Button, Select, Text } from 'rizzui'; // Import the status classes
 import { STATUS_CLASSES } from '../../../Constant/Colors/Color';
+import { ScreenName } from '../../../Constant/Screen/Screen';
+import { useDispatch } from 'react-redux';
 
-export default function CustomFilter({ screen, DynamicFilterData }) {
-    const [filterOptions, setFilterOptions] = useState([]);
-    
-    useEffect(() => {
-       
-        const FilterItem = FilterCondition?.find(Obj => Obj?.screen === screen);
-        if(DynamicFilterData){
-            
-        }else{
-            setFilterOptions(FilterItem?.condition || []);
+export default function CustomFilter({ screen, json, setAction, ApiHit }) {
+    const dispatch = useDispatch()
+    const FilterItem = FilterCondition?.find(Obj => Obj?.screen === screen);
+
+    const handleFilterChange = (e, serverKey) => {
+        let { label, value, id } = e
+        if (value === 'all') {
+            Object.assign(json, { search: {} })
+        } else {
+            Object.assign(json.search, { [serverKey]: value })
         }
 
-        
+        dispatch(setAction(json))
+        if (ApiHit) { ApiHit() }
+    }
 
-    }, [DynamicFilterData, screen]);
+    const removeJson = () => {
+        var tj = json
+        Object.assign(json, { search: {} })
+        dispatch(setAction(json))
+        if (ApiHit) { ApiHit() }
+    }
 
     return (
         <div className='grid grid-cols-4 gap-4'>
             {
-                filterOptions?.map((ele, index) => (
-                    <div key={index}>
-                        <Select
-                            options={ele?.Options}
-                            placeholder={ele?.placeholder || 'Select ...'}
-                            optionClassName='hover:bg-red-lighter'
-                            getOptionDisplayValue={
-                                ele?.useCustomDisplay
-                                    ? (option) => renderOptionDisplayValue(option.value)
-                                    : (option) => renderDefaultDisplay(option.value)
-                            }
-                        />
-                    </div>
-                ))
+                FilterItem?.condition?.map((ele, index) => <div key={index}>
+                    {typeof ele.render === 'function'
+                        ? ele.render((e) => handleFilterChange(e, ele?.serverKey))
+                        : ele.render}
+                </div>)
             }
-        </div>
-    );
-}
-
-function renderOptionDisplayValue(value) {
-    const lowerCaseValue = value.toLowerCase();
-    const statusClass = STATUS_CLASSES[lowerCaseValue] || STATUS_CLASSES.default;
-
-    return (
-        <div className="flex items-center">
-            <Badge color={statusClass.badgeColor} renderAsDot />
-            <Text className={`ms-2 font-medium capitalize ${statusClass.textColor}`}>
-                {value}
-            </Text>
-        </div>
-    );
-}
-
-function renderDefaultDisplay(value) {
-    return (
-        <div className="flex items-center">
-            <Text className="ms-2 capitalize text-gray-800 transition-colors duration-200 ">
-                {value}
-            </Text>
+            {Object.keys(json?.search)?.length > 0 && <div><Button onClick={() => removeJson()}>Remove Filter</Button></div>}
         </div>
     );
 }

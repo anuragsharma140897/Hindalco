@@ -1,25 +1,22 @@
+import SearchableSelect from "../../Component/ui/form/select/SearchableSelect";
+import { searchGeneral, searchRole } from "../Api/Api";
+import { ScreenName } from "../Screen/Screen";
+
 export const FilterCondition = [
     {
-        _id : 1, screen : 'user',
+        _id : 1, screen : ScreenName?.user,
         condition : [
-            { 
-                key:'status', 
-                FilterType : 'Filter by Status',
-                placeholder : 'Filter by Status',
-                Options : [
-                    { id:'Active', label : 'Active', value : 'active' },
-                    { id:'Inactive', label : 'Inactive', value : 'inactive' },
-                    { id:'Blocked', label : 'Blocked', value : 'blocked' },
-                ],
+            {
+                id : 0,
+                serverKey:'status',
+                render : (onChange)=><SearchableSelect type={'filter'} api={searchGeneral} dynamicSearch={{'fieldName':'status'}} getFieldName={'value'} onChange={onChange}/>,
                 useCustomDisplay : true,
-                status : true
-            },{ 
-                key:'role', 
-                FilterType : 'Filter by Role',
-                placeholder : 'Filter by Role',
-                Options : [],
-                useCustomDisplay : false,
-                status : true
+            },
+            {
+                id : 1,
+                serverKey:'roleName',
+                render : (onChange)=><SearchableSelect type={'filter'} api={searchRole} getFieldName={'roleName'} onChange={onChange}/>,
+                useCustomDisplay : true,
             }
         ]
     }

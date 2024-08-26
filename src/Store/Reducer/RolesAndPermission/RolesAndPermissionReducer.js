@@ -16,7 +16,7 @@ const initialState = {
       ],
       child: [
         {
-          value: "user namagement master",
+          value: "user management master",
           url: [],
           permission: [
             {

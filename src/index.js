@@ -39,6 +39,7 @@ import 'react-clock/dist/Clock.css';
 import InboundReducer from './Store/Reducer/inbound/inbout-reducer';
 import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-batch-reducer';
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
+import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -72,7 +73,9 @@ const rootReducer = combineReducers({
   InboundReducer :InboundReducer,
   MappingMasterReducer : MappingMasterReducer,
   DashboardInventoryBatchReducer : DashboardInventoryBatchReducer,
-  DashboardBatchReducer : DashboardBatchReducer
+  DashboardBatchReducer : DashboardBatchReducer,
+  OutboundReducer :OutboundReducer,
+
 
 })
 

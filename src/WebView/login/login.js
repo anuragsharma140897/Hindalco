@@ -32,8 +32,8 @@ function Login() {
             setAuthenticatedUser(res?.jwtToken)
             window.location.reload()
           }
-          if (res.status === 500) {
-            dispatch(setAuthError({ "password": res.error?.message }, SET_AUTH_ERROR))
+          if (res.status === 404) {
+            dispatch(setAuthError({ "password": res.error.message }, SET_AUTH_ERROR))
           }
         })
       }

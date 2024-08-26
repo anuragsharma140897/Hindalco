@@ -117,8 +117,9 @@ export const GenerateBadge = (items) => {
 
 
 export const DeleteItem = (id, showCustomAlert) => {
-  var json = { page:1, limit : 1, search : {roleId: id} }
-  HitApi(json, searchUser).then((Result)=>{
+  // var json = { page:1, limit : 1, search : {roleId: id} }
+  var json = {id:id}
+  HitApi(json, deleteRole).then((Result)=>{
     if(Result?.content?.length>0){
       showCustomAlert({
         type : 'error',

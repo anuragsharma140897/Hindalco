@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PageHeader from '../../../shared/page-header';
 import { useModal } from '../../../shared/modal-views/use-modal';
-import ControlledTable from '../../../Component/ControlledTable/ControlledTable';
 import { GetUserColumns } from './user-column';
 import { useColumn } from '../../../Hooks/use-column';
 import { TableClass } from '../../../Constant/Classes/Classes';
@@ -10,8 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { searchUser } from '../../../Constant/Api/Api';
 import { CompileUserMaster } from './promiss/user-promiss';
-import { setUserData } from '../../../Store/Action/user-management/user-action';
+import { setUserApiJson, setUserData } from '../../../Store/Action/user-management/user-action';
 import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
+import CustomTable from '../../../Component/ui/table/custom-table';
+import { ScreenName } from '../../../Constant/Screen/Screen';
 
 export default function UserManagement() {
     const dispatch = useDispatch();
@@ -19,7 +20,6 @@ export default function UserManagement() {
     const reduxPagination = useSelector(state => state.PaginationReducer);
     const { openModal, closeModal } = useModal();
 
-    // Function to load user data with pagination handling
     const loadData = (type) => {
         let json = reduxUser?.searchJson;
 
@@ -28,6 +28,8 @@ export default function UserManagement() {
         } else {
             Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
         }
+
+        console.log('json', json);
 
         HitApi(json, searchUser).then((result) => {
             if (result?.success !== false) {
@@ -58,20 +60,23 @@ export default function UserManagement() {
     return (
         <div>
             <PageHeader
+                screen={ScreenName?.user}
                 btnText={'Add User'}
                 children={<AddUserMaster closeModal={closeModal} ApiHit={loadData} />}
                 title={'Add User'}
                 titleClass={'text-center'}
                 customSize={700}
             />
-            <ControlledTable
-                screen={'user'}
+            <CustomTable
+                screen={ScreenName?.user}
                 variant="modern"
                 showLoadingText={true}
                 data={reduxUser?.doc?.content}
                 columns={visibleColumns}
                 className={TableClass}
-                ApitHit={loadData}
+                json={reduxUser?.searchJson}
+                setAction={setUserApiJson}
+                ApiHit={loadData}
             />
         </div>
     );
