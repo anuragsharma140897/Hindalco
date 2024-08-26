@@ -2,7 +2,7 @@
 export const IP = '137.184.74.218'
 // export const IP = '192.168.0.100:9090'
 
-export const MQTTIP = 'ws://192.168.0.114:9001'
+export const MQTTIP = 'ws://192.168.1.104:9001'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
@@ -11,6 +11,7 @@ export const DeviceMicroService = `http://${IP}/device/api/`
 export const IOTMicroService = `http://${IP}/iot/api/`
 export const OrderMicroService = `http://${IP}/order/api/`
 
+export const IotMicroService = `http://${IP}/iot/api/`
 
 export const LoginApi = BaseUrl + 'login'
 // User
@@ -64,6 +65,10 @@ export const readerStatus = DeviceMicroService+'readerStatus'
 export const readerNetwork = DeviceMicroService+'readerNetwork'
 export const getAccessInMqtt = DeviceMicroService+'getAccessInMqtt'
 export const viewTopics = DeviceMicroService+'viewTopics'
+export const readerMode = DeviceMicroService+'readerMode'
+export const editReaderMode = DeviceMicroService+'editReaderMode'
+
+export const rebootReader = DeviceMicroService + 'rebootReader'
 
 
 //Weighing Scale
@@ -130,4 +135,7 @@ export const searchRfidTag = IOTMicroService + 'searchRfidTag'
 // inbound
 
 export const addInbound = OrderMicroService + 'addInbound'
+// Dashbaord
+
+
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import banner from '../../Images/loginimage.png'
 import { Colors } from '../../Constant/Colors/Color'
 import LoginInput from '../../Component/ui/form/input/LoginInput'
@@ -10,9 +10,11 @@ import { SET_AUTH_ERROR, setAuthError } from '../../Store/Action/Auth/Sample/Aut
 import { HitApi } from '../../Store/Action/Api/ApiAction'
 import { LoginApi } from '../../Constant/Api/Api'
 import { setAuthenticatedUser } from '../../Storage/Storage'
-import bcrypt from "bcryptjs-react"
+import { Button } from 'rizzui'
 
 function Login() {
+
+  const [loading ,setLoading] = useState(false)
   const AuthReducer = useSelector(state => state.AuthReducer)
   const dispatch = useDispatch()
 
@@ -21,14 +23,17 @@ function Login() {
     LoginValidation(AuthReducer?.doc).then((error) => {
       dispatch(setAuthError(error, SET_AUTH_ERROR))
       if (Object.keys(error).length === 0) {
+        setLoading(true)
         HitApi(AuthReducer?.doc, LoginApi).then((res) => {
 
+          console.log("res",res);
+          setLoading(false)
           if (res.statusCode === 200) {
             setAuthenticatedUser(res?.jwtToken)
             window.location.reload()
           }
-          if(res.status === 500){
-            dispatch(setAuthError( {"password": res.error}, SET_AUTH_ERROR))
+          if (res.status === 500) {
+            dispatch(setAuthError({ "password": res.error?.message }, SET_AUTH_ERROR))
           }
         })
       }
@@ -53,7 +58,9 @@ function Login() {
                   <LoginInput icon={<LoginPasswordIcon />} placeholder="Password" ispassword name={"password"} error={!AuthReducer?.doc?.password || AuthReducer?.error?.password} />
                 </div>
                 <div>
-                  <button className=' text-xl w-full mt-10  py-4 rounded-2xl bg-white font-extrabold' onClick={handlelogin} style={{ color: Colors.LOGINRED }}>Login</button>
+                  <Button className=' text-xl w-full mt-10  py-6 rounded-2xl bg-white font-extrabold text-theme ' onClick={handlelogin} isLoading={loading}>
+                    Login
+                  </Button>
                 </div>
               </div>
             </div>

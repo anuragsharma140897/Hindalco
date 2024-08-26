@@ -39,7 +39,6 @@ export default function Table({ striped, variant = 'elegant', emptyText, classNa
   );
 }
 
-
 function handleTextAlignment(align) {
   if (align === 'center') return 'justify-center';
   if (align === 'right') return 'justify-end';

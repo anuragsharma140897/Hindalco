@@ -141,7 +141,7 @@ export default function AddSupplierMaster({ row }) {
             <div className='p-10 rounded-xl bg-white'>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-5 lg:space-y-6">
-                        <div className='grid grid-cols-4 gap-x-4 '>
+                        <div className='grid grid-cols-4 gap-4 '>
                             <CustomInput important={true} name="supplierName" label="Supplier Name" value={reduxSupplier?.apiJson?.supplierName} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} name="supplierCode" label="Supplier Code" value={reduxSupplier?.apiJson?.supplierCode} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <SearchableSelect name="supplierGroup" label="Supplier Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'suppliergroup'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} onChange={(e) => handleOnChange(e, 'supplierGroup')} />
@@ -150,9 +150,9 @@ export default function AddSupplierMaster({ row }) {
                             <CustomInput important={true} name="supplierAddress1" label="Supplier Add1" value={reduxSupplier?.apiJson?.supplierAddress1} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} name="supplierAddress2" label="Supplier Add2" value={reduxSupplier?.apiJson?.supplierAddress2} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} name="supplierLandmark" label="Supplier Landmark" value={reduxSupplier?.apiJson?.supplierLandmark} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
-                            <SearchCountryStateCity value={reduxSupplier?.apiJson?.supplierCountry} important={true} label="Supplier Country" options={countries} onChange={handleCountry} />
-                            <SearchCountryStateCity value={reduxSupplier?.apiJson?.supplierState} important={true} label="Supplier State" options={states} onChange={handleStateChange} />
-                            <SearchCountryStateCity value={reduxSupplier?.apiJson?.supplierCity} important={true} label="Supplier City" options={cities} onChange={handleCityChange} />
+                            <SearchCountryStateCity name={"supplierCountry"} value={reduxSupplier?.apiJson?.supplierCountry} important={true} label="Supplier Country" options={countries} onChange={handleCountry} error={errors} />
+                            <SearchCountryStateCity name={"supplierState"} value={reduxSupplier?.apiJson?.supplierState} important={true} label="Supplier State" options={states} onChange={handleStateChange} error={errors} />
+                            <SearchCountryStateCity name={"supplierCity"} value={reduxSupplier?.apiJson?.supplierCity} important={true} label="Supplier City" options={cities} onChange={handleCityChange}  error={errors}/>
                             <CustomInput important={true} type={"number"} maxLength={6} name="supplierPostCode" label="Supplier PostCode" value={reduxSupplier?.apiJson?.supplierPostCode} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} name="supplierGst" label="Supplier Gst" value={reduxSupplier?.apiJson?.supplierGst} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} type={"number"} name="supplierContactPhone" maxLength={10} label="Supplier Contact" value={reduxSupplier?.apiJson?.supplierContactPhone} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
@@ -160,7 +160,7 @@ export default function AddSupplierMaster({ row }) {
                             <CustomInput important={true} name="supplierVat" label="Supplier VAT" value={reduxSupplier?.apiJson?.supplierVat} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomInput important={true} name="supplierTan" label="Supplier TAN" value={reduxSupplier?.apiJson?.supplierTan} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
                             <CustomSelect important={true} name="supplierStatus" label="Supplier Status" options={statusOption} value={reduxSupplier?.apiJson?.supplierStatus} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} />
-                            <SearchableSelect name="siteIds" label="Site" api={searchSite} getFieldName={'siteName'} onChange={(e) => handleOnChange(e, 'siteIds')} />
+                            <SearchableSelect name="siteIds" label="Site" api={searchSite} getFieldName={'siteName'} error={errors} onChange={(e) => handleOnChange(e, 'siteIds')} />
                         </div>
                         <div className='flex gap-3 justify-end'>
                             <CustomButton text={'Back'} variant='flat' onClick={() => { window.location.pathname = 'master/supplier' }} />

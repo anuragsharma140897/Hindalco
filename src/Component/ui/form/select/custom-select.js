@@ -41,7 +41,7 @@ export default function CustomSelect({
 
     return (
         <div className="mb-6 relative">
-            <label className="block font-bold mb-2">{label}{important === false ? ' (Optional)' : ''}</label>
+            <label className="block font-bold ">{label}{important === false ? ' (Optional)' : ''}</label>
             <div className="relative">
                 <select
                     name={name}
@@ -50,7 +50,7 @@ export default function CustomSelect({
                     disabled={disabled}
                     className={`w-full p-2 text-lg rounded-lg border appearance-none 
                     disabled:bg-gray-200
-                    ${error?.[name] ? 'border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
+                    ${error?.[name] ? 'border-red-500 border-2 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
                 >
                     <option value="" disabled>{placeholder || `Select ${label}`}</option>
                     {options?.map((option, index) => (

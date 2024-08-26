@@ -3,6 +3,8 @@ import { validationSchema } from "../../validationSchema";
 export const addSupplierSchema = {
   supplierName: validationSchema.string('Supplier Name is required'),
   supplierCode: validationSchema.string('Supplier Code is required'),
+  supplierGroup: validationSchema.string('Supplier Group is required'),
+  supplierType: validationSchema.string('Supplier Type is required'),
   supplierContactEmail: validationSchema.email('Supplier Email is required'),
   supplierAddress1: validationSchema.string('Supplier Address1 is required'),
   supplierAddress2: validationSchema.string('Supplier Address2 is required'),
@@ -17,6 +19,8 @@ export const addSupplierSchema = {
   supplierVat: validationSchema.vat('Supplier VAT is required'),
   supplierTan: validationSchema.tan('Supplier TAN is required'),
   supplierStatus: validationSchema.string('Supplier Status is required'),
+  siteIds: validationSchema.string('Site is required'),
+
    
 };
-
+// supplierGroup

@@ -16,22 +16,22 @@ export default function DataReceivedByReader() {
     const columns = useMemo(() => GetMqttReaderColumns())
     const { visibleColumns } = useColumn(columns);
 
-
     useEffect(() => {
-
-        
-
+        let messageIndex = 1;
         const handleConnect = () => {
             setIsConnected(true);
         };
 
         const handleMessage = (msg) => {
+            const parsedMsg = JSON.parse(msg);
+            const indexedMsg = { ...parsedMsg, index: messageIndex++ }; // Add index to message
             setMessages((prevMessages) => {
-                const updatedMessages = [JSON.parse(msg), ...prevMessages].slice(0, 10);
-                dispatch(setMqttReceivedData(updatedMessages))
+                const updatedMessages = [indexedMsg, ...prevMessages].slice(0, 10);
+                dispatch(setMqttReceivedData(updatedMessages));
                 return updatedMessages;
             });
         };
+
 
         const handleError = (err) => {
             console.error('Connection error: ', err);
@@ -48,16 +48,8 @@ export default function DataReceivedByReader() {
         };
     }, []);
 
-
-    console.log('reduxMqtt', reduxMqtt?.doc);
     return (
         <div style={{maxHeight : 400, overflow : 'scroll'}}>
-
-            {/* <ul>
-                {messages.map((msg, index) => (
-                    <li key={index}>{msg}</li>
-                ))}
-            </ul> */}
             <ControlledTable
                 variant="modern"
                 // isLoading={loading}

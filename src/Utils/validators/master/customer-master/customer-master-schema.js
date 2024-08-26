@@ -4,7 +4,9 @@ import { validationSchema } from "../../validationSchema";
 export const customerlMasterSchema = {
   customerName: validationSchema.string('Customer Name is required'),
   customerCode: validationSchema.string('Customer Code is required'),
+  customerGroup: validationSchema.string('Customer Group is required'),
   customerEmail: validationSchema.email('Customer Email is required'),
+  customerType: validationSchema.email('Customer Type is required'),
   customerAddress1: validationSchema.string('Customer Address1 is required'),
   customerAddress2: validationSchema.string('Customer Address2 is required'),
   customerLandmark: validationSchema.string('Customer Landmark is required'),
@@ -18,5 +20,8 @@ export const customerlMasterSchema = {
   customerVat: validationSchema.vat('Customer VAT is required'),
   customerTan: validationSchema.tan('Customer TAN is required'),
   customerStatus: validationSchema.string('Customer Status is required'),
-   
+  siteIds: validationSchema.string('Site is required'),
+
+
+
 };

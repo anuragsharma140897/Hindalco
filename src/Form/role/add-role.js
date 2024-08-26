@@ -62,12 +62,15 @@ const AddRole = ({ closeModal, row }) => {
           }
           if (row?.id) {
             Object.assign(json, { id: row?.id })
-            HitApi(json, updateRole).then((result) => {
 
+            console.log('udpated json', json);
+
+            HitApi(json, updateRole).then((result) => {
+              console.log('result', result);
             })
           } else {
             HitApi(json, addRole).then((result) => {
-
+              console.log('result', result);
             })
           }
 

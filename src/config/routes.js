@@ -34,7 +34,7 @@ export const routes = {
     },
     device: {
       readerMaster : '/device/reader',
-      createReader : '/device/reader/create',
+      createReader : '/device/reader/add',
       editReader : '/device/reader/edit/:id',
       readerConfiguration : '/device/reader/reader-configuration/:id',
       readerReplacementMaster : '/device/reader-replacement',

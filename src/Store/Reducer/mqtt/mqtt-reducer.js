@@ -1,8 +1,9 @@
-import { SET_MQTT_RECEIVED_DATA, SET_SELECTED_READER } from "../../Action/mqtt/mqtt-action";
+import { SET_MQTT_RECEIVED_DATA, SET_SELECTED_READER, SET_SELECTED_READER_ANTEENA } from "../../Action/mqtt/mqtt-action";
 
 const initialState = {
-    doc:null,
+    doc: null,
     selected: null,
+    selectedAnteena: null,
     timestamp: Date.now()
 }
 
@@ -12,6 +13,8 @@ const MQTTReducer = (state = initialState, action) => {
             return ({ ...state, doc: action.value, timestamp: Date.now() })
         case SET_SELECTED_READER:
             return ({ ...state, selected: action.value, timestamp: Date.now() })
+        case SET_SELECTED_READER_ANTEENA:
+            return ({ ...state, selectedAnteena: action.value, timestamp: Date.now() })
         default:
             return state;
     }

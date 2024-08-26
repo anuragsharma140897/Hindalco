@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import { addGeneral, addVehicle, searchGeneral, searchSite, searchTag, updateGeneral, updateVehicle } from '../../../Constant/Api/Api';
+import {  addVehicle, searchGeneral, searchSite, updateVehicle } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { vehicleMasterVariable as variable } from '../../../Constant/variables/master/vehicle-master/vehicle-master.variable';
 import { setVehicleMasterApiJson } from '../../../Store/Action/master/vehicle-master/vehicle-master-action'
@@ -13,7 +13,6 @@ import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect
 
 export default function AddVehicleMaster({ row, closeModal }) {
     var dispatch = useDispatch()
-    // const reduxGeneral = useSelector(state => state.GeneralMasterReducer)
     const reduxVehicle = useSelector(state => state.VehicleMasterReducer)
     const { errors, validate } = useValidation(vehicleMasterSchema);
 
@@ -95,7 +94,7 @@ export default function AddVehicleMaster({ row, closeModal }) {
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <div className='grid grid-cols-2 gap-x-4'>
+                    <div className='grid grid-cols-2 gap-4'>
                     <CustomInput important={true} name="vehicleNumber" label="Vehicle Number" value={reduxVehicle?.apiJson?.vehicleNumber} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <CustomInput important={true} name="vehicleMaker" label="Vehicle Maker" value={reduxVehicle?.apiJson?.vehicleMaker} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <CustomInput important={true} name="vehicleModel" label="Vehicle Model" value={reduxVehicle?.apiJson?.vehicleModel} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
@@ -105,7 +104,6 @@ export default function AddVehicleMaster({ row, closeModal }) {
                     <SearchableSelect name="vehicleType" label="Vehicle Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'vehicleType'} getFieldName={'value'} value={reduxVehicle?.apiJson?.roleName} error={errors}  onChange={(e)=>handleOnChange(e,'vehicleType')} />
                     <CustomInput important={false} name="supplierIds" label="Supplier ID" value={reduxVehicle?.apiJson?.supplierIds} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <SearchableSelect name="siteIds" label="Site" api={searchSite} getFieldName={'siteName'} onChange={(e)=>handleOnChange(e,'siteIds')} />
-
                     </div>
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />

@@ -56,6 +56,7 @@ export default function AddProduct() {
       if (ID) {
         Object.assign(json, { id: ID })
         HitApi(json, updateProduct).then((result) => {
+          console.log('result',result);
           if (result.status === 200) {
             var alert = window.confirm(result.message)
             if (alert || !alert) {
@@ -90,7 +91,14 @@ export default function AddProduct() {
 
     }
   };
+  const handleOnChange = (e) => {
+    const { id, label, value } = e
+    console.log("dfsddsd", e);
+    let oldJson = reduxProduct?.apiJson
+    let newJson = { ...oldJson, "productGroup": e?.value }
+    dispatch(setProductMasterApiJson(newJson))
 
+}
   return (
     <div className='p-10 bg-white rounded-xl'>
       <form onSubmit={handleSubmit}>
@@ -100,7 +108,7 @@ export default function AddProduct() {
             <CustomInput maxLength={15} name="productCode" label="Product Code" value={reduxProduct?.apiJson?.productCode} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
             <CustomInput maxLength={50} name="productDescription" label="Product Description" value={reduxProduct?.apiJson?.productDescription} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
             {/* <CustomInput name="productGroup" label="Product Group" value={reduxProduct?.apiJson?.productGroup} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} /> */}
-            <SearchableSelect name="productGroup" label="Product Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'gender'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
+            <SearchableSelect name="productGroup" label="Product Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'gender'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson}  onChange={handleOnChange} />
           </div>
           <div className='grid grid-cols-4 gap-4'>
             <CustomInput maxLength={6} type={'number'} name="height" label="Height" value={reduxProduct?.apiJson?.height} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
