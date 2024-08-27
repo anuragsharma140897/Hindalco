@@ -16,7 +16,7 @@ import useAlertController from '../../../Hooks/use-alert-controller';
 
 export default function SiteMaster() {
   const dispatch = useDispatch()
-  const reduxSite = useSelector(state=>state.SiteMasterReducer)
+  const reduxSite = useSelector(state => state.SiteMasterReducer)
   const { openModal, closeModal } = useModal();
   const { showCustomAlert } = useAlertController();
   const [loading, setLoading] = useState(false)
@@ -27,8 +27,8 @@ export default function SiteMaster() {
     console.log('json', json);
     setLoading(true)
     HitApi(json, searchSite).then((result) => {
-      if(result){
-        CompileSiteMaster(result).then((CompiledData)=>{
+      if (result) {
+        CompileSiteMaster(result).then((CompiledData) => {
           dispatch(setSiteMasterData(CompiledData))
           setLoading(false)
         })
@@ -40,7 +40,7 @@ export default function SiteMaster() {
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
-    if(reduxSite?.doc === null){
+    if (reduxSite?.doc === null) {
       loadData()
     }
   }, [])
@@ -49,6 +49,7 @@ export default function SiteMaster() {
     <div>
       <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<AddSiteMaster closeModal={closeModal} ApiHit={loadData} />} title={'Add Site'} customSize={400} />
       <ControlledTable
+      
         variant="modern"
         isLoading={loading}
         showLoadingText={true}

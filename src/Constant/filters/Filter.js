@@ -9,14 +9,14 @@ export const FilterCondition = [
             {
                 id : 0,
                 serverKey:'status',
-                render : (onChange)=><SearchableSelect type={'filter'} api={searchGeneral} dynamicSearch={{'fieldName':'status'}} getFieldName={'value'} onChange={onChange}/>,
-                useCustomDisplay : true,
+                render : (onChange, onClear)=><SearchableSelect name={'status'} placeholder={'Select Status'} type={'filter'} api={searchGeneral} dynamicSearch={{'fieldName':'status'}} getFieldName={'value'} onChange={onChange} onClear={onClear} useCustomDisplay={true}/>,
+                
             },
             {
                 id : 1,
                 serverKey:'roleName',
-                render : (onChange)=><SearchableSelect type={'filter'} api={searchRole} getFieldName={'roleName'} onChange={onChange}/>,
-                useCustomDisplay : true,
+                render : (onChange, onClear)=><SearchableSelect name={'roleName'} placeholder={'Select Role Name'} type={'filter'} api={searchRole} getFieldName={'roleName'} onChange={onChange} onClear={onClear} useCustomDisplay={false}/>,
+                
             }
         ]
     }

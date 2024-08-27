@@ -11,8 +11,6 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
     const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
 
-    console.log('row?.id', row?.id, user);
-
     const areKeysNotEmpty = () => {
         if (!Array.isArray(checkKeys)) return false;
         return checkKeys.every((key) => Array.isArray(row[key]) && row[key]?.length<=0);
@@ -21,9 +19,6 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     // Check if keys are not empty
     const keysAreNotEmpty = areKeysNotEmpty();
     
-    console.log(row, isDeleteAllowed, keysAreNotEmpty);
-
-
     return (
         <div className="flex items-center gap-3 pe-4">
             {isEditAllowed && user?.userId !== row?.id && <Tooltip size="sm" content="Edit User" placement="top" color="invert">
