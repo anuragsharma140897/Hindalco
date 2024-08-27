@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import PageHeader from '../../../shared/page-header'
-import { searchBuilding, searchGeneral } from '../../../Constant/Api/Api'
+import { addBulkTags, addOrder, searchBuilding, searchGeneral } from '../../../Constant/Api/Api'
 import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect'
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -11,6 +11,10 @@ import { Colors } from '../../../Constant/Colors/Color';
 import OutboundAddVehicle from '../add-vehicle/outbound-add-vehicle';
 import { useModal } from '../../../shared/modal-views/use-modal';
 import AddVehicle from '../add-vehicle/add-vehicle';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import { Status } from '../../../Constant/Status';
+import { data } from 'autoprefixer';
 
 function CreateOutbound() {
     const reduxOutbound = useSelector(state => state.OutboundReducer);
@@ -20,6 +24,8 @@ function CreateOutbound() {
     });
     const dispatch = useDispatch()
     const { openModal, closeModal } = useModal();
+
+    const [loading ,setLoading ] = useState(false)
 
 
     const handleOnChange = useCallback
@@ -49,16 +55,22 @@ function CreateOutbound() {
     };
 
 
-  const handleFunctionCall = () => {
+  const handleCreateOutboudnd = (type) =>{
+    var json = reduxOutbound?.apiJson
+  
 
-    openModal({
-      view: <OutboundAddVehicle />,
-      customSize: '800px',
-      title: "Add Vehicle",
+    const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED ,movementStatus:Status.ENTRY_MOVEMENT_STATUS,status: json?.status || 'Active' };
+
+    HitApi(updatedJson, addOrder).then((result) => {
+        console.log("result-----",result);
+
+        if(result.status === 200){
+            alert(result.message)
+
+        }
     })
-
   }
-    console.log('reduxOutbound', reduxOutbound);
+    console.log('reduxOutbound--', reduxOutbound);
 
     return (
         <div>
@@ -93,30 +105,31 @@ function CreateOutbound() {
                             <div className='w-full'>
                                 <div className='text-base text-black font-semibold'>Bill To</div>
                                 <div className='mt-5'>
-                                    {/* <div className='grid grid-cols-4'> */}
                                     <SearchableSelect name="billTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'billTo')} />
-                                    {/* </div> */}
                                 </div>
                             </div>
                             <div className='w-full'>
                                 <div className='text-base text-black font-semibold'>Ship To</div>
                                 <div className='mt-5'>
-                                    {/* <div className='grid grid-cols-4'> */}
                                     <SearchableSelect name="dispatchTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'dispatchTo')} />
-                                    {/* </div> */}
                                 </div>
                             </div>
                         </div>
 
                     </div>
                     {/*Vehicle */}
-                    <AddVehicle/>
-                    {/* <div className='flex items-center  mt-5 gap-x-2'>
-                        <div className='text-base text-black font-semibold'>Add Vehicle</div>
-                        <div className='cursor-pointer'>
-                            <IoIosAddCircle size={30} color={Colors.LOGINRED}  onClick={handleFunctionCall}/>
+                    {reduxOutbound?.apiJson.billTo && reduxOutbound?.apiJson.dispatchTo &&
+                        <div>
+                            <AddVehicle />
                         </div>
-                    </div> */}
+
+                    }
+                    {reduxOutbound?.apiJson.batchID && <div>
+                        <CustomButton type={'submit'} className={''} text={ 'Submit'} onClick={handleCreateOutboudnd} loading={loading} />
+                    </div>
+
+                    }
+                    
                 </div>
             }
 

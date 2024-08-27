@@ -19,23 +19,18 @@ function OutboundBatch() {
     const [selectedRow, setSelectedRow] = useState(null);
 
 
-    const onRowSelect = (key) => {
-        setSelectedRow(key);
-        console.log("Selected row:", key)
+    const onRowSelect = (id) => {
+        setSelectedRow(id);
+        console.log("Selected row:", id)
 
         var oldJson = reduxOutbound?.apiJson
 
         console.log("oldJson",oldJson);
         var json ={
-            "batchID" :key
+            "batchId" :id
         }
         Object.assign(oldJson,json)
-        dispatch(setOutboundApiJson(oldJson));
-
-      
-
-
-    
+        dispatch(setOutboundApiJson(oldJson));    
     };
 
 
@@ -60,7 +55,7 @@ function OutboundBatch() {
          page :1,
          limit : reduxPagination?.doc?.limit,
          search: {
-            // "buildingId":reduxOutbound?.apiJson?.dispatchFrom
+            "buildingId":reduxOutbound?.apiJson?.dispatchFrom
          }
         }
 
