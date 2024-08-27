@@ -1,9 +1,10 @@
-import {  SET_OUTBOUND_ADDED_VEHICLE, SET_OUTBOUND_API_JSON, SET_OUTBOUND_DATA, SET_OUTBOUND_SEARCH_JSON } from "../../Action/outbound/outbound-action";
+import { SET_BUILDING_BATCH, SET_OUTBOUND_ADDED_VEHICLE, SET_OUTBOUND_API_JSON, SET_OUTBOUND_DATA, SET_OUTBOUND_SEARCH_JSON } from "../../Action/outbound/outbound-action";
 
 const initialState = {
     doc: [],
     apiJson: {},
     vehicleAdded: [],
+    builddingBatch: [],
     searchJson: { page: 1, limit: 10, search: {} },
     timestamp: Date.now()
 }
@@ -18,6 +19,8 @@ const OutboundReducer = (state = initialState, action) => {
             return ({ ...state, searchJson: action.value, timestamp: Date.now() })
         case SET_OUTBOUND_ADDED_VEHICLE:
             return ({ ...state, vehicleAdded: action.value, timestamp: Date.now() })
+        case SET_BUILDING_BATCH:
+            return ({ ...state, builddingBatch: action.value, timestamp: Date.now() })
         default:
             return state;
     }

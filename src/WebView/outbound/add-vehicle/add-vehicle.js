@@ -48,7 +48,7 @@ function AddVehicle() {
           <Radio label="Ignore batch" value="Ignorebatch" />
         </RadioGroup>
       </div>
-      <div className='grid grid-cols-4'>
+      <div >
         <div className='mt-5 '>
           {value === "Batch" && <OutboundBatch />}
 
