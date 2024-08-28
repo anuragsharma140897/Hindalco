@@ -27,7 +27,9 @@ export const routes = {
       createConfigurationMaster: '/master/configuration/create',
       editConfigurationMaster: '/master/configuration/edit/:id',
       vehicleMaster: '/master/vehicle',
-      innventoryMaster: '/master/inventory'
+      innventoryMaster: '/master/inventory',
+      inventoryInventories: '/master/inventory/:id',
+
 
     },
     device: {
@@ -51,6 +53,7 @@ export const routes = {
       outboundOrder: '/outbond/outbound-order',
       webPicking: '/outbond/web-picking',
       outboundCreate: '/outbond/outbound-create',
+      outboundEdit: '/outbond/outbound-edit/:id',
     },
   },
 };

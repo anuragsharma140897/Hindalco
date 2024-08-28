@@ -35,7 +35,7 @@ function renderDefaultDisplay(value) {
 
 
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, onClear, useCustomDisplay }) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, onClear, useCustomDisplay ,label}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
@@ -53,6 +53,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
       HitApi(json, api).then((result) => {
+        console.log('result', result);
         CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
@@ -81,6 +82,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
  
   return (
     <div>
+      { label && <div className='block font-bold mt-2'>{label}</div> }
       {
         options?.length > 0 && (<Select
           name={name}
@@ -89,7 +91,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           onClear={onClear}
           options={options || []}
           placeholder={placeholder ? placeholder : `Select ${name || '...'} `}
-          className={cn(className, 'bg-white')}
+          className={cn(className, 'bg-white z-[99999]')}
           dropdownClassName="p-2 gap-1 grid !z-0 capitalize"
           getOptionDisplayValue={(option) =>
             useCustomDisplay?renderOptionDisplayValue(option.value) : renderDefaultDisplay(option.value)

@@ -57,8 +57,8 @@ export const getBuildingZoneMasterColumns = ({ zoneid }) => {
 export const DeleteItem = (id, zoneid) => {
 
   var json = {
-    buildingId: id,
-    zoneId: zoneid,
+    mapTo: id,
+    sourceId: zoneid,
   }
 
 

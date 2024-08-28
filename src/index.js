@@ -29,11 +29,17 @@ import WeighingScaleReducer from './Store/Reducer/device/weighing-scale/weighing
 import ConfigurationMasterReducer from './Store/Reducer/master/configuration-master/configuration-master-reducer';
 import InventoryMasterReducer from './Store/Reducer/master/inventory-master/inventory-master-reducer';
 import MappingMasterReducer from './Store/Reducer/master/mapping-master/mapping-master-reducer';
+import InventoryReducer from './Store/Reducer/Inventories/InventoryReducer';
 import LoadingReducer from './Store/Reducer/loading/loading-reducer';
 import SearchableSelectReducer from './Store/Reducer/common/searcheable-select/searcheable-select-reducer';
 import MQTTReducer from './Store/Reducer/mqtt/mqtt-reducer';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import InboundReducer from './Store/Reducer/inbound/inbout-reducer';
 import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-batch-reducer';
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
+import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -57,13 +63,19 @@ const rootReducer = combineReducers({
   LocationMasterReducer: LocationMasterReducer,
   TagMasterReducer:TagMasterReducer,
   ConfigurationMasterReducer :ConfigurationMasterReducer,
+  InventoryMasterReducer : InventoryMasterReducer,
+  MappingMasterReducer : MappingMasterReducer,
+  InventoryReducer:InventoryReducer,
   MappingMasterReducer : MappingMasterReducer,
   LoadingReducer : LoadingReducer,
   SearchableSelectReducer : SearchableSelectReducer,
   MQTTReducer : MQTTReducer,
+  InboundReducer :InboundReducer,
   MappingMasterReducer : MappingMasterReducer,
   DashboardInventoryBatchReducer : DashboardInventoryBatchReducer,
-  DashboardBatchReducer : DashboardBatchReducer
+  DashboardBatchReducer : DashboardBatchReducer,
+  OutboundReducer :OutboundReducer,
+
 
 })
 

@@ -20,19 +20,20 @@ export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
     width: 10,
     render: (value, row, index) => <Text>{index + 1 || '---'}</Text>,
   },
+
   {
-    title: <HeaderCell title="id" className={'font-extrabold'} />,
-    dataIndex: 'id',
-    key: 'id',
+    title: <HeaderCell title="Vehicle Maker" className={'font-extrabold'} />,
+    dataIndex: 'vehicleMaker',
+    key: 'vehicleMaker',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
   {
-    title: <HeaderCell title="Vehicle Maker" className={'font-extrabold'} />,
-    dataIndex: 'vehicleMaker',
-    key: 'vehicleMaker',
+    title: <HeaderCell title="Vehicle Number" className={'font-extrabold'} />,
+    dataIndex: 'vehicleNumber',
+    key: 'vehicleNumber',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -75,18 +76,9 @@ export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
     ),
   },
   {
-    title: <HeaderCell title="Vehicle Gear"  className={'font-extrabold'}/>,
-    dataIndex: 'vehicleGear',
-    key: 'vehicleGear',
-    width: 100,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
-    title: <HeaderCell title="Vendor Id"  className={'font-extrabold'}/>,
-    dataIndex: 'vendorId',
-    key: 'vendorId',
+    title: <HeaderCell title="Status"  className={'font-extrabold'}/>,
+    dataIndex: 'status',
+    key: 'status',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>

@@ -12,10 +12,12 @@ import { buildingMasterVariable as variable  } from '../../../Constant/variables
 import useDeleteKeys from '../../../Hooks/use-delete-keys';
 import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
 import useAlertController from '../../../Hooks/use-alert-controller';
+import { setSearchableSelectSelectedData } from '../../../Store/Action/common/searcheable-select/searcheable-select-action';
 
 export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     var dispatch = useDispatch()
     const reduxBuilding = useSelector(state => state.BuildingMasterReducer)
+    const reduxSelect = useSelector(state => state.SearchableSelectReducer)
     const { errors, validate } = useValidation(builingMasterSchema);
     const deleteKeys = useDeleteKeys();
     const { showCustomAlert } = useAlertController();
@@ -27,8 +29,11 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     }, [])
 
     const loadDefault = (row) => {
+        console.log('row', row);
         var json = reduxBuilding?.apiJson
+        var selected = reduxSelect?.selected
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        dispatch(setSearchableSelectSelectedData([...selected, {unitName : row?.['unitName']}]))
         dispatch(setBuildingMasterApiJson(json))
     }
     const handleSubmit = (e) => {
@@ -41,8 +46,6 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
                 HitApi(json, updateBuilding).then((result) => {
-
-                    
                     if (result?.success!==false) {
                         showCustomAlert({
                             type: 'success',
@@ -83,10 +86,8 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
 
     const handleClose = () => {
         closeModal();
-        dispatch(setBuildingMasterApiJson(deleteKeys(reduxBuilding?.apiJson)))
+        dispatch(setBuildingMasterApiJson({}))
     }
-
-
 
     return (
         <div className='p-10'>
@@ -97,7 +98,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
                         <CustomInput name="buildingNo" label="Building No" validate={validate} value={reduxBuilding?.apiJson?.buildingNo} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} />
                     </div>
                     <div className='grid grid-cols-2 gap-4'>
-                    <SearchableSelect name="unit" label="Unit" api={searchSite} getFieldName={'siteName'} getFieldLabel={'siteName'} getFieldValue={'siteName'} value={reduxBuilding?.apiJson?.roleName} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} onChange={handleCustomChange}/>
+                    <SearchableSelect name="unitName" label="Unit" api={searchSite} getFieldName={'siteName'} getFieldLabel={'siteName'} getFieldValue={'siteName'} value={reduxBuilding?.apiJson?.roleName} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} onChange={handleCustomChange}/>
                         {/* <CustomInput name="unit" label="Unit" validate={validate} value={reduxBuilding?.apiJson?.unit} error={errors} reduxState={reduxBuilding?.apiJson} setAction={setBuildingMasterApiJson} /> */}
                     </div>
 

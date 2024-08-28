@@ -91,12 +91,12 @@ export const GetBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
       width: 130,
       render: (_, row) => renderCell(null, row, (
         <TableActions
-          screen={'siteMaster'}
+          screen={'buildingMaster'}
           row={row}
-          onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Site Master', AddBuildingMaster, 800, ApiHit)}
+          onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Building Master', AddBuildingMaster, 800, ApiHit)}
           onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
           onDelete={(rowData) => handleDelete(rowData)}
-          checkKeys={['buildingIds','locationIds','readerIds']}
+          checkKeys={[]}
         />
       )),
     }

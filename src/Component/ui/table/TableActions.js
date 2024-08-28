@@ -8,6 +8,10 @@ import { ScreenName } from '../../../Constant/Screen/Screen';
 import { getAuthenticatedUser } from '../../../Storage/Storage';
 const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     const user = getAuthenticatedUser()
+
+    console.log('ScreenName?.[screen]', ScreenName?.[screen]);
+
+    
     const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
     const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
     

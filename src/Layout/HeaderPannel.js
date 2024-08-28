@@ -4,8 +4,6 @@ import { Colors } from '../Constant/Colors/Color';
 import { getHeadingFromPathname } from '../Utils/Utils';
 import { useTranslation } from 'react-i18next';
 import HeaderPopup from './HeaderPopup';
-import { Dropdown, Button } from "rizzui";
-import { FaChevronDown } from "react-icons/fa6";
 import HeaderSiteDropdown from './HeaderSiteDropdown';
 
 
@@ -20,7 +18,7 @@ function HeaderPannel() {
   return (
     <div className='px-5 py-3 bg-[#f1f1f1] border border-l-0 mb-3'>
       <div className='flex justify-end md:justify-between items-center font-bold text-lg'>
-        <div className='hidden md:flex'>{t(heading)}</div>
+        <div className='hidden md:flex md:pl-10'>{t(heading)}</div>
         <div>
           <div className='flex gap-x-5 items-center'>
             

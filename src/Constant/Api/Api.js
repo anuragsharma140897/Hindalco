@@ -7,6 +7,9 @@ export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
 export const PlantMicroService = `http://${IP}/plant/api/`
 export const DeviceMicroService = `http://${IP}/device/api/`
+export const IOTMicroService = `http://${IP}/iot/api/`
+export const OrderMicroService = `http://${IP}/order/api/`
+
 export const IotMicroService = `http://${IP}/iot/api/`
 
 export const LoginApi = BaseUrl + 'login'
@@ -109,15 +112,37 @@ export const mapping = PlantMicroService + 'mapping'
 export const removeMapping = PlantMicroService + 'removeMapping'
 
 
+//addBatch 
+
+export const addBatch = IOTMicroService + 'addBatch'
+export const searchBatch = IOTMicroService + 'searchBatch'
+export const updateBatch = IOTMicroService + 'updateBatch'
+export const deleteBatchCollection = IOTMicroService + 'deleteBatchCollection'
+
+
 // mqtt
 export const addMqttConfig = DeviceMicroService + 'addMqttConfig'
 export const updateMqttConfig = DeviceMicroService + 'updateMqttConfig'
 export const searchMqttConfig = DeviceMicroService + 'searchMqttConfig'
 export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
 
+//rfidTags
+
+
+export const searchRfidTag = IOTMicroService + 'searchRfidTag'
+
+// inbound
+
+export const addInbound = OrderMicroService + 'addInbound'
 // Dashbaord
-export const searchBatch = IotMicroService + 'searchBatch'
-export const searchRfidTag = IotMicroService + 'searchRfidTag'
+
+//order 
+export const addOrder = OrderMicroService + 'addOrder'
+export const searchOrder = OrderMicroService + 'searchOrder'
+
+//updateBulkTags
+export const updateBulkTags = IOTMicroService + 'updateBulkTags'
+
 
 
 

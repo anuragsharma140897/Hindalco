@@ -97,7 +97,14 @@ export const AddChildRolePermission = (arr, itemKey) => {
 
 export const getHeadingFromPathname = () => {
     const pathname = window.location.pathname;
+    const segments = pathname.split('/');
 
+    if (pathname.startsWith("/master/inventory/")) {
+        return "Inventory / Inventories";
+    }
+    if (pathname.startsWith("/outbond/outbound-edit/")) {
+        return "Outbound / Edit";
+    }
     switch (pathname) {
         case "/":
             return "Dashboard"
@@ -153,12 +160,20 @@ export const getHeadingFromPathname = () => {
             return "Inbound Order / Create";
         case "/master/inventory":
             return "Inventory Master"
+        case "/master/supplier/create":
+            return "Supplier Master / Create"
+        case "/inbond/inbound-order":
+            return "Inbound Order"
+        case "/outbond/outbound-create":
+            return "Outbound Order / Create"
+        case "/outbond/outbound-order":
+            return "Outbound Order"
+
         default:
             return "";
     }
 }
 
-// not used
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],

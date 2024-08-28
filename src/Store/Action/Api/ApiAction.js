@@ -25,11 +25,9 @@ export const HitApi = (json, api) => {
 
         fetch(api, requestOptions)
             .then(res => {
-                // Check if the response status is not OK (e.g., 404)
                 if (!res.ok) {
                     return res.json().then(err => {
                         console.log('err ---- ', err);
-                        // Resolve with an error object instead of rejecting
                         resolve({
                             success: false,
                             status: res.status,
@@ -42,13 +40,11 @@ export const HitApi = (json, api) => {
             })
             .then(result => {
                 if (result) {
-                    // Resolve with success status
                     resolve(result)
                 }
             })
             .catch(err => {
                 console.log('Error caught: ', err);
-                // Resolve with an error object
                 resolve({
                     success: false,
                     message: 'An error occurred during the API call.',

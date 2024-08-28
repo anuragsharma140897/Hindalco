@@ -1,7 +1,5 @@
 import { PiMapPin, PiListChecksBold, PiBarcode, PiBookOpenText, PiBatteryVerticalHigh, PiTrash } from 'react-icons/pi';
 import { RxDashboard } from "react-icons/rx";
-
-import { FaUsersCog } from "react-icons/fa";
 import { routes } from '../config/routes';
 import UserManagementIcon from '../Constant/Icons/user-management-icon';
 import RolePermissionIcon from '../Constant/Icons/role-permission-icon';
@@ -14,7 +12,11 @@ import ProductMasterIcon from '../Constant/Icons/product-master-icon';
 import CustomerMasterIcon from '../Constant/Icons/coustumer-master-icon';
 import SupplierMasterIcon from '../Constant/Icons/supplier-master-icon';
 import GeneralMasterIcon from '../Constant/Icons/general-master-icon';
-import ReaderBuildingMappingMasterIcon from '../Constant/Icons/reader-building-mapping-master-icon';
+import MappingMasterIcon from '../Constant/Icons/mapping-master-icon';
+import VehicleMasterIcon from '../Constant/Icons/vehicle-master-icon';
+import ConfigurationMasterIcon from '../Constant/Icons/configuration-master-icon';
+import WeighingScaleIcon from '../Constant/Icons/weighing-scale-icon';
+import WebReceivingIcon from '../Constant/Icons/web-receiving-icon';
 
 export const menuItems = [
   {
@@ -34,11 +36,10 @@ export const menuItems = [
       { name: 'Customer Master', href: routes?.panel?.master?.customerMaster ,icon : <CustomerMasterIcon />},
       { name: 'Supplier Master', href: routes?.panel?.master?.supplierMaster ,icon : <SupplierMasterIcon />},
       { name: 'Inventory Master', href: routes?.panel?.master?.innventoryMaster,icon : <GeneralMasterIcon /> },
-      { name: 'Vehicle Master', href: routes?.panel?.master?.vehicleMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
-      { name: 'Configuration Master', href: routes?.panel?.master?.configurationMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
+      { name: 'Vehicle Master', href: routes?.panel?.master?.vehicleMaster ,icon : <VehicleMasterIcon /> },
+      { name: 'Configuration Master', href: routes?.panel?.master?.configurationMaster ,icon : <ConfigurationMasterIcon /> },
       { name: 'General Master', href: routes?.panel?.master?.generalMaster,icon : <GeneralMasterIcon /> },
-      { name: 'Mapping Master', href: routes?.panel?.master?.mappingMaster, icon : <GeneralMasterIcon /> },
-      // { name: 'Reader Building Mapping Master', href: routes?.panel?.master?.readerBuildingMappingMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
+      { name: 'Mapping Master', href: routes?.panel?.master?.mappingMaster, icon : <MappingMasterIcon /> },
     ],
   },
   {
@@ -47,8 +48,8 @@ export const menuItems = [
       { name: 'Reader Master', href: routes?.panel?.device?.readerMaster ,icon : <ReaderMasterIcon />},
       { name: 'Reader Replacement Master', href: routes?.panel?.device?.readerReplacementMaster,icon : <ReaderReplacementMasterIcon />}, 
       { name: 'Reader Health Master', href: routes?.panel?.device?.readerHealthMaster ,icon : <ReaderHealthMasterIcon /> },
-      { name: 'Reader Building Mapping Master', href: routes?.panel?.device?.readerBuildingMappingMaster ,icon : <ReaderBuildingMappingMasterIcon /> },
-      { name: 'Weighing Scale', href: routes?.panel?.device?.weighingScale ,icon : <ReaderBuildingMappingMasterIcon /> },
+      { name: 'Reader Building Mapping Master', href: routes?.panel?.device?.readerBuildingMappingMaster ,icon : <MappingMasterIcon /> },
+      { name: 'Weighing Scale', href: routes?.panel?.device?.weighingScale ,icon : <WeighingScaleIcon /> },
     ],
   },
   { name: 'Reports', },
@@ -56,7 +57,7 @@ export const menuItems = [
     name: 'Inbound', href: '#', icon: '',
     dropdownItems: [
       { name: 'Inbound Order', href: routes?.panel?.inbond?.inboundOrder },
-      { name: 'Web Receving', href: routes?.panel?.inbond?.webReceiving },
+      { name: 'Web Receving', href: routes?.panel?.inbond?.webReceiving ,icon :<WebReceivingIcon/> },
     ],
   }, {
     name: 'Outbound', href: '#', icon: '',
