@@ -38,6 +38,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
+                console.log('json', json);
                 HitApi(json, updateSite).then((result) => {
                     if (result?.success!==false) {
                         showCustomAlert({
@@ -50,7 +51,6 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
                     }
                 })
               } else {
-                Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addSite).then((result) => {
                     if (result?.success!==false) {
                         showCustomAlert({
@@ -70,6 +70,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
 
     const handleClose = () =>{
         closeModal()
+        dispatch(setSiteMasterApiJson({}))
     }
 
     return (
@@ -80,7 +81,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
                     <CustomInput important={false} name="buildings" label="Building " value={reduxSite?.apiJson?.buildings} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
                     <CustomInput important={false} name="area" label="Area " helperText={'Type area in sqft only'} value={reduxSite?.apiJson?.area} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
-                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
+                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={handleClose} />
                         <CustomButton type={'submit'} className={''} text={row?.id?'Update' : 'Submit'} />
                     </div>
                 </div>

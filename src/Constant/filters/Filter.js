@@ -19,5 +19,38 @@ export const FilterCondition = [
                 
             }
         ]
+    },
+    {
+        _id : 1, screen : ScreenName?.roleAndPermission,
+        condition : [
+            {
+                id : 0,
+                serverKey:'roleName',
+                render : (onChange, onClear)=><SearchableSelect name={'roleName'} placeholder={'Select Role Name'} type={'filter'} api={searchRole} getFieldName={'roleName'} onChange={onChange} onClear={onClear} useCustomDisplay={false}/>,
+                
+            }
+        ]
+    },
+    {
+        _id : 1, screen : ScreenName?.siteMaster,
+        condition : [
+            {
+                id : 0,
+                serverKey:'status',
+                render : (onChange, onClear)=><SearchableSelect name={'status'} placeholder={'Select Status'} type={'filter'} api={searchGeneral} dynamicSearch={{'fieldName':'status'}} getFieldName={'value'} onChange={onChange} onClear={onClear} useCustomDisplay={true}/>,
+                
+            }
+        ]
+    },
+    {
+        _id : 3, screen : ScreenName?.buildingMaster,
+        condition : [
+            {
+                id : 0,
+                serverKey:'status',
+                render : (onChange, onClear)=><SearchableSelect name={'status'} placeholder={'Select Status'} type={'filter'} api={searchGeneral} dynamicSearch={{'fieldName':'status'}} getFieldName={'value'} onChange={onChange} onClear={onClear} useCustomDisplay={true}/>,
+                
+            }
+        ]
     }
 ]
