@@ -16,7 +16,7 @@ function OutboundIgoneBatch() {
     const reduxPagination = useSelector((state) => state.PaginationReducer);
     const reduxOutbound = useSelector(state => state.OutboundReducer);
 
-    const [loading ,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const [selectedRows, setSelectedRows] = useState([]);
 
@@ -28,7 +28,7 @@ function OutboundIgoneBatch() {
     const onRowSelect = (row) => {
         setSelectedRows(prevSelected => {
             const isSelected = prevSelected.some(item => item.id === row.id);
-    
+
             if (isSelected) {
                 return prevSelected.filter(item => item.id !== row.id);
             }
@@ -64,12 +64,12 @@ function OutboundIgoneBatch() {
             console.log("searchRfidTag-----", result);
             dispatch(setOutboundInventory(result?.content))
             var oldJson = reduxOutbound?.apiJson
-            console.log("oldJson",oldJson);
-            var json ={
-                "batchId" :result?.content[0]?.batchId
+            console.log("oldJson", oldJson);
+            var json = {
+                "batchId": result?.content[0]?.batchId
             }
 
-            console.log("json",json);
+            console.log("json", json);
             Object.assign(oldJson, json);
             dispatch(setOutboundApiJson(oldJson));
 
@@ -78,7 +78,7 @@ function OutboundIgoneBatch() {
 
     // const handleCreateOutboudnd = () =>{
     //     var json = reduxOutbound?.apiJson
-     
+
     //         const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED ,movementStatus:Status.ENTRY_MOVEMENT_STATUS,status: json?.status || 'Active',batchID :null };
     //         console.log('updatedJson',updatedJson);
     //         HitApi(updatedJson,addOrder).then((result) => {
@@ -89,18 +89,18 @@ function OutboundIgoneBatch() {
 
     //                 const updateOrederIDArr = selectedRows
 
-                  
+
     //                 HitApi(updateOrederIDArr, updateBulkTags).then((result) => {
     //                     console.log("result-----",result);
-                
+
     //                     if(result.status === 200){
     //                         alert(result.message)
-                
+
     //                     }
     //                 })
-    
-    
-        
+
+
+
     //             }
     //         })
     //   }
@@ -108,37 +108,33 @@ function OutboundIgoneBatch() {
 
     const handleCreateOutbound = () => {
         const json = reduxOutbound?.apiJson;
-    
-        // Prepare the updated JSON object for the initial API call
-        const updatedJson = { 
-            ...json, 
-            orderType: "OUTBOUND", 
-            orderStatus: Status.ORDER_INITIATED, 
-            movementStatus: Status.ENTRY_MOVEMENT_STATUS, 
-            status: json?.status || 'Active', 
-            batchID: null 
+
+        const updatedJson = {
+            ...json,
+            orderType: "OUTBOUND",
+            orderStatus: Status.ORDER_INITIATED,
+            movementStatus: Status.ENTRY_MOVEMENT_STATUS,
+            status: json?.status || 'Active',
+            batchID: null
         };
-    
+
         console.log('updatedJson', updatedJson);
-    
-        // Make the initial API call
+
         HitApi(updatedJson, addOrder).then((result) => {
             console.log("result-----", result);
             console.log("Orderid", result?.data?.id);
-    
+
             if (result.status === 200) {
                 alert(result.message);
-    
-                // Replace orderId in selectedRows with the new Orderid
+
                 const updateOrderIDArr = selectedRows.map(row => ({
                     ...row,
                     orderId: result?.data?.id
                 }));
-    
-                // Make the second API call with the updated order IDs
+
                 HitApi(updateOrderIDArr, updateBulkTags).then((result) => {
                     console.log("result-----", result);
-            
+
                     if (result.status === 200) {
                         alert(result.message);
                     }
@@ -146,8 +142,8 @@ function OutboundIgoneBatch() {
             }
         });
     };
-    
-      console.log("reduxOusvsdfcdsctbound",reduxOutbound);
+
+    console.log("reduxOusvsdfcdsctbound", reduxOutbound);
 
 
     return (
@@ -161,8 +157,11 @@ function OutboundIgoneBatch() {
                 className={TableClass}
             />
 
-            <CustomButton type={'submit'} className={''} text={'Submit'} onClick={handleCreateOutbound} loading={loading} />
+            <div className='flex justify-end gap-x-2 mt-3'>
+            <CustomButton  text={ 'Back'} variant={'flat'} onClick={()=>window.location.pathname = '/inbond/outbound-order'}/> 
+                <CustomButton type={'submit'} className={''} text={'Submit'} onClick={handleCreateOutbound} loading={loading} />
 
+            </div>
         </div>
     )
 }

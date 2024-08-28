@@ -140,6 +140,7 @@ export const addInbound = OrderMicroService + 'addInbound'
 
 //order 
 export const addOrder = OrderMicroService + 'addOrder'
+export const searchOrder = OrderMicroService + 'searchOrder'
 
 //updateBulkTags
 export const updateBulkTags = IOTMicroService + 'updateBulkTags'

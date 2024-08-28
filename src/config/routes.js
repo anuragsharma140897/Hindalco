@@ -53,6 +53,7 @@ export const routes = {
       outboundOrder: '/outbond/outbound-order',
       webPicking: '/outbond/web-picking',
       outboundCreate: '/outbond/outbound-create',
+      outboundEdit: '/outbond/outbound-edit/:id',
     },
   },
 };

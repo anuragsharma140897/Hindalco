@@ -37,6 +37,7 @@ import MappingMaster from '../WebView/master/mapping-master/mapping-master'
 import Inventories from '../WebView/master/inventory-master/inventories/inventories'
 import AddCustomeMaster from '../Form/master/customer-master/add-customer-master'
 import Dashboard from '../WebView/dashboard/dashboard'
+import EditOutbound from '../WebView/outbound/EditOutbound/EditOutbound'
 
 export default function CustomRoutes() {
 
@@ -82,6 +83,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.editConfigurationMaster} exact element={<AddConfigurationMaster />} />
             <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
             <Route path={routes?.panel?.master?.inventoryInventories} exact element={<Inventories />} />
+            <Route path={routes?.panel?.outbond?.outboundEdit} exact element={<EditOutbound/>} />
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

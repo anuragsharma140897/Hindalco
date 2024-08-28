@@ -132,8 +132,7 @@ export default function AddCustomeMaster({ row, closeModal }) {
 
     return (
         <div>
-            <PageHeader metaTitle={'Create Customer'} disbleExport />
-            <div className='p-10 rounded-xl bg-white'>
+            <div className='p-10 rounded-xl bg-white mt-10' >
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-5 lg:space-y-6">
                         <div className='grid grid-cols-4 gap-4 '>

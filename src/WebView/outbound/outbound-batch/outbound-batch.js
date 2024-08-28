@@ -6,8 +6,10 @@ import { useColumn } from '../../../Hooks/use-column';
 import { useDispatch, useSelector } from 'react-redux';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
-import { searchBatch } from '../../../Constant/Api/Api';
+import { addOrder, searchBatch } from '../../../Constant/Api/Api';
 import { setBuldingBatch, setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action';
+import CustomButton from '../../../Component/ui/buttons/custom-button';
+import { Status } from '../../../Constant/Status';
 
 function OutboundBatch() {
     const { openModal, closeModal } = useModal();
@@ -33,15 +35,7 @@ function OutboundBatch() {
         dispatch(setOutboundApiJson(oldJson));    
     };
 
-
-    const columns = useMemo(() => getOutboundBatchColumns({ 
-        openModal, 
-        closeModal, 
-        loading, 
-        setLoading,
-        selectedRow,
-        onRowSelect
-    }), [openModal, closeModal, loading, selectedRow]);
+    const columns = useMemo(() => getOutboundBatchColumns({  openModal,  closeModal,  loading,  setLoading, selectedRow, onRowSelect}), [openModal, closeModal, loading, selectedRow]);
     const { visibleColumns } = useColumn(columns);
 
     useEffect(() => {
@@ -65,10 +59,34 @@ function OutboundBatch() {
         })
     }
 
+   const  onSubmit = () =>{
+    var json = reduxOutbound?.apiJson
+
+
+    const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED ,movementStatus:Status.ENTRY_MOVEMENT_STATUS,status: json?.status || 'Active' };
+
+    HitApi(updatedJson, addOrder).then((result) => {
+        console.log("result-----",result);
+
+        if(result.status === 200){
+            alert(result.message)
+        }
+    })
+
+   }
+
+
     console.log("reduxOutbound-----",reduxOutbound);
     return (
         <div>
             <ControlledTable variant="modern" isLoading={false} showLoadingText={true} data={reduxOutbound?.builddingBatch} columns={visibleColumns} className={TableClass} />
+            {
+             reduxOutbound?.apiJson?.batchId &&
+            <div className='flex justify-end mt-3 gap-x-2'>
+                 <CustomButton  text={ 'Back'} variant={'flat'} onClick={()=>window.location.pathname = '/inbond/outbound-order'}/> 
+                 <CustomButton type={'submit'}  text={ 'Submit'} onClick={onSubmit} loading={loading} /> 
+            </div>
+            }
         </div>
     )
 }

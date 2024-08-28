@@ -102,6 +102,9 @@ export const getHeadingFromPathname = () => {
     if (pathname.startsWith("/master/inventory/")) {
         return "Inventory / Inventories";
     }
+    if (pathname.startsWith("/outbond/outbound-edit/")) {
+        return "Outbound / Edit";
+    }
     switch (pathname) {
         case "/":
             return "Dashboard"
@@ -163,11 +166,14 @@ export const getHeadingFromPathname = () => {
             return "Inbound Order"
         case "/outbond/outbound-create":
             return "Outbound Order / Create"
+        case "/outbond/outbound-order":
+            return "Outbound Order"
+
         default:
             return "";
     }
 }
-// /outbond/outbound-create
+
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],

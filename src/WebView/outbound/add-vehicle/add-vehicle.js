@@ -34,36 +34,6 @@ function AddVehicle() {
       <div className='text-lg font-bold'>Vehicle Allotted </div>
       <PageHeader btnText={'Add Vehicle'} children={<OutboundAddVehicle />} title={'Add Vehicle'} disbleExport={true} customSize={800} />
       <ControlledTable variant="modern" isLoading={false} showLoadingText={true} data={reduxOutbound?.vehicleAdded} columns={visibleColumns} className={TableClass} />
-   {reduxOutbound?.apiJson?.vehicleIds?.length > 0 &&
-    <div>
-    <div className='mt-5'>
-         <div className='text-base text-black font-semibold mb-5'>Batch / Without batch</div>
-         <RadioGroup
-           value={value}
-           setValue={(newValue) => {
-             setValue(newValue);
-             setSelectedDetails(null);
-           }}
-           className="flex gap-4"
-         >
-           <Radio label="Batch" value="Batch" />
-           <Radio label="Ignore batch" value="Ignorebatch" />
-         </RadioGroup>
-       </div>
-       <div >
-         <div className='mt-5 '>
-           {value === "Batch" && <OutboundBatch />}
-           {value === "Ignorebatch" && <OutboundIgoneBatch/>}
-
- 
-           {/* {value === "Batch" && <SearchableSelect name="batchId" label="Batch" api={searchBatch} getFieldName={'batchName'} onChange={(e) => handleOnChange(e, 'batchId')} />} */}
-           {/* {value === "Ignorebatch" && <SearchableSelect name="supplierId" label="Supplier" api={searchSupplier} getFieldName={'supplierName'} onChange={(e) => handleOnChange(e, 'supplierId')} />} */}
-         </div>
-       </div>
-    </div>
-   }
-
-
     </div>
   )
 }
