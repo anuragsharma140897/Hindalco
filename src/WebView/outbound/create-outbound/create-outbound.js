@@ -37,14 +37,24 @@ function CreateOutbound() {
         }, [dispatch, reduxOutbound?.apiJson]);
 
 
+  
+
     const handleDateChange = (e, name) => {
         setDefaultDates(prevState => ({
             ...prevState,
             [name]: e
         }));
-        const formattedDate = e?.toISOString()?.slice(0, 19);
-        const updatedJson = { ...reduxOutbound?.apiJson, [name]: formattedDate };
-        dispatch(setOutboundApiJson(updatedJson));
+    
+        if (e) {
+            const formattedDate = new Date(e.getTime() - (e.getTimezoneOffset() * 60000)).getTime();
+    
+            const updatedJson = { ...reduxOutbound?.apiJson, [name]: formattedDate };
+            dispatch(setOutboundApiJson(updatedJson));
+        } else {
+            const updatedJson = { ...reduxOutbound?.apiJson };
+            delete updatedJson[name];
+            dispatch(setOutboundApiJson(updatedJson));
+        }
     };
 
     console.log("reduxOutbound",reduxOutbound);

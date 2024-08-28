@@ -20,6 +20,11 @@ function OutboundBatch() {
 
     const [selectedRow, setSelectedRow] = useState(reduxOutbound?.apiJson?.batchId || null);
 
+    let isEdit = false
+    if(window.location.pathname.split('/')[2] === 'outbound-edit'){
+       isEdit =true
+    }
+
 
 
 
@@ -64,9 +69,10 @@ function OutboundBatch() {
     const onSubmit = () => {
         setLoading(true)
         var json = reduxOutbound?.apiJson
-        const apiTohit = reduxOutbound?.apiJson?.batchId  && reduxOutbound?.apiJson?.saleType ==="INTERNAL" ? updateOrder : addOrder
+        const apiTohit =isEdit ? updateOrder : addOrder
 
-        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active' };
+        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active' ,id : json?._id};
+        console.log("updatedJson-----", updatedJson);
 
         HitApi(updatedJson, apiTohit).then((result) => {
             console.log("result-----", result);
@@ -94,7 +100,7 @@ function OutboundBatch() {
                 reduxOutbound?.apiJson?.batchId &&
                 <div className='flex justify-end mt-3 gap-x-2'>
                     <CustomButton text={'Back'} variant={'flat'} onClick={() => window.location.pathname = '/inbond/outbound-order'} />
-                    <CustomButton type={'submit'} text={reduxOutbound?.apiJson?.batchId  && reduxOutbound?.apiJson?.saleType ==="INTERNAL"? 'Update' : 'Submit'} onClick={onSubmit} loading={loading} />
+                    <CustomButton type={'submit'} text={isEdit? 'Update' : 'Submit'} onClick={onSubmit} loading={loading} />
                 </div>
             }
         </div>

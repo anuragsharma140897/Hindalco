@@ -19,6 +19,10 @@ function OutboundIgoneBatch() {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [selectedRows, setSelectedRows] = useState([]);
+    let isEdit = false
+    if(window.location.pathname.split('/')[2] === 'outbound-edit'){
+       isEdit =true
+    }
 
     const onRowSelect = (row) => {
         setSelectedRows((prevSelected) => {
@@ -85,10 +89,12 @@ function OutboundIgoneBatch() {
             orderStatus: Status.ORDER_INITIATED,
             movementStatus: Status.ENTRY_MOVEMENT_STATUS,
             status: json?.status || 'Active',
-            batchID: null
+            batchID: null,
+            id : json?._id
         };
 
-        const apiToHit = reduxOutbound?.apiJson?.id ? updateOrder : addOrder;
+
+        const apiToHit = isEdit ? updateOrder : addOrder;
 
         setLoading(true);
         HitApi(updatedJson, apiToHit).then((result) => {
@@ -131,7 +137,7 @@ function OutboundIgoneBatch() {
                 <CustomButton 
                     type={'submit'} 
                     className={''} 
-                    text={reduxOutbound?.apiJson?.id ? 'Update' : 'Submit'} 
+                    text={isEdit ? 'Update' : 'Submit'} 
                     onClick={handleCreateOutbound} 
                     loading={loading} 
                 />
