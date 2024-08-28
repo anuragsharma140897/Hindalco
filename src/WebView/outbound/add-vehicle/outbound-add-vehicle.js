@@ -30,6 +30,8 @@ function OutboundAddVehicle() {
     } else {
       vehicleIds.push({
         vehicleId: e?.id,
+        vehicleNumber :e.value
+
       });
       const json = {
         ...oldJson,
@@ -59,11 +61,14 @@ function OutboundAddVehicle() {
       dispatch( setOutboundAddedVehicle(oldArr))
     });
   };
+
+
+  
   console.log("selectedDetails", selectedDetails);
   return (
     <div className='p-10'>
       <div className='mb-5'>
-        <SearchableSelect name="vehicleId" label="Vehicle" api={searchVehicle} getFieldName={'vehicleNumber'} onChange={(e) => handleChange(e)} />
+        <SearchableSelect lable={"Select Vehicle"} name="vehicleId" label="Vehicle" api={searchVehicle} getFieldName={'vehicleNumber'} onChange={(e) => handleChange(e)} />
         {
           selectedDetails ?
           <div>

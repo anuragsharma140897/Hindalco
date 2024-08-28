@@ -29,8 +29,6 @@ export default function UserManagement() {
             Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
         }
 
-        console.log('json', json);
-
         HitApi(json, searchUser).then((result) => {
             if (result?.success !== false) {
                 CompileUserMaster(result).then((compiledData) => {
@@ -42,6 +40,8 @@ export default function UserManagement() {
                         totalElements: compiledData?.totalElements,
                     }));
                 });
+            }else{
+                dispatch(setUserData([]));
             }
         });
     };

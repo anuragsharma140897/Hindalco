@@ -8,11 +8,11 @@ function OutboundInternal() {
     const dispatch = useDispatch()
     const reduxOutbound = useSelector(state => state.OutboundReducer);
     const handleOnChange = useCallback
-    ((e, name) => {
+    ((e, name,fromName) => {
         const { id } = e;
         let newJson = { [name]: id };
-        if (name === "dispatchFrom" || name === "dispatchTo" || name === "billTo") {
-            newJson = { [name]: e.id }
+        if ( name === "dispatchTo" || name === "billTo") {
+            newJson = { [name]: e.id , [fromName]: e.value}
         }
         else {
             newJson = { [name]: e.value }
@@ -27,13 +27,13 @@ function OutboundInternal() {
                     <div className='w-full'>
                         <div className='text-base text-black font-semibold'>Bill To</div>
                         <div className='mt-5'>
-                            <SearchableSelect name="billTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'billTo')} />
+                            <SearchableSelect name="billTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'billTo',"billToName")} />
                         </div>
                     </div>
                     <div className='w-full'>
                         <div className='text-base text-black font-semibold'>Ship To</div>
                         <div className='mt-5'>
-                            <SearchableSelect name="dispatchTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'dispatchTo')} />
+                            <SearchableSelect name="dispatchTo" label="Select Building" api={searchBuilding} getFieldName={'buildingName'} onChange={(e) => handleOnChange(e, 'dispatchTo',"dispatchToName")} />
                         </div>
                     </div>
                 </div>

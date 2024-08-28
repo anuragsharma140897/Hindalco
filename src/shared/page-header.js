@@ -14,7 +14,7 @@ export default function PageHeader({ screen, metaTitle, btnText, className, data
   const { openModal } = useModal();
   let metaObject = pageHeader?.find((Obj) => Obj.title === metaTitle)
   // const isEditAllowed = usePermissionCheck(screen, 'write');
-  const isEditAllowed = true;
+  const isEditAllowed = true
 
   const handleFunctionCall = () => {
     if (href) {
