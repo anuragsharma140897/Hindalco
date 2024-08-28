@@ -1,7 +1,7 @@
 
 // export const IP = '137.184.74.218'
 
-export const IP = '192.168.1.104:9090'
+export const IP = '192.168.0.104:9090'
 
 // export const IP = '192.168.1.104:9090'
 export const MQTTIP = 'ws://192.168.1.104:9001'
@@ -141,6 +141,7 @@ export const addInbound = OrderMicroService + 'addInbound'
 
 //order 
 export const addOrder = OrderMicroService + 'addOrder'
+export const updateOrder = OrderMicroService + 'updateOrder'
 export const searchOrder = OrderMicroService + 'searchOrder'
 
 //updateBulkTags

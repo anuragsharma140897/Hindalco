@@ -16,33 +16,44 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
   },
   {
     title: <HeaderCell title="Dispatch From" className={'font-extrabold'} />,
-    dataIndex: 'dispatchFrom',
-    key: 'dispatchFrom',
+    dataIndex: 'dispatchFromName',
+    key: 'dispatchFromName',
     width: 130,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
+  // {
+  //   title: <HeaderCell title="Dispatch From Type" className={'font-extrabold'} />,
+  //   dataIndex: 'dispatchFromType',
+  //   key: 'dispatchFromType',
+  //   width: 130,
+  //   render: (value) => (
+  //     <Text className="font-medium text-gray-700">{value || '---'}</Text>
+  //   ),
+  // }, 
   {
-    title: <HeaderCell title="Dispatch From Type" className={'font-extrabold'} />,
-    dataIndex: 'dispatchFromType',
-    key: 'dispatchFromType',
-    width: 130,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  }, {
     title: <HeaderCell title="Dispatch To" className={'font-extrabold'} />,
-    dataIndex: 'dispatchTo',
-    key: 'dispatchTo',
+    dataIndex: 'dispatchToName',
+    key: 'dispatchToName',
     width: 130,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
-  }, {
-    title: <HeaderCell title="Dispatch To Type" className={'font-extrabold'} />,
-    dataIndex: 'dispatchToType',
-    key: 'dispatchToType',
+  },
+  // {
+  //   title: <HeaderCell title="Dispatch To Type" className={'font-extrabold'} />,
+  //   dataIndex: 'dispatchToType',
+  //   key: 'dispatchToType',
+  //   width: 130,
+  //   render: (value) => (
+  //     <Text className="font-medium text-gray-700">{value || '---'}</Text>
+  //   ),
+  // },
+   {
+    title: <HeaderCell title="Bill To" className={'font-extrabold'} />,
+    dataIndex: 'billToName',
+    key: 'billToName',
     width: 130,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -92,12 +103,8 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit'} placement="top" color="invert">
-          {/* <label href={routes?.eCommerce?.editOrder(row.id)}>
-                <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
-                  <PencilIcon className="h-4 w-4" />
-                </ActionIcon>
-              </label> */
-            <a href={'/outbond/outbound-edit/' + row.id}>
+          {
+            <a href={'/outbond/outbound-edit/' + row._id}>
               <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
                 <PencilIcon className="h-4 w-4" />
               </ActionIcon>

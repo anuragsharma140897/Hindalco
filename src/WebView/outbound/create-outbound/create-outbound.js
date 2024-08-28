@@ -8,6 +8,7 @@ import DateAndTime from '../../../Component/ui/date-and-time/date-and-time';
 import OutboundInternal from '../internal/outbound-internal';
 import AddVehicle from '../add-vehicle/add-vehicle';
 import BatchWithout from '../internal/batch-without';
+import OutboundExternal from '../external/outbound-external';
 
 
 function CreateOutbound() {
@@ -77,6 +78,10 @@ function CreateOutbound() {
             {
                 Object.keys(reduxOutbound?.apiJson).length !== 0 && reduxOutbound?.apiJson?.saleType === "INTERNAL" &&
                 <OutboundInternal />
+            }
+             {
+                Object.keys(reduxOutbound?.apiJson).length !== 0 && reduxOutbound?.apiJson?.saleType === "EXTERNAL" &&
+                <OutboundExternal />
             }
             {/* addvehicle */}
             {reduxOutbound?.apiJson.billTo && reduxOutbound?.apiJson.dispatchTo &&
