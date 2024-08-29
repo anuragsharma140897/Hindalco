@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import useValidation from '../../../Hooks/useValidation';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 import CustomInput from '../../../Component/ui/form/input/custom-input';
-import { addBatch, addTag, addVehicle, searchProduct, updateBatch, updateVehicle } from '../../../Constant/Api/Api';
+import { addBatch, searchProduct, updateBatch } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { inventoryMasterVariable as variable } from '../../../Constant/variables/master/inventory-master/inventory-master.variable';
-import { setVehicleMasterApiJson } from '../../../Store/Action/master/vehicle-master/vehicle-master-action'
-import { vehicleMasterSchema } from '../../../Utils/validators/master/vehicle-master/vehicle-master-schema';
 import { setInventoryMasterApiJson } from '../../../Store/Action/master/inventory-master/inventory-master-action';
 import { inventoryMasterSchema } from '../../../Utils/validators/master/inventory-master/inventory-master-scheema';
 import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
@@ -78,19 +76,19 @@ export default function AddInventoryMaster({ row, closeModal }) {
 
     }
 
-    console.log("reduxInventory", reduxInventory);
+    console.log("reduxInventory", reduxInventory)
 
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <SearchableSelect name="product_id" label="Product" api={searchProduct} getFieldName={'productName'} onChange={handleOnChange} />
-                    <CustomInput important={true} name="batchName" label="Batch Name" value={reduxInventory?.apiJson?.batchName} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} />
-                    <CustomInput important={true} name="batchNumber" label="Batch Number" value={reduxInventory?.apiJson?.batchNumber} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} />
-                    <CustomInput important={true} name="totalInventory" type={'number'} label="Total Inventory" value={reduxInventory?.apiJson?.totalInventory} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} />
+                    <SearchableSelect name="product_id" label="Product" api={searchProduct} getFieldName={'productName'} onChange={handleOnChange} error={errors} validate={validate}/>
+                    <CustomInput important={true} name="batchName" label="Batch Name" value={reduxInventory?.apiJson?.batchName} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} validate={validate} />
+                    <CustomInput important={true} name="batchNumber" label="Batch Number" value={reduxInventory?.apiJson?.batchNumber} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} validate={validate}/>
+                    <CustomInput important={true} name="totalInventory" type={'number'} label="Total Inventory" value={reduxInventory?.apiJson?.totalInventory} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} validate={validate} />
                     <div className='flex gap-3 justify-end'>
-                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton text={'Cancel'} variant='flat'  onClick={closeModal} />
+                        <CustomButton type={'submit'}  text={row?.id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>
