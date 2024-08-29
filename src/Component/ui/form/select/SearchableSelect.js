@@ -65,6 +65,8 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   };
 
   const handleChange = (e) => {
+
+    console.log("eeee",e);
     const { value, id } = e;
     const updatedSelected = reduxSelect?.selected.map(item =>
       item.name === name ? { ...item, value } : item

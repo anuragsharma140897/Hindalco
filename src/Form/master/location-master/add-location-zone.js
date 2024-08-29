@@ -9,7 +9,7 @@ import { getzoneLocationMasterColumns } from '../../../WebView/master/location-m
 import { useColumn } from '../../../Hooks/use-column';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { CompileZoneMaster } from '../../../WebView/master/zone-master/promise/zone-master-promise';
-import { addZoneToLocation, searchZone } from '../../../Constant/Api/Api';
+import { addZoneToLocation, searchSite, searchZone } from '../../../Constant/Api/Api';
 import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
 
 
@@ -56,28 +56,30 @@ function AddLocationZone({ row }) {
 
 
     const handleSubmit = () => {
-        if (reduxZone?.apiJson?._id) {
-            setLoading(true)
-            var json = {
-                sourceId: row?._id,
-                mapTo: reduxZone?.apiJson?._id,
-            }
+        alert("yess")
+        console.log("reduxZone?.apiJson?._id",reduxZone);
+        // if (reduxZone?.apiJson?._id) {
+        //     setLoading(true)
+        //     var json = {
+        //         sourceId: row?._id,
+        //         mapTo: reduxZone?.apiJson?._id,
+        //     }
 
-            console.log(json);
+        //     console.log(json);
 
-            HitApi(json, addZoneToLocation).then((result) => {
-                setLoading(false)
-                console.log("result", result);
-                if (result?.status === 200) {
-                    alert(result.message)
-                    window.location.pathname = '/master/location'
-                }
-                else {
-                    alert(result.message)
-                }
+        //     HitApi(json, addZoneToLocation).then((result) => {
+        //         setLoading(false)
+        //         console.log("result", result);
+        //         if (result?.status === 200) {
+        //             alert(result.message)
+        //             window.location.pathname = '/master/location'
+        //         }
+        //         else {
+        //             alert(result.message)
+        //         }
 
-            })
-        }  
+        //     })
+        // }  
 
     }
 
@@ -86,19 +88,22 @@ function AddLocationZone({ row }) {
         const { id, value } = e;
         console.log("e",e)
 
-        const newJson = { [name]: id  };
-        console.log("newJson",newJson);
-        const updatedJson = { ...reduxLocation?.apiJson, ...newJson };
+        // const newJson = { [name]: id  };
+        // console.log("newJson",newJson);
+        // const updatedJson = { ...reduxLocation?.apiJson, ...newJson };
 
-        console.log("updatedJson",updatedJson);
-        dispatch(setZoneMasterApiJson(updatedJson));
+        // console.log("updatedJson",updatedJson);
+        // dispatch(setZoneMasterApiJson(updatedJson));
     }, [dispatch, reduxLocation?.apiJson]);
 
 
-    console.log("row",row);
+console.log("reduxLocation",reduxLocation);
+console.log("reduxZone",reduxZone);
 
     return (
         <div className='p-10'>
+                                        {/* <SearchableSelect name="siteIds" label="Site" api={searchSite} getFieldName={'siteName'} onChange={(e)=>handleOnChange(e,'siteIds')}   /> */}
+
             <SearchableSelect name="_id" label="Select Zone" api={searchZone} getFieldName={'value'}  onChange={(e) => handleOnChange(e,"_id")} />
             <div className='flex gap-3 justify-end mt-3 mb-5'>
                 <CustomButton text={'Cancel'} variant='flat' onClick={closeModal} />

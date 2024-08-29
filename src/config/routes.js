@@ -15,6 +15,8 @@ export const routes = {
       editProduct : '/master/product/edit/:id',
       customerMaster : '/master/customer',
       createCustomer : '/master/customer/create',
+      editCustomer : '/master/customer/edit/:id',
+
       supplierMaster : '/master/supplier',
       createSupplier : '/master/supplier/create',
       generalMaster : '/master/general',

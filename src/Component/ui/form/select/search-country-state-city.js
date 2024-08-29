@@ -5,8 +5,6 @@ import Select from 'react-select';
 
 function SearchCountryStateCity({ important, label, error, name, options, onChange, value }) {
 
-
-console.log("error",error);
     return (
         <div >
             <label className="block font-bold mb-2">{label}{important === false ? '(Optional)' : ''}</label>

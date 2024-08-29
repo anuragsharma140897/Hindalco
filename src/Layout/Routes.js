@@ -63,6 +63,8 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.editProduct} exact element={<CreateProduct />} />
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
             <Route path={routes?.panel?.master?.createCustomer} exact element={<AddCustomeMaster />} />
+            <Route path={routes?.panel?.master?.editCustomer} exact element={<AddCustomeMaster/>} />
+
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
@@ -84,7 +86,9 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
             <Route path={routes?.panel?.master?.inventoryInventories} exact element={<Inventories />} />
             <Route path={routes?.panel?.outbond?.outboundEdit} exact element={<EditOutbound/>} />
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )
 }
+// editCustomer

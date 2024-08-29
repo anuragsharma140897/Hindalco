@@ -105,6 +105,10 @@ export const getHeadingFromPathname = () => {
     if (pathname.startsWith("/outbond/outbound-edit/")) {
         return "Outbound / Edit";
     }
+    if (pathname.startsWith("/master/customer/edit/")) {
+        return "Customer Master / Edit";
+    }
+    // master/customer/edit/
     switch (pathname) {
         case "/":
             return "Dashboard"

@@ -417,10 +417,6 @@ export const validationSchema = {
   vat,
   tan,
   vehicle,
-
   json
-  // Add other validators like boolean, email, etc., here...
 };
 
-const emailValidator = validationSchema.email().validate('test@example.com');
-console.log(emailValidator); 

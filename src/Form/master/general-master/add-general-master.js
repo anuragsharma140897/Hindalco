@@ -38,9 +38,11 @@ export default function AddGeneralMaster({ row, closeModal }) {
             if (row?._id) {
                 Object.assign(json, { _id: row?._id })
                 HitApi(json, updateGeneral).then((result) => {
+                    console.log("result",result);
                     setLoading(false)
 
                     if (result && result.status === 200) {
+                        
                         alert(result.message);
                         window.location.pathname = '/master/general';
                     }
@@ -52,6 +54,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addGeneral).then((result) => {
+                    console.log("result",result);
                     setLoading(false)
 
                     if (result && result.status === 201) {
@@ -59,7 +62,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
                         window.location.pathname = '/master/general';
                     }
                     else {
-                        alert(result.message);
+                        alert(result.error?.message);
                     }
 
                 })

@@ -197,7 +197,7 @@ export const getSupplierMasterColumns = ({openModal, closeModal, loading, setLoa
         </Tooltip>
         <DeletePopover title={`Delete Customer Master`}  description={`Are you sure you want to delete this Master?`} 
          loading={loading}
-          onDelete={() => DeleteItem(row.id,setLoading)} 
+          onDelete={() => DeleteItem(row._id,setLoading)} 
         />
       </div>
     ),
@@ -206,10 +206,10 @@ export const getSupplierMasterColumns = ({openModal, closeModal, loading, setLoa
 
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
     const result = await HitApi(json, deleteSupplier);
 
     if (result.status === 200) {

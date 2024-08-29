@@ -37,10 +37,10 @@ export default function AddCustomeMaster({ row}) {
     ];
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row);
             console.log("row",row);
-            var json = [{name:'customerGroup',value:row?.customerGroup},{name:'customerType',value:row?.customerType}]
+            var json = [{name:'customerGroup',value:row?.customerGroup},{name:'customerType',value:row?.customerType},{name:'siteIds',value:row?.siteIds?.siteName}]
             dispatch(setSearchableSelectSelectedData(json))
             setCountries(row?.customerCountry)
 
@@ -65,8 +65,8 @@ export default function AddCustomeMaster({ row}) {
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
-            const apiCall = row?.id ? updateCustomer : addCustomer;
-            const updatedJson = { ...json, id: row?.id, status: json?.status || 'Active' };
+            const apiCall = row?._id ? updateCustomer : addCustomer;
+            const updatedJson = { ...json, _id: row?._id, status: json?.status || 'Active' };
 
             HitApi(updatedJson, apiCall).then((result) => {
                 setLoading(false);
@@ -163,7 +163,7 @@ export default function AddCustomeMaster({ row}) {
                         </div>
                         <div className='flex gap-3 justify-end'>
                             <CustomButton text={'Back'} variant='flat' onClick={() => { window.location.pathname = 'master/customer/' }} />
-                            <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                            <CustomButton type={'submit'}  text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                         </div>
                     </div>
                 </form>

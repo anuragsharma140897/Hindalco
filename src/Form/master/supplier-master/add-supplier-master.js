@@ -39,9 +39,9 @@ export default function AddSupplierMaster({ row }) {
     ];
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row);
-            var json = [{name:'supplierGroup',value:row?.supplierGroup},{name:'supplierType',value:row?.supplierType}]
+            var json = [{name:'supplierGroup',value:row?.supplierGroup},{name:'supplierType',value:row?.supplierType},{name:'siteIds',value:row?.siteIds?.siteName}]
             dispatch(setSearchableSelectSelectedData(json))
         }
 
@@ -67,8 +67,8 @@ export default function AddSupplierMaster({ row }) {
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
-            const apiCall = row?.id ? updateSupplier : addSupplier;
-            const updatedJson = { ...json, id: row?.id, status: json?.status || 'Active' };
+            const apiCall = row?._id ? updateSupplier : addSupplier;
+            const updatedJson = { ...json, _id: row?._id, status: json?.status || 'Active' };
 
             HitApi(updatedJson, apiCall).then((result) => {
                 setLoading(false);
@@ -167,7 +167,7 @@ export default function AddSupplierMaster({ row }) {
                         </div>
                         <div className='flex gap-3 justify-end'>
                             <CustomButton text={'Back'} variant='flat' onClick={() => { window.location.pathname = 'master/supplier' }} />
-                            <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                            <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                         </div>
                     </div>
                 </form>

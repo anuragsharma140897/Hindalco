@@ -188,23 +188,15 @@ export const getCustomerMasterColumns = ({ openModal, closeModal, loading, setLo
       <div className="flex items-center gap-3 pe-4">
          {console.log("row",row)}
         <Tooltip size="sm" content={'Edit Customer'} placement="top" color="invert">
-        {/* <label>
+        <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Customer Master' , AddCustomeMaster, 1200)}>
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
-          </label> */}
-           <Tooltip size="sm" content={'Edit Product'} placement="top" color="invert">
-          <a href={'/master/customer/edit/' + row.id}>
-           
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
-              <PencilIcon className="h-4 w-4" />
-            </ActionIcon>
-          </a>
-        </Tooltip>
+          </label>
         </Tooltip>
         <DeletePopover title={`Delete Customer Master`}  description={`Are you sure you want to delete this employee?`} 
          loading={loading}
-          onDelete={() => DeleteItem(row.id,setLoading)} 
+          onDelete={() => DeleteItem(row._id,setLoading)} 
         />
       </div>
     ),
@@ -214,10 +206,10 @@ export const getCustomerMasterColumns = ({ openModal, closeModal, loading, setLo
 
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
     const result = await HitApi(json, deleteCustomer);
 
     if (result.status === 200) {
