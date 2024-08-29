@@ -72,14 +72,14 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
             loading={loading}
             title={`Delete Location Master`}
             description={`Are you sure you want to delete?`}
-            onDelete={() => DeleteItem(row.id, setLoading)}
+            onDelete={() => DeleteItem(row._id, setLoading)}
           />
         ) : (
           <DeletePopover
           loading={loading}
           title={`You cannot delete location`}
           description={`This Master is already assigned`}
-          onDelete={() => DeleteItem(row.id, setLoading)}
+          onDelete={() => DeleteItem(row._id, setLoading)}
           disable={true}
         />
         )}
@@ -98,10 +98,14 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
 
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
+console.log("_id",_id);
+
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
+
+    console.log("json",json);
     const result = await HitApi(json, deleteLocation);
 
     if (result.status === 200) {

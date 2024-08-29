@@ -23,7 +23,7 @@ const classes = {
   },
 };
 
-export default function Table({ striped, variant = 'elegant', emptyText, className, ...props }) {
+export default function CustomTable({ striped, variant = 'elegant', emptyText, className, ...props }) {
   // Combine the necessary classes based on props
   const combinedClasses = cn(
     classes?.table,

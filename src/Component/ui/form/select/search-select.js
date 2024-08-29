@@ -22,6 +22,8 @@ export default function SearchSelect({
     const value = options.find(option => option.value === reduxState?.[name]) || null;
 
     const handleChange = (selectedValue) => {
+
+        console.log("selectedValue",selectedValue)
         let updatedJson = { ...reduxState };
         updatedJson[name] = selectedValue?.value || '';
         dispatch(setAction(updatedJson));

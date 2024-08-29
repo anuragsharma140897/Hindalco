@@ -12,8 +12,47 @@ import AddBuildingMaster from '../../../Form/master/building-master/add-building
 import { deleteBuilding } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { FaUserPlus } from "react-icons/fa";
+import useAlertController from '../../../Hooks/use-alert-controller';
+import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import TableActions from '../../../Component/ui/table/TableActions';
 
-export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
+export const GetBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
+  const { showCustomAlert } = useAlertController();
+  const [loadingRows, setLoadingRows] = useState({});
+
+  const handleDelete = async (row) => {
+    setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
+
+    const json = { id: row?.id };
+
+    // try {
+    //   const result = await HitApi(json, deleteSite);
+    //   if (result?.success !== false) {
+    //     showCustomAlert({
+    //       type: 'success',
+    //       title: 'Success!',
+    //       message: 'Site Deleted Successfully',
+    //     });
+    //     if (ApiHit) { ApiHit(); }
+    //   } else {
+    //     showCustomAlert({
+    //       type: 'error',
+    //       title: 'Delete Error',
+    //       message: 'Unable to delete this role. This role is already linked with a user.',
+    //     });
+    //   }
+    // } catch (err) {
+    //   console.log('Unexpected error:', err);
+    // } finally {
+    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    // }
+    
+  };
+
+  const renderCell = (value, row, content) => (
+    loadingRows[row.index] ? <Skeleton /> : content
+  );
   const columns = [
     {
       title: (
@@ -22,61 +61,44 @@ export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
       dataIndex: 'index',
       key: 'index',
       width: 30,
-      render: (value) => <Text>{value || '---'}</Text>,
-    },
-    {
-      title: (
-        <HeaderCell title="id" />
-      ),
-      dataIndex: 'id',
-      key: 'id',
-      width: 30,
-      render: (value) => <Text>{value || '---'}</Text>,
+      render: (value, row, index) => renderCell(value, row, <Text>{index + 1 || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Building Name" className={'font-extrabold'} />,
       dataIndex: 'buildingName',
       key: 'buildingName',
       width: 150,
-      render: (value) => (
-        <Text className="font-medium text-gray-700">{value || '---'}</Text>
-      ),
+      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Building No" className={'font-extrabold'} />,
       dataIndex: 'buildingNo',
       key: 'buildingNo',
       width: 150,
-      render: (value) => (
-        <Text className="font-medium text-gray-700">{value || '---'}</Text>
-      ),
+      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
+    },
+    {
+      title: <HeaderCell title="Unit" className={'font-extrabold'} />,
+      dataIndex: 'unitName',
+      key: 'unitName',
+      width: 150,
+      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Actions" className={'font-extrabold'} />,
       dataIndex: 'action',
       key: 'action',
       width: 130,
-      render: (_, row) => (
-        <div className="flex items-center gap-3 pe-4">
-          <Tooltip size="sm" content={'Edit Building'} placement="top" color="invert">
-            <label>
-              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Building Master', AddBuildingMaster, 800)}>
-                <PencilIcon className="h-4 w-4" />
-              </ActionIcon>
-            </label>
-          </Tooltip>
-          <DeletePopover title={`Delete Building`} description={`Are you sure you want to delete this employee?`}
-            onDelete={() => DeleteItem(row.id)}
-          />
-          <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
-            <label>
-              <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser row={row} ApiHit={ApiHit}/>, title : 'Map User' })}>
-                <FaUserPlus className="h-4 w-4" />
-              </ActionIcon>
-            </label>
-          </Tooltip>
-        </div>
-      ),
+      render: (_, row) => renderCell(null, row, (
+        <TableActions
+          screen={'buildingMaster'}
+          row={row}
+          onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Building Master', AddBuildingMaster, 800, ApiHit)}
+          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+          onDelete={(rowData) => handleDelete(rowData)}
+          checkKeys={[]}
+        />
+      )),
     }
   ];
 
@@ -119,16 +141,4 @@ export const getBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
   }
 
   return columns;
-};
-
-export const DeleteItem = (id) => {
-  const json = { id: id };
-  HitApi(json, deleteBuilding).then((result) => {
-    if (result && result.status === 200) {
-      alert('Building deleted successfully');
-      
-    } else {
-      alert('Failed to delete the building');
-    }
-  });
 };

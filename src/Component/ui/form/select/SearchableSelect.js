@@ -82,9 +82,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
  
   return (
     <div>
-      {label &&
-        <div className='block font-bold mb-2'>{label}</div>
-      }
+      { label && <div className='block font-bold mt-2'>{label}</div> }
       {
         options?.length > 0 && (<Select
           name={name}

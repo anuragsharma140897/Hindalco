@@ -19,9 +19,12 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
         } else {
             Object.assign(json.search, { [serverKey]: value })
         }
+
+        console.log('filter json : ', json);
         dispatch(setAction(json))
         if (ApiHit) { ApiHit() }
     }
+
 
     const removeJson = () => {
         var tj = json

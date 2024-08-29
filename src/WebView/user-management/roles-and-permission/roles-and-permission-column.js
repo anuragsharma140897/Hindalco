@@ -5,91 +5,116 @@ import Permission from '../permission/permission';
 import PencilIcon from '../../../Constant/Icons/pencil';
 import DeletePopover from '../../../shared/delete-popover';
 import React from 'react';
-import { deleteRole, searchUser } from '../../../Constant/Api/Api';
+import { deleteRole } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { EditScreen } from '../../../shared/edit-screen';
 import AddRolesAndPermission from './add/add-roles-and-permission';
+import useAlertController from '../../../Hooks/use-alert-controller';
+import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import TableActions from '../../../Component/ui/table/TableActions';
 
-export const getRolesAndPermissionColumns = ({ openModal, closeModal, showCustomAlert }) => [
-  {
-    title: (
-      <HeaderCell title="SR No." />
-    ),
-    dataIndex: 'index',
-    key: 'index',
-    width: 10,
-    render: (value) => <Text>{value || '---'}</Text>,
-  },
-  {
-    title: <HeaderCell title="Role Name" />,
-    dataIndex: 'roleName',
-    key: 'roleName',
-    width: 80,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
-    title: <HeaderCell title="Permission" />,
-    dataIndex: 'permission',
-    key: 'permission',
-    width: 250,
-    render: (permission) => GenerateBadge(permission)
-  },
-  {
-    title: <HeaderCell title="Actions" className="opacity-0" />,
-    dataIndex: 'action',
-    key: 'action',
-    width: 130,
-    render: (_, row) => (
-      <div className="flex items-center justify-end gap-3 pe-4">
-        <Tooltip size="sm" content={'Check Users'} placement="top" color="invert">
-          <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
-              <PencilIcon className="h-4 w-4" />
-            </ActionIcon>
-          </label>
-        </Tooltip>
-        <Tooltip size="sm" content={'Edit Site Master'} placement="top" color="invert">
-          <label>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={()=>EditScreen(openModal, closeModal, row, 'Edit Roles And Permission' , AddRolesAndPermission, 800)}>
-              <PencilIcon className="h-4 w-4" />
-            </ActionIcon>
-          </label>
-        </Tooltip>
-        <DeletePopover title={`Delete Role`} description={`Are you sure you want to delete this Role?`}
-          onDelete={() => DeleteItem(row.id, showCustomAlert)}
+export const GetRolesAndPermissionColumns = ({ openModal, closeModal, showCustomAlert, ApiHit }) => {
+  const [loadingRows, setLoadingRows] = useState({});
+
+  const handleDelete = async (row) => {
+    setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
+
+    const json = { id: row?.id };
+
+    // try {
+    //   const result = await HitApi(json, deleteRole);
+    //   if (result?.success !== false) {
+    //     showCustomAlert({
+    //       type: 'success',
+    //       title: 'Success!',
+    //       message: 'Role Deleted Successfully',
+    //     });
+    //     if (ApiHit) { ApiHit(); }
+    //   } else {
+    //     showCustomAlert({
+    //       type: 'error',
+    //       title: 'Delete Error',
+    //       message: 'Unable to delete this role. This role is already linked with a user.',
+    //     });
+    //   }
+    // } catch (err) {
+    //   console.log('Unexpected error:', err);
+    // } finally {
+    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    // }
+  };
+
+  const renderCell = (value, row, content) => (
+    loadingRows[row.index] ? <Skeleton /> : content
+  );
+
+  return [
+    {
+      title: <HeaderCell title="SR No." />,
+      dataIndex: 'index',
+      key: 'index',
+      width: 10,
+      render: (value, row) => renderCell(value, row, <Text>{value || '---'}</Text>),
+    },
+    {
+      title: <HeaderCell title="Role Name" />,
+      dataIndex: 'roleName',
+      key: 'roleName',
+      width: 80,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Permission" />,
+      dataIndex: 'permission',
+      key: 'permission',
+      width: 250,
+      render: (permission, row) => renderCell(permission, row, GenerateBadge(permission))
+    },
+    {
+      title: <HeaderCell title="Actions" className="opacity-0" />,
+      dataIndex: 'action',
+      key: 'action',
+      width: 130,
+      render: (_, row) => renderCell(null, row, (
+        <TableActions
+          screen={'roleAndPermission'}
+          row={row}
+          onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Site Master', AddRolesAndPermission, 800, ApiHit)}
+          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+          onDelete={(rowData) => handleDelete(rowData)}
+          checkKeys={[]}
         />
-      </div>
-    ),
-  },
+      )),
+    },
+  ];
+};
 
-];
-
-export const GenerateBadge = (items) => {
+const GenerateBadge = (items) => {
   const badgeColors = { read: "bg-yellow-buttonYellow", write: "bg-green-buttonGreen", delete: "bg-red-buttonRed" };
 
   return (
     <div className="flex flex-row gap-4">
-      {items.map((item, index) => {
-        return (
-          <div key={index} className="flex flex-col py-1 px-1.5">
-            <label className='capitalize'>{item?.value}</label>
-            <div className="flex flex-row gap-2">
-              {item.permission.map((perm, permIndex) => (
-                <div key={permIndex} className="flex flex-col">
-                  <div className="flex gap-2">
-                    {Object.keys(perm).map((key) =>
-                      perm[key] ? (
-                        <Badge
-                          key={`${item.value}-${key}`}
-                          renderAsDot
-                          className={badgeColors[key]}
-                        />
-                      ) : null
-                    )}
-                  </div>
-                  {item.child && item.child.length > 0 && (
+      {items.map((item, index) => (
+        <div key={index} className="flex flex-col py-1 px-1.5">
+          <label className='capitalize'>{item?.value}</label>
+          <div className="flex flex-row gap-2">
+            {item.permission.map((perm, permIndex) => (
+              <div key={permIndex} className="flex flex-col">
+                <div className="flex gap-2">
+                  {Object.keys(perm).map((key) =>
+                    perm[key] ? (
+                      <Badge
+                        key={`${item.value}-${key}`}
+                        renderAsDot
+                        className={badgeColors[key]}
+                      />
+                    ) : null
+                  )}
+                </div>
+                {item.child && item.child.length > 0 && (
                   <div className="pl-4 mt-2">
                     {item.child.map((child, childIndex) => (
                       <div key={childIndex} className="flex flex-col">
@@ -97,7 +122,7 @@ export const GenerateBadge = (items) => {
                         <div className="flex gap-2 my-1">
                           {Object.keys(child.permission[0]).map((key) =>
                             child.permission[0][key] ? (
-                              <Badge key={`${child.value}-${key}`} renderAsDot className={badgeColors[key]}/>
+                              <Badge key={`${child.value}-${key}`} renderAsDot className={badgeColors[key]} />
                             ) : null
                           )}
                         </div>
@@ -105,35 +130,11 @@ export const GenerateBadge = (items) => {
                     ))}
                   </div>
                 )}
-                </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )
-      })}
+        </div>
+      ))}
     </div>
   );
 };
-
-
-export const DeleteItem = (id, showCustomAlert) => {
-  // var json = { page:1, limit : 1, search : {roleId: id} }
-  var json = {id:id}
-  HitApi(json, deleteRole).then((Result)=>{
-    if(Result?.content?.length>0){
-      showCustomAlert({
-        type : 'error',
-        title : "Delete Error",
-        message : "Unable to delete this role, This role is already linked with the User"
-      })
-      console.log('Result', Result);
-
-    }
-  }).catch(err=>{
-    console.log('Unexpected error:', err);
-  })
-  
-  // HitApi(json, deleteRole).then((Result) => {
-
-  // })
-}

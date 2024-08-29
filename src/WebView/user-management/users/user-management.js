@@ -11,7 +11,7 @@ import { searchUser } from '../../../Constant/Api/Api';
 import { CompileUserMaster } from './promiss/user-promiss';
 import { setUserApiJson, setUserData } from '../../../Store/Action/user-management/user-action';
 import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
-import CustomTable from '../../../Component/ui/table/custom-table';
+import ControlledTable from '../../../Component/ui/table/custom-table';
 import { ScreenName } from '../../../Constant/Screen/Screen';
 
 export default function UserManagement() {
@@ -67,7 +67,7 @@ export default function UserManagement() {
                 titleClass={'text-center'}
                 customSize={700}
             />
-            <CustomTable
+            <ControlledTable
                 screen={ScreenName?.user}
                 variant="modern"
                 showLoadingText={true}

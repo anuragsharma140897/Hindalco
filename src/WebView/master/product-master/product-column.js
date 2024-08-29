@@ -97,13 +97,6 @@ export const getProductMasterColumns = () => [
         <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
           onDelete={() => DeleteItem(row.id)}
         />
-        {/* <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
-              <ProtectIcon className="h-4 w-4" />
-            </ActionIcon>
-          </label>
-        </Tooltip> */}
       </div>
     ),
   },

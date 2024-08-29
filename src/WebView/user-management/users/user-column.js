@@ -21,23 +21,30 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
   const handleDelete = async (row) => {
     setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
 
-    // API call here
+    const json = { id: row?.id };
 
-    var json = {
-      id: row?.id
-    }
-
-    // HitApi(json, deleteUser).then((result) => {
+    // try {
+    //   const result = await HitApi(json, deleteUser);
     //   if (result?.success !== false) {
     //     showCustomAlert({
     //       type: 'success',
     //       title: 'Success!',
-    //       message: 'User Deleted Successfully',
+    //       message: 'Role Deleted Successfully',
     //     });
-    //     setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
-    //     if (ApiHit) { ApiHit() }
+    //     if (ApiHit) { ApiHit(); }
+    //   } else {
+    //     showCustomAlert({
+    //       type: 'error',
+    //       title: 'Delete Error',
+    //       message: 'Unable to delete this role. This role is already linked with a user.',
+    //     });
     //   }
-    // })
+    // } catch (err) {
+    //   console.log('Unexpected error:', err);
+    // } finally {
+    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    // }
+    
   };
 
   // Render cell content or loading skeleton based on loading state

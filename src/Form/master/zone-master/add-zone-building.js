@@ -64,12 +64,12 @@ function AddZoneBuilding({ row }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (reduxZone?.apiJson?.id) {
+        if (reduxZone?.apiJson?._id) {
             setLoading(true)
             var json = {
 
-                sourceId: row?.id,
-                mapTo: reduxZone?.apiJson?.id,
+                sourceId: row?._id,
+                mapTo: reduxZone?.apiJson?._id,
 
             }
 

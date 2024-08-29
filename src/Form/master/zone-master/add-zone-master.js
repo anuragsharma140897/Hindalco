@@ -19,7 +19,7 @@ export default function AddZoneMaster({ row, closeModal }) {
     const { errors, validate } = useValidation(zoneMasterSchema);
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -39,9 +39,9 @@ export default function AddZoneMaster({ row, closeModal }) {
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
     
-            const apiCall = row?.id ? updateZone : addZone;
-            if (row?.id) {
-                Object.assign(json, { id: row.id });
+            const apiCall = row?._id ? updateZone : addZone;
+            if (row?._id) {
+                Object.assign(json, { id: row._id });
             } else {
                 Object.assign(json, { status: json?.status || 'active' });
             }
@@ -80,8 +80,8 @@ export default function AddZoneMaster({ row, closeModal }) {
                 <div className="space-y-5 lg:space-y-6">
                     <CustomInput important={true} name="value" label="Zone Name" value={reduxZone?.apiJson?.value} error={errors} reduxState={reduxZone?.apiJson} setAction={setZoneMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
-                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton text={'Cancel'} variant='flat'  onClick={closeModal} />
+                        <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>
