@@ -94,6 +94,9 @@ function AddLocationZone({ row }) {
         dispatch(setZoneMasterApiJson(updatedJson));
     }, [dispatch, reduxLocation?.apiJson]);
 
+
+    console.log("row",row);
+
     return (
         <div className='p-10'>
             <SearchableSelect name="_id" label="Select Zone" api={searchZone} getFieldName={'value'}  onChange={(e) => handleOnChange(e,"_id")} />

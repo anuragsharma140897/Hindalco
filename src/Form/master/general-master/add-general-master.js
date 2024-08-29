@@ -18,7 +18,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
     const { errors, validate } = useValidation(generalMasterSchema);
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -35,8 +35,8 @@ export default function AddGeneralMaster({ row, closeModal }) {
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
-            if (row?.id) {
-                Object.assign(json, { id: row?.id })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id })
                 HitApi(json, updateGeneral).then((result) => {
                     setLoading(false)
 
@@ -79,7 +79,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
                     <CustomInput important={true} name="usedBy" label="Used By" value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>
