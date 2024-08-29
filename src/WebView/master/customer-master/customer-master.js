@@ -40,7 +40,6 @@ export default function CustomerMaster() {
 
   console.log(reduxCustomer);
 
-
   return (
     <div>
     <PageHeader  btnText={'Create'} href={routes?.panel?.master?.createCustomer}  customSize={1200} />

@@ -21,8 +21,8 @@ function OutboundBatch() {
     const [selectedRow, setSelectedRow] = useState(reduxOutbound?.apiJson?.batchId || null);
 
     let isEdit = false
-    if(window.location.pathname.split('/')[2] === 'outbound-edit'){
-       isEdit =true
+    if (window.location.pathname.split('/')[2] === 'outbound-edit') {
+        isEdit = true
     }
 
 
@@ -69,25 +69,21 @@ function OutboundBatch() {
     const onSubmit = () => {
         setLoading(true)
         var json = reduxOutbound?.apiJson
-        const apiTohit =isEdit ? updateOrder : addOrder
+        const apiTohit = isEdit ? updateOrder : addOrder
 
-        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active' ,id : json?._id};
+        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active', id: json?._id };
         console.log("updatedJson-----", updatedJson);
 
         HitApi(updatedJson, apiTohit).then((result) => {
             console.log("result-----", result);
             setLoading(false)
-
             if (result.status === 200) {
-              
-
                 alert(result.message)
                 window.location.pathname = '/outbond/outbound-order'
             }
         })
 
     }
-
 
     console.log("reduxOutbound-----", reduxOutbound);
 
@@ -100,7 +96,7 @@ function OutboundBatch() {
                 reduxOutbound?.apiJson?.batchId &&
                 <div className='flex justify-end mt-3 gap-x-2'>
                     <CustomButton text={'Back'} variant={'flat'} onClick={() => window.location.pathname = '/inbond/outbound-order'} />
-                    <CustomButton type={'submit'} text={isEdit? 'Update' : 'Submit'} onClick={onSubmit} loading={loading} />
+                    <CustomButton type={'submit'} text={isEdit ? 'Update' : 'Submit'} onClick={onSubmit} loading={loading} />
                 </div>
             }
         </div>

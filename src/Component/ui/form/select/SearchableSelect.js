@@ -35,7 +35,7 @@ function renderDefaultDisplay(value) {
 
 
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, onClear, useCustomDisplay ,lable}) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, onClear, useCustomDisplay ,label}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
@@ -82,8 +82,8 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
  
   return (
     <div>
-      {lable &&
-        <div className='block font-bold mb-2'>{lable}</div>
+      {label &&
+        <div className='block font-bold mb-2'>{label}</div>
       }
       {
         options?.length > 0 && (<Select

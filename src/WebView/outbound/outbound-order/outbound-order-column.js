@@ -6,7 +6,6 @@ import SearchUser from '../../../shared/common/search-user';
 import EyeIcon from '../../../Constant/Icons/eye';
 
 export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellClick, openModal }) => [
-
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -23,15 +22,6 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
-  // {
-  //   title: <HeaderCell title="Dispatch From Type" className={'font-extrabold'} />,
-  //   dataIndex: 'dispatchFromType',
-  //   key: 'dispatchFromType',
-  //   width: 130,
-  //   render: (value) => (
-  //     <Text className="font-medium text-gray-700">{value || '---'}</Text>
-  //   ),
-  // }, 
   {
     title: <HeaderCell title="Dispatch To" className={'font-extrabold'} />,
     dataIndex: 'dispatchToName',
@@ -41,16 +31,7 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),
   },
-  // {
-  //   title: <HeaderCell title="Dispatch To Type" className={'font-extrabold'} />,
-  //   dataIndex: 'dispatchToType',
-  //   key: 'dispatchToType',
-  //   width: 130,
-  //   render: (value) => (
-  //     <Text className="font-medium text-gray-700">{value || '---'}</Text>
-  //   ),
-  // },
-   {
+  {
     title: <HeaderCell title="Bill To" className={'font-extrabold'} />,
     dataIndex: 'billToName',
     key: 'billToName',
@@ -65,7 +46,9 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
     key: 'expectedArrival',
     width: 120,
     render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      <Text className="font-medium text-gray-700">
+        {value ? new Date(value).toLocaleString() : '---'}
+      </Text>
     ),
   },
   {
@@ -74,7 +57,9 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
     key: 'orderDateTime',
     width: 120,
     render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      <Text className="font-medium text-gray-700">
+        {value ? new Date(value).toLocaleString() : '---'}
+      </Text>
     ),
   },
   {
@@ -108,9 +93,10 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
               <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
                 <PencilIcon className="h-4 w-4" />
               </ActionIcon>
-            </a>}
+            </a>
+          }
         </Tooltip>
-
+        
         <Tooltip size="sm" content={'View'} placement="top" color="invert">
           <label href={routes?.eCommerce?.editOrder(row.id)}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
@@ -121,5 +107,4 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
       </div>
     ),
   },
-
 ];
