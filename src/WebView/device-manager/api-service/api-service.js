@@ -14,7 +14,7 @@ export default function ApiService() {
   const [openPopupIndex, setOpenPopupIndex] = useState(null);
   const [addMoreServiceModal, setAddMoreServiceModal] = useState(false);
   const [dataForRequest, setDataForRequest] = useState(false);
-  
+  const [bodyScreen, setBodyScreen] = useState('Global');
 
   useEffect(() => {
     if (ServiceMasterReducer?.doc === null) {
@@ -47,6 +47,7 @@ export default function ApiService() {
 
   const handleAddNewRequest = (i,index) => {
     setDataForRequest([i,index])
+    setBodyScreen('Request')
     setOpenPopupIndex(null);
   };
 
@@ -69,6 +70,10 @@ export default function ApiService() {
     oldJson.serviceName = object.serviceName
     dispatch(setApiJson(oldJson))
     setAddMoreServiceModal(object?.type)
+  }
+
+  const handleAddGloabalVariables = (id) =>{
+    setBodyScreen('Global')
   }
 
   return (
@@ -127,6 +132,13 @@ export default function ApiService() {
                         <Trash2 className="mr-2" size={16} />
                         Delete Service
                       </button>
+                      <button
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                        onClick={() => handleAddGloabalVariables(ele?._id)}
+                      >
+                        <Trash2 className="mr-2" size={16} />
+                        Add Global Variables
+                      </button>
                     </div>
                   </div>
                 )}
@@ -146,7 +158,12 @@ export default function ApiService() {
         ))}
       </div>
       <div className="col-span-9 bg-white p-4 shadow-md rounded-xl">
-        <ApiRequest dataForRequest={dataForRequest}/>
+        {
+          bodyScreen === 'Global'?
+          <h1>Hellow</h1>
+          :
+          <ApiRequest dataForRequest={dataForRequest}/>
+        }
       </div>
 
       {
