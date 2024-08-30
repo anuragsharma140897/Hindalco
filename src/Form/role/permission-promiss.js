@@ -1,7 +1,9 @@
+import { IP } from "../../Constant/Api/Api";
+
 export const ConstructJson = (data) => {
   return new Promise((resolve, reject) => {
     const allowedEndPoints = []; // Array to hold all the URLs where the permission is true
-    const baseURLToRemove = "http://192.168.1.104:9090";
+    const baseURLToRemove = `http://${IP}`;
 
     const compiledPermissions = data.map(parent => {
       const filteredChildren = parent.child.map(child => {

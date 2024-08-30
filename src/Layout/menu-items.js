@@ -52,6 +52,16 @@ export const menuItems = [
       { name: 'Weighing Scale', href: routes?.panel?.device?.weighingScale ,icon : <WeighingScaleIcon /> },
     ],
   },
+  {
+    name: 'Device Manager', href: '#', icon: '', badge: 'New',
+    dropdownItems: [
+      { name: 'Devices', href: routes?.panel?.deviceManager?.devices ,icon : <ReaderMasterIcon />},
+      { name: 'Brokers', href: routes?.panel?.deviceManager?.broker ,icon : <ReaderMasterIcon />},
+      { name: 'Device Profile', href: routes?.panel?.deviceManager?.deviceProfiler ,icon : <ReaderMasterIcon />},
+      { name: 'Api Services', href: routes?.panel?.deviceManager?.apiService ,icon : <ReaderMasterIcon />},
+      { name: 'Mapper', href: routes?.panel?.deviceManager?.mapper ,icon : <ReaderMasterIcon />},
+    ],
+  },
   { name: 'Reports', },
   {
     name: 'Inbound', href: '#', icon: '',

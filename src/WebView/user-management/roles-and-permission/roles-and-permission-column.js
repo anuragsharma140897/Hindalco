@@ -22,27 +22,27 @@ export const GetRolesAndPermissionColumns = ({ openModal, closeModal, showCustom
 
     const json = { id: row?.id };
 
-    // try {
-    //   const result = await HitApi(json, deleteRole);
-    //   if (result?.success !== false) {
-    //     showCustomAlert({
-    //       type: 'success',
-    //       title: 'Success!',
-    //       message: 'Role Deleted Successfully',
-    //     });
-    //     if (ApiHit) { ApiHit(); }
-    //   } else {
-    //     showCustomAlert({
-    //       type: 'error',
-    //       title: 'Delete Error',
-    //       message: 'Unable to delete this role. This role is already linked with a user.',
-    //     });
-    //   }
-    // } catch (err) {
-    //   console.log('Unexpected error:', err);
-    // } finally {
-    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
-    // }
+    try {
+      const result = await HitApi(json, deleteRole);
+      if (result?.success !== false) {
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Role Deleted Successfully',
+        });
+        if (ApiHit) { ApiHit(); }
+      } else {
+        showCustomAlert({
+          type: 'error',
+          title: 'Delete Error',
+          message: 'Unable to delete this role. This role is already linked with a user.',
+        });
+      }
+    } catch (err) {
+      console.log('Unexpected error:', err);
+    } finally {
+      setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    }
   };
 
   const renderCell = (value, row, content) => (

@@ -38,6 +38,10 @@ import Inventories from '../WebView/master/inventory-master/inventories/inventor
 import AddCustomeMaster from '../Form/master/customer-master/add-customer-master'
 import Dashboard from '../WebView/dashboard/dashboard'
 import EditOutbound from '../WebView/outbound/EditOutbound/EditOutbound'
+import Devices from '../WebView/device-manager/devices/devices'
+import Brokers from '../WebView/device-manager/brokers/brokers'
+import DeviceProfile from '../WebView/device-manager/device-profile/device-profile'
+import Mapper from '../WebView/device-manager/mapper/mapper'
 
 export default function CustomRoutes() {
 
@@ -84,6 +88,12 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.innventoryMaster} exact element={<InventoryMaster />} />
             <Route path={routes?.panel?.master?.inventoryInventories} exact element={<Inventories />} />
             <Route path={routes?.panel?.outbond?.outboundEdit} exact element={<EditOutbound/>} />
+            <Route path={routes?.panel?.deviceManager?.devices} exact element={<Devices/>} />
+            <Route path={routes?.panel?.deviceManager?.broker} exact element={<Brokers/>} />
+            <Route path={routes?.panel?.deviceManager?.deviceProfiler} exact element={<DeviceProfile/>} />
+            <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
+            <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
+            <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

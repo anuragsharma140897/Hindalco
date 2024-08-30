@@ -3,14 +3,9 @@ import JsonEditor from '../../Component/ui/editor/json-editor'
 
 export default function Test() {
   const [json, setJson] = useState({"page":1})
-  const [result, setRedult] = useState({"page":1})
-
-
 
   const onChange = (value) =>{
     console.log('value', value);
-
-    setRedult([JSON.stringify(value)])
   }
 
   return (
