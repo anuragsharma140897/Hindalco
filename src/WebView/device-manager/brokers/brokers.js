@@ -1,9 +1,10 @@
 import React from 'react'
+import CustomButton from '../../../Component/ui/buttons/custom-button'
 
 function brokers() {
   return (
     <div>
-      <div onClick={()=>window.location.pathname = 'device-manager/broker/add'}>Add</div>
+      <CustomButton text={"Add Broker"} onClick={()=>window.location.pathname = 'device-manager/broker/add'}/>
     </div>
   )
 }

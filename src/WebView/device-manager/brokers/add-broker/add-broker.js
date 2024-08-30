@@ -56,11 +56,6 @@ function AddBroker() {
         <CustomSwitcs name="isBrokerSecureConnection" label={'Broker Secure Connection'} value={reduxBrokers?.apiJson?.isBrokerSecureConnection} reduxState={reduxBrokers?.apiJson}  setAction={setBrokersApiJson} />
 
       </div>
-
-
-
-
-
     </div>
   )
 }
