@@ -48,7 +48,9 @@ export const routes = {
       broker : '/device-manager/broker',
       deviceProfiler : '/device-manager/devices-profile',
       apiService : '/device-manager/api-service',
-      mapper : '/device-manager/mapper'
+      mapper : '/device-manager/mapper',
+      certificates : '/device-manager/certificates',
+      addCertificates : '/device-manager/certificates/add',
     },
     inbond: {
       inboundOrder: '/inbond/inbound-order',

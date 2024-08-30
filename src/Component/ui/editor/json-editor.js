@@ -3,7 +3,7 @@ import JSONEditor from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.css';
 import './jsoneditor-custom.css'; // Import your updated custom CSS
 
-const JsonEditor = ({ json, onChange, setJson }) => {
+const CustomJsonEditor = ({ json, onChange, readOnly = false, detectRender }) => {
   const editorRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -18,10 +18,8 @@ const JsonEditor = ({ json, onChange, setJson }) => {
       },
     });
 
-    // Set JSON data
+    // Set initial JSON data
     editorRef.current.set(json);
-
-    console.log('editorRef', json);
 
     // Cleanup on unmount
     return () => {
@@ -31,7 +29,14 @@ const JsonEditor = ({ json, onChange, setJson }) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Update the editor when json prop changes
+    if (editorRef.current) {
+      editorRef.current.update(json);
+    }
+  }, [detectRender]);
+
   return <div ref={containerRef} style={{ height: '400px' }} />;
 };
 
-export default JsonEditor;
+export default CustomJsonEditor;

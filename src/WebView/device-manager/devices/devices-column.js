@@ -58,54 +58,63 @@ export const GetDeviceMasterColumns = (openModal, closeModal, ApiHit) => {
       render: (value, row, index) => renderCell(value, row, <Text>{index + 1 || '---'}</Text>),
     },
     {
-      title: <HeaderCell title="Site Name" className="font-extrabold" />,
-      dataIndex: 'siteName',
-      key: 'siteName',
+      title: <HeaderCell title="Device Type" className="font-extrabold" />,
+      dataIndex: 'deviceType',
+      key: 'deviceType',
       width: 100,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{value || '---'}</Text>
       )),
     },
     {
-      title: <HeaderCell title="Building" className="font-extrabold" />,
-      dataIndex: 'buildings',
-      key: 'buildings',
+      title: <HeaderCell title="make" className="font-extrabold" />,
+      dataIndex: 'make',
+      key: 'make',
       width: 100,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{value || '---'}</Text>
       )),
     },
     {
-      title: <HeaderCell title="Area" className="font-extrabold" />,
-      dataIndex: 'area',
-      key: 'area',
+      title: <HeaderCell title="model" className="font-extrabold" />,
+      dataIndex: 'model',
+      key: 'model',
       width: 100,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{value || '---'}</Text>
       )),
     },
     {
-      title: <HeaderCell title="Created By" className="font-extrabold" />,
-      dataIndex: 'createdBy',
-      key: 'createdBy',
+      title: <HeaderCell title="Firmware Version" className="font-extrabold" />,
+      dataIndex: 'firmwareVersion',
+      key: 'firmwareVersion',
       width: 100,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{value || '---'}</Text>
       )),
     },
     {
-      title: <HeaderCell title="Creation Date" className="font-extrabold" />,
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      title: <HeaderCell title="Is Cloud Configurable" className="font-extrabold" />,
+      dataIndex: 'isCloudConfigurable',
+      key: 'isCloudConfigurable',
       width: 150,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{getFormattedDate(value, ['date', 'month', 'year', 'hour', 'minute', 'second']) || '---'}</Text>
       )),
     },
     {
-      title: <HeaderCell title="Updation Date" className="font-extrabold" />,
-      dataIndex: 'updatedAt',
-      key: 'updatedAt',
+      title: <HeaderCell title="Secure Connection Type" className="font-extrabold" />,
+      dataIndex: 'secureConnectionType',
+      key: 'secureConnectionType',
+      width: 150,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{getFormattedDate(value, ['date', 'month', 'year', 'hour', 'minute', 'second']) || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Network Information" className="font-extrabold" />,
+      dataIndex: 'host',
+      key: 'host',
       width: 150,
       render: (value, row) => renderCell(value, row, (
         <Text className="font-medium text-gray-700">{getFormattedDate(value, ['date', 'month', 'year', 'hour', 'minute', 'second']) || '---'}</Text>

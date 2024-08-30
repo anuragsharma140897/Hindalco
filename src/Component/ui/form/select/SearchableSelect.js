@@ -82,7 +82,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
  
   return (
     <div>
-      { label && <div className='block font-bold mt-2'>{label}</div> }
+      { label && <div className='block font-bold'>{label}</div> }
       {
         options?.length > 0 && (<Select
           name={name}
@@ -92,7 +92,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           options={options || []}
           placeholder={placeholder ? placeholder : `Select ${name || '...'} `}
           className={cn(className, 'bg-white z-[99999]')}
-          dropdownClassName="p-2 gap-1 grid !z-0 capitalize"
+          dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
           getOptionDisplayValue={(option) =>
             useCustomDisplay?renderOptionDisplayValue(option.value) : renderDefaultDisplay(option.value)
           }

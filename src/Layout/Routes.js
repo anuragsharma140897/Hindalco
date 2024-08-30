@@ -44,6 +44,7 @@ import DeviceProfile from '../WebView/device-manager/device-profile/device-profi
 import Mapper from '../WebView/device-manager/mapper/mapper'
 import ApiService from '../WebView/device-manager/api-service/api-service'
 import AddDevice from '../WebView/device-manager/devices/add-device/add-device'
+import Certificates from '../WebView/device-manager/certificates/certificates'
 
 export default function CustomRoutes() {
 
@@ -97,6 +98,9 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
+            <Route path={routes?.panel?.deviceManager?.certificates} exact element={<Certificates/>} />
+
+            
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )
