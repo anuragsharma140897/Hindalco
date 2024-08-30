@@ -5,6 +5,7 @@ import { searchGeneral } from '../../../../Constant/Api/Api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBrokersApiJson } from '../store/action/brokers/brokers-action'
 import { Checkbox } from 'rizzui'
+import CustomSwitcs from '../component/form/custum-switchs'
 
 function AddBroker() {
   const reduxBrokers = useSelector(state => state.BrokersReducer)
@@ -22,9 +23,24 @@ function AddBroker() {
   const handleOnChange = useCallback((e, name) => {
     const { _id, value } = e;
     console.log("e", e);
-    // const newJson = { [name]: value };
-    // const updatedJson = { ...reduxBrokers?.apiJson, ...newJson };
-    // dispatch(setBrokersApiJson(updatedJson));
+    var json = reduxBrokers?.apiJson
+   if(name === 'brokerSecureConnectionType'){
+    var newJson = {
+      [name]: {
+        "type": e?.label,
+        "name": e?.value
+      },
+    }
+   }
+   else{
+    var newJson = {
+      [name]: value,
+     
+    }
+   }
+
+    Object.assign(json, newJson);
+    dispatch(setBrokersApiJson(json));
   }, [dispatch, reduxBrokers?.apiJson]);
 
   console.log("reduxBrokers", reduxBrokers);
@@ -36,20 +52,9 @@ function AddBroker() {
         <SearchableSelect name="borkerType" label="Borker Type" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokertype' }} onChange={(e) => handleOnChange(e, 'borkertype')} />
         <CustomInput name="brokerIp" label="Broker Ip" value={reduxBrokers?.apiJson?.brokerIp} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} />
         <CustomInput name="brokerPort" label="Broker Port" value={reduxBrokers?.apiJson?.brokerPort} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} />
-        <SearchableSelect type={'custom'} name="brokerSecureConnectionType" label="Borker SecureConnection Type" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokerSecureConnectionType' }} onChange={(e) => handleOnChange(e, 'brokerSecureConnectionType')} />
-        <div className="flex items-center space-x-2">
-  <Checkbox 
-    id="isBrokerSecureConnection"
-    checked={reduxBrokers?.apiJson?.isBrokerSecureConnection || false}
-    onCheckedChange={handleCheckboxChange}
-  />
-  <label 
-    htmlFor="isBrokerSecureConnection" 
-    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-  >
-    Is Broker Secure Connection
-  </label>
-</div>        />
+        <SearchableSelect type={'custom'} name="brokerSecureConnectionType" label="SecureConnection Type" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokerSecureConnectionType' }} onChange={(e) => handleOnChange(e, 'brokerSecureConnectionType')} />
+        <CustomSwitcs name="isBrokerSecureConnection" label={'Broker Secure Connection'} value={reduxBrokers?.apiJson?.isBrokerSecureConnection} reduxState={reduxBrokers?.apiJson}  setAction={setBrokersApiJson} />
+
       </div>
 
 
