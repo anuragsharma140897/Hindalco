@@ -40,11 +40,11 @@ import Dashboard from '../WebView/dashboard/dashboard'
 import EditOutbound from '../WebView/outbound/EditOutbound/EditOutbound'
 import Devices from '../WebView/device-manager/devices/devices'
 import Brokers from '../WebView/device-manager/brokers/brokers'
-import DeviceProfile from '../WebView/device-manager/device-profile/device-profile'
 import Mapper from '../WebView/device-manager/mapper/mapper'
 import ApiService from '../WebView/device-manager/api-service/api-service'
 import AddDevice from '../WebView/device-manager/devices/add-device/add-device'
 import Certificates from '../WebView/device-manager/certificates/certificates'
+import Configuration from '../WebView/device-manager/configuration/configuration'
 
 export default function CustomRoutes() {
 
@@ -94,7 +94,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.devices} exact element={<Devices/>} />
             <Route path={routes?.panel?.deviceManager?.addDevice} exact element={<AddDevice/>} />
             <Route path={routes?.panel?.deviceManager?.broker} exact element={<Brokers/>} />
-            <Route path={routes?.panel?.deviceManager?.deviceProfiler} exact element={<DeviceProfile/>} />
+            <Route path={routes?.panel?.deviceManager?.configuration} exact element={<Configuration/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
