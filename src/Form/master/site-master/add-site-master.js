@@ -10,8 +10,6 @@ import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { siteMasterVariable as variable } from '../../../Constant/variables/master/site-master/site-master.variable';
 import useAlertController from '../../../Hooks/use-alert-controller';
 
-
-
 export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     var dispatch = useDispatch()
     const reduxSite = useSelector(state => state.SiteMasterReducer)
@@ -23,7 +21,6 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
             loadDefault(row)
         }
     }, [])
-
 
     const loadDefault = (row) => {
         var json = reduxSite?.apiJson
@@ -38,7 +35,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
-                console.log('json', json);
+
                 HitApi(json, updateSite).then((result) => {
                     if (result?.success!==false) {
                         showCustomAlert({

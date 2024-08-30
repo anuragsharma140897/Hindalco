@@ -31,8 +31,6 @@ export const routes = {
       vehicleMaster: '/master/vehicle',
       innventoryMaster: '/master/inventory',
       inventoryInventories: '/master/inventory/:id',
-
-
     },
     device: {
       readerMaster : '/device/reader',
@@ -45,6 +43,15 @@ export const routes = {
       weighingScale : '/device/weighingscale',
       createWeighingScale : '/device/weighingscale/create',
       editWeighingScale : '/device/weighingscale/edit/:id',
+    },
+    deviceManager:{
+      devices : '/device-manager/devices',
+      addDevice : '/device-manager/devices/add',
+      broker : '/device-manager/broker',
+      addbroker : '/device-manager/broker/add',
+      deviceProfiler : '/device-manager/devices-profile',
+      apiService : '/device-manager/api-service',
+      mapper : '/device-manager/mapper'
     },
     inbond: {
       inboundOrder: '/inbond/inbound-order',

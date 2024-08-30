@@ -39,7 +39,7 @@ export default function AddLocationMaster({ row, closeModal }) {
         var json = reduxLocation?.apiJson
         const validationErrors = validate(json);
 
-        console.log("validationErrors", validationErrors);
+
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
             if (row?._id) {
@@ -59,7 +59,7 @@ export default function AddLocationMaster({ row, closeModal }) {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addLocation).then((result) => {
                     setLoading(false)
-                    console.log("result-----", result);
+
                     if (result.status === 201) {
                         alert(result.message);
                         window.location.pathname = 'master/location'

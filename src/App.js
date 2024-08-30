@@ -19,7 +19,7 @@ export default function App() {
 
  let user = getAuthenticatedUser()
 
- console.log('user', user);
+
 
   return (
     <div>

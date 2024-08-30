@@ -1,11 +1,9 @@
 
 // export const IP = '137.184.74.218'
+export const IP = '192.168.0.104:9090'
 
-// export const IP = '192.168.0.118:9090'
 
-export const IP = '192.168.0.120:9090'
-
-export const MQTTIP = 'ws://192.168.1.104:9001'
+export const MQTTIP = 'ws://192.168.0cle.104:9001'
 export const BaseUrl = `http://${IP}/auth/`
 export const UserMicroService = `http://${IP}/user/api/`
 export const HelperMicroService = `http://${IP}/helper/api/`
@@ -132,7 +130,6 @@ export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
 
 //rfidTags
 
-
 export const searchRfidTag = IOTMicroService + 'searchRfidTag'
 
 // inbound
@@ -147,6 +144,11 @@ export const searchOrder = OrderMicroService + 'searchOrder'
 
 //updateBulkTags
 export const updateBulkTags = IOTMicroService + 'updateBulkTags'
+
+
+// Device Manager
+export const searchDevice = DeviceMicroService+'searchDevice'
+
 
 
 

@@ -25,7 +25,7 @@ function AddConfigurationMaster() {
     json.search._id = ID
     HitApi(json, searchMqttConfig).then((result) => {
       if (result) {
-        console.log('result', result);
+
         CompileConfigurationMaster(result?.content?.[0]).then((CompiledData) => {
           if (CompiledData) {
             dispatch(setConfigurationMasterApiJson(CompiledData))

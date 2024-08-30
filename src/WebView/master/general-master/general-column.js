@@ -64,7 +64,7 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
     width: 600,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        {console.log('row',row)}
+
         <Tooltip size="sm" content={'Edit General Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit General Master', AddGeneralMaster, 400)}>

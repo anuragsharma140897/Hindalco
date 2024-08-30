@@ -56,7 +56,7 @@ export default function AddProduct() {
       if (ID) {
         Object.assign(json, { id: ID })
         HitApi(json, updateProduct).then((result) => {
-          console.log('result',result);
+
           if (result.status === 200) {
             var alert = window.confirm(result.message)
             if (alert || !alert) {
@@ -93,7 +93,7 @@ export default function AddProduct() {
   };
   const handleOnChange = (e) => {
     const { id, label, value } = e
-    console.log("dfsddsd", e);
+
     let oldJson = reduxProduct?.apiJson
     let newJson = { ...oldJson, "productGroup": e?.value }
     dispatch(setProductMasterApiJson(newJson))

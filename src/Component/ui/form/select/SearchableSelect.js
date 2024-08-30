@@ -46,15 +46,15 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
       loadData();
     }
 
-    console.log('reduxSelect?.doc', reduxSelect?.selected);
+
   }, [options, reduxSelect]);
 
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
       HitApi(json, api).then((result) => {
-        console.log('result', result);
         CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
+          console.log('CompiledData', CompiledData);
           if (CompiledData) {
             setOptions(CompiledData);
             dispatch(setSearchableSelectData(CompiledData));
@@ -66,7 +66,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
 
   const handleChange = (e) => {
 
-    console.log("eeee",e);
+
     const { value, id } = e;
     const updatedSelected = reduxSelect?.selected.map(item =>
       item.name === name ? { ...item, value } : item
@@ -85,7 +85,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const onClear = () =>{
     var json = reduxSelect?.selected
     const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
-    console.log('existingIndex', existingIndex);
+
     if (existingIndex !== -1) {
         const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
         dispatch(setSearchableSelectSelectedData(updatedSelected));

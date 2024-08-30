@@ -40,7 +40,7 @@ function OutboundOrder() {
 
 
     HitApi(json, searchOrder).then((result) => {
-      console.log("result",result);
+
       if (result) {
         CompileOutbound(result).then((CompiledData) => {
           dispatch(setOutboundData(CompiledData));
@@ -51,7 +51,7 @@ function OutboundOrder() {
     })
   }
 
-  console.log("reduxOutboundss",reduxOutbound);
+
 
 
   return (

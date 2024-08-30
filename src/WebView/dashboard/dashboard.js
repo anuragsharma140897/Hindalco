@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   const handleOnChange = (e) => {
     const { id, label, value } = e
-    console.log(id, label, value);
+
     var json = reduxDevice?.searchJson
     dispatch(setBuildingMasterSelectedBuildingId(id))
     Object.assign(json.search, { "buildingIds": { $in: [id] } })

@@ -43,13 +43,13 @@ export default function DeviceStatus({ loading }) {
             token : readerLoginData?.message,
             ip : reduxDeviceReader?.doc?.readerIp
         }
-        console.log('json',json);
+
         HitApi(json,rebootReader).then(res=>{
-            console.log('res',res);
+
         })
     }
 
-    console.log('reduxDeviceReader',reduxDeviceReader);
+
 
     return (
         <div className='flex justify-between'>

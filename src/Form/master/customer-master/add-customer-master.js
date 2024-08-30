@@ -39,7 +39,7 @@ export default function AddCustomeMaster({ row}) {
     useEffect(() => {
         if (row?._id) {
             loadDefault(row);
-            console.log("row",row);
+
             var json = [{name:'customerGroup',value:row?.customerGroup},{name:'customerType',value:row?.customerType},{name:'siteIds',value:row?.siteIds?.siteName}]
             dispatch(setSearchableSelectSelectedData(json))
             setCountries(row?.customerCountry)
@@ -53,10 +53,10 @@ export default function AddCustomeMaster({ row}) {
         setCountries(allCountries);
     }, [row?._id]); 
     const loadDefault = useCallback((row) => {
-          console.log('xcxccx',row);
+
         var json = { ...reduxCustomer?.apiJson };
 
-        console.log("ccsdcsdsdsdsd",json);
+
         
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         Object.assign(json, {siteIds : row?.siteIds?._id})
@@ -67,10 +67,10 @@ export default function AddCustomeMaster({ row}) {
         e.preventDefault();
         var json = reduxCustomer?.apiJson;
 
-        console.log("json",json);
+
         const validationErrors = validate(json);
 
-        console.log("validationErrors",validationErrors);
+
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);

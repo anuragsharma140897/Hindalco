@@ -38,7 +38,7 @@ export const GetSiteMasterColumns = (openModal, closeModal, ApiHit) => {
     //     });
     //   }
     // } catch (err) {
-    //   console.log('Unexpected error:', err);
+
     // } finally {
     //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
     // }
@@ -121,7 +121,7 @@ export const GetSiteMasterColumns = (openModal, closeModal, ApiHit) => {
           screen={'siteMaster'}
           row={row}
           onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Site Master', AddSiteMaster, 800, ApiHit)}
-          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+
           onDelete={(rowData) => handleDelete(rowData)}
           checkKeys={['buildingIds','locationIds','readerIds']}
         />

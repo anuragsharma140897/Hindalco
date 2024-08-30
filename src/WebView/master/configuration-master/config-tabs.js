@@ -44,11 +44,11 @@ export default function ConfigTabs({ID}) {
                 if (ID) {
                     Object.assign(compiledData, { id: ID })
                     HitApi(compiledData, updateMqttConfig).then((result) => {
-                        console.log('result',result);
+
                     })
                 } else {
                     HitApi(compiledData, addMqttConfig).then((result) => {
-                        console.log('result',result);
+
                     })
                 }
             })

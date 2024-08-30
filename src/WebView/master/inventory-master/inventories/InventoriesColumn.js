@@ -79,8 +79,8 @@ export const InventoriesColumn = ({ reduxInventory }) => [
     render: (value) => (
      <>
         <Text className="font-medium text-gray-700">{reduxInventory?.doc?.content[0]?.status || '---'}</Text>
-      {console.log("ddd",)}
-      {console.log("reduxInventory?.doc?.content?.product_id?.produce",reduxInventory?.doc?.content[0])}
+
+
      </>
     ),
   },

@@ -30,11 +30,11 @@ function OutboundBatch() {
 
     const onRowSelect = (id) => {
         setSelectedRow(id);
-        console.log("Selected row:", id)
+
 
         var oldJson = reduxOutbound?.apiJson
 
-        console.log("oldJson", oldJson);
+
         var json = {
             "batchId": id
         }
@@ -61,7 +61,7 @@ function OutboundBatch() {
         }
 
         HitApi(json, searchBatch).then((result) => {
-            console.log("result11", result);
+
             dispatch(setBuldingBatch(result?.content))
         })
     }
@@ -72,10 +72,10 @@ function OutboundBatch() {
         const apiTohit = isEdit ? updateOrder : addOrder
 
         const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active', id: json?._id };
-        console.log("updatedJson-----", updatedJson);
+
 
         HitApi(updatedJson, apiTohit).then((result) => {
-            console.log("result-----", result);
+
             setLoading(false)
             if (result.status === 200) {
                 alert(result.message)
@@ -85,10 +85,10 @@ function OutboundBatch() {
 
     }
 
-    console.log("reduxOutbound-----", reduxOutbound);
 
 
-    console.log("selectedRow", selectedRow);
+
+
     return (
         <div>
             <ControlledTable variant="modern" isLoading={false} showLoadingText={true} data={reduxOutbound?.builddingBatch} columns={visibleColumns} className={TableClass} />

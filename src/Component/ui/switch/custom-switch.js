@@ -8,14 +8,14 @@ export default function CustomSwitch({ reduxState,name, label, value, disabled,s
 
     const onClick = (value) =>{
         if(disabled !== true){
-            console.log('call');
+
             var oldJson = reduxState
             oldJson[name] = value;
             dispatch(setAction(oldJson));
         }
     }
 
-    console.log('disabled',disabled);
+
 
     return (
         <div>

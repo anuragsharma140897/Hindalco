@@ -82,9 +82,9 @@ function Inventories() {
     }
 
 
-    console.log("reduxInventory______",reduxInventory?.doc?.content);
 
-    console.log("reduxInventories",reduxInventories);
+
+
     return (
         <div>
             <div className='text-xl font-bold mb-10'>{reduxInventory?.doc?.content[0]?.batchName} Inventories</div>

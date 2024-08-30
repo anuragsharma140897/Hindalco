@@ -25,25 +25,25 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
             loadDefault(row)
         }
 
-        console.log('reduxUser?.apiJson', reduxUser?.apiJson);
+
 
     }, [reduxUser])
 
     const loadDefault = (row) => {
         var json = reduxUser?.apiJson
 
-        console.log('json before', json);
+
 
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
-        console.log('json after', json);
+
         dispatch(setUserApiJson(json))
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxUser?.apiJson
         const validationErrors = validate(json);
-        console.log('validationErrors', validationErrors);
-        console.log('json', json);
+
+
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
@@ -103,7 +103,6 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         Object.assign(json, { status : value })
         dispatch(setUserApiJson(json))
     }
-
 
     return (
         <div className='p-10'>

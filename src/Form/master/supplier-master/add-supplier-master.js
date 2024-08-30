@@ -20,7 +20,7 @@ import { setSearchableSelectSelectedData } from '../../../Store/Action/common/se
 
 export default function AddSupplierMaster({ row }) {
 
-    console.log("row",row);
+
     const dispatch = useDispatch();
     const reduxSupplier = useSelector(state => state.SupplierMasterReducer);
 
@@ -64,7 +64,7 @@ export default function AddSupplierMaster({ row }) {
         var json = reduxSupplier?.apiJson;
         const validationErrors = validate(json);
 
-        console.log("validationErrors", validationErrors);
+
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
@@ -139,7 +139,7 @@ export default function AddSupplierMaster({ row }) {
     }, [dispatch, reduxSupplier?.apiJson]);
 
 
-    console.log("reduxSupplier", reduxSupplier);
+
     return (
         <div>
             <div className='p-10 rounded-xl bg-white'>

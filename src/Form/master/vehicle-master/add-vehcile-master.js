@@ -42,7 +42,7 @@ export default function AddVehicleMaster({ row, closeModal }) {
         var json = reduxVehicle?.apiJson
         const validationErrors = validate(json);
 
-        console.log("validationErrors",validationErrors);
+
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
             if (row?._id) {
@@ -62,7 +62,7 @@ export default function AddVehicleMaster({ row, closeModal }) {
                 HitApi(json, addVehicle).then((result) => {
                     setLoading(false)
 
-                    console.log("result_____",result?.error?.message);
+
                     if(result?.status === 201){
                         alert(result.message);
                         window.location.pathname = '/master/vehicle'
@@ -91,10 +91,10 @@ export default function AddVehicleMaster({ row, closeModal }) {
     }, [dispatch, reduxVehicle?.apiJson]);
 
 
-    console.log("reduxVehicle",reduxVehicle);
 
 
-    console.log("");
+
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

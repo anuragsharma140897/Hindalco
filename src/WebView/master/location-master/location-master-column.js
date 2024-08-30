@@ -59,7 +59,7 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
     width: 600,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        {console.log("row",row)}
+
         <Tooltip size="sm" content={'Edit Location Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Location Master', AddLocationMaster, 400)}>
@@ -99,13 +99,13 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
 
 
 const DeleteItem = async (_id, setLoading) => {
-console.log("_id",_id);
+
 
   setLoading(true);
   try {
     const json = { _id };
 
-    console.log("json",json);
+
     const result = await HitApi(json, deleteLocation);
 
     if (result.status === 200) {

@@ -90,7 +90,7 @@ export default function CreateDeviceReader() {
     const { id, label, value } = e
     var json = reduxDevice?.apiJson
 
-    console.log('e', e);
+
     var ts = {
       [fieldName]: {
         "antennaNumber": no,

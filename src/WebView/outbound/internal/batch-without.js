@@ -23,7 +23,7 @@ function BatchWithout() {
     };
 
 
-console.log("reduxOutbou0000nd",reduxOutbound)
+
     return (
         <div>
             <div>

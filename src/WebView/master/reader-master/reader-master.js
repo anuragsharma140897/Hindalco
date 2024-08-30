@@ -23,7 +23,7 @@ export default function ReaderMaster() {
     HitApi(json, searchReader).then((result) => {
       if(result){
         CompileDeviceReader(result).then((CompiledData)=>{
-          console.log('CompiledData', CompiledData);
+
           dispatch(setDeviceReaderData(CompiledData))
         })
       }

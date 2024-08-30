@@ -42,7 +42,7 @@ function AddLocationZone({ row }) {
         HitApi(json, searchZone).then((result) => {
             if (result) {
                 CompileZoneMaster(result).then((CompiledData) => {
-                    console.log("CompiledData", CompiledData)
+
                     const x = CompiledData.content?.map(building => ({
                         label: building.value,
                         value: building.id,
@@ -56,7 +56,7 @@ function AddLocationZone({ row }) {
 
 
     const handleSubmit = () => {
-        console.log("reduxZone?.apiJson?._id",reduxZone);
+
         if (reduxZone?.apiJson?._id) {
             setLoading(true)
             var json = {
@@ -64,11 +64,11 @@ function AddLocationZone({ row }) {
                 mapTo: reduxZone?.apiJson?._id,
             }
 
-            console.log(json);
+
 
             HitApi(json, addZoneToLocation).then((result) => {
                 setLoading(false)
-                console.log("result", result);
+
                 if (result?.status === 200) {
                     alert(result.message)
                     window.location.pathname = '/master/location'
@@ -85,19 +85,19 @@ function AddLocationZone({ row }) {
 
     const handleOnChange = useCallback((e, name) => {
         const { _id, value } = e;
-        console.log("e",e)
+
 
         const newJson = { [name]: _id  };
-        console.log("newJson",newJson);
+
         const updatedJson = { ...reduxLocation?.apiJson, ...newJson };
 
-        console.log("updatedJson",updatedJson);
+
         dispatch(setZoneMasterApiJson(updatedJson));
     }, [dispatch, reduxLocation?.apiJson]);
 
 
-console.log("reduxLocation",reduxLocation);
-console.log("reduxZone",reduxZone);
+
+
 
     return (
         <div className='p-10'>

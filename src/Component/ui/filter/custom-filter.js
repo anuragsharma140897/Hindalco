@@ -20,7 +20,7 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
             Object.assign(json.search, { [serverKey]: value })
         }
 
-        console.log('filter json : ', json);
+
         dispatch(setAction(json))
         if (ApiHit) { ApiHit() }
     }
@@ -35,9 +35,9 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
     }
 
     const handleClearFilter = (name) => {
-        console.log('handleClearFilter hit', name, reduxSelect?.selected);
+
         const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
-        console.log('existingIndex', existingIndex);
+
         if (existingIndex !== -1) {
             const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
             dispatch(setSearchableSelectSelectedData(updatedSelected));

@@ -34,7 +34,8 @@ export default function AddInventoryMaster({ row, closeModal }) {
         var json = {
             ...reduxInventory?.apiJson, 
             totalInventory: parseInt(reduxInventory?.apiJson?.totalInventory, 10), 
-        };        console.log('json+___++_',json);
+        };        
+
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
@@ -69,14 +70,14 @@ export default function AddInventoryMaster({ row, closeModal }) {
 
     const handleOnChange = (e) => {
         const { id, label, value } = e
-        console.log(e);
+
         let oldJson = reduxInventory?.apiJson
         let newJson = { ...oldJson, "product_id": e?.id }
         dispatch(setInventoryMasterApiJson(newJson))
 
     }
 
-    console.log("reduxInventory", reduxInventory)
+
 
     return (
         <div className='p-10'>

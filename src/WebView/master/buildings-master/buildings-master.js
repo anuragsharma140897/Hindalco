@@ -30,7 +30,7 @@ export default function BuildingsMaster() {
       Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
     }
 
-    console.log('json', json);
+
 
     HitApi(json, searchBuilding).then((result) => {
       if (result?.success !== false) {

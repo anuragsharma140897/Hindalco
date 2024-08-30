@@ -20,7 +20,7 @@ import { setLocationMasterApiJson } from '../../../Store/Action/master/location-
 function AddZoneBuilding({ row }) {
     let zoneid = row?._id
 
-    console.log("zoneid", zoneid);
+
 
     const reduxZone = useSelector(state => state.ZoneMasterReducer);
     const reduxBuilding = useSelector(state => state.ZoneMasterReducer);
@@ -47,11 +47,11 @@ function AddZoneBuilding({ row }) {
         json.limit = 1000
         HitApi(json, searchBuilding).then((result) => {
 
-            console.log('result searchBuilding  ', result);
+
 
             if (result) {
                 CompileBuildingMaster(result).then((CompiledData) => {
-                    console.log("CompiledData", CompiledData)
+
                     const x = CompiledData.content?.map(building => ({
                         label: building.buildingName,
                         value: building.id,
@@ -75,11 +75,11 @@ function AddZoneBuilding({ row }) {
 
             }
 
-            console.log(json);
+
 
             HitApi(json, addBuildingToZone).then((result) => {
                 setLoading(false)
-                console.log("result", result);
+
                 if (result?.status === 200) {
                     alert(result.message)
                     window.location.pathname = '/master/zone'
@@ -100,17 +100,17 @@ function AddZoneBuilding({ row }) {
 
     const handleOnChange = useCallback((e, name) => {
         const { _id, value } = e;
-        console.log("e",e)
+
 
         const newJson = { [name]: _id  };
-        console.log("newJson",newJson);
+
         const updatedJson = { ...reduxZone?.apiJson, ...newJson };
 
-        console.log("updatedJson",updatedJson);
+
         dispatch(setZoneMasterApiJson(updatedJson));
     }, [dispatch, reduxZone?.apiJson]);
 
-    console.log("reduxZone", reduxZone);
+
 
     return (
         <div className='p-10 mb-40'>

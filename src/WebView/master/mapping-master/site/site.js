@@ -26,9 +26,9 @@ export default function Site() {
 
     const loadData = () => {
         var json = reduxSite?.searchJson
-        console.log('json builgin', json);
+
         HitApi(json, searchSite).then((result) => {
-            console.log('result', result);
+
             if (result?.success !== false) {
                 CompileBuildingMaster(result).then((CompiledData) => {
                     dispatch(setSiteMasterData(CompiledData))

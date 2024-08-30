@@ -4,7 +4,7 @@ import {  removeBuildingFromZone } from "../../../../Constant/Api/Api";
 import { HitApi } from "../../../../Store/Action/Api/ApiAction";
 
 export const getBuildingZoneMasterColumns = ({ zoneid }) => {
-  console.log("zoneid", zoneid);
+
 
   const columns = [
     {
@@ -64,7 +64,7 @@ export const DeleteItem = (_id, zoneid) => {
 
   HitApi(json, removeBuildingFromZone)
     .then((result) => {
-      console.log('result', result);
+
       if (result && result.status === 200) {
         alert('Building deleted successfully');
         window.location.pathname ='/master/zone'

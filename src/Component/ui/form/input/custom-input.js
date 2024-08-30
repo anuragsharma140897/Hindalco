@@ -19,7 +19,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
             const { name, value } = e.target;
             let number = value;
             let firstSixDigits = number.toString().substring(0, maxLength);
-            console.log('firstSixDigits', firstSixDigits);
+
             let updatedJson = { ...reduxState };
             updatedJson[name] = firstSixDigits;
             dispatch(setAction(updatedJson));

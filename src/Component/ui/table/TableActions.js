@@ -9,10 +9,11 @@ import { getAuthenticatedUser } from '../../../Storage/Storage';
 const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     const user = getAuthenticatedUser()
 
-    console.log('ScreenName?.[screen]', ScreenName?.[screen]);
+
 
     
     const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
+    // const isEditAllowed = true
     const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
     
     const areKeysNotEmpty = () => {
@@ -23,7 +24,7 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     // Check if keys are not empty
     const keysAreNotEmpty = areKeysNotEmpty();
 
-    console.log('keysAreNotEmpty', keysAreNotEmpty);
+
     
     return (
         <div className="flex items-center gap-3 pe-4">

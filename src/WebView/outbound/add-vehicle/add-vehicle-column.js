@@ -11,8 +11,8 @@ import { setOutboundAddedVehicle, setOutboundApiJson } from '../../../Store/Acti
 export const getaddVehicleColumns = ({ reduxOutbound ,dispatch}) => {
 
   const DeleteItem = (row) => {
-    console.log("row", row);
-    console.log("reduxOutbound", reduxOutbound);
+
+
    var oldApiJson = reduxOutbound?.apiJson
     const updatedAddedVehicle = reduxOutbound?.vehicleAdded?.filter(item => item.id !== row.id);
     oldApiJson.vehicleIds = oldApiJson?.vehicleIds?.filter(item => item.vehicleId !== row.id);

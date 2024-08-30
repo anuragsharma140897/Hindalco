@@ -43,7 +43,7 @@ export const GetBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
     //     });
     //   }
     // } catch (err) {
-    //   console.log('Unexpected error:', err);
+
     // } finally {
     //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
     // }
@@ -68,21 +68,21 @@ export const GetBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
       dataIndex: 'buildingName',
       key: 'buildingName',
       width: 150,
-      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
+      render: (value, row, index) => renderCell(value, row, <Text>{value  || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Building No" className={'font-extrabold'} />,
       dataIndex: 'buildingNo',
       key: 'buildingNo',
       width: 150,
-      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
+      render: (value, row, index) => renderCell(value, row, <Text>{value  || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Unit" className={'font-extrabold'} />,
       dataIndex: 'unitName',
       key: 'unitName',
       width: 150,
-      render: (value, row, index) => renderCell(value, row, <Text>{value + 1 || '---'}</Text>),
+      render: (value, row, index) => renderCell(value, row, <Text>{value  || '---'}</Text>),
     },
     {
       title: <HeaderCell title="Actions" className={'font-extrabold'} />,
@@ -94,7 +94,7 @@ export const GetBuildingMasterColumns = (openModal, closeModal, ApiHit) => {
           screen={'buildingMaster'}
           row={row}
           onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Building Master', AddBuildingMaster, 800, ApiHit)}
-          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+
           onDelete={(rowData) => handleDelete(rowData)}
           checkKeys={[]}
         />

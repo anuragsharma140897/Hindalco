@@ -8,8 +8,6 @@ export default function Navigation() {
     const pathname = window.location.pathname
     const [selected, setSelected] = useState(0)
 
-
-
     const handleClick = (index) => {
 
         setSelected(index)

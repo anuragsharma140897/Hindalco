@@ -25,7 +25,7 @@ function EditOutbound() {
 
     const pathname = window.location.pathname
     const id = pathname.split('/')[3]
-    console.log('id', id);
+
     var json = {
       page: 1,
       limit: 1,
@@ -34,15 +34,15 @@ function EditOutbound() {
       }
     }
     HitApi(json, searchOrder).then(res => {
-      console.log('res',res);
+
 
       var oldJson = reduxOutbound.apiJson
       oldJson = res?.content[0]
 
-      console.log('oldJson',oldJson);
+
       dispatch(setOutboundApiJson(oldJson))
 
-      console.log('res?.content', res?.content);
+
       var json = [{name:'dispatchFrom',value:res?.content?.[0]?.dispatchFromName},{name:'orderStatus',value:res?.content?.[0]?.orderStatus},{name:'saleType',value:res?.content?.[0]?.saleType} ,{name:'billTo',value:res?.content?.[0]?.billToName},{name:'dispatchTo',value:res?.content?.[0]?.dispatchToName}]
 
 
@@ -56,11 +56,11 @@ function EditOutbound() {
           }
         }
 
-        console.log('json',json);
+
 
         HitApi(json,searchVehicle).then(res=>{
 
-          console.log('res-->>',res);
+
 
           dispatch(setOutboundAddedVehicle(res?.content))
         })
@@ -70,9 +70,9 @@ function EditOutbound() {
 
     })
   }
-console.log("reduxOutbound",reduxOutbound);
 
-console.log("reduxSelect",reduxSelect);
+
+
   return (
   
     <CreateOutbound />

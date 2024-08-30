@@ -29,7 +29,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     }, [])
 
     const loadDefault = (row) => {
-        console.log('row', row);
+
         var json = reduxBuilding?.apiJson
         var selected = reduxSelect?.selected
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
@@ -40,7 +40,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         e.preventDefault();
         var json = reduxBuilding?.apiJson
 
-        console.log('json', json);
+
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {

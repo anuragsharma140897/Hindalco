@@ -1,9 +1,19 @@
-import React from 'react'
-import { getAuthenticatedUser } from '../../Storage/Storage';
+import React, { useState } from 'react'
+import JsonEditor from '../../Component/ui/editor/json-editor'
 
-export default function test() {
-  // console.log(getAuthenticatedUser());
+export default function Test() {
+  const [json, setJson] = useState({"page":1})
+  const [result, setRedult] = useState({"page":1})
+
+
+
+  const onChange = (value) =>{
+
+
+    setRedult([JSON.stringify(value)])
+  }
+
   return (
-    <div>test</div>
+    <div><JsonEditor json={json} onChange={onChange}/></div>
   )
 }

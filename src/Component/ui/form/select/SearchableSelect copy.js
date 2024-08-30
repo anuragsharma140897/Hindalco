@@ -36,7 +36,7 @@ export default function SearchableSelect({ type, label, important, api, name, er
       loadData();
     }
 
-    console.log('defaultValueIndex', defaultValueIndex);
+
 
   }, [options]);
 

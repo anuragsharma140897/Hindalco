@@ -59,7 +59,7 @@ export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoadin
 
 
       <div className="flex items-center gap-3 pe-4">
-        {console.log("row+++++++++++++", row)}
+
         <Tooltip size="sm" content={'Edit Zone Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Zone Master', AddZoneMaster, 400)}>

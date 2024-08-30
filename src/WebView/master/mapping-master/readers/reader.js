@@ -40,9 +40,9 @@ export default function Reader() {
       },
 
     }
-    console.log('laoding reader data...', json);
+
     HitApi(json, searchReader).then((result) => {
-      console.log('result location : ', result);
+
       if (result?.success !== false) {
         dispatch(setDeviceReaderData(result))
       } else {
@@ -54,7 +54,7 @@ export default function Reader() {
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
     const { id, label, value } = e
-    console.log(id);
+
     Object.assign(json, { selectedReaderIdFromDropdown: id })
     dispatch(setSelectedMappingMasterJson(json))
   }
@@ -81,7 +81,7 @@ export default function Reader() {
     setDynamicLoading({ 'zone': true, 'location': true, 'reader': true })
 
     HitApi(readerToLocationMappingJson, mapping).then((readerToLocationMappingResult) => {
-      console.log('readerToLocationMappingResult', readerToLocationMappingResult);
+
       if (readerToLocationMappingResult?.success !== false) {
         var readerToZoneMappingJson = {
           sourceId: json?.selectedZoneID,
@@ -96,9 +96,9 @@ export default function Reader() {
           title: 'Success!',
           message: 'Reader to Location Mapping Successfully',
         });
-        console.log('readerToZoneMappingJson', readerToZoneMappingJson);
+
         HitApi(readerToZoneMappingJson, mapping).then((readerToZoneMappingREsult) => {
-          console.log('readerToZoneMappingREsult', readerToZoneMappingREsult);
+
 
           if (readerToZoneMappingREsult?.success !== false) {
             var readerToBuildingMappingJson = {
@@ -114,9 +114,9 @@ export default function Reader() {
               title: 'Success!',
               message: 'Reader to Zone Mapping Successfully',
             });
-            console.log('readerToBuildingMappingJson', readerToBuildingMappingJson);
+
             HitApi(readerToBuildingMappingJson, mapping).then((readerToBuildingMappingResult) => {
-              console.log('readerToBuildingMappingResult', readerToBuildingMappingResult);
+
               if (readerToBuildingMappingResult?.success !== false) {
                 showCustomAlert({
                   type: 'success',
@@ -128,15 +128,15 @@ export default function Reader() {
                 closeModal()
                 loadData()
               } else {
-                console.log('error');
+
               }
             })
           } else {
-            console.log('error');
+
           }
         })
       } else {
-        console.log('error');
+
       }
     })
   }
@@ -156,7 +156,7 @@ export default function Reader() {
 
       setDynamicLoading({ 'zone': true, 'location': true, 'reader': true })
       HitApi(readerToLocationMappingJson, removeMapping).then((readerToLocationMappingResult) => {
-        console.log('readerToLocationMappingResult', readerToLocationMappingResult);
+
         if (readerToLocationMappingResult?.success !== false) {
           var readerToZoneMappingJson = {
             sourceId: json?.selectedZoneID,
@@ -171,9 +171,9 @@ export default function Reader() {
             title: 'Success!',
             message: 'Reader to Location Demapping Successfully',
           });
-          console.log('readerToZoneMappingJson', readerToZoneMappingJson);
+
           HitApi(readerToZoneMappingJson, removeMapping).then((readerToZoneMappingREsult) => {
-            console.log('readerToZoneMappingREsult', readerToZoneMappingREsult);
+
             if (readerToZoneMappingREsult?.success !== false) {
               var readerToBuildingMappingJson = {
                 sourceId: json?.selectedBuildingID,
@@ -188,9 +188,9 @@ export default function Reader() {
                 title: 'Success!',
                 message: 'Reader to Zone Demapping Successfully',
               });
-              console.log('readerToBuildingMappingJson', readerToBuildingMappingJson);
+
               HitApi(readerToBuildingMappingJson, removeMapping).then((readerToBuildingMappingResult) => {
-                console.log('readerToBuildingMappingResult', readerToBuildingMappingResult);
+
                 if (readerToBuildingMappingResult?.success !== false) {
                   showCustomAlert({
                     type: 'success',
@@ -202,15 +202,15 @@ export default function Reader() {
                   // closeModal()
                   loadData()
                 } else {
-                  console.log('error');
+
                 }
               })
             } else {
-              console.log('error');
+
             }
           })
         } else {
-          console.log('error');
+
         }
       })
 
@@ -218,7 +218,7 @@ export default function Reader() {
   }
 
   const handleReaderClick = (ele) => {
-    console.log('reader ele : ', ele);
+
     var json = reduxMappingMaster?.mappingJson
     Object.assign(json, { selectedReaderID: ele?.id })
     dispatch(setSelectedMappingMasterJson(json))
