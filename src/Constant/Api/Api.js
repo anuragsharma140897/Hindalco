@@ -128,7 +128,6 @@ export const deleteMqttConfig = DeviceMicroService + 'deleteMqttConfig'
 
 //rfidTags
 
-
 export const searchRfidTag = IOTMicroService + 'searchRfidTag'
 
 // inbound
@@ -142,6 +141,11 @@ export const searchOrder = OrderMicroService + 'searchOrder'
 
 //updateBulkTags
 export const updateBulkTags = IOTMicroService + 'updateBulkTags'
+
+
+// Device Manager
+export const searchDevice = DeviceMicroService+'searchDevice'
+
 
 
 

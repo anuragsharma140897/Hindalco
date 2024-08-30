@@ -43,6 +43,7 @@ import Brokers from '../WebView/device-manager/brokers/brokers'
 import DeviceProfile from '../WebView/device-manager/device-profile/device-profile'
 import Mapper from '../WebView/device-manager/mapper/mapper'
 import ApiService from '../WebView/device-manager/api-service/api-service'
+import AddDevice from '../WebView/device-manager/devices/add-device/add-device'
 
 export default function CustomRoutes() {
 
@@ -90,6 +91,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.inventoryInventories} exact element={<Inventories />} />
             <Route path={routes?.panel?.outbond?.outboundEdit} exact element={<EditOutbound/>} />
             <Route path={routes?.panel?.deviceManager?.devices} exact element={<Devices/>} />
+            <Route path={routes?.panel?.deviceManager?.addDevice} exact element={<AddDevice/>} />
             <Route path={routes?.panel?.deviceManager?.broker} exact element={<Brokers/>} />
             <Route path={routes?.panel?.deviceManager?.deviceProfiler} exact element={<DeviceProfile/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />

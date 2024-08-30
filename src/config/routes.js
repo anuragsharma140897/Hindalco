@@ -44,6 +44,7 @@ export const routes = {
     },
     deviceManager:{
       devices : '/device-manager/devices',
+      addDevice : '/device-manager/devices/add',
       broker : '/device-manager/broker',
       deviceProfiler : '/device-manager/devices-profile',
       apiService : '/device-manager/api-service',

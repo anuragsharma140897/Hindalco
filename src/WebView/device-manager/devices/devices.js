@@ -8,64 +8,67 @@ import useAlertController from '../../../Hooks/use-alert-controller';
 import { GetDeviceMasterColumns } from './devices-column';
 import { TableClass } from '../../../Constant/Classes/Classes';
 import { useColumn } from '../../../Hooks/use-column';
+import { searchDevice } from '../../../Constant/Api/Api';
+import { HitApi } from '../../../Store/Action/Api/ApiAction';
+import AddDevice from './add-device/add-device';
+import { routes } from '../../../config/routes';
 
 export default function Devices() {
   const dispatch = useDispatch()
-  const reduxSite = useSelector(state => state.DevicesReducer)
+  const reduxDevices = useSelector(state => state.DevicesReducer)
   const reduxPagination = useSelector(state => state.PaginationReducer);
   const { openModal, closeModal } = useModal();
   const { showCustomAlert } = useAlertController();
   const [loading, setLoading] = useState(false)
 
   const loadData = (type) => {
-    var json = reduxSite?.searchJson
+    var json = reduxDevices?.searchJson
     if (type === 'init') {
       Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit });
     } else {
       Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
     }
 
-    // HitApi(json, searchSite).then((result) => {
-    //   // if (result?.success !== false) {
-    //   //   CompileSiteMaster(result).then((compiledData) => {
-    //   //     dispatch(setSiteMasterData(compiledData));
-    //   //     dispatch(setPagination({
-    //   //       limit: json?.limit,
-    //   //       totalPages: compiledData?.totalPages,
-    //   //       number: compiledData?.number,
-    //   //       totalElements: compiledData?.totalElements,
-    //   //     }));
-    //   //   });
-    //   // } else {
-    //   //   dispatch(setSiteMasterData([]));
-    //   // }
-    // });
+    console.log('json', json);
+
+    HitApi(json, searchDevice).then((result) => {
+      console.log(';result', result);
+      // if (result?.success !== false) {
+      //   CompileSiteMaster(result).then((compiledData) => {
+      //     dispatch(setSiteMasterData(compiledData));
+      //     dispatch(setPagination({
+      //       limit: json?.limit,
+      //       totalPages: compiledData?.totalPages,
+      //       number: compiledData?.number,
+      //       totalElements: compiledData?.totalElements,
+      //     }));
+      //   });
+      // } else {
+      //   dispatch(setSiteMasterData([]));
+      // }
+    });
   }
 
   const columns = useMemo(() => GetDeviceMasterColumns(openModal, closeModal, loadData, showCustomAlert))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {
-    if (reduxSite?.doc === null) {
+    if (reduxDevices?.doc === null) {
       loadData('init')
     }
-
-    console.log('reduxPagination', reduxPagination);
   }, [])
 
   return (
     <div>
-      <PageHeader metaTitle={'Site Master'} btnText={'Add Site'} children={<h1>Hi</h1>} title={'Add Site'} customSize={400} />
-      
+      <PageHeader btnText={'Add Device'}  href={routes?.panel?.deviceManager?.addDevice} disbleExport />
       <ControlledTable
-        
         variant="modern"
         isLoading={loading}
         showLoadingText={true}
-        data={reduxSite?.doc?.content}
+        data={reduxDevices?.doc?.content}
         columns={visibleColumns}
         className={TableClass}
-        json={reduxSite?.searchJson}
+        json={reduxDevices?.searchJson}
         // setAction={setSiteMasterApiJson}
         ApiHit={loadData}
       />
