@@ -49,6 +49,8 @@ export const routes = {
       addDevice : '/device-manager/devices/add',
       broker : '/device-manager/broker',
       addbroker : '/device-manager/broker/add',
+      editbroker : '/device-manager/broker/edit/:id',
+
       deviceProfiler : '/device-manager/devices-profile',
       apiService : '/device-manager/api-service',
       mapper : '/device-manager/mapper'

@@ -1,6 +1,11 @@
 
 // export const IP = '137.184.74.218'
-export const IP = '192.168.0.104:9090'
+
+// export const IP = '192.168.0.104:9090'
+
+
+export const IP = '192.168.0.118:9090'
+
 
 
 export const MQTTIP = 'ws://192.168.0cle.104:9001'
@@ -148,6 +153,15 @@ export const updateBulkTags = IOTMicroService + 'updateBulkTags'
 
 // Device Manager
 export const searchDevice = DeviceMicroService+'searchDevice'
+
+//Broker
+
+export const addBroker = DeviceMicroService + 'addBroker'
+export const searchBroker = DeviceMicroService + 'searchBroker'
+export const updateBroker = DeviceMicroService + 'updateBroker'
+export const deleteBroker = DeviceMicroService + 'deleteBroker'
+
+
 
 
 

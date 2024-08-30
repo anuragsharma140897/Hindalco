@@ -172,12 +172,16 @@ export const getHeadingFromPathname = () => {
             return "Outbound Order / Create"
         case "/outbond/outbound-order":
             return "Outbound Order"
-
+        case "/device-manager/broker":
+            return "Brokers"
+        case "/device-manager/broker/add":
+            return "Brokers / Add"
         default:
             return "";
     }
 }
-
+// device-manager/broker/add
+// device-manager/broker
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {
         read: ["/usermanagement/read"],
