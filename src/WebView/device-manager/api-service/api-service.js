@@ -5,6 +5,7 @@ import { setApiJson, setServiceMasterJson } from './Store/Action/ServiceMasterAc
 import { AllApiCallHere } from './Store/AllApiCallHere';
 import { deleteApiService, searchApiService } from './constants/constant';
 import AddMoreService from './addMoreService';
+import ApiRequest from './ApiRequest';
 
 export default function ApiService() {
   const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
@@ -12,6 +13,8 @@ export default function ApiService() {
   const dispatch = useDispatch()
   const [openPopupIndex, setOpenPopupIndex] = useState(null);
   const [addMoreServiceModal, setAddMoreServiceModal] = useState(false);
+  const [dataForRequest, setDataForRequest] = useState(false);
+  
 
   useEffect(() => {
     if (ServiceMasterReducer?.doc === null) {
@@ -42,7 +45,8 @@ export default function ApiService() {
     setOpenPopupIndex(openPopupIndex === index ? null : index);
   };
 
-  const handleAddNewRequest = (serviceIndex) => {
+  const handleAddNewRequest = (i,index) => {
+    setDataForRequest([i,index])
     setOpenPopupIndex(null);
   };
 
@@ -131,7 +135,7 @@ export default function ApiService() {
             {openServices[i] && (
               <div className="ml-6 mt-1">
                 {ele?.requests?.map((item, index) => (
-                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded">
+                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={()=>handleAddNewRequest(i,index)}>
                     <File className="w-4 h-4 mr-2 text-gray-500" />
                     <span className="text-gray-600 text-sm">{item?.requestName}</span>
                   </div>
@@ -142,8 +146,7 @@ export default function ApiService() {
         ))}
       </div>
       <div className="col-span-9 bg-white p-4 shadow-md rounded-xl">
-        <h2 className="text-2xl font-semibold text-gray-800">Content Area</h2>
-        <p className="text-gray-600 mt-2">Select a service or request from the sidebar to view details.</p>
+        <ApiRequest dataForRequest={dataForRequest}/>
       </div>
 
       {
