@@ -57,6 +57,7 @@ export default function Devices() {
       loadData('init')
     }
   }, [])
+  
 
   return (
     <div>
