@@ -94,7 +94,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.addDevice} exact element={<AddDevice/>} />
             <Route path={routes?.panel?.deviceManager?.broker} exact element={<Brokers/>} />
             <Route path={routes?.panel?.deviceManager?.deviceProfiler} exact element={<DeviceProfile/>} />
-            <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
+            {/* <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} /> */}
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
             <Route path={'/test'} exact element={<Test />} />

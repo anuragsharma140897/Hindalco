@@ -42,6 +42,7 @@ import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
 import DevicesReducer from './Store/Reducer/device-master/devices/devices-reducer';
+import ServiceMasterReducer from './WebView/device-manager/api-service/Store/Reducer/ServiceMasterReducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -79,7 +80,9 @@ const rootReducer = combineReducers({
   OutboundReducer :OutboundReducer,
   // Device Mapper Reducers
   EditorReducer : EditorReducer,
-  DevicesReducer : DevicesReducer
+  DevicesReducer : DevicesReducer,
+
+  ServiceMasterReducer : ServiceMasterReducer
 
 
 })
