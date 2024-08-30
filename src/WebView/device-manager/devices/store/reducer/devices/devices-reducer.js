@@ -1,4 +1,4 @@
-import { SET_DEVICES_API_JSON, SET_DEVICES_DATA, SET_DEVICES_SEARCH_JSON } from "../../../Action/device-master/devices/device-action"
+import { SET_DEVICES_API_JSON, SET_DEVICES_DATA, SET_DEVICES_SEARCH_JSON } from "../../action/devices/devices-action"
 
 const initialState = {
     doc: null,

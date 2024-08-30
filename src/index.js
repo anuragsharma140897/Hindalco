@@ -41,7 +41,7 @@ import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-bat
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
-import DevicesReducer from './Store/Reducer/device-master/devices/devices-reducer';
+import DevicesReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
