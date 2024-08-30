@@ -42,6 +42,7 @@ import Devices from '../WebView/device-manager/devices/devices'
 import Brokers from '../WebView/device-manager/brokers/brokers'
 import DeviceProfile from '../WebView/device-manager/device-profile/device-profile'
 import Mapper from '../WebView/device-manager/mapper/mapper'
+import ApiService from '../WebView/device-manager/api-service/api-service'
 
 export default function CustomRoutes() {
 
@@ -92,7 +93,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.broker} exact element={<Brokers/>} />
             <Route path={routes?.panel?.deviceManager?.deviceProfiler} exact element={<DeviceProfile/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
-            <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
+            <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
             <Route path={'/test'} exact element={<Test />} />
         </Routes>

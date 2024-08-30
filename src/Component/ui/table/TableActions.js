@@ -13,6 +13,7 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
 
     
     const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
+    // const isEditAllowed = true
     const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
     
     const areKeysNotEmpty = () => {

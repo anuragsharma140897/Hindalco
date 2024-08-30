@@ -104,7 +104,6 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         dispatch(setUserApiJson(json))
     }
 
-
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>

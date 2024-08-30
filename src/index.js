@@ -40,6 +40,8 @@ import InboundReducer from './Store/Reducer/inbound/inbout-reducer';
 import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-batch-reducer';
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
+import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
+import DevicesReducer from './Store/Reducer/device-master/devices/devices-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -75,6 +77,9 @@ const rootReducer = combineReducers({
   DashboardInventoryBatchReducer : DashboardInventoryBatchReducer,
   DashboardBatchReducer : DashboardBatchReducer,
   OutboundReducer :OutboundReducer,
+  // Device Mapper Reducers
+  EditorReducer : EditorReducer,
+  DevicesReducer : DevicesReducer
 
 
 })
