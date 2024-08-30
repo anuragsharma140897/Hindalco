@@ -25,6 +25,7 @@ const string = (requiredMessage = 'This field is required') => {
       return validator;
     },
     validate: (value) => {
+      console.log('value', value);
       if (validationRules.isRequired && (!value || !value.trim())) {
         return validationRules.errorMessage;
       }

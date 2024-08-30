@@ -72,14 +72,14 @@ export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoadin
             loading={loading}
             title={`Delete Zone Master`}
             description={`Are you sure you want to delete?`}
-            onDelete={() => DeleteItem(row.id, setLoading)}
+            onDelete={() => DeleteItem(row._id, setLoading)}
           />
         ) : (
           <DeletePopover
           loading={loading}
           title={`You cannot delete zone`}
           description={`This zone is already assigned`}
-          onDelete={() => DeleteItem(row.id, setLoading)}
+          onDelete={() => DeleteItem(row._id, setLoading)}
           disable={true}
         />
         )}
@@ -97,10 +97,10 @@ export const getZoneMasterColumns = ({ openModal, closeModal, loading, setLoadin
 ];
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
     const result = await HitApi(json, deleteZone);
 
     if (result.status === 200) {

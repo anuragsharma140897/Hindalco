@@ -9,6 +9,7 @@ import { vehicleMasterVariable as variable } from '../../../Constant/variables/m
 import { setVehicleMasterApiJson } from '../../../Store/Action/master/vehicle-master/vehicle-master-action'
 import { vehicleMasterSchema } from '../../../Utils/validators/master/vehicle-master/vehicle-master-schema';
 import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
+import { setSearchableSelectSelectedData } from '../../../Store/Action/common/searcheable-select/searcheable-select-action';
 
 
 export default function AddVehicleMaster({ row, closeModal }) {
@@ -19,17 +20,21 @@ export default function AddVehicleMaster({ row, closeModal }) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
+            var json = [{name:'vehicleType',value:row?.vehicleType},{name:'siteIds',value:row?.siteIds?.siteName}]
+            dispatch(setSearchableSelectSelectedData(json))
+            
         }
     }, [])
 
 
     const loadDefault = (row) => {
         var json = reduxVehicle?.apiJson
-
-
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        Object.assign(json, {siteIds : row?.siteIds?._id})
+        Object.assign(json, {vehicleType : row?.vehicleType})
+
         dispatch(setVehicleMasterApiJson(json))
     }
     const handleSubmit = (e) => {
@@ -40,20 +45,17 @@ export default function AddVehicleMaster({ row, closeModal }) {
         console.log("validationErrors",validationErrors);
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
-            if (row?.id) {
-                Object.assign(json, { id: row?.id , status: json?.status || 'active'})
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id , status: json?.status || 'active'})
                 HitApi(json, updateVehicle).then((result) => {
                     setLoading(false)
                     if(result?.status ==200){
                         alert(result.message);
                         window.location.pathname = '/master/vehicle'
-                    }
-                   
+                    }            
                     else {
                         alert(result.message)
                     }
-
-
                 })
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
@@ -82,14 +84,17 @@ export default function AddVehicleMaster({ row, closeModal }) {
 
 
     const handleOnChange = useCallback((e, name) => {
-        const { id, value } = e;
-        const newJson = { [name]: name === 'siteIds' ? id : value };
+        const { _id, value } = e;
+        const newJson = { [name]: name === 'siteIds' ? _id : value };
         const updatedJson = { ...reduxVehicle?.apiJson, ...newJson };
         dispatch(setVehicleMasterApiJson(updatedJson));
     }, [dispatch, reduxVehicle?.apiJson]);
 
 
     console.log("reduxVehicle",reduxVehicle);
+
+
+    console.log("");
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
@@ -101,13 +106,13 @@ export default function AddVehicleMaster({ row, closeModal }) {
                     <CustomInput important={true} name="vehicleYear" type={'number'} maxLength={4} label="Vehicle Year" value={reduxVehicle?.apiJson?.vehicleYear} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <CustomInput important={true} name="vehicleEngine" label="Vehicle Engine" value={reduxVehicle?.apiJson?.vehicleEngine} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <CustomInput important={true} name="tagId" label="Tag Number" value={reduxVehicle?.apiJson?.tagId} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
-                    <SearchableSelect name="vehicleType" label="Vehicle Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'vehicleType'} getFieldName={'value'} value={reduxVehicle?.apiJson?.roleName} error={errors}  onChange={(e)=>handleOnChange(e,'vehicleType')} />
+                    <SearchableSelect name="vehicleType" label="Vehicle Type" api={searchGeneral} checkServerKey={'fieldName'}  dynamicSearch={{ 'fieldName': 'vehicletype' }} checkServerValue={'vehicleType'} getFieldName={'value'} value={reduxVehicle?.apiJson?.roleName} error={errors}  onChange={(e)=>handleOnChange(e,'vehicleType')} />
                     <CustomInput important={false} name="supplierIds" label="Supplier ID" value={reduxVehicle?.apiJson?.supplierIds} error={errors} reduxState={reduxVehicle?.apiJson} setAction={setVehicleMasterApiJson} />
                     <SearchableSelect name="siteIds" label="Site" api={searchSite} getFieldName={'siteName'} onChange={(e)=>handleOnChange(e,'siteIds')} />
                     </div>
                     <div className='flex gap-3 justify-end'>
-                        <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton text={'Cancel'} variant='flat'  onClick={closeModal} />
+                        <CustomButton type={'submit'}  text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>

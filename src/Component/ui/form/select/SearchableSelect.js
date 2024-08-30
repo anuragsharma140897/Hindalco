@@ -35,7 +35,7 @@ function renderDefaultDisplay(value) {
 
 
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, onClear, useCustomDisplay ,label}) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
@@ -57,7 +57,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
         CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
-            // dispatch(setSearchableSelectData(CompiledData));
+            dispatch(setSearchableSelectData(CompiledData));
           }
         });
       });
@@ -81,6 +81,18 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
     if (onChange) onChange(e);
     setSelected(value);
   };
+
+  const onClear = () =>{
+    var json = reduxSelect?.selected
+    const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
+    console.log('existingIndex', existingIndex);
+    if (existingIndex !== -1) {
+        const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
+        dispatch(setSearchableSelectSelectedData(updatedSelected));
+        delete json?.search?.[name]
+    }
+
+  }
  
   return (
     <div>

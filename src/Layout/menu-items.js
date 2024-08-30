@@ -17,6 +17,7 @@ import VehicleMasterIcon from '../Constant/Icons/vehicle-master-icon';
 import ConfigurationMasterIcon from '../Constant/Icons/configuration-master-icon';
 import WeighingScaleIcon from '../Constant/Icons/weighing-scale-icon';
 import WebReceivingIcon from '../Constant/Icons/web-receiving-icon';
+import LocationMasterIcon from '../Constant/Icons/location-master-icon';
 
 export const menuItems = [
   {
@@ -31,7 +32,7 @@ export const menuItems = [
       { name: 'Buildings Master', href: routes?.panel?.master?.buildingsMaster ,icon : <BuildingsMasterIcon />},
       { name: 'Zone Master', href: routes?.panel?.master?.zomeMaster ,icon : <BuildingsMasterIcon />},
       { name: 'Tag Master', href: routes?.panel?.master?.tagMaster ,icon : <BuildingsMasterIcon />},
-      { name: 'Location Master', href: routes?.panel?.master?.locationMaster ,icon : <BuildingsMasterIcon />},
+      { name: 'Location Master', href: routes?.panel?.master?.locationMaster ,icon : <LocationMasterIcon />},
       { name: 'Product Master', href: routes?.panel?.master?.productMaster ,icon : <ProductMasterIcon />}, 
       { name: 'Customer Master', href: routes?.panel?.master?.customerMaster ,icon : <CustomerMasterIcon />},
       { name: 'Supplier Master', href: routes?.panel?.master?.supplierMaster ,icon : <SupplierMasterIcon />},

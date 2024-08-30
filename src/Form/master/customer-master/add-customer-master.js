@@ -51,17 +51,26 @@ export default function AddCustomeMaster({ row}) {
             value: country.name
         }));
         setCountries(allCountries);
-    }, [row?.id]); 
+    }, [row?._id]); 
     const loadDefault = useCallback((row) => {
+          console.log('xcxccx',row);
         var json = { ...reduxCustomer?.apiJson };
+
+        console.log("ccsdcsdsdsdsd",json);
+        
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        Object.assign(json, {siteIds : row?.siteIds?._id})
         dispatch(setCustomerMasterApiJson(json));
     }, [dispatch, reduxCustomer?.apiJson]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxCustomer?.apiJson;
+
+        console.log("json",json);
         const validationErrors = validate(json);
+
+        console.log("validationErrors",validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
@@ -83,8 +92,8 @@ export default function AddCustomeMaster({ row}) {
     };
 
     const handleOnChange = useCallback((e, name) => {
-        const { id, value } = e;
-        const newJson = { [name]: name === 'siteIds' ? id : value };
+        const { _id, value } = e;
+        const newJson = { [name]: name === 'siteIds' ? _id : value };
         const updatedJson = { ...reduxCustomer?.apiJson, ...newJson };
         dispatch(setCustomerMasterApiJson(updatedJson));
     }, [dispatch, reduxCustomer?.apiJson]);

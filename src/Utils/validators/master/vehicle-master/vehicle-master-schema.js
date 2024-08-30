@@ -6,5 +6,7 @@ export const vehicleMasterSchema = {
     vehicleYear: validationSchema.number('Vehicle Year is required'),
     vehicleEngine: validationSchema.string('Value is required'),
     vehicleNumber : validationSchema.vehicle('Vehicle Number is required'),
+    vehicleType : validationSchema.string('Vehicle Type is required'),
+    siteIds : validationSchema.string('Site is required'),
    
 };

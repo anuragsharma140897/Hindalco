@@ -6,7 +6,7 @@ export const customerlMasterSchema = {
   customerCode: validationSchema.string('Customer Code is required'),
   customerGroup: validationSchema.string('Customer Group is required'),
   customerEmail: validationSchema.email('Customer Email is required'),
-  customerType: validationSchema.string('Customer Type is required'),
+  customerType: validationSchema?.string('Customer Type is required'),
   customerAddress1: validationSchema.string('Customer Address1 is required'),
   customerAddress2: validationSchema.string('Customer Address2 is required'),
   customerLandmark: validationSchema.string('Customer Landmark is required'),

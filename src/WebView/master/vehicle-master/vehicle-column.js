@@ -9,7 +9,7 @@ import { deleteGeneral, deleteSite, deleteVehicle } from '../../../Constant/Api/
 import AddGeneralMaster from '../../../Form/master/general-master/add-general-master';
 import AddVehicleMaster from '../../../Form/master/vehicle-master/add-vehcile-master';
 
-export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
+export const getVehicleMasterColumns = ({ openModal, closeModal ,loading,setLoading}) => [
     
   {
     title: (
@@ -98,8 +98,8 @@ export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
             </ActionIcon>
           </label>
         </Tooltip>
-        <DeletePopover title={`Delete Vehicle Master`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => DeleteItem(row.id)} 
+        <DeletePopover loading={loading} title={`Delete Vehicle Master`}  description={`Are you sure you want to delete this employee?`} 
+          onDelete={() => DeleteItem(row._id,setLoading)} 
         />
       </div>
     ),
@@ -107,9 +107,23 @@ export const getVehicleMasterColumns = ({ openModal, closeModal }) => [
 ];
 
 
-export const DeleteItem = (id) =>{
-  var json = {id:id}
-  HitApi(json, deleteVehicle).then((Result)=>{
 
-  })
-}
+const DeleteItem = async (_id, setLoading) => {
+  setLoading(true);
+  try {
+    const json = { _id };
+    const result = await HitApi(json, deleteVehicle);
+
+    if (result.status === 200) {
+      alert(result.message);
+      window.location.pathname = '/master/vehicle';
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    alert("An error occurred while deleting the item.");
+  } finally {
+    setLoading(false);
+  }
+};

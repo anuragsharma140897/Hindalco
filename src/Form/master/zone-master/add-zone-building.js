@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import SearchSelect from '../../../Component/ui/form/select/search-select';
 import useValidation from '../../../Hooks/useValidation';
@@ -13,10 +13,12 @@ import CustomButton from '../../../Component/ui/buttons/custom-button';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { addBuildingToZone, searchBuilding } from '../../../Constant/Api/Api';
 import { CompileBuildingMaster } from '../../../WebView/master/buildings-master/promiss/building-master.promiss';
+import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
+import { setLocationMasterApiJson } from '../../../Store/Action/master/location-master/location-master-action';
 
 
 function AddZoneBuilding({ row }) {
-    let zoneid = row?.id
+    let zoneid = row?._id
 
     console.log("zoneid", zoneid);
 
@@ -93,15 +95,32 @@ function AddZoneBuilding({ row }) {
         }
 
     }
+
+
+
+    const handleOnChange = useCallback((e, name) => {
+        const { _id, value } = e;
+        console.log("e",e)
+
+        const newJson = { [name]: _id  };
+        console.log("newJson",newJson);
+        const updatedJson = { ...reduxZone?.apiJson, ...newJson };
+
+        console.log("updatedJson",updatedJson);
+        dispatch(setZoneMasterApiJson(updatedJson));
+    }, [dispatch, reduxZone?.apiJson]);
+
     console.log("reduxZone", reduxZone);
 
     return (
         <div className='p-10 mb-40'>
             <form onSubmit={handleSubmit}>
-                <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} />
-                <div className='flex gap-3 justify-end mb-5'>
+            <SearchableSelect name="_id" label="Select Building" api={searchBuilding} getFieldName={'buildingName'}  onChange={(e) => handleOnChange(e,"_id")} />
+
+                {/* <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} /> */}
+                <div className='flex gap-3 justify-end mb-5 mt-3'>
                     <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                    <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} />
+                    <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} onClick={handleSubmit}/>
                 </div>
                 <ControlledTable
                     variant="modern"

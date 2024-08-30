@@ -41,7 +41,7 @@ export default function AddZoneMaster({ row, closeModal }) {
     
             const apiCall = row?._id ? updateZone : addZone;
             if (row?._id) {
-                Object.assign(json, { id: row._id });
+                Object.assign(json, { _id: row._id });
             } else {
                 Object.assign(json, { status: json?.status || 'active' });
             }
@@ -51,10 +51,10 @@ export default function AddZoneMaster({ row, closeModal }) {
                     setLoading(false); 
 
     
-                    if (row?.id && result?.status === 200) {
+                    if (row?._id && result?.status === 200) {
                         alert(result.message);
                         window.location.pathname = '/master/zone';
-                    } else if (!row?.id && result?.status === 201) {
+                    } else if (!row?._id && result?.status === 201) {
                         alert(result.message);
                         window.location.pathname = '/master/zone';
                     } else {

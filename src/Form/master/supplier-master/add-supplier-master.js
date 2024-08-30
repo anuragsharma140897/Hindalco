@@ -56,6 +56,7 @@ export default function AddSupplierMaster({ row }) {
         var json = { ...reduxSupplier?.apiJson };
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
         dispatch(setSupplierApiJson(json));
+        Object.assign(json, {siteIds : row?.siteIds?._id})
     }, [dispatch, reduxSupplier?.apiJson]);
 
     const handleSubmit = (e) => {
@@ -85,8 +86,8 @@ export default function AddSupplierMaster({ row }) {
     };
 
     const handleOnChange = useCallback((e, name) => {
-        const { id, value } = e;
-        const newJson = { [name]: name === 'siteIds' ? id : value };
+        const { _id, value } = e;
+        const newJson = { [name]: name === 'siteIds' ? _id : value };
         const updatedJson = { ...reduxSupplier?.apiJson, ...newJson };
         dispatch(setSupplierApiJson(updatedJson));
     }, [dispatch, reduxSupplier?.apiJson]);
@@ -147,9 +148,9 @@ export default function AddSupplierMaster({ row }) {
                         <div className='grid grid-cols-4 gap-4 '>
                             <CustomInput important={true} name="supplierName" label="Supplier Name" value={reduxSupplier?.apiJson?.supplierName} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} validate={validate} />
                             <CustomInput important={true} name="supplierCode" label="Supplier Code" value={reduxSupplier?.apiJson?.supplierCode} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} validate={validate} />
-                            <SearchableSelect name="supplierGroup" label="Supplier Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'suppliergroup'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} onChange={(e) => handleOnChange(e, 'supplierGroup')} validate={validate} />
+                            <SearchableSelect name="supplierGroup" label="Supplier Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'supplierGroup'}  dynamicSearch={{ 'fieldName': 'suppliergroup' }} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} onChange={(e) => handleOnChange(e, 'supplierGroup')} validate={validate} />
                             <CustomInput important={true} name="supplierContactEmail" label="Supplier Email" value={reduxSupplier?.apiJson?.supplierContactEmail} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson} validate={validate}  />
-                            <SearchableSelect name="supplierType" label="Supplier Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'supplierType'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} onChange={(e) => handleOnChange(e, 'supplierType')} validate={validate}  />
+                            <SearchableSelect name="supplierType" label="Supplier Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'supplierType'} getFieldName={'value'}  dynamicSearch={{ 'fieldName': 'suppliertype' }} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} onChange={(e) => handleOnChange(e, 'supplierType')} validate={validate}  />
                             <CustomInput important={true} name="supplierAddress1" label="Supplier Add1" value={reduxSupplier?.apiJson?.supplierAddress1} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson}  validate={validate} />
                             <CustomInput important={true} name="supplierAddress2" label="Supplier Add2" value={reduxSupplier?.apiJson?.supplierAddress2} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson}   validate={validate}/>
                             <CustomInput important={true} name="supplierLandmark" label="Supplier Landmark" value={reduxSupplier?.apiJson?.supplierLandmark} error={errors} reduxState={reduxSupplier?.apiJson} setAction={setSupplierApiJson}  validate={validate}/>
