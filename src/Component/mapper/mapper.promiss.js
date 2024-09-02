@@ -1,4 +1,4 @@
-export const CompileConfiguration = (configuration, input) => {
+export const CompileConfiguration = (configurations, input) => {
   return new Promise((resolve, reject) => {
     try {
       const processConfig = (config, inputData) => {
@@ -10,8 +10,8 @@ export const CompileConfiguration = (configuration, input) => {
           if (typeof path === 'object' && path !== null) {
             // If the path is an object, recursively process it
             result[mainKey] = processConfig(path, inputData);
-          } else if (typeof path === 'string') {
-            // If path is a string, use it to fetch data from inputData
+          } else if (typeof path === 'string' && path.length > 0) {
+            // If path is a non-empty string, use it to fetch data from inputData
             const keys = path.split('.'); // Split the path string to handle nested properties
 
             // Use reduce to traverse through inputData to get the final value
@@ -35,8 +35,7 @@ export const CompileConfiguration = (configuration, input) => {
             // Assign the value to the result object, or "blank" if undefined
             result[mainKey] = inputValues !== undefined ? inputValues : "blank";
           } else {
-            // If path is not a string or object, assign "blank" and log an error
-            console.error(`Invalid path for key "${mainKey}": expected a string or object but received ${typeof path}`);
+            // If path is not a valid string, assign "blank"
             result[mainKey] = "blank";
           }
         });
@@ -44,9 +43,10 @@ export const CompileConfiguration = (configuration, input) => {
         return result;
       };
 
-      // Process the configuration with the input data
-      const compiledData = processConfig(configuration, input);
-      resolve(compiledData);
+      // Process each configuration object in the configurations array
+      const compiledDataArray = configurations.map((config) => processConfig(config, input));
+
+      resolve(compiledDataArray);
     } catch (error) {
       // Reject the promise if there's an error
       console.error('Error compiling configuration:', error);
