@@ -9,7 +9,7 @@ import ApiRequest from './ApiRequest';
 import { FullJson } from './FullJson';
 import CustomInput from './component/custom-input';
 import GlobalVariableForm from './GlobalService/GlobalService';
-import Mapper from './Mapper';
+import ApiMapper from './Mapper';
 
 export default function ApiService() {
   const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
@@ -213,7 +213,7 @@ export default function ApiService() {
                 apiType === 'Api Controller' ?
                   <ApiRequest dataForRequest={dataForRequest} />
                   :
-                  <Mapper />
+                  <ApiMapper />
               }
             </div>
             :

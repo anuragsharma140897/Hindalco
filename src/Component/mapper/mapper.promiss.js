@@ -1,3 +1,4 @@
+
 export const CompileConfiguration = (configurations, input) => {
   return new Promise((resolve, reject) => {
     try {
@@ -32,8 +33,10 @@ export const CompileConfiguration = (configurations, input) => {
               return acc[key]; // Regular object access
             }, inputData);
 
+
+
             // Assign the value to the result object, or "blank" if undefined
-            result[mainKey] = inputValues !== undefined ? inputValues : "blank";
+            result[mainKey] = inputValues !== undefined ? inputValues : path;
           } else {
             // If path is not a valid string, assign "blank"
             result[mainKey] = "blank";

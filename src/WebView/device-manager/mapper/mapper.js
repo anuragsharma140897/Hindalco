@@ -18,8 +18,18 @@ const usedBy = [
 export default function Mapper() {
   const reduxMapping = useSelector(state => state.MappingReducer)
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
-  const [input, setInput] = useState({ "page": 1, "apiName": "/url" })
-  const [mapping, setMapping] = useState(null)
+  const [input, setInput] = useState({
+    "statusCode": 200,
+    "message": "User Logged In successfully",
+    "jwtToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXJhaiIsInJvbGVJZCI6IjY2YmYyZjQ3YWM4MjMwNDZkYjVkYjg2OSIsImV4cCI6MTcyNTMxNjYwNCwidXNlcklkIjoiNjZjMzExODk1MTc5ZTE0OTc3NTI0NDQ4IiwiaWF0IjoxNzI1Mjg3ODA0fQ.0v8AUN2gzdpxJ--8zXnF4ieZxtm4VYn2iXkiqNE3L6NUK4y8WRNdtmF53gMi9jrqAU1pDBHJGgyzvjbJxarcjg"
+  })
+  const [mapping, setMapping] = useState([
+    {
+      "valueName": "code",
+      "data": "statusCode",
+      "dataType": "int"
+    }
+  ])
   const [output, setOutput] = useState(null)
   const { errors, validate } = useValidation(addMappingSchema);
 
