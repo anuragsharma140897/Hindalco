@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setServiceRequestData } from '../store/Action/ServiceMasterAction';
+import CustomJsonEditor from '../../../../Component/ui/editor/json-editor';
 
 function Body() {
 
@@ -11,9 +12,11 @@ function Body() {
     const tabs = ['raw', 'form-data', 'x-www-form-urlencoded', 'binary'];
 
     const onChange = (value) =>{
-        var oldJson = ServiceMasterReducer?.requestDoc
-        oldJson.request.body.raw = value
-        dispatch(setServiceRequestData(oldJson))
+        if(isValidJSON(value)){
+            var oldJson = ServiceMasterReducer?.requestDoc
+            oldJson.request.body.raw = value
+            dispatch(setServiceRequestData(oldJson))
+        }
     }
 
     const onChangeMode = (tab) =>{
@@ -22,6 +25,19 @@ function Body() {
         oldJson.request.body.mode = tab
         dispatch(setServiceRequestData(oldJson))
     }
+
+    function isValidJSON(jsonString) {
+        try {
+          JSON.parse(jsonString);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      console.log('ServiceMasterReducer?.requestDoc?.request?.body?.raw',ServiceMasterReducer?.requestDoc);
+
+      console.log('JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body)',ServiceMasterReducer?.requestDoc?.request?.body);
 
     return (
         <div>
@@ -36,7 +52,7 @@ function Body() {
             <div className='m-5'>
                 {
                     activeTab === 'raw' ?
-                    <textarea onChange={(e)=>onChange(e.target.value)} className='h-max w-full' value={ServiceMasterReducer?.requestDoc?.request?.body?.raw}/>    
+                    <CustomJsonEditor onChange={(value) => onChange(value, 'input')} json={ServiceMasterReducer?.requestDoc?.request?.body?.raw!==""?JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body?.raw):{}} />
                     :
                         activeTab === 'form-data' ?
                             <p>form-data</p> :

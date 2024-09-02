@@ -1,9 +1,10 @@
-import { SET_API_JSON, SET_SERVICE_MASTER_JSON, SET_SERVICE_REQUEST_DATA } from "../Action/ServiceMasterAction"
+import { SET_API_JSON, SET_SERVICE_MASTER_JSON, SET_SERVICE_REQUEST_DATA, SET_SERVICE_GLOBAL_VAR } from "../Action/ServiceMasterAction"
 
 const initialState = {
     doc: null,
     apiJson: {},
     requestDoc: null,
+    globalVariables: null,
     timestamp: Date.now()
 }
 
@@ -16,6 +17,8 @@ const ServiceMasterReducer = (state = initialState, action) => {
             return ({ ...state, apiJson: action.value, timestamp: Date.now() })
         case SET_SERVICE_REQUEST_DATA:
             return ({ ...state, requestDoc: action.value, timestamp: Date.now() })
+        case SET_SERVICE_GLOBAL_VAR:
+            return ({ ...state, globalVariables: action.value, timestamp: Date.now() })
         default:
             return state;
     }

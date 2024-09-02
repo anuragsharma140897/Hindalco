@@ -115,27 +115,13 @@ export const dynamicFetch = async (requestDoc) => {
       }
   
       if (!response.ok) {
-        return JSON.stringify({
-          success: false,
-          error: `HTTP error! status: ${response.status}`,
-          errorType: 'HTTPError',
-          statusCode: response.status,
-          data: typeof data === 'string' ? data : JSON.stringify(data)
-        });
+        return JSON.stringify(data);
       }
   
       console.log('Response:', data);
-      return JSON.stringify({
-        success: true,
-        data: typeof data === 'string' ? data : JSON.stringify(data),
-        statusCode: response.status
-      });
+      return JSON.stringify(data);
     } catch (error) {
       console.error('Fetch error:', error);
-      return JSON.stringify({
-        success: false,
-        error: error.message || 'An error occurred during the fetch operation',
-        errorType: error.name || 'FetchError'
-      });
+      return JSON.stringify(error);
     }
   };

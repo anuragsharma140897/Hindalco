@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChevronDown, ChevronRight, Folder, File, PlusCircle, EllipsisVertical, Plus, Edit, Trash2 } from 'lucide-react';
-import { setApiJson, setServiceMasterJson, setServiceRequestData } from './store/Action/ServiceMasterAction';
+import { setApiJson, setServiceGlobalVariabls, setServiceMasterJson, setServiceRequestData } from './store/Action/ServiceMasterAction';
 import { AllApiCallHere } from './store/AllApiCallHere';
 import { addRequest, deleteApiService, searchApiService, updateApiService } from './constants/constant';
 import AddMoreService from './addMoreService';
 import ApiRequest from './ApiRequest';
-import {FullJson} from './FullJson';
+import { FullJson } from './FullJson';
 import CustomInput from './component/custom-input';
+import GlobalVariableForm from './GlobalService/GlobalService';
+import Mapper from './Mapper';
 
 export default function ApiService() {
   const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
@@ -16,8 +18,10 @@ export default function ApiService() {
   const [openPopupIndex, setOpenPopupIndex] = useState(null);
   const [addMoreServiceModal, setAddMoreServiceModal] = useState(false);
   const [dataForRequest, setDataForRequest] = useState(false);
-  const [bodyScreen, setBodyScreen] = useState('Global');
+  const [bodyScreen, setBodyScreen] = useState('');
   const [requestAddModal, setRequestAddModal] = useState(false);
+  const [apiType, setApiType] = useState('Api Controller');
+  const [selectedService, setSelectedService] = useState(null)
 
   useEffect(() => {
     if (ServiceMasterReducer?.doc === null) {
@@ -34,7 +38,7 @@ export default function ApiService() {
       }
     }
     AllApiCallHere(json, searchApiService).then(res => {
-      console.log('res',res);
+      console.log('res', res);
       if (res?.content?.length > 0) {
         dispatch(setServiceMasterJson(res?.content))
       }
@@ -42,6 +46,7 @@ export default function ApiService() {
   }
 
   const toggleService = (index) => {
+    console.log('call==---');
     setOpenServices(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
@@ -49,10 +54,10 @@ export default function ApiService() {
     setOpenPopupIndex(openPopupIndex === index ? null : index);
   };
 
-  const onClickServiceRequest = (i, index) => {
+  const onClickServiceRequest = (i, index,ele) => {
+    dispatch(setServiceGlobalVariabls(ele?.globalVariables))
     dispatch(setServiceRequestData(null))
-
-    setDataForRequest({serviceIndex:i, requestIndex:index})
+    setDataForRequest({ serviceIndex: i, requestIndex: index })
     setBodyScreen('Request')
   };
 
@@ -69,8 +74,6 @@ export default function ApiService() {
     setOpenPopupIndex(null);
   };
 
-  console.log('dsfds---');
-  
   const editServiceClick = (object) => {
     var oldJson = ServiceMasterReducer?.apiJson
     oldJson.protocol = object.protocol
@@ -79,8 +82,9 @@ export default function ApiService() {
     setAddMoreServiceModal(object?.type)
   }
 
-  const handleAddGloabalVariables = (id) => {
+  const handleAddGloabalVariables = (ele) => {
     setBodyScreen('Global')
+    setSelectedService(ele)
   }
 
   const handleAddNewRequest = (data) => {
@@ -89,25 +93,24 @@ export default function ApiService() {
     json.serviceName = data.serviceName
     json.serviceId = data._id
 
-    console.log('data',data);
-    console.log('json',json);
+    console.log('data', data);
+    console.log('json', json);
 
-    AllApiCallHere(json,addRequest).then(res=>{
-      console.log('res',res);
-      if(res.status === 201){
+    AllApiCallHere(json, addRequest).then(res => {
+      if (res.status === 201) {
         var newJson = {
-          requestId:res?.data?._id,
-          requestName:res?.data?.name
+          requestId: res?.data?._id,
+          requestName: res?.data?.name
         }
-        if(data?.requests === null){
+        if (data?.requests === null) {
           data.requests = [newJson]
         }
-        else{
+        else {
           data?.requests.push(newJson)
         }
         delete data.createdAt
         delete data.updatedAt
-        AllApiCallHere(data,updateApiService).then(result=>{
+        AllApiCallHere(data, updateApiService).then(result => {
           setRequestAddModal(false)
         })
       }
@@ -172,7 +175,7 @@ export default function ApiService() {
                       </button>
                       <button
                         className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                        onClick={() => handleAddGloabalVariables(ele?._id)}
+                        onClick={() => handleAddGloabalVariables(ele)}
                       >
                         <Trash2 className="mr-2" size={16} />
                         Add Global Variables
@@ -185,7 +188,7 @@ export default function ApiService() {
             {openServices[i] && (
               <div className="ml-6 mt-1">
                 {ele?.requests?.map((item, index) => (
-                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={() => onClickServiceRequest(i, index)}>
+                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={() => onClickServiceRequest(i, index,ele)}>
                     <File className="w-4 h-4 mr-2 text-gray-500" />
                     <span className="text-gray-600 text-sm">{item?.requestName}</span>
                   </div>
@@ -198,9 +201,23 @@ export default function ApiService() {
       <div className="col-span-9 p-4">
         {
           bodyScreen === 'Global' ?
-            <h1>Hellow</h1>
+            <GlobalVariableForm selectedService={selectedService} />
             :
-            <ApiRequest dataForRequest={dataForRequest} />
+            bodyScreen === 'Request'?
+            <div>
+              <div className='flex'>
+                <h3 onClick={() => setApiType('Api Controller')} className={`${apiType === 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Api Controller</h3>
+                <h3 onClick={() => setApiType('Mapper')} className={`${apiType !== 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Mapper</h3>
+              </div>
+              {
+                apiType === 'Api Controller' ?
+                  <ApiRequest dataForRequest={dataForRequest} />
+                  :
+                  <Mapper />
+              }
+            </div>
+            :
+            ''
         }
       </div>
       {
