@@ -1,4 +1,4 @@
-import { SET_SERVICE_MASTER_JSON, SET_API_JSON, SET_SERVICE_REQUEST_DATA } from "../Action/ServiceMasterAction"
+import { SET_API_JSON, SET_SERVICE_MASTER_JSON, SET_SERVICE_REQUEST_DATA } from "../Action/ServiceMasterAction"
 
 const initialState = {
     doc: null,

@@ -1,9 +1,9 @@
 import React from 'react'
 import CustomInput from './component/custom-input'
-import { AllApiCallHere } from './Store/AllApiCallHere'
+import { AllApiCallHere } from './store/AllApiCallHere'
 import { addApiService, updateApiService } from './constants/constant';
 import { useDispatch, useSelector } from 'react-redux';
-import { setApiJson, setServiceMasterJson } from './Store/Action/ServiceMasterAction';
+import { setApiJson, setServiceMasterJson } from './store/Action/ServiceMasterAction';
 
 function AddMoreService({ setModal, type }) {
 

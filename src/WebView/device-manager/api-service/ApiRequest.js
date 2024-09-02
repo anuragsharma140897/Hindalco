@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import CustomInput from './component/custom-input';
+import Header from '../api-service/ApiRequestType/Header'
+import Auth from '../api-service/ApiRequestType/Auth'
+import Body from '../api-service/ApiRequestType/Body'
+import Params from '../api-service/ApiRequestType/Params'
 import { useDispatch, useSelector } from 'react-redux';
-import { AllApiCallHere } from './Store/AllApiCallHere';
+import { AllApiCallHere } from './store/AllApiCallHere';
+import { setServiceRequestData } from './store/Action/ServiceMasterAction';
 import { searchRequest, updateRequest } from './constants/constant';
-import { setServiceRequestData } from './Store/Action/ServiceMasterAction';
-import { File, PlusCircle } from 'lucide-react';
-import Header from './ApiRequestType/Header';
-import Body from './ApiRequestType/Body';
-import Auth from './ApiRequestType/Auth';
 import { dynamicFetch } from './FullJson';
 
 function ApiRequest({ dataForRequest }) {
@@ -112,7 +111,7 @@ function ApiRequest({ dataForRequest }) {
             </div>
             <div className='flex justify-end mt-5'>
                 <button className="flex gap-1 p-2 text-white font-bold col-span-1 bg-blue-400 items-center text-center rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" onClick={() => onClickSaveRequest()}>
-                    <File /> Save
+                    {/* <File /> Save */}
                 </button>
             </div>
             <div className='mt-5'>
