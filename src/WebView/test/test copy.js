@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import JsonEditor from '../../Component/ui/editor/json-editor'
+import React from 'react'
+import { HitApi } from '../../Store/Action/Api/ApiAction'
+import { searchConfig } from '../../Constant/Api/Api'
+import JsonEditor from './Editor'
 
 export default function Test() {
-  const [json, setJson] = useState({"page":1})
-
-  const onChange = (value) =>{
-    console.log('value', value);
-  }
 
   return (
-    <div><JsonEditor json={json} onChange={onChange}/></div>
+    <div>
+      <JsonEditor />
+    </div>
   )
 }

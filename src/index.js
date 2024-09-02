@@ -41,6 +41,8 @@ import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-bat
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import DevicesReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
+import ConfigurationReducer from './Store/Reducer/device-master/configuration/configuration-reducer';
+import MappingReducer from './Store/Reducer/device-master/mapping/mapping-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -77,9 +79,9 @@ const rootReducer = combineReducers({
   DashboardBatchReducer : DashboardBatchReducer,
   OutboundReducer :OutboundReducer,
   // Device Mapper Reducers
-  DevicesReducer : DevicesReducer
-
-
+  MappingReducer: MappingReducer,
+  DevicesReducer : DevicesReducer,
+  ConfigurationReducer : ConfigurationReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

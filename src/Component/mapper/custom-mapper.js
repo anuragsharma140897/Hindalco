@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import CustomJsonEditor from '../ui/editor/json-editor';
 import { CompileConfiguration } from './mapper.promiss';
 import CustomButton from '../ui/buttons/custom-button';
+import { useSelector } from 'react-redux';
 
-export default function CustomMapper({ input, mapping, setOutput, output }) {
+export default function CustomMapper({ input, mapping, setOutput, output, editorRef }) {
     const [inputJson, setInputJson] = useState(input);
     const [outputJson, setOutputJson] = useState(null);
     const [mappingJson, setMappingJson] = useState(mapping);
+
     const [render, setRender] = useState(Date.now())
 
+    useEffect(() => {
+
+    }, [mappingJson, render]); 
+    
     const onChange = (value, type) => {
         try {
             const parsedJson = JSON.parse(value);
@@ -33,6 +39,7 @@ export default function CustomMapper({ input, mapping, setOutput, output }) {
             }
         });
     };
+
 
     return (
         <div>

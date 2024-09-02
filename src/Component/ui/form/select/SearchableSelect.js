@@ -52,12 +52,13 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
+      console.log('SearchableSelect json', json);
       HitApi(json, api).then((result) => {
-        console.log('result', result);
+        console.log('result : ---', result);
         CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
-            // dispatch(setSearchableSelectData(CompiledData));
+            dispatch(setSearchableSelectData(result?.content));
           }
         });
       });

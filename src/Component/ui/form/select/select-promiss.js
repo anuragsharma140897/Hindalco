@@ -5,7 +5,7 @@ export const CompileSelectData = (data, getFieldName, type) => {
             data?.map((ele, index) => {
                 var label = ele?.[getFieldName]
                 var value = ele?.[getFieldName]
-                td.push({ label: label, value: value, id: ele?.id })
+                td.push({ label: label, value: value, id: ele?.id, index : index})
             })
             resolve(td)
     });
