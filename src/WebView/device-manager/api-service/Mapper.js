@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import CustomJsonEditor from '../../../Component/ui/editor/json-editor';
 import CustomConfiguration from '../../../Component/configuration/custom-configuration';
@@ -7,16 +7,26 @@ import CustomMapper from '../../../Component/mapper/custom-mapper';
 function Mapper() {
 
     const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
-    const reduxMapping = useSelector(state => state.MappingReducer)
 
-    const [input, setInput] = useState({ "page": 1 })
-    const [mapping, setMapping] = useState({ "page": "page" })
+    const [input, setInput] = useState({})
+    const [mapping, setMapping] = useState({})
     const [output, setOutput] = useState()
 
-    console.log('ServiceMasterReducer?.requestDoc?.response?',ServiceMasterReducer?.requestDoc);
+    useEffect(()=>{
+        if(ServiceMasterReducer?.globalVariables!==null && Object.keys(mapping).length === 0){
+            setMapping(ServiceMasterReducer?.globalVariables)
+        }
+        if(Object.keys(input).length === 0){
+            setInput(ServiceMasterReducer?.requestDoc?.response?.[0])
+        }
+    },[])
+
+    console.log('ServiceMasterReducer?.requestDoc?.response?',input);
+    console.log('output',output);
+    console.log('output',mapping);
 
     return (
-        <CustomMapper input={ServiceMasterReducer?.requestDoc?.response?.[0]} mapping={ServiceMasterReducer?.globalVariables!==null?ServiceMasterReducer?.globalVariables:{}} setOutput={setOutput} output={output} />
+        <CustomMapper input={input} setInput={setInput} mapping={ServiceMasterReducer?.globalVariables!==null?ServiceMasterReducer?.globalVariables:{}} setMapping={mapping} setOutput={setOutput} output={output} />
         // <CustomJsonEditor readOnly={true} json={ServiceMasterReducer?.requestDoc?.response?.[0]} />
     )
 }
