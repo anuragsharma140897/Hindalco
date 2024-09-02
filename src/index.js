@@ -43,6 +43,9 @@ import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import DevicesReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
 import ConfigurationReducer from './Store/Reducer/device-master/configuration/configuration-reducer';
 import MappingReducer from './Store/Reducer/device-master/mapping/mapping-reducer';
+import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
+import DevicesReducer from './Store/Reducer/device-master/devices/devices-reducer';
+import ServiceMasterReducer from './WebView/device-manager/api-service/Store/Reducer/ServiceMasterReducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -81,7 +84,10 @@ const rootReducer = combineReducers({
   // Device Mapper Reducers
   MappingReducer: MappingReducer,
   DevicesReducer : DevicesReducer,
-  ConfigurationReducer : ConfigurationReducer
+  ConfigurationReducer : ConfigurationReducer,
+  EditorReducer : EditorReducer,
+  DevicesReducer : DevicesReducer,
+  ServiceMasterReducer : ServiceMasterReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
