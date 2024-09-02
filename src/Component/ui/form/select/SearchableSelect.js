@@ -46,15 +46,12 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
       loadData();
     }
 
-    console.log('reduxSelect?.doc', reduxSelect?.selected);
   }, [options, reduxSelect]);
 
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
-      console.log('SearchableSelect json', json);
       HitApi(json, api).then((result) => {
-        console.log('result : ---', result);
         CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
           if (CompiledData) {
             setOptions(CompiledData);
@@ -81,6 +78,8 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
     setSelected(value);
   };
  
+  console.log('error?.[name]', error?.[name]);
+
   return (
     <div>
       { label && <div className='block font-bold'>{label}</div> }
@@ -92,11 +91,13 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           onClear={onClear}
           options={options || []}
           placeholder={placeholder ? placeholder : `Select ${name || '...'} `}
-          className={cn(className, 'bg-white z-[99999]')}
+          className={cn(className, 'bg-white h-10 z-[99999] rounded-md mb-4')}
           dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
           getOptionDisplayValue={(option) =>
             useCustomDisplay?renderOptionDisplayValue(option.value) : renderDefaultDisplay(option.value)
           }
+          error={error?.[name]}
+
           value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['value']}
           onChange={handleChange}
         />)
@@ -106,11 +107,11 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           This field cannot be edited
         </span>
       )}
-      {error?.[name] && (
+      {/* {error?.[name] && (
         <span className="text-red-500 text-sm mt-2 block">
           {error?.[name]}
         </span>
-      )}
+      )} */}
     </div>
   )
 }

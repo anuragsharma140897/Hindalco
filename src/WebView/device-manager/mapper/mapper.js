@@ -9,7 +9,6 @@ import { setMappingApiJson, setMappingMappingJson } from '../../../Store/Action/
 import { addMappingSchema } from '../../../Utils/validators/device-manager/mapping/add-mapping.schema';
 import CustomButton from '../../../Component/ui/buttons/custom-button';
 
-
 const usedBy = [
   { id: 0, label: 'device', value: 'device' },
   { id: 0, label: 'gps', value: 'gps' },
@@ -51,16 +50,20 @@ export default function Mapper() {
     }
   };
 
-  const SaveConfiguration = () =>{
+  const SaveConfiguration = () => {
     var json = reduxMapping?.apiJson
-    Object.assign(json,{
-      input : [input],
-      mapping : [mapping],
-      output : [output],
-    })
+    const validationErrors = validate(json);
+    console.log('final submit json', validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      Object.assign(json, {
+        input: [input],
+        mapping: [mapping],
+        output: [output],
+      })
 
-    console.log('final submit json', json);
-    
+      console.log('final submit json', validationErrors);
+    }
+
     // HitApi(json, addMapper).then((res)=>{
     //   console.log('res', res);
     // })
@@ -71,7 +74,7 @@ export default function Mapper() {
     <div>
       <div className='grid grid-cols-4 gap-4'>
         <CustomInput validate={validate} name="mapperName" label="Mapper Name" value={reduxMapping?.apiJson?.mapperName} error={errors} reduxState={reduxMapping?.apiJson} setAction={setMappingApiJson} />
-        <SearchableSelect name="useFor" label="Load Configuration" api={searchConfig} getFieldName={'configName'} value={reduxMapping?.apiJson?.roleName} error={errors} reduxState={reduxMapping?.apiJson} setAction={setMappingApiJson} onChange={handleCustomChange} />
+        <SearchableSelect validate={validate} name="useFor" label="Load Configuration" api={searchConfig} getFieldName={'configName'} value={reduxMapping?.apiJson?.roleName} error={errors} reduxState={reduxMapping?.apiJson} setAction={setMappingApiJson} onChange={handleCustomChange} />
       </div>
       {mapping && <div><CustomMapper input={input} setInput={setInput} mapping={mapping} setMapping={setMapping} output={output} setOutput={setOutput} /></div>}
       {output && <div><CustomButton type={'submit'} text={'Save Configuration'} onClick={SaveConfiguration} /></div>}

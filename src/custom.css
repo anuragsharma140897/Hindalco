@@ -63,3 +63,8 @@ table tr td {
   background-color: #444444;
   border-color: #555555;
 }
+
+.rizzui-select-button:hover{
+  border-color: red;
+  outline: none;
+}
