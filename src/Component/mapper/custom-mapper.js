@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import CustomJsonEditor from '../ui/editor/json-editor';
-import { CompileConfiguration } from './mapper.promiss';
+import React, { useState } from 'react'
+import CustomJsonEditor from '../ui/editor/json-editor'
 import CustomButton from '../ui/buttons/custom-button';
-import { useSelector } from 'react-redux';
+import { CompileConfiguration } from './mapper.promiss';
+import { HitApi } from '../../Store/Action/Api/ApiAction';
 
-export default function CustomMapper({ input, mapping, setOutput, output, editorRef }) {
-    const [inputJson, setInputJson] = useState(input);
-    const [outputJson, setOutputJson] = useState(null);
-    const [mappingJson, setMappingJson] = useState(mapping);
+export default function CustomMapper({ input, setInput, mapping, setMapping, output, setOutput }) {
 
-    const [render, setRender] = useState(Date.now())
-
-    useEffect(() => {
-
-    }, [mappingJson, render]); 
-    
     const onChange = (value, type) => {
+        console.log('value', value);
         try {
-            const parsedJson = JSON.parse(value);
             if (type === 'input') {
-                setInputJson(parsedJson);
+                setInput(value);
             } else if (type === 'mapping') {
-                setMappingJson(parsedJson);
+                setMapping(value);
             }
         } catch (error) {
             console.error('Invalid JSON format:', error.message);
@@ -30,16 +21,12 @@ export default function CustomMapper({ input, mapping, setOutput, output, editor
 
     const GenerateOutput = (e) => {
         e.preventDefault();
-        CompileConfiguration(mappingJson, inputJson).then((CompiledData) => {
+        CompileConfiguration(mapping, input).then((CompiledData) => {
             if (CompiledData) {
-                console.log('CompiledData', CompiledData);
-                setOutputJson(CompiledData);
                 setOutput(CompiledData);
-                setRender(Date.now())
             }
         });
     };
-
 
     return (
         <div>
@@ -48,22 +35,23 @@ export default function CustomMapper({ input, mapping, setOutput, output, editor
                     <div className='grid grid-cols-3 gap-4'>
                         <div>
                             <label className='font-bold'>Input JSON</label>
-                            <CustomJsonEditor detectRender={render} json={inputJson} onChange={(value) => onChange(value, 'input')} />
+                            <CustomJsonEditor json={input} onChange={(value) => onChange(value, 'input')} />
                         </div>
                         <div>
                             <label className='font-bold'>Configuration</label>
-                            <CustomJsonEditor  detectRender={render} json={mappingJson} onChange={(value) => onChange(value, 'mapping')} />
+                            <CustomJsonEditor json={mapping} onChange={(value) => onChange(value, 'mapping')} />
                         </div>
                         <div>
                             <label className='font-bold'>Output JSON</label>
-                            <CustomJsonEditor detectRender={render} json={outputJson} readOnly />
+                            <CustomJsonEditor json={output} readOnly />
                         </div>
                     </div>
                 </div>
-                <div>
-                    <CustomButton text={'Generate Output'} onClick={GenerateOutput} />
+                <div className='flex space-x-4'>
+                    <div><CustomButton variant='flat' text={'Generate Output'} onClick={GenerateOutput} /></div>
+
                 </div>
             </form>
         </div>
-    );
+    )
 }

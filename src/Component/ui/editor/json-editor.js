@@ -1,65 +1,47 @@
 import React, { useEffect, useRef } from 'react';
 import JSONEditor from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.css';
-import './jsoneditor-custom.css'; // Import your updated custom CSS
-import { useSelector } from 'react-redux';
 
-const CustomJsonEditor = ({ json, onChange, readOnly = false, detectRender }) => {
+const CustomJsonEditor = ({ json ={}, onChange, readOnly = false,  }) => {
   const editorRef = useRef(null);
   const containerRef = useRef(null);
-  const reduxMapping = useSelector((state) => state.MappingReducer);
+
+  console.log('json - - -  - - - - - - ', json);
 
   useEffect(() => {
-    // Initialize JSONEditor
-    initEditor();
+    // Initialize the JSON editor
+    editorRef.current = new JSONEditor(containerRef.current, {
+      mode: 'code', // Mode can be 'tree', 'view', 'form', 'text', etc.
+      onChangeText: (jsonText) => {
+        try {
+          const updatedJson = JSON.parse(jsonText);
+          onChange(updatedJson);
+        } catch (error) {
+          console.error('Invalid JSON format:', error);
+        }
+      },
+    });
 
-    // Cleanup function to destroy the editor on component unmount
+    // Set initial JSON data
+    editorRef.current.update(json);
+
+    // Cleanup function to destroy the editor on unmount
     return () => {
-      destroyEditor();
+      if (editorRef.current) {
+        editorRef.current.destroy();
+      }
     };
-  }, []);
-
-  const destroyEditor = () => {
-    if (editorRef.current) {
-      editorRef.current.destroy();
-      editorRef.current = null; // Clear the reference
-    }
-  };
-
-  const initEditor = () => {
-    if (containerRef.current) {
-      editorRef.current = new JSONEditor(containerRef.current, {
-        mode: 'code', // 'tree', 'view', 'form', 'text', 'preview' can also be used
-        onChangeText: (jsonString) => {
-          if (onChange) {
-            onChange(jsonString);
-          }
-        },
-        onEditable: () => !readOnly, // Make editor read-only if the prop is set
-      });
-
-      // Set initial JSON data
-      editorRef.current.set(json);
-    }
-  };
-
-  
-  useEffect(() => {
-    // Update the editor when json prop changes
-    if (editorRef.current) {
-      editorRef.current.update(json);
-    }
-    console.log('Editor updated due to detectRender change.');
-  }, [detectRender]);
+  }, []); // Empty dependency array ensures this runs only once
 
   useEffect(() => {
-    // Reinitialize the editor if reduxMapping?.mappingJson changes
-    if (reduxMapping?.mappingJson) {
-      destroyEditor();
-      initEditor();
-      console.log('Editor reinitialized due to reduxMapping change.');
+    if (editorRef.current) {
+      // Update JSON in the editor without resetting cursor position
+      const currentJson = editorRef.current.get();
+      if (JSON.stringify(currentJson) !== JSON.stringify(json)) {
+        editorRef.current.update(json);
+      }
     }
-  }, [reduxMapping?.mappingJson]);
+  }, [json]); // Update only if `json` changes
 
   return <div ref={containerRef} style={{ height: '400px' }} />;
 };

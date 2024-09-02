@@ -24,7 +24,7 @@ export default function Mapper({input, mapping, setResult}) {
   const dispatch = useDispatch();
   const reduxJson = useSelector(state => state.EditorReducer);
   const { errors, validate } = useValidation(mapperSchema);
-  const [output, setDat]
+  // const [output, setDat]
   // const { showCustomAlert } = useAlertController();
 
   const onChange = (value, type) => {
@@ -56,21 +56,7 @@ export default function Mapper({input, mapping, setResult}) {
     }
   };
 
-  const SaveConfiguration = () =>{
-    var json = reduxJson?.apiJson
-    Object.assign(json,{
-      input : [reduxJson?.input],
-      mapping : [reduxJson?.mapping],
-      output : [reduxJson?.output],
-    })
-
-    console.log('final submit json', json);
-    
-    HitApi(json, addMapper).then((res)=>{
-      console.log('res', res);
-    })
-
-  }
+  
 
   const handleSelectChange = (e) => {
     var json = reduxJson?.apiJson

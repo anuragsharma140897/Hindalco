@@ -11,15 +11,16 @@ function Body() {
 
     const tabs = ['raw', 'form-data', 'x-www-form-urlencoded', 'binary'];
 
-    const onChange = (value) =>{
-        if(isValidJSON(value)){
-            var oldJson = ServiceMasterReducer?.requestDoc
-            oldJson.request.body.raw = value
-            dispatch(setServiceRequestData(oldJson))
-        }
+    const onChange = (value) => {
+
+        console.log("value", value);
+
+        var oldJson = ServiceMasterReducer?.requestDoc
+        oldJson.request.body.raw = JSON.stringify(value)
+        dispatch(setServiceRequestData(oldJson))
     }
 
-    const onChangeMode = (tab) =>{
+    const onChangeMode = (tab) => {
         setActiveTab(tab)
         var oldJson = ServiceMasterReducer?.requestDoc
         oldJson.request.body.mode = tab
@@ -28,16 +29,16 @@ function Body() {
 
     function isValidJSON(jsonString) {
         try {
-          JSON.parse(jsonString);
-          return true;
+            JSON.parse(jsonString);
+            return true;
         } catch (error) {
-          return false;
+            return false;
         }
-      }
+    }
 
-      console.log('ServiceMasterReducer?.requestDoc?.request?.body?.raw',ServiceMasterReducer?.requestDoc);
+    console.log('ServiceMasterReducer?.requestDoc?.request?.body?.raw', ServiceMasterReducer?.requestDoc);
 
-      console.log('JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body)',ServiceMasterReducer?.requestDoc?.request?.body);
+    console.log('JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body)', ServiceMasterReducer?.requestDoc?.request?.body);
 
     return (
         <div>
@@ -52,8 +53,8 @@ function Body() {
             <div className='m-5'>
                 {
                     activeTab === 'raw' ?
-                    <CustomJsonEditor onChange={(value) => onChange(value, 'input')} json={ServiceMasterReducer?.requestDoc?.request?.body?.raw!==""?JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body?.raw):{}} />
-                    :
+                        <CustomJsonEditor onChange={(value) => onChange(value, 'input')} json={ServiceMasterReducer?.requestDoc?.request?.body?.raw !== "" && Object.keys(ServiceMasterReducer?.requestDoc?.request?.body?.raw).length !== 0 ? JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body?.raw) : {}} />
+                        :
                         activeTab === 'form-data' ?
                             <p>form-data</p> :
                             activeTab === 'x-www-form-urlencoded' ?

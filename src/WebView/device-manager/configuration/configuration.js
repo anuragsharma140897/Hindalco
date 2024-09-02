@@ -1,57 +1,76 @@
-import React, { useState } from 'react'
-import CustomConfiguration from '../../../Component/configuration/custom-configuration'
-import CustomButton from '../../../Component/ui/buttons/custom-button'
-import CustomInput from '../../../Component/ui/form/input/custom-input'
+import React, { useEffect, useMemo } from 'react'
+import ControlledTable from '../../../Component/ui/table/custom-table'
+import PageHeader from '../../../shared/page-header'
 import { useDispatch, useSelector } from 'react-redux'
-import { setConfigurationJson } from '../../../Store/Action/device-master/configuration/configuration-action'
-import useValidation from '../../../Hooks/useValidation'
-import { addConfigurationSchema } from '../../../Utils/validators/device-manager/configuration/add-configuration.schema'
-import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect'
-import { addConfig, searchGeneral } from '../../../Constant/Api/Api'
+import { searchConfig } from '../../../Constant/Api/Api'
 import { HitApi } from '../../../Store/Action/Api/ApiAction'
+import { routes } from '../../../config/routes'
+import { CompileConfigurationMaster } from './promiss/configuration-master.promiss'
+import { setPagination } from '../../../Store/Action/Pagination/PaginationAction'
+import { setConfigurationData } from '../../../Store/Action/device-master/configuration/configuration-action'
+import { GetConfigurationColumns } from './configuration-column'
+import { useColumn } from '../../../Hooks/use-column'
 
 export default function Configuration() {
   const dispatch = useDispatch()
   const reduxConfiguration = useSelector(state => state.ConfigurationReducer)
-  const [input, setInput] = useState({ "page": 1 })
-  const [output, setOutput] = useState()
-  const { errors, validate } = useValidation(addConfigurationSchema);
+  const reduxPagination = useSelector(state => state.PaginationReducer);
 
-  console.log('reduxConfiguration', reduxConfiguration);
+  useEffect(()=>{
 
-  const handleSave = () => {
-    var json = reduxConfiguration?.apiJson
+    if(reduxConfiguration?.doc === null){
+      loadData('init')
+    }
 
-    Object.assign(json, {
-      config: [output],
+  },[reduxConfiguration])
 
-    })
 
-    HitApi(json, addConfig).then((Res)=>{
-      console.log('Res = ', Res);
-    })
+  const loadData = (type) => {
+    var json = reduxConfiguration?.searchJson
+    if (type === 'init') {
+      Object.assign(json, { page: 1, limit: reduxPagination?.doc?.limit });
+    } else {
+      Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
+    }
 
-    console.log(json);
+    HitApi(json, searchConfig).then((result) => {
+      console.log('result', result);
+      if (result?.success !== false) {
+        CompileConfigurationMaster(result).then((CompiledData) => {
+          dispatch(setConfigurationData(CompiledData));
+          dispatch(setPagination({
+            limit: json?.limit,
+            totalPages: CompiledData?.totalPages,
+            number: CompiledData?.number,
+            totalElements: CompiledData?.totalElements,
+          }));
+        });
+      } else {
+        
+      }
+    });
   }
 
-  const handleCustomChange = (e) =>{
-    var json = reduxConfiguration?.apiJson
-    const { id, value } = e
-    Object.assign(json, { useFor: value })
-    dispatch(setConfigurationJson(json))
+  const columns = useMemo(() => GetConfigurationColumns())
+  const { visibleColumns } = useColumn(columns);
 
-  }
 
   return (
     <div>
-      <div className='grid grid-cols-4 gap-4'>
-        <CustomInput validate={validate} name="configName" label="Confuguraiton Name" value={reduxConfiguration?.apiJson?.configName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} />
-        <SearchableSelect name="useFor" label="Use For" api={searchGeneral} getFieldName={'value'} dynamicSearch={{'fieldName':'mapperUseFor'}} value={reduxConfiguration?.apiJson?.roleName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} onChange={handleCustomChange}/>
-      </div>
-      <CustomConfiguration input={input} output={output} setOutput={setOutput} />
-      <div className='my-4'>
-        <CustomButton text={'Save Configuration'} onClick={handleSave} />
-      </div>
+      <PageHeader btnText={'Add Configuration'} href={routes?.panel?.deviceManager?.addConfiguration} />
+
+      <ControlledTable
+      // screen={ScreenName?.siteMaster}
+      // variant="modern"
+      // isLoading={loading}
+      // showLoadingText={true}
+      data={reduxConfiguration?.doc?.content}
+      columns={visibleColumns}
+      // className={TableClass}
+      // json={reduxSite?.searchJson}
+      // setAction={setSiteMasterApiJson}
+      // ApiHit={loadData}
+      />
     </div>
   )
 }
