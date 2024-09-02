@@ -1,5 +1,5 @@
 import React from 'react'
-import { setApiJson } from '../Store/Action/ServiceMasterAction';
+import { setApiJson } from '../store/Action/ServiceMasterAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function CustomInput({ name }) {

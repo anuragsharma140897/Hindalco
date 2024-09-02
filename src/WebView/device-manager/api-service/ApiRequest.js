@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CustomInput from './component/custom-input';
 import { useDispatch, useSelector } from 'react-redux';
-import { AllApiCallHere } from './Store/AllApiCallHere';
+import { AllApiCallHere } from './store/AllApiCallHere';
 import { searchRequest, updateRequest } from './constants/constant';
-import { setServiceRequestData } from './Store/Action/ServiceMasterAction';
+import { setServiceRequestData } from './store/Action/ServiceMasterAction';
 import { File, PlusCircle } from 'lucide-react';
 import Header from './ApiRequestType/Header';
 import Body from './ApiRequestType/Body';

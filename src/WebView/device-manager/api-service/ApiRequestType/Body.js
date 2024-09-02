@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setServiceRequestData } from '../Store/Action/ServiceMasterAction';
+import { setServiceRequestData } from '../store/Action/ServiceMasterAction';
 
 function Body() {
 
