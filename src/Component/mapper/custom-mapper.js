@@ -4,7 +4,7 @@ import CustomButton from '../ui/buttons/custom-button';
 import { CompileConfiguration } from './mapper.promiss';
 import { HitApi } from '../../Store/Action/Api/ApiAction';
 
-export default function CustomMapper({ input, setInput, mapping, setMapping, output, setOutput }) {
+export default function CustomMapper({ input, setInput, mapping, setMapping, output, setOutput,onMyClick }) {
 
     const onChange = (value, type) => {
         console.log('value', value);
@@ -24,6 +24,7 @@ export default function CustomMapper({ input, setInput, mapping, setMapping, out
         CompileConfiguration(mapping, input).then((CompiledData) => {
             if (CompiledData) {
                 setOutput(CompiledData);
+                onMyClick(CompiledData)
             }
         });
     };
