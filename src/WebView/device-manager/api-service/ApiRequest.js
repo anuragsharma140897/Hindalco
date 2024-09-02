@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Header from '../api-service/ApiRequestType/Header'
 import Auth from '../api-service/ApiRequestType/Auth'
 import Body from '../api-service/ApiRequestType/Body'
-import Params from '../api-service/ApiRequestType/Params'
 import { useDispatch, useSelector } from 'react-redux';
 import { AllApiCallHere } from './store/AllApiCallHere';
 import { setServiceRequestData } from './store/Action/ServiceMasterAction';
@@ -27,9 +26,6 @@ function ApiRequest({ dataForRequest }) {
     }, [ServiceMasterReducer])
 
     const getApiRequest = () => {
-
-        console.log('dataForRequest', dataForRequest);
-
         var json = {
             page: 1,
             limit: 1,
