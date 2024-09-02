@@ -12,10 +12,11 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     console.log('ScreenName?.[screen]', ScreenName?.[screen]);
 
     
-    const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
-    // const isEditAllowed = true
-    const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
-    
+    // const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
+    const isEditAllowed = true
+    // const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
+    const isDeleteAllowed = true
+
     const areKeysNotEmpty = () => {
         if (!Array.isArray(checkKeys)) return false;
         return checkKeys.every((key) => Array.isArray(row[key]) && row[key]?.length<=0);

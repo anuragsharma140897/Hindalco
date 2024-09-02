@@ -8,7 +8,7 @@ export default function CustomConfiguration({ input, setOutput }) {
 
     const onChange = (value, type) => {
         try {
-            const parsedJson = JSON.parse(value);
+            const parsedJson = (value);
             if (type === 'input') {
                 setInputJson(parsedJson);
             }
@@ -25,7 +25,7 @@ export default function CustomConfiguration({ input, setOutput }) {
         <div>
             <div>
                 <label className='font-bold'>Input JSON</label>
-                <CustomJsonEditor detectRender={render} json={inputJson} onChange={(value) => onChange(value, 'input')} />
+                
             </div>
         </div>
     );

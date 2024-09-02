@@ -4,7 +4,7 @@ const initialState = {
     doc: null,
     apiJson: {},
     searchJson: { page: 1, limit: 10, search: {} },
-    mappingJson: null,
+    mappingJson: {},
     timestamp: Date.now()
 }
 
