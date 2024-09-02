@@ -41,9 +41,8 @@ import DashboardBatchReducer from './Store/Reducer/dashbaord/batch/dashbaord-bat
 import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/dashbaord-inventory-reducer';
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import DevicesManagerReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
-// import DevicesReducer from './Store/Reducer/device-master/devices/devices-reducer';
 import ConfigurationReducer from './Store/Reducer/device-master/configuration/configuration-reducer';
-import MappingReducer from './Store/Reducer/device-master/mapping/mapping-reducer';
+// import MappingReducer from './Store/Reducer/device-master/mapping/mapping-reducer';
 // import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
 
 import ServiceMasterReducer from './WebView/device-manager/api-service/store/Reducer/ServiceMasterReducer';
@@ -83,7 +82,7 @@ const rootReducer = combineReducers({
   DashboardBatchReducer : DashboardBatchReducer,
   OutboundReducer :OutboundReducer,
   // Device Mapper Reducers
-  MappingReducer: MappingReducer,
+  // MappingReducer: MappingReducer,
   DevicesManagerReducer : DevicesManagerReducer,
   ConfigurationReducer : ConfigurationReducer,
   // EditorReducer : EditorReducer,
