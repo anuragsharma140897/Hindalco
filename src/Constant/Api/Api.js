@@ -3,8 +3,11 @@
 
 // export const IP = '192.168.0.104:9090'
 
+export const IP = '192.168.0.106:9090'
 
-export const IP = '192.168.0.118:9090'
+
+
+// export const IP = '192.168.0.118:9090'
 
 
 
@@ -160,6 +163,15 @@ export const addBroker = DeviceMicroService + 'addBroker'
 export const searchBroker = DeviceMicroService + 'searchBroker'
 export const updateBroker = DeviceMicroService + 'updateBroker'
 export const deleteBroker = DeviceMicroService + 'deleteBroker'
+
+
+//add certificates
+export const addCertificate = DeviceMicroService + 'addCertificate'
+export const searchCertificate = DeviceMicroService + 'searchCertificate'
+export const updateCertificate = DeviceMicroService + 'updateCertificate'
+export const deleteCertificate = DeviceMicroService + 'deleteCertificate'
+
+//get certificates
 
 
 

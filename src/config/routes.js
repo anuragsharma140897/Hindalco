@@ -43,6 +43,7 @@ export const routes = {
       weighingScale : '/device/weighingscale',
       createWeighingScale : '/device/weighingscale/create',
       editWeighingScale : '/device/weighingscale/edit/:id',
+
     },
     deviceManager:{
       devices : '/device-manager/devices',
@@ -53,7 +54,11 @@ export const routes = {
 
       deviceProfiler : '/device-manager/devices-profile',
       apiService : '/device-manager/api-service',
-      mapper : '/device-manager/mapper'
+      mapper : '/device-manager/mapper',
+
+      certificates : '/device-manager/certificates',
+      addCertificates : '/device-manager/certificates/add',
+      editCertificates : '/device-manager/certificates/edit/:id',
     },
     inbond: {
       inboundOrder: '/inbond/inbound-order',

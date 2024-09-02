@@ -108,6 +108,9 @@ export const getHeadingFromPathname = () => {
     if (pathname.startsWith("/master/customer/edit/")) {
         return "Customer Master / Edit";
     }
+    if (pathname.startsWith("/device-manager/certificates/edit/")) {
+        return "Certificates / Edit";
+    }
     // master/customer/edit/
     switch (pathname) {
         case "/":
@@ -176,11 +179,15 @@ export const getHeadingFromPathname = () => {
             return "Brokers"
         case "/device-manager/broker/add":
             return "Brokers / Add"
+        case "/device-manager/certificates":
+            return "Certificates"
+        case "/device-manager/certificates/add":
+            return "Add Certificate"
         default:
             return "";
     }
 }
-// device-manager/broker/add
+// device-manager/certificates/edit/
 // device-manager/broker
 const endpointBasedOnPermissions = {
     USER_MANAGEMENT: {

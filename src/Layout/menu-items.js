@@ -58,6 +58,8 @@ export const menuItems = [
     dropdownItems: [
       { name: 'Devices', href: routes?.panel?.deviceManager?.devices ,icon : <ReaderMasterIcon />},
       { name: 'Brokers', href: routes?.panel?.deviceManager?.broker ,icon : <ReaderMasterIcon />},
+      { name: 'Certificates', href: routes?.panel?.deviceManager?.certificates,icon : <ReaderMasterIcon />},
+
       { name: 'Device Profile', href: routes?.panel?.deviceManager?.deviceProfiler ,icon : <ReaderMasterIcon />},
       { name: 'Api Services', href: routes?.panel?.deviceManager?.apiService ,icon : <ReaderMasterIcon />},
       { name: 'Mapper', href: routes?.panel?.deviceManager?.mapper ,icon : <ReaderMasterIcon />},

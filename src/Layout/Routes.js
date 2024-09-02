@@ -45,6 +45,8 @@ import Mapper from '../WebView/device-manager/mapper/mapper'
 import ApiService from '../WebView/device-manager/api-service/api-service'
 import AddDevice from '../WebView/device-manager/devices/add-device/add-device'
 import AddBroker from '../WebView/device-manager/brokers/add-broker/add-broker'
+import Certificates from '../WebView/device-manager/certificates/certificates'
+import AddCertificate from '../WebView/device-manager/certificates/add-certificate/add-certificate'
 
 export default function CustomRoutes() {
 
@@ -71,7 +73,6 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.master?.customerMaster} exact element={<CustomerMaster />} />
             <Route path={routes?.panel?.master?.createCustomer} exact element={<AddCustomeMaster />} />
             <Route path={routes?.panel?.master?.editCustomer} exact element={<AddCustomeMaster/>} />
-
             <Route path={routes?.panel?.master?.supplierMaster} exact element={<SupplierMaster />} />
             <Route path={routes?.panel?.master?.createSupplier} exact element={<CreateSupplier />} />
             <Route path={routes?.panel?.master?.generalMaster} exact element={<GeneralMaster />} />
@@ -102,6 +103,12 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
+            <Route path={routes?.panel?.deviceManager?.certificates} exact element={<Certificates/>} />
+            <Route path={routes?.panel?.deviceManager?.addCertificates} exact element={<AddCertificate/>} />
+            <Route path={routes?.panel?.deviceManager?.editCertificates} exact element={<AddCertificate/>} />
+
+
+
             <Route path={'/test'} exact element={<Test />} />
         </Routes>
     )

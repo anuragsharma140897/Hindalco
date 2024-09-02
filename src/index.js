@@ -43,6 +43,7 @@ import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
 import DevicesReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
 import BrokersReducer from './WebView/device-manager/brokers/store/reducer/brokers/brokers-reducer';
+import CertificatesReducer from './WebView/device-manager/certificates/store/Reducer/certificate-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -82,6 +83,7 @@ const rootReducer = combineReducers({
   EditorReducer : EditorReducer,
   DevicesReducer : DevicesReducer,
   BrokersReducer : BrokersReducer,
+  CertificatesReducer:CertificatesReducer,
 
 
 })
