@@ -22,7 +22,7 @@ export default function Reader() {
 
   const loadData = () => {
     var json = reduxDevice?.apiJson
-    console.log('json', json);
+
     HitApi(json, searchReader).then((result) => {
       if (result?.success !== false) {
         CompileDeviceReader(result).then((CompiledData) => {

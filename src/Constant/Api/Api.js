@@ -137,6 +137,7 @@ export const addInbound = OrderMicroService + 'addInbound'
 
 //order 
 export const addOrder = OrderMicroService + 'addOrder'
+export const updateOrder = OrderMicroService + 'updateOrder'
 export const searchOrder = OrderMicroService + 'searchOrder'
 
 //updateBulkTags
@@ -147,6 +148,24 @@ export const updateBulkTags = IOTMicroService + 'updateBulkTags'
 export const searchDevice = DeviceMicroService+'searchDevice'
 export const addConfig = DeviceMicroService+'addConfig'
 export const searchConfig = DeviceMicroService+'searchConfig'
+
+
+
+//Broker
+
+export const addBroker = DeviceMicroService + 'addBroker'
+export const searchBroker = DeviceMicroService + 'searchBroker'
+export const updateBroker = DeviceMicroService + 'updateBroker'
+export const deleteBroker = DeviceMicroService + 'deleteBroker'
+
+
+//add certificates
+export const addCertificate = DeviceMicroService + 'addCertificate'
+export const searchCertificate = DeviceMicroService + 'searchCertificate'
+export const updateCertificate = DeviceMicroService + 'updateCertificate'
+export const deleteCertificate = DeviceMicroService + 'deleteCertificate'
+
+//get certificates
 
 
 

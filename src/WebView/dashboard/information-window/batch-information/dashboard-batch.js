@@ -28,7 +28,7 @@ export default function DashboardBatch() {
     Object.assign(json.search, { buildingId: reduxBuilding?.selectedBuildingId })
     if (type === 'init') {
       HitApi(json, searchBatch).then((result) => {
-        console.log('result', result);
+
         if (result?.success !== false) {
           dispatch(setDashboardBatchData(result))
         }

@@ -29,10 +29,10 @@ export default function Devices() {
       Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
     }
 
-    console.log('json', json);
+
 
     HitApi(json, searchDevice).then((result) => {
-      console.log(';result', result);
+
       // if (result?.success !== false) {
       //   CompileSiteMaster(result).then((compiledData) => {
       //     dispatch(setSiteMasterData(compiledData));

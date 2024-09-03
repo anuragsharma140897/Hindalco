@@ -59,7 +59,7 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
     width: 600,
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
-        {console.log("row",row)}
+
         <Tooltip size="sm" content={'Edit Location Master'} placement="top" color="invert">
           <label>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => EditScreen(openModal, closeModal, row, 'Edit Location Master', AddLocationMaster, 400)}>
@@ -72,14 +72,14 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
             loading={loading}
             title={`Delete Location Master`}
             description={`Are you sure you want to delete?`}
-            onDelete={() => DeleteItem(row.id, setLoading)}
+            onDelete={() => DeleteItem(row._id, setLoading)}
           />
         ) : (
           <DeletePopover
           loading={loading}
           title={`You cannot delete location`}
           description={`This Master is already assigned`}
-          onDelete={() => DeleteItem(row.id, setLoading)}
+          onDelete={() => DeleteItem(row._id, setLoading)}
           disable={true}
         />
         )}
@@ -98,10 +98,14 @@ export const getLocationMasterColumns = ({ openModal, closeModal ,loading, setLo
 
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
+
+
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
+
+
     const result = await HitApi(json, deleteLocation);
 
     if (result.status === 200) {

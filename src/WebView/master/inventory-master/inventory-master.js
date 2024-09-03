@@ -44,7 +44,7 @@ function InventoryMaster() {
     }
     HitApi(json, searchBatch).then((result) => {
 
-      console.log("result",result);
+
       if (result) {
         CompileInventoryMaster(result).then((CompiledData) => {
           dispatch(setInventoryMasterData(CompiledData))

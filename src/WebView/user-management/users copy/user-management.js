@@ -31,7 +31,7 @@ export default function UserManagement() {
         HitApi(json, searchUser).then((result) => {
             if (result?.success !== false) {
                 CompileUserMaster(result).then((CompiledData) => {
-                    console.log('CompiledData', CompiledData);
+
                     dispatch(setUserData(CompiledData));
                     var tp = {
                         limit: json?.limit,

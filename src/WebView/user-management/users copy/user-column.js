@@ -120,7 +120,7 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
 
 
 export const DeleteItem = (row) => {
-  console.log('row', row);
+
   // Object.assign(row, {loading:true})
   // row.setLoading(true)
   // var json = { id: id }

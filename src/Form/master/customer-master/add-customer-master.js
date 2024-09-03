@@ -14,11 +14,12 @@ import CustomSelect from '../../../Component/ui/form/select/custom-select';
 import SearchCountryStateCity from '../../../Component/ui/form/select/search-country-state-city';
 import { Country, State, City } from 'country-state-city';
 import { useCallback } from 'react';
+import { setSearchableSelectSelectedData } from '../../../Store/Action/common/searcheable-select/searcheable-select-action';
 
 
 
 
-export default function AddCustomeMaster({ row, closeModal }) {
+export default function AddCustomeMaster({ row}) {
     const dispatch = useDispatch();
     const reduxCustomer = useSelector(state => state.CustomerMasterReducer);
     const reduxUser = useSelector(state => state.UserReducer);
@@ -36,8 +37,13 @@ export default function AddCustomeMaster({ row, closeModal }) {
     ];
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row);
+
+            var json = [{name:'customerGroup',value:row?.customerGroup},{name:'customerType',value:row?.customerType},{name:'siteIds',value:row?.siteIds?.siteName}]
+            dispatch(setSearchableSelectSelectedData(json))
+            setCountries(row?.customerCountry)
+
         }
 
         const allCountries = Country.getAllCountries().map(country => ({
@@ -45,23 +51,31 @@ export default function AddCustomeMaster({ row, closeModal }) {
             value: country.name
         }));
         setCountries(allCountries);
-    }, [row?.id]); // Update this effect only when row.id changes
-
+    }, [row?._id]); 
     const loadDefault = useCallback((row) => {
+
         var json = { ...reduxCustomer?.apiJson };
+
+
+        
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
+        Object.assign(json, {siteIds : row?.siteIds?._id})
         dispatch(setCustomerMasterApiJson(json));
     }, [dispatch, reduxCustomer?.apiJson]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         var json = reduxCustomer?.apiJson;
+
+
         const validationErrors = validate(json);
+
+
 
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true);
-            const apiCall = row?.id ? updateCustomer : addCustomer;
-            const updatedJson = { ...json, id: row?.id, status: json?.status || 'Active' };
+            const apiCall = row?._id ? updateCustomer : addCustomer;
+            const updatedJson = { ...json, _id: row?._id, status: json?.status || 'Active' };
 
             HitApi(updatedJson, apiCall).then((result) => {
                 setLoading(false);
@@ -78,8 +92,8 @@ export default function AddCustomeMaster({ row, closeModal }) {
     };
 
     const handleOnChange = useCallback((e, name) => {
-        const { id, value } = e;
-        const newJson = { [name]: name === 'siteIds' ? id : value };
+        const { _id, value } = e;
+        const newJson = { [name]: name === 'siteIds' ? _id : value };
         const updatedJson = { ...reduxCustomer?.apiJson, ...newJson };
         dispatch(setCustomerMasterApiJson(updatedJson));
     }, [dispatch, reduxCustomer?.apiJson]);
@@ -144,9 +158,9 @@ export default function AddCustomeMaster({ row, closeModal }) {
                             <CustomInput important={true} name="customerAddress1" label="Customer Add1" value={reduxCustomer?.apiJson?.customerAddress1} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate} />
                             <CustomInput important={true} name="customerAddress2" label="Customer Add2" value={reduxCustomer?.apiJson?.customerAddress2} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate} />
                             <CustomInput important={true} name="customerLandmark" label="Customer Landmark" value={reduxCustomer?.apiJson?.customerLandmark} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate} />
-                            <SearchCountryStateCity name={"customerCountry"} value={reduxCustomer?.apiJson?.customerCountry} important={true} label="Customer Country" options={countries} error={errors} onChange={handleCountry}  validate={validate}  />
-                            <SearchCountryStateCity name={"customerState"} value={reduxCustomer?.apiJson?.customerState} important={true} label="Customer State" options={states} error={errors} onChange={handleStateChange}  validate={validate} />
-                            <SearchCountryStateCity name={"customerCity"} value={reduxCustomer?.apiJson?.customerCity} important={true} label="Customer City" options={cities} error={errors} onChange={handleCityChange}  validate={validate}  />
+                            <SearchCountryStateCity name={"customerCountry"} value={row ? row?.customerCountry :reduxCustomer ?.apiJson?.customerCountry} important={true} label="Customer Country" options={countries} error={errors} onChange={handleCountry}  validate={validate}  />
+                            <SearchCountryStateCity name={"customerState"} value={row ? row?.customerState :reduxCustomer?.apiJson?.customerState} important={true} label="Customer State" options={states} error={errors} onChange={handleStateChange}  validate={validate} />
+                            <SearchCountryStateCity name={"customerCity"} value={row ? row?.customerCity :reduxCustomer?.apiJson?.customerCity} important={true} label="Customer City" options={cities} error={errors} onChange={handleCityChange}  validate={validate}  />
                             <CustomInput important={true} type={"number"} maxLength={6} name="customerPostCode" label="Customer PostCode" value={reduxCustomer?.apiJson?.customerPostCode} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate}  />
                             <CustomInput important={true} name="customerGst" label="Customer Gst" value={reduxCustomer?.apiJson?.customerGst} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate}  />
                             <CustomInput important={true} type={"number"} name="customerContact" maxLength={10} label="Customer Contact" value={reduxCustomer?.apiJson?.customerContact} error={errors} reduxState={reduxCustomer?.apiJson} setAction={setCustomerMasterApiJson}  validate={validate}  />
@@ -158,7 +172,7 @@ export default function AddCustomeMaster({ row, closeModal }) {
                         </div>
                         <div className='flex gap-3 justify-end'>
                             <CustomButton text={'Back'} variant='flat' onClick={() => { window.location.pathname = 'master/customer/' }} />
-                            <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                            <CustomButton type={'submit'}  text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                         </div>
                     </div>
                 </form>

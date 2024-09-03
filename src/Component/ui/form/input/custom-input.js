@@ -17,7 +17,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
             const { name, value } = e.target;
             let number = value;
             let firstSixDigits = number.toString().substring(0, maxLength);
-            console.log('firstSixDigits', firstSixDigits);
+
             let updatedJson = { ...reduxState };
             updatedJson[name] = firstSixDigits;
             dispatch(setAction(updatedJson));
@@ -41,7 +41,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
         <>
             {
                 !hide && <div className="mb-1">
-                    <label className="block font-bold ">{label}{important === false ? '(Optional)' : ''}</label>
+                    <label className="block font-bold mb-2">{label}{important === false ? '(Optional)' : ''}</label>
                     <input
                         type={type || 'text'}
                         maxLength={maxLength}

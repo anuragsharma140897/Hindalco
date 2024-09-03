@@ -42,10 +42,11 @@ import DashboardInventoryBatchReducer from './Store/Reducer/dashbaord/inventory/
 import OutboundReducer from './Store/Reducer/outbound/outbound-reducer';
 import DevicesManagerReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
 import ConfigurationReducer from './Store/Reducer/device-master/configuration/configuration-reducer';
-// import EditorReducer from './WebView/device-manager/mapper/store/reducer/editor/editor-reducer';
-
 import ServiceMasterReducer from './WebView/device-manager/api-service/store/Reducer/ServiceMasterReducer';
 import MappingReducer from './Store/Reducer/device-master/mapping/mapping-reducer';
+import DevicesReducer from './WebView/device-manager/devices/store/reducer/devices/devices-reducer';
+import BrokersReducer from './WebView/device-manager/brokers/store/reducer/brokers/brokers-reducer';
+import CertificatesReducer from './WebView/device-manager/certificates/store/reducer/certificate-reducer';
 
 const rootReducer = combineReducers({
   ApiReducer: ApiReducer,
@@ -85,9 +86,10 @@ const rootReducer = combineReducers({
   MappingReducer: MappingReducer,
   DevicesManagerReducer : DevicesManagerReducer,
   ConfigurationReducer : ConfigurationReducer,
-  // EditorReducer : EditorReducer,
-  // DevicesReducer : DevicesReducer,
-  ServiceMasterReducer : ServiceMasterReducer
+  ServiceMasterReducer : ServiceMasterReducer,
+  DevicesReducer : DevicesReducer,
+  BrokersReducer : BrokersReducer,
+  CertificatesReducer:CertificatesReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

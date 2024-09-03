@@ -111,9 +111,9 @@ export const getReaderMasterColumns = ({ openModal, loadData }) => {
 
 export const onDeleteItem = (id, ApiHit) => {
   var json = { id: id }
-  console.log('json', json);
+
   HitApi(json, deleteReader).then((Result) => {
-    console.log('Result', Result);
+
     if (Result.status === 200) {
       // window.location.reload() 
       if (ApiHit) { ApiHit() }

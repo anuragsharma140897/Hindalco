@@ -27,7 +27,7 @@ export const HitApi = (json, api) => {
             .then(res => {
                 if (!res.ok) {
                     return res.json().then(err => {
-                        console.log('err ---- ', err);
+
                         resolve({
                             success: false,
                             status: res.status,
@@ -44,7 +44,7 @@ export const HitApi = (json, api) => {
                 }
             })
             .catch(err => {
-                console.log('Error caught: ', err);
+
                 resolve({
                     success: false,
                     message: 'An error occurred during the API call.',

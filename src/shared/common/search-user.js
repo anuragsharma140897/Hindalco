@@ -21,14 +21,14 @@ export default function SearchUser({ row, ApiHit }) {
     const { loadingState, setDynamicLoading } = useDynamicLoading();
 
     useEffect(() => {
-        console.log('reduxBuilding', reduxBuilding);
+
     }, [reduxBuilding])
 
     const handleOnChange = (e) => {
         var json = reduxBuilding?.apiJson
         const { id, label, value } = e
 
-        console.log('selected user id', id);
+
 
         Object.assign(json, {
             sourceId: row.id,
@@ -77,7 +77,7 @@ export default function SearchUser({ row, ApiHit }) {
                 "source": "buildingIds",
                 "mapping": "userIds"
             }
-            console.log('finalJson remove', finalJson);
+
             setDynamicLoading({ 'user': true })
             HitApi(finalJson, removeMapping).then((result) => {
                 if (result?.success !== false) {
@@ -103,7 +103,7 @@ export default function SearchUser({ row, ApiHit }) {
         }
     }
 
-    console.log('row?.userIds', row?.userIds);
+
 
     let item = row?.userIds?.map((userId) => {
         const matchedUser = reduxSelectData?.doc?.find((ele) => ele?.id === userId);

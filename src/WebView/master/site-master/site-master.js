@@ -57,7 +57,7 @@ export default function SiteMaster() {
       loadData('init')
     }
 
-    console.log('reduxPagination', reduxPagination);
+
   }, [])
 
   return (

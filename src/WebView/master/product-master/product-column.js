@@ -5,7 +5,7 @@ import PencilIcon from '../../../Constant/Icons/pencil';
 import { deleteProduct } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 
-export const getProductMasterColumns = () => [
+export const getProductMasterColumns = ({loading,setLoading}) => [
   {
     title: <HeaderCell title="#" />,
     dataIndex: 'index',
@@ -88,32 +88,47 @@ export const getProductMasterColumns = () => [
     render: (_, row) => (
       <div className="flex items-center gap-3 pe-4">
         <Tooltip size="sm" content={'Edit Product'} placement="top" color="invert">
-          <a href={'/master/product/edit/' + row.id}>
+          <a href={'/master/product/edit/' + row._id}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
               <PencilIcon className="h-4 w-4" />
             </ActionIcon>
           </a>
         </Tooltip>
-        <DeletePopover title={`Delete User`} description={`Are you sure you want to delete this employee?`}
-          onDelete={() => DeleteItem(row.id)}
+        <DeletePopover loading={loading} title={`Delete User`} description={`Are you sure you want to delete this employee?`}
+          onDelete={() => DeleteItem(row._id,setLoading)}
         />
-        {/* <Tooltip size="sm" content={'Search User'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
-            <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
-              <ProtectIcon className="h-4 w-4" />
-            </ActionIcon>
-          </label>
-        </Tooltip> */}
       </div>
     ),
   },
 ];
 
-export const DeleteItem = (id) => {
-  var json = { id: id }
-  HitApi(json, deleteProduct).then((Result) => {
-    if (Result.status === 200) {
-      window.location.reload()
+// export const DeleteItem = (_id) => {
+//   var json = { _id: _id }
+//   HitApi(json, deleteProduct).then((Result) => {
+//     if (Result.status === 200) {
+//       window.location.reload()
+//     }
+//   })
+// }
+
+
+
+const DeleteItem = async (_id, setLoading) => {
+  setLoading(true);
+  try {
+    const json = { _id };
+    const result = await HitApi(json, deleteProduct);
+
+    if (result.status === 200) {
+      alert(result.message);
+      window.location.pathname = '/master/product/';
+    } else {
+      alert(result.message);
     }
-  })
-}
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    alert("An error occurred while deleting the item.");
+  } finally {
+    setLoading(false);
+  }
+};

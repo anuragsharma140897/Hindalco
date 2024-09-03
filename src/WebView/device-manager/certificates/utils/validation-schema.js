@@ -423,4 +423,4 @@ export const validationSchema = {
 };
 
 const emailValidator = validationSchema.email().validate('test@example.com');
-console.log(emailValidator); 
+

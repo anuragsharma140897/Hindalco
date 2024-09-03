@@ -22,12 +22,12 @@ function InboundAddProduct({setShowProdcutTbale}) {
 
 
 
-    console.log("reduxInbound", reduxInbound);
+
 
 
     const handleChange = (e) => {
         var oldJson = reduxInbound?.apiJson
-        console.log("json", oldJson);
+
         var json = {
             "productId": e?.id
         }
@@ -63,10 +63,10 @@ function InboundAddProduct({setShowProdcutTbale}) {
 
             var accuatalIndex = reduxInbound?.productAdded?.length-1
 
-            console.log("reduxInboundlength",reduxInbound?.productAdded?.length);
+
             let oldProdJson =reduxInbound?.productAdded?.[accuatalIndex]
 
-            console.log("oldProdJson",oldProdJson);
+
 
             let newProdJson ={
                 "quantity": reduxInbound?.apiJson?.quantity
@@ -75,7 +75,7 @@ function InboundAddProduct({setShowProdcutTbale}) {
             oldProdArr.push(oldProdJson)
             dispatch(setInboundData(oldProdArr));
             const oldArr = [...reduxInbound?.doc]; 
-            console.log("oldArr", oldArr);
+
             oldArr?.push(json);
             dispatch(setInboundData(oldArr));
     
@@ -92,7 +92,7 @@ function InboundAddProduct({setShowProdcutTbale}) {
         }
     };
 
-    console.log("reduxInbound---", reduxInbound);
+
 
     return (
         <div className='p-10'>

@@ -8,25 +8,17 @@ import { useModal } from '../../../shared/modal-views/use-modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { TableClass } from '../../../Constant/Classes/Classes'
 import { getaddVehicleColumns } from './add-vehicle-column'
-import { Radio, RadioGroup } from 'rizzui'
-import { searchBatch } from '../../../Constant/Api/Api'
-import { setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action'
-import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect'
-import OutboundBatch from '../outbound-batch/outbound-batch'
-import OutboundIgoneBatch from '../outbound-ignore-batch/outbound-igone-batch'
 
 function AddVehicle() {
   const { openModal, closeModal } = useModal();
   const [value, setValue] = useState("");
+  const reduxOutbound = useSelector((state) => state.OutboundReducer);
+  const dispatch = useDispatch()
 
   const [loading, setLoading] = React.useState(false);
-  const columns = useMemo(() => getaddVehicleColumns({ openModal, closeModal, loading, setLoading }))
+  const columns = useMemo(() => getaddVehicleColumns({ reduxOutbound, dispatch }))
   const { visibleColumns } = useColumn(columns);
-  const reduxOutbound = useSelector((state) => state.OutboundReducer);
   const [selectedDetails, setSelectedDetails] = useState(null);
-
-
-
 
 
   return (

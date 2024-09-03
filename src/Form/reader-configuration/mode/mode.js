@@ -36,7 +36,7 @@ export default function Mode() {
             ip: reduxDevice?.doc?.readerIp,
         }
         HitApi(json, readerStatus).then((result) => {
-            console.log('result', result);
+
             if (result) {
                 dispatch(setReaderConfigurationSummaryJson(result))
             }
@@ -52,7 +52,7 @@ export default function Mode() {
             if (result) {
                 dispatch(setReaderConfigurationModeData(result))
                 CompileModeForApiJson(result).then(CompileData => {
-                    console.log('CompileData', CompileData);
+
                     if (CompileData) {
                         dispatch(setReaderConfigurationApiJson(CompileData))
                     }
@@ -67,7 +67,7 @@ export default function Mode() {
         if (userPassword === correctPassword) {
             setDisable(false)
         } else if (userPassword === '') {
-            console.log('false');
+
         }
         else {
             alert('Password is incorrect');
@@ -84,7 +84,7 @@ export default function Mode() {
 
             Object.assign(CompileData,json)
             HitApi(CompileData,editReaderMode).then(result=>{
-                console.log(result);
+
             })
         })
     }

@@ -126,11 +126,11 @@ export const DeleteItem = (id, showCustomAlert) => {
         title : "Delete Error",
         message : "Unable to delete this role, This role is already linked with the User"
       })
-      console.log('Result', Result);
+
 
     }
   }).catch(err=>{
-    console.log('Unexpected error:', err);
+
   })
   
   // HitApi(json, deleteRole).then((Result) => {

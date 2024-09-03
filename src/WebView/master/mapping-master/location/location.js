@@ -29,7 +29,7 @@ export default function Location() {
       loadData()
     }
 
-    console.log('reduxLoading********', reduxLoading?.doc);
+
 
   }, [reduxMappingMaster])
 
@@ -40,9 +40,9 @@ export default function Location() {
         buildingIds: { $in: [reduxMappingMaster?.mappingJson?.selectedBuildingID] }
       }
     }
-    console.log('laoding location data', json);
+
     HitApi(json, searchLocation).then((result) => {
-      console.log('result location : ', result);
+
       if (result?.success !== false) {
         dispatch(setLocationMasterData(result))
       } else {
@@ -65,7 +65,7 @@ export default function Location() {
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
     const { id, label, value } = e
-    console.log(id);
+
     Object.assign(json, { selectedLocationIdFromDropdown: id })
     dispatch(setSelectedMappingMasterJson(json))
 
@@ -127,7 +127,7 @@ export default function Location() {
       "mapping": "locationIds"
     }
 
-    console.log('locationToZoneMappingJson', locationToZoneMappingJson);
+
 
     setDynamicLoading({ 'zone': true, 'location': true })
     HitApi(locationToZoneMappingJson, removeMapping).then((result) => {
@@ -165,13 +165,13 @@ export default function Location() {
 
 
   const handleLocationClick = (ele) => {
-    console.log('location ele : ', ele);
+
     var json = reduxMappingMaster?.mappingJson
     Object.assign(json, { selectedLocationID: ele?.id })
     dispatch(setDeviceReaderData(null))
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterLocationData(ele))
-    console.log('handleZoneClick json', json);
+
 
     delete json?.selectedReaderID;
   }

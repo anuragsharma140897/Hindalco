@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PageHeader from '../../../shared/page-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../../shared/modal-views/use-modal'
@@ -21,9 +21,10 @@ function Vehiclemaster() {
   const dispatch = useDispatch()
   const reduxVehicle = useSelector(state => state.VehicleMasterReducer)
   const reduxPagination = useSelector(state => state.PaginationReducer)
+  const [loading ,setLoading] = useState(false)
 
   const { openModal, closeModal } = useModal();
-  const columns = useMemo(() => getVehicleMasterColumns({ openModal, closeModal }))
+  const columns = useMemo(() => getVehicleMasterColumns({ openModal, closeModal ,loading ,setLoading}))
   const { visibleColumns } = useColumn(columns);
 
   useEffect(() => {

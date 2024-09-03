@@ -75,7 +75,7 @@ export default function RolesAndPermission() {
         }));
         })
     }).catch(err => {
-      console.log('eeee err', err);
+
     })
   }
 

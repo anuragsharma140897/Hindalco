@@ -15,7 +15,7 @@ export default function DashbaordInventory() {
     const { visibleColumns } = useColumn(columns);
 
     useEffect(() => {
-        console.log('reduxBatch', reduxBatch?.inventory);
+
     }, [reduxBatch])
 
     return (

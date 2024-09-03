@@ -23,7 +23,7 @@ export default function AddProduct() {
   var ID = url.split('/')[4]
 
   useEffect(() => {
-    if (ID && !reduxProduct?.apiJson?.id) {
+    if (!reduxProduct?.apiJson?._id) {
       loadDefault(ID)
     }
   }, [])
@@ -107,8 +107,7 @@ export default function AddProduct() {
             <CustomInput maxLength={15} name="productName" label="Product Name" value={reduxProduct?.apiJson?.productName} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
             <CustomInput maxLength={15} name="productCode" label="Product Code" value={reduxProduct?.apiJson?.productCode} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
             <CustomInput maxLength={50} name="productDescription" label="Product Description" value={reduxProduct?.apiJson?.productDescription} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />
-            {/* <CustomInput name="productGroup" label="Product Group" value={reduxProduct?.apiJson?.productGroup} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} /> */}
-            <SearchableSelect name="productGroup" label="Product Group" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'gender'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson}  onChange={handleOnChange} />
+            <SearchableSelect name="productGroup" label="Product Group" api={searchGeneral} checkServerKey={'fieldName' }  checkServerValue={'gender'} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson}  onChange={handleOnChange} />
           </div>
           <div className='grid grid-cols-4 gap-4'>
             <CustomInput maxLength={6} type={'number'} name="height" label="Height" value={reduxProduct?.apiJson?.height} error={errors} reduxState={reduxProduct?.apiJson} setAction={setProductMasterApiJson} />

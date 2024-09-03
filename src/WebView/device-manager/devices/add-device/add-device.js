@@ -46,6 +46,8 @@ export default function AddDevice() {
     
   }
 
+
+
   return (
     <div className='p-10 bg-white rounded-lg'>
       <form onSubmit={handleSubmit}>

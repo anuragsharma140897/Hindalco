@@ -22,19 +22,19 @@ class MQTTService {
     this.client = mqtt.connect(MQTTIP);
 
     this.client.on('connect', () => {
-      console.log('Connected');
+
       this.isConnected = true;
       this.subscribers.onConnect();
 
       this.client.subscribe('66c8aca49acf5c2a949d7701/recevieTagInfo', (err) => {
         if (!err) {
-          console.log('Subscribed to topic');
+
         }
       });
     });
 
     this.client.on('message', (topic, payload) => {
-      console.log(`Received message: ${payload.toString()} on topic: ${topic}`);
+
       this.message = payload.toString();
       this.subscribers.onMessage(this.message);
     });
@@ -49,7 +49,7 @@ class MQTTService {
     if (this.client) {
       this.client.subscribe(topic, (err) => {
         if (!err) {
-          console.log(`Subscribed to topic: ${topic}`);
+
         }
       });
     }

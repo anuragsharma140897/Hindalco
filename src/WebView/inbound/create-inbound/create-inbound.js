@@ -40,7 +40,7 @@ function CreateInbound() {
 
 
 
-  console.log("value: " + value);
+
 
   const handleOnChange = useCallback((e, name) => {
     const { id } = e;
@@ -78,7 +78,7 @@ function CreateInbound() {
     const searchJson = value === 'Customer' ? reduxCustomer?.searchJson : reduxSupplier?.searchJson;
     const json = { ...searchJson, page: 1, limit: reduxPagination?.doc?.limit, search: { id } };
     HitApi(json, apiMethod).then((result) => {
-      console.log("result++++", result?.content?.[0]);
+
       setDetails(result?.content?.[0] || null);
     });
   };
@@ -121,7 +121,7 @@ function CreateInbound() {
     }
     Object.assign(oldJson, json);
     HitApi(ddf, addInbound).then((result) => {
-      console.log("result++++", result)
+
     })
 
 
@@ -129,9 +129,9 @@ function CreateInbound() {
 
   }
 
-  console.log("selectedDetails", selectedDetails);
 
-  console.log("reduxInbound+++", reduxInbound);
+
+
 
   return (
     <div>

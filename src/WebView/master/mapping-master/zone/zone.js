@@ -34,7 +34,7 @@ export default function Zone() {
   const loadData = () => {
     var json = { page: 1, limit: 5000, search: { buildingIds: { $in: [reduxMappingMaster?.mappingJson?.selectedBuildingID] } } }
     HitApi(json, searchZone).then((result) => {
-      console.log('result Zone oading', result);
+
       if (result?.success !== false) {
         dispatch(setZoneMasterData(result))
       }
@@ -44,7 +44,7 @@ export default function Zone() {
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
     const { id, label, value } = e
-    console.log(id);
+
     Object.assign(json, { selectedZoneIdFromDropdown: id })
     dispatch(setSelectedMappingMasterJson(json))
 
@@ -61,7 +61,7 @@ export default function Zone() {
       "source": "buildingIds",
       "mapping": "zoneIds"
     }
-    console.log('finalJson', finalJson);
+
 
     HitApi(finalJson, mapping).then((result) => {
       if (result?.success !== false) {
@@ -89,7 +89,7 @@ export default function Zone() {
       "source": "buildingIds",
       "mapping": "zoneIds"
     }
-    console.log('finalJson', finalJson);
+
 
     HitApi(finalJson, removeMapping).then((result) => {
       if (result?.success !== false) {
@@ -108,7 +108,7 @@ export default function Zone() {
 
 
   const handleZoneClick = (ele) => {
-    console.log('zone ele : ', ele);
+
     var json = reduxMappingMaster?.mappingJson
     Object.assign(json, { selectedZoneID: ele?.id })
     dispatch(setLocationMasterData(null))
@@ -117,7 +117,7 @@ export default function Zone() {
 
     delete json?.selectedLocationID;
     delete json?.selectedReaderID;
-    console.log('handleZoneClick json', json);
+
   }
 
   const handleClick = () => {

@@ -38,7 +38,7 @@ function ConfigurationMaster() {
     })
   }
 
-  console.log('reduxConfiguration',reduxConfiguration);
+
 
   return (
     <div>

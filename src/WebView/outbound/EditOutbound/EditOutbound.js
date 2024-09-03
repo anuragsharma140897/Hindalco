@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { HitApi } from '../../../Store/Action/Api/ApiAction'
-import { searchOrder } from '../../../Constant/Api/Api'
+import { searchOrder, searchVehicle } from '../../../Constant/Api/Api'
 import { useDispatch, useSelector } from 'react-redux';
-import { setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action';
+import { setOutboundAddedVehicle, setOutboundApiJson } from '../../../Store/Action/outbound/outbound-action';
 import CreateOutbound from '../create-outbound/create-outbound';
+import { setSearchableSelectSelectedData } from '../../../Store/Action/common/searcheable-select/searcheable-select-action';
 
 function EditOutbound() {
 
   const reduxOutbound = useSelector(state => state.OutboundReducer);
+  
+  const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const dispatch = useDispatch()
 
 
-  const [data, setData] = useState(null)
 
   useEffect(() => {
-    if (data === null) {
+   
       loadData()
-    }
+  
   }, [])
 
   const loadData = () => {
 
     const pathname = window.location.pathname
     const id = pathname.split('/')[3]
-    console.log('id', id);
-    setData(id)
+
     var json = {
       page: 1,
       limit: 1,
@@ -34,19 +35,46 @@ function EditOutbound() {
     }
     HitApi(json, searchOrder).then(res => {
 
-      console.log('res',res);
 
       var oldJson = reduxOutbound.apiJson
-      oldJson.dispatchFrom = res?.content?.[0]?.dispatchFrom
+      oldJson = res?.content[0]
+
+
       dispatch(setOutboundApiJson(oldJson))
-      setData(res)
+
+
+      var json = [{name:'dispatchFrom',value:res?.content?.[0]?.dispatchFromName},{name:'orderStatus',value:res?.content?.[0]?.orderStatus},{name:'saleType',value:res?.content?.[0]?.saleType} ,{name:'billTo',value:res?.content?.[0]?.billToName},{name:'dispatchTo',value:res?.content?.[0]?.dispatchToName}]
+
+
+      res?.content?.[0]?.vehicleIds?.map((ele,i)=>{
+
+        var json = {
+          page:1,
+          limit:10,
+          search:{
+            id:ele.vehicleId,
+          }
+        }
+
+
+
+        HitApi(json,searchVehicle).then(res=>{
+
+
+
+          dispatch(setOutboundAddedVehicle(res?.content))
+        })
+      })
+
+      dispatch(setSearchableSelectSelectedData(json))
+
     })
   }
 
-  console.log(data);
+
 
   return (
-    data !== null &&
+  
     <CreateOutbound />
   )
 }

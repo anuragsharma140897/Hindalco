@@ -41,7 +41,7 @@ export default function CustomSelect({
 
     return (
         <div className="mb-6 relative">
-            <label className="block font-bold ">{label}{important === false ? ' (Optional)' : ''}</label>
+            <label className="block font-bold mb-2">{label}{important === false ? ' (Optional)' : ''}</label>
             <div className="relative">
                 <select
                     name={name}

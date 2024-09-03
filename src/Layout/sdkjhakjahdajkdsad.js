@@ -47,7 +47,7 @@ const filteredMenuItems = menuItems.map((menuItem) => {
 const SidebarMenu = ({ colorPresetName, theme }) => {
   const pathname = usePathname();
 
-  console.log(getAuthenticatedUser());
+
 
   return filteredMenuItems.map((item, index) => {
     if (!item) return null; // Skip items that were filtered out

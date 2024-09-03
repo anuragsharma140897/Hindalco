@@ -21,7 +21,7 @@ export default function AddLocationMaster({ row, closeModal }) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -39,11 +39,11 @@ export default function AddLocationMaster({ row, closeModal }) {
         var json = reduxLocation?.apiJson
         const validationErrors = validate(json);
 
-        console.log("validationErrors", validationErrors);
+
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
-            if (row?.id) {
-                Object.assign(json, { id: row?.id })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id })
                 HitApi(json, updateLocation).then((result) => {
                     if (result?.status === 200) {
                         alert(result.message);
@@ -59,7 +59,7 @@ export default function AddLocationMaster({ row, closeModal }) {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addLocation).then((result) => {
                     setLoading(false)
-                    console.log("result-----", result);
+
                     if (result.status === 201) {
                         alert(result.message);
                         window.location.pathname = 'master/location'
@@ -83,7 +83,7 @@ export default function AddLocationMaster({ row, closeModal }) {
                     <CustomInput important={true} name="value" label="Location Name" value={reduxLocation?.apiJson?.value} error={errors} reduxState={reduxLocation?.apiJson} setAction={setLocationMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>

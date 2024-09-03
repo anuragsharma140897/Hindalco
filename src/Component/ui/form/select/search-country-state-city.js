@@ -5,11 +5,9 @@ import Select from 'react-select';
 
 function SearchCountryStateCity({ important, label, error, name, options, onChange, value }) {
 
-
-console.log("error",error);
     return (
         <div >
-            <label className="block font-bold">{label}{important === false ? '(Optional)' : ''}</label>
+            <label className="block font-bold mb-2">{label}{important === false ? '(Optional)' : ''}</label>
             <div >
             <Select
                 defaultInputValue={value}
@@ -19,7 +17,6 @@ console.log("error",error);
                 className={`w-full text-lg rounded-lg
                 disabled:bg-gray-200
                ${error?.[name] ? 'border-2 border-red-400 focus:outline-none focus:ring-2 focus:ring-red-500' : 'border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'}`}
-
                 placeholder="Select ..."
             />
             </div>

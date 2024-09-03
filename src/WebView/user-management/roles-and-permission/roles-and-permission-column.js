@@ -39,7 +39,7 @@ export const GetRolesAndPermissionColumns = ({ openModal, closeModal, showCustom
         });
       }
     } catch (err) {
-      console.log('Unexpected error:', err);
+
     } finally {
       setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
     }
@@ -83,7 +83,7 @@ export const GetRolesAndPermissionColumns = ({ openModal, closeModal, showCustom
           screen={'roleAndPermission'}
           row={row}
           onEdit={(rowData) => EditScreen(openModal, closeModal, rowData, 'Edit Site Master', AddRolesAndPermission, 800, ApiHit)}
-          onView={(rowData) => console.log('View action for', rowData)} // replace with actual view logic
+
           onDelete={(rowData) => handleDelete(rowData)}
           checkKeys={[]}
         />

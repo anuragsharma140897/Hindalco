@@ -26,7 +26,7 @@ function Login() {
         setLoading(true)
         HitApi(AuthReducer?.doc, LoginApi).then((res) => {
 
-          console.log("res",res);
+
           setLoading(false)
           if (res.statusCode === 200) {
             setAuthenticatedUser(res?.jwtToken)

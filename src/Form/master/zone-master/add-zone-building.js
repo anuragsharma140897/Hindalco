@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import SearchSelect from '../../../Component/ui/form/select/search-select';
 import useValidation from '../../../Hooks/useValidation';
@@ -13,12 +13,14 @@ import CustomButton from '../../../Component/ui/buttons/custom-button';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import { addBuildingToZone, searchBuilding } from '../../../Constant/Api/Api';
 import { CompileBuildingMaster } from '../../../WebView/master/buildings-master/promiss/building-master.promiss';
+import SearchableSelect from '../../../Component/ui/form/select/SearchableSelect';
+import { setLocationMasterApiJson } from '../../../Store/Action/master/location-master/location-master-action';
 
 
 function AddZoneBuilding({ row }) {
-    let zoneid = row?.id
+    let zoneid = row?._id
 
-    console.log("zoneid", zoneid);
+
 
     const reduxZone = useSelector(state => state.ZoneMasterReducer);
     const reduxBuilding = useSelector(state => state.ZoneMasterReducer);
@@ -45,11 +47,11 @@ function AddZoneBuilding({ row }) {
         json.limit = 1000
         HitApi(json, searchBuilding).then((result) => {
 
-            console.log('result searchBuilding  ', result);
+
 
             if (result) {
                 CompileBuildingMaster(result).then((CompiledData) => {
-                    console.log("CompiledData", CompiledData)
+
                     const x = CompiledData.content?.map(building => ({
                         label: building.buildingName,
                         value: building.id,
@@ -64,20 +66,20 @@ function AddZoneBuilding({ row }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (reduxZone?.apiJson?.id) {
+        if (reduxZone?.apiJson?._id) {
             setLoading(true)
             var json = {
 
-                sourceId: row?.id,
-                mapTo: reduxZone?.apiJson?.id,
+                sourceId: row?._id,
+                mapTo: reduxZone?.apiJson?._id,
 
             }
 
-            console.log(json);
+
 
             HitApi(json, addBuildingToZone).then((result) => {
                 setLoading(false)
-                console.log("result", result);
+
                 if (result?.status === 200) {
                     alert(result.message)
                     window.location.pathname = '/master/zone'
@@ -93,15 +95,32 @@ function AddZoneBuilding({ row }) {
         }
 
     }
-    console.log("reduxZone", reduxZone);
+
+
+
+    const handleOnChange = useCallback((e, name) => {
+        const { _id, value } = e;
+
+
+        const newJson = { [name]: _id  };
+
+        const updatedJson = { ...reduxZone?.apiJson, ...newJson };
+
+
+        dispatch(setZoneMasterApiJson(updatedJson));
+    }, [dispatch, reduxZone?.apiJson]);
+
+
 
     return (
         <div className='p-10 mb-40'>
             <form onSubmit={handleSubmit}>
-                <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} />
-                <div className='flex gap-3 justify-end mb-5'>
+            <SearchableSelect name="_id" label="Select Building" api={searchBuilding} getFieldName={'buildingName'}  onChange={(e) => handleOnChange(e,"_id")} />
+
+                {/* <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} /> */}
+                <div className='flex gap-3 justify-end mb-5 mt-3'>
                     <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                    <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} />
+                    <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} onClick={handleSubmit}/>
                 </div>
                 <ControlledTable
                     variant="modern"

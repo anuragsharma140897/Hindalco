@@ -35,7 +35,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         if (Object.keys(validationErrors).length === 0) {
             if (row?.id) {
                 Object.assign(json, { id: row?.id })
-                console.log('json', json);
+
                 HitApi(json, updateSite).then((result) => {
                     if (result?.success!==false) {
                         showCustomAlert({

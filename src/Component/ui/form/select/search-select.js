@@ -17,11 +17,13 @@ export default function SearchSelect({
 }) {
     const dispatch = useDispatch();
 
-    console.log("error",error);
+
 
     const value = options.find(option => option.value === reduxState?.[name]) || null;
 
     const handleChange = (selectedValue) => {
+
+
         let updatedJson = { ...reduxState };
         updatedJson[name] = selectedValue?.value || '';
         dispatch(setAction(updatedJson));
