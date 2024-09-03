@@ -12,6 +12,7 @@ import { setGeneralMasterApiJson } from '../../../Store/Action/master/general-ma
 
 
 export default function AddGeneralMaster({ row, closeModal }) {
+    console.log("row",row);
     var dispatch = useDispatch()
     const reduxGeneral = useSelector(state => state.GeneralMasterReducer)
     const [loading, setLoading] = useState(false)
@@ -72,13 +73,14 @@ export default function AddGeneralMaster({ row, closeModal }) {
         }
     };
 
+    console.log('reduxGeneral',reduxGeneral);
 
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
+                    <CustomInput important={true} name="label" label="Label" value={reduxGeneral?.apiJson?.label} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <CustomInput important={true} name="value" label="Value" value={reduxGeneral?.apiJson?.value} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
-                    <CustomInput important={true} name="fieldName" label="Field Name" value={reduxGeneral?.apiJson?.fieldName} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <CustomInput important={true} name="usedBy" label="Used By" value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />

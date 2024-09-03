@@ -136,10 +136,10 @@ function AddBroker() {
       <div className='bg-white mt-5 rounded-xl  p-10'>
         <div className='grid grid-cols-4 gap-4'>
           <CustomInput important={true} name="brokerIp" label="Broker Ip" value={reduxBrokers?.apiJson?.brokerIp} error={errors} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} validate={validate} />
-          <SearchableSelect name="brokerType" label="Broker Type" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'brokertype'} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokertype' }} value={reduxBrokers?.apiJson?.roleName} error={errors} reduxState={reduxBrokers?.apiJson} onChange={(e) => handleOnChange(e, 'brokerType')} validate={validate} />
+          <SearchableSelect name="brokerType" label="Broker Type" placeholder={'Select Broker Type'} api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'usedBy': 'brokerType' }} value={reduxBrokers?.apiJson?.roleName} error={errors} reduxState={reduxBrokers?.apiJson} onChange={(e) => handleOnChange(e, 'brokerType')} validate={validate} />
           <CustomInput important={true} name="brokerPort" label="Broker Port" value={reduxBrokers?.apiJson?.brokerPort} error={errors} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} validate={validate} />
-          <SearchableSelect type={'custom'} name="brokerSecureConnectionType" label="SecureConnection Type" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokerSecureConnectionType' }} onChange={(e) => handleOnChange(e, 'brokerSecureConnectionType')} />
-          <SearchableSelect type={'custom'} name="brokerCertificate" label="Broker Certificate" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'brokerCertificate' }} onChange={(e) => handleOnChange(e, 'brokerCertificate')} />
+          <SearchableSelect type={'custom'} name="brokerSecureConnectionType" label="SecureConnection Type" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'usedBy': 'brokerSecureConnectionType' }} onChange={(e) => handleOnChange(e, 'brokerSecureConnectionType')} />
+          <SearchableSelect type={'custom'} name="brokerCertificate" label="Broker Certificate" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'usedBy': 'brokerCertificate' }} onChange={(e) => handleOnChange(e, 'brokerCertificate')} />
           <CustomInput important={true} name="protocol" label="Broker Protocol" value={reduxBrokers?.apiJson?.protocol} error={errors} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} validate={validate} />
           <div className='mt-8'>
             <CustomSwitch name="isBrokerSecureConnection" label={'Broker Secure Connection'} value={reduxBrokers?.apiJson?.isBrokerSecureConnection} reduxState={reduxBrokers?.apiJson} setAction={setBrokersApiJson} />
@@ -166,7 +166,7 @@ function AddBroker() {
               <div className='grid grid-cols-4 gap-4'>
                 <MapableInput label="Topic Name"  defaultValue={item?.topicName} onChange={(e)=>handleMapableInputChange(e.target.value,'topicName',i)}/>
                 <MapableInput label="Topic Usage"  defaultValue={item?.topicUsage}  onChange={(e)=>handleMapableInputChange(e.target.value,'topicUsage',i)}/>
-                <MapableInput label="Receive Command"   defaultValue={item?.sendCommand}  onChange={(e)=>handleMapableInputChange(e.target.value,'sendCommand',i)}/>
+                <MapableInput label="Send Command"   defaultValue={item?.sendCommand}  onChange={(e)=>handleMapableInputChange(e.target.value,'sendCommand',i)}/>
                 <MapableInput label="Receive Command"  defaultValue={item?.receiveCommand}   onChange={(e)=>handleMapableInputChange(e.target.value,'receiveCommand',i)}/>
           </div>
           </div>

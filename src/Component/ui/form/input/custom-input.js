@@ -11,6 +11,8 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
     // Fetch the value from reduxState using the name prop
     const value = reduxState?.[name] || '';
 
+    console.log("value",value);
+
 
 
     const handleChange = (e) => {

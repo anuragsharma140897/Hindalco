@@ -1,6 +1,6 @@
 export const generalMasterVariable = {
     value : 'value',
-    fieldName : 'fieldName',
+    label : 'label',
     usedBy : 'usedBy',
 
 }

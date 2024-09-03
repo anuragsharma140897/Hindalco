@@ -10,9 +10,10 @@ export const CompileSelectData = (data, getFieldName, type) => {
         if (type === 'custom') {
 
             data?.map((ele, index) => {
-                var label = ele?.[getFieldName]
-                var value = ele?.usedBy
-                td.push({ label: label, value: value, _id: ele?._id })
+                var label = ele?.label
+                var value = ele?.value
+                var usedBy = ele?.usedBy
+                td.push({ label: label, value: value, _id: ele?._id, usedBy })
             })
         } else {
 

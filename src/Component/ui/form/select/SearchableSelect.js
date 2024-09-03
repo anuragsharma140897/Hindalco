@@ -65,13 +65,11 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   };
 
   const handleChange = (e) => {
-
-
     const { value, id } = e;
     const updatedSelected = reduxSelect?.selected.map(item =>
       item.name === name ? { ...item, value } : item
     );
-
+    
     if (!updatedSelected.some(item => item.name === name)) {
       updatedSelected.push({ name, value });
     }
@@ -93,6 +91,8 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
     }
 
   }
+
+  console.log('reduxSelect?.selected', reduxSelect?.selected);
  
   return (
     <div>
@@ -108,9 +108,9 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           className={cn(className, 'bg-white z-[99999]')}
           dropdownClassName="p-2 gap-1 grid !z-0 capitalize"
           getOptionDisplayValue={(option) =>
-            useCustomDisplay?renderOptionDisplayValue(option.value) : renderDefaultDisplay(option.value)
+            useCustomDisplay?renderOptionDisplayValue(option.label) : renderDefaultDisplay(option.label)
           }
-          value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['value']}
+          value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['name']}
           onChange={handleChange}
         />)
       }
