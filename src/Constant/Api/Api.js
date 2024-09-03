@@ -1,9 +1,9 @@
 
 // export const IP = '137.184.74.218'
 
-// export const IP = '192.168.0.104:9090'
+export const IP = '192.168.0.104:9090'
 
-export const IP = '192.168.0.106:9090'
+// export const IP = '192.168.0.106:9090'
 
 
 

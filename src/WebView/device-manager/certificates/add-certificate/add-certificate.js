@@ -74,18 +74,18 @@ function AddCertificate() {
       var newJson = {
         [name]: [
           {
-            "usage": e?.label,
-            "critical": e?.value
+            "usage": e?.value,
+            "critical": e?.label
           }
         ],
       }
     }
-    else {
-      var newJson = {
-        [name]: value,
+    // else {
+    //   var newJson = {
+    //     [name]: value,
 
-      }
-    }
+    //   }
+    // }
 
     Object.assign(json, newJson);
     dispatch(setCertificatesApiJson(json));
@@ -155,7 +155,7 @@ function AddCertificate() {
         <CustomInput important={true} name="serialNumber" label="Certificate SerialNumber" value={reduxCertificates?.apiJson?.serialNumber} reduxState={reduxCertificates?.apiJson} setAction={setCertificatesApiJson}/>
         <DateAndTime lable={"Valid From"} onChange={(e) => handleDateChange(e, "validFrom")} value={defaultDates.validFrom}/>
         <DateAndTime lable={"Valid To"} onChange={(e) => handleDateChange(e, "validTo")} value={defaultDates.validTo}/>
-        <SearchableSelect type={'custom'} name="keyUsage" label="Key Usage" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'keyUsage'} getFieldName={'value'} dynamicSearch={{ fieldName: 'keyUsage' }} value={reduxCertificates?.apiJson?.roleName} reduxState={reduxCertificates?.apiJson} onChange={(e) => handleOnChange(e, 'keyUsage')}/>
+        <SearchableSelect  type={'custom'} name="keyUsage" label="Key Usage" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'keyUsage'} getFieldName={'value'} dynamicSearch={{ fieldName: 'keyUsage' }} value={reduxCertificates?.apiJson?.roleName} reduxState={reduxCertificates?.apiJson} onChange={(e) => handleOnChange(e, 'keyUsage')}/>
         <SearchableSelect type={'custom'} name="extendedKeyUsage" label="Extended Key Usage" api={searchGeneral} checkServerKey={'fieldName'} checkServerValue={'extendedKeyUsage'} getFieldName={'value'} dynamicSearch={{ fieldName: 'extendedKeyUsage' }} value={reduxCertificates?.apiJson?.roleName} reduxState={reduxCertificates?.apiJson} onChange={(e) => handleOnChange(e, 'extendedKeyUsage')}/>
         <CustomInput important={true} name="publicKey" label="Public Key" value={reduxCertificates?.apiJson?.publicKey} reduxState={reduxCertificates?.apiJson} setAction={setCertificatesApiJson}/>
         <CustomInput important={true} name="signature" label="Certificate Signature" value={reduxCertificates?.apiJson?.signature} reduxState={reduxCertificates?.apiJson} setAction={setCertificatesApiJson}/>

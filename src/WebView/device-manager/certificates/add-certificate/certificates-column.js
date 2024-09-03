@@ -104,7 +104,7 @@ const DeleteItem = async (_id, setLoading) => {
 
         if (result.status === 200) {
             alert(result.message);
-            window.location.pathname = '/device-manager/broker';
+            window.location.pathname = '/device-manager/certificates';
         } else {
             alert(result.message);
         }
