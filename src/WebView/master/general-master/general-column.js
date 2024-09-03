@@ -31,18 +31,9 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
     )
   },
   {
-    title: <HeaderCell title="Field Name" className={'font-extrabold'} />,
-    dataIndex: 'fieldName',
-    key: 'fieldName',
-    width: 100,
-    render: (value) => (
-      <Text className="font-medium text-gray-700">{value || '---'}</Text>
-    ),
-  },
-  {
-    title: <HeaderCell title="Status" className={'font-extrabold'} />,
-    dataIndex: 'status',
-    key: 'status',
+    title: <HeaderCell title="Label" className={'font-extrabold'} />,
+    dataIndex: 'label',
+    key: 'label',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -53,6 +44,15 @@ export const getGeneralMasterColumns = ({ openModal, closeModal, loading, setLoa
     dataIndex: 'usedBy',
     key: 'usedBy',
     width: 150,
+    render: (value) => (
+      <Text className="font-medium text-gray-700">{value || '---'}</Text>
+    ),
+  },
+  {
+    title: <HeaderCell title="Status" className={'font-extrabold'} />,
+    dataIndex: 'status',
+    key: 'status',
+    width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
     ),

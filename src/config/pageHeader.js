@@ -113,5 +113,11 @@ export const pageHeader = [
             { name: 'List' }
         ],
     },
+    {
+        title: 'Mapper', breadcrumb: [
+            { href: routes?.panel?.inbond?.inboundCreate, name: 'Mapper' },
+            { name: 'List' }
+        ],
+    },
 
 ] 

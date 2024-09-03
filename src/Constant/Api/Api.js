@@ -168,7 +168,12 @@ export const deleteCertificate = DeviceMicroService + 'deleteCertificate'
 
 //get certificates
 
+// Mapper
 
+export const addMapper = DeviceMicroService + 'addMapper'
+export const searchMapper = DeviceMicroService + 'searchMapper'
+export const updateMapper = DeviceMicroService + 'updateMapper'
+export const deleteMapper = DeviceMicroService + 'deleteMapper'
 
 
 

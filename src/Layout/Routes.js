@@ -48,6 +48,7 @@ import Configuration from '../WebView/device-manager/configuration/configuration
 import AddConfiguration from '../WebView/device-manager/configuration/add/add-configuration'
 import AddBroker from '../WebView/device-manager/brokers/add-broker/add-broker'
 import AddCertificate from '../WebView/device-manager/certificates/add-certificate/add-certificate'
+import AddMapper from '../WebView/device-manager/mapper/add-mapper/add-mapper'
 
 export default function CustomRoutes() {
 
@@ -109,6 +110,7 @@ export default function CustomRoutes() {
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<EditOutbound/>} />
             <Route path={routes?.panel?.deviceManager?.apiService} exact element={<ApiService/>} />
             <Route path={routes?.panel?.deviceManager?.mapper} exact element={<Mapper/>} />
+            <Route path={routes?.panel?.deviceManager?.addMapper} exact element={<AddMapper/>} />
             <Route path={routes?.panel?.deviceManager?.certificates} exact element={<Certificates/>} />
             <Route path={routes?.panel?.deviceManager?.addCertificates} exact element={<AddCertificate/>} />
             <Route path={routes?.panel?.deviceManager?.editCertificates} exact element={<AddCertificate/>} />

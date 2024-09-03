@@ -35,7 +35,7 @@ function renderDefaultDisplay(value) {
 
 
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label}) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label, reduxState}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
@@ -64,13 +64,11 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   };
 
   const handleChange = (e) => {
-
-
     const { value, id } = e;
     const updatedSelected = reduxSelect?.selected.map(item =>
       item.name === name ? { ...item, value } : item
     );
-
+    
     if (!updatedSelected.some(item => item.name === name)) {
       updatedSelected.push({ name, value });
     }
@@ -84,14 +82,16 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const onClear = () =>{
     var json = reduxSelect?.selected
     const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
-
     if (existingIndex !== -1) {
         const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
         dispatch(setSearchableSelectSelectedData(updatedSelected));
         delete json?.search?.[name]
+        if(reduxState){delete reduxState?.[name]}
     }
 
   }
+
+  console.log('reduxSelect?.selected', reduxSelect?.selected);
  
   console.log('error?.[name]', error?.[name]);
 
@@ -109,7 +109,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           className={cn(className, 'bg-white h-10 z-[99999] rounded-md mb-4')}
           dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
           getOptionDisplayValue={(option) =>
-            useCustomDisplay?renderOptionDisplayValue(option.value) : renderDefaultDisplay(option.value)
+            useCustomDisplay?renderOptionDisplayValue(option.label) : renderDefaultDisplay(option.label)
           }
           error={error?.[name]}
 

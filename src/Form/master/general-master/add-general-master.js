@@ -12,6 +12,7 @@ import { setGeneralMasterApiJson } from '../../../Store/Action/master/general-ma
 
 
 export default function AddGeneralMaster({ row, closeModal }) {
+    console.log("row",row);
     var dispatch = useDispatch()
     const reduxGeneral = useSelector(state => state.GeneralMasterReducer)
     const [loading, setLoading] = useState(false)
@@ -72,6 +73,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
         }
     };
 
+    console.log('reduxGeneral',reduxGeneral);
 
     // Example var json = { label:TLS, value : TLS 1.2, usedBy : brokerType // this will come from an array from constant }
     // Example2  var json = { label:male, value : male, usedBy : gender }
@@ -80,9 +82,9 @@ export default function AddGeneralMaster({ row, closeModal }) {
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <CustomInput important={true} name="value" label="Label" value={reduxGeneral?.apiJson?.value} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
-                    <CustomInput important={true} name="fieldName" placeholder={'select hai, comming from constant array'} label="Used By" value={reduxGeneral?.apiJson?.fieldName} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
-                    <CustomInput important={true} name="usedBy" label="value" value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
+                    <CustomInput important={true} name="label" label="Label" value={reduxGeneral?.apiJson?.label} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
+                    <CustomInput important={true} name="value" label="Value" value={reduxGeneral?.apiJson?.value} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
+                    <CustomInput important={true} name="usedBy" label="Used By" value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                         <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />

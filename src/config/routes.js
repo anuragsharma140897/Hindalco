@@ -53,6 +53,7 @@ export const routes = {
       addConfiguration : '/device-manager/configuration/add',
       apiService : '/device-manager/api-service',
       mapper : '/device-manager/mapper',
+      addMapper : '/device-manager/mapper/add',
       certificates : '/device-manager/certificates',
       addCertificates : '/device-manager/certificates/add',
       addbroker : '/device-manager/broker/add',

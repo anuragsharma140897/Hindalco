@@ -1,0 +1,106 @@
+import React, { useState } from "react";
+import useAlertController from "../../../Hooks/use-alert-controller";
+import Skeleton from "react-loading-skeleton";
+import { HeaderCell } from "../../../Component/ui/table";
+import TableActions from "../../../Component/ui/table/TableActions";
+import { getFormattedDate } from "../../../Utils/Utils";
+import { Text } from "rizzui";
+
+export const GetMapperColumns = (ApiHit) => {
+  const { showCustomAlert } = useAlertController();
+  const [loadingRows, setLoadingRows] = useState({});
+
+  const handleDelete = async (row) => {
+    setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
+
+    const json = { id: row?.id };
+
+    // try {
+    //   const result = await HitApi(json, deleteSite);
+    //   if (result?.success !== false) {
+    //     showCustomAlert({
+    //       type: 'success',
+    //       title: 'Success!',
+    //       message: 'Site Deleted Successfully',
+    //     });
+    //     if (ApiHit) { ApiHit(); }
+    //   } else {
+    //     showCustomAlert({
+    //       type: 'error',
+    //       title: 'Delete Error',
+    //       message: 'Unable to delete this role. This role is already linked with a user.',
+    //     });
+    //   }
+    // } catch (err) {
+
+    // } finally {
+    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    // }
+    
+  };
+
+  const renderCell = (value, row, content) => (
+    loadingRows[row.index] ? <Skeleton /> : content
+  );
+
+  return [
+    {
+      title: <HeaderCell title="#" />,
+      dataIndex: 'index',
+      key: 'index',
+      width: 10,
+      render: (value, row, index) => renderCell(value, row, <Text>{index + 1 || '---'}</Text>),
+    },
+    {
+      title: <HeaderCell title="Mapper Name" className="font-extrabold" />,
+      dataIndex: 'mapperName',
+      key: 'mapperName',
+      width: 100,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Use For" className="font-extrabold" />,
+      dataIndex: 'useFor',
+      key: 'useFor',
+      width: 100,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{value || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Creation Date" className="font-extrabold" />,
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      width: 150,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{getFormattedDate(value, ['date', 'month', 'year', 'hour', 'minute', 'second']) || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Updation Date" className="font-extrabold" />,
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      width: 150,
+      render: (value, row) => renderCell(value, row, (
+        <Text className="font-medium text-gray-700">{getFormattedDate(value, ['date', 'month', 'year', 'hour', 'minute', 'second']) || '---'}</Text>
+      )),
+    },
+    {
+      title: <HeaderCell title="Actions" className="font-extrabold" />,
+      dataIndex: 'action',
+      key: 'action',
+      width: 300,
+      render: (_, row) => renderCell(null, row, (
+        <TableActions
+          screen={'siteMaster'}
+          row={row}
+          onEdit={(rowData) => {}}
+          onDelete={(rowData) => handleDelete(rowData)}
+          checkKeys={[]}
+        />
+      )),
+    },
+  ];
+};

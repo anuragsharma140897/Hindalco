@@ -47,7 +47,9 @@ export default function AddDevice() {
 
   const handleSelect = (e, name) => {
     let { label, value, id } = e
-
+    var json = reduxDevices?.apiJson || {}
+    Object.assign(json, {[name]:value})
+    dispatch(setDevicesApiJson(json))
   }
 
   return (
@@ -55,14 +57,14 @@ export default function AddDevice() {
       <form >
         <div className='mb-4'><Title as='h4'>Basic Information</Title></div>
         <div className="grid grid-cols-4 gap-4 ">
-          <CustomSelect name="deviceType" label={'Device Type'} options={DeviceType} onChange={handleSelect} />
+          <CustomSelect name="deviceType" label={'Device Type'} options={DeviceType} onChange={(e)=>handleSelect(e, 'deviceType')} />
           <CustomInput name="make" label="Make" validate={validate} value={reduxDevices?.apiJson?.make} error={errors} reduxState={reduxDevices?.apiJson} setAction={setDevicesApiJson} />
           <CustomInput name="model" label="Model" value={reduxDevices?.apiJson?.model} error={errors} reduxState={reduxDevices?.apiJson} setAction={setDevicesApiJson} />
           <CustomInput name="firmwareVersion" label="Firmware Version" value={reduxDevices?.apiJson?.firmwareVersion} error={errors} reduxState={reduxDevices?.apiJson} setAction={setDevicesApiJson} />
           <CustomSwitch name="isCloudConfigurable" label={'Is Cloud Configurable'} position={'top'} value={reduxDevices?.apiJson?.isCloudConfigurable} error={errors} reduxState={reduxDevices?.apiJson} setAction={setDevicesApiJson} />
-          <CustomSelect name="protocol" label={'Protocol'} options={Protocol} onChange={handleSelect} />
+          <CustomSelect name="protocol" label={'Protocol'} options={Protocol} onChange={(e)=>handleSelect(e, 'protocol')} />
           <CustomSwitch name="isSecureConnection" label={'Is Secure Connection'} position={'top'} value={reduxDevices?.apiJson?.isSecureConnection} error={errors} reduxState={reduxDevices?.apiJson} setAction={setDevicesApiJson} />
-          <CustomSelect name="secureConnectionType" label={'Secure Connection Type'} options={SecureConnectionType} onChange={handleSelect} />
+          <CustomSelect name="secureConnectionType" label={'Secure Connection Type'} options={SecureConnectionType} onChange={(e)=>handleSelect(e, 'secureConnectionType')} />
         </div>
         <div className='mt-8 mb-4'><Title as='h4'>Network Information</Title></div>
         <div className="grid grid-cols-4 gap-4 my-4">
