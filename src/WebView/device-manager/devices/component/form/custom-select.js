@@ -30,7 +30,7 @@ function renderDefaultDisplay(value) {
   );
 }
 
-export default function CustomSelect({ name, className, placeholder, disabled, error, onChange, onClear, useCustomDisplay, label, options, searchable }) {
+export default function CustomSelect({ name, className, placeholder, disabled, error, onChange, useCustomDisplay, label, options, searchable }) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [selected, setSelected] = useState(null)
@@ -51,7 +51,18 @@ export default function CustomSelect({ name, className, placeholder, disabled, e
     setSelected(value);
   };
 
-  
+  const onClear = () => {
+    var json = reduxSelect?.selected
+    const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
+
+    if (existingIndex !== -1) {
+      const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
+      dispatch(setSearchableSelectSelectedData(updatedSelected));
+      delete json?.search?.[name]
+    }
+
+  }
+
 
   return (
     <div>
@@ -63,7 +74,7 @@ export default function CustomSelect({ name, className, placeholder, disabled, e
           clearable
           onClear={onClear}
           options={options || []}
-          placeholder={placeholder ? placeholder : `Select ${name || '...'} `}
+          placeholder={placeholder ? placeholder : `Select ${label || '...'} `}
           className={cn(className, 'bg-white z-[99999] mb-1')}
           dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
           getOptionDisplayValue={(option) =>

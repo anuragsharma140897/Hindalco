@@ -145,6 +145,7 @@ export const updateBulkTags = IOTMicroService + 'updateBulkTags'
 
 
 // Device Manager
+export const addDevice = DeviceMicroService+'addDevice'
 export const searchDevice = DeviceMicroService+'searchDevice'
 export const addConfig = DeviceMicroService+'addConfig'
 export const searchConfig = DeviceMicroService+'searchConfig'

@@ -12,6 +12,9 @@ import { searchDevice } from '../../../Constant/Api/Api';
 import { HitApi } from '../../../Store/Action/Api/ApiAction';
 import AddDevice from './add-device/add-device';
 import { routes } from '../../../config/routes';
+import { CompileDevices } from './promiss/devices-promiss';
+import { setDevicesData } from './store/action/devices/devices-action';
+import { setPagination } from '../../../Store/Action/Pagination/PaginationAction';
 
 export default function Devices() {
   const dispatch = useDispatch()
@@ -28,24 +31,22 @@ export default function Devices() {
     } else {
       Object.assign(json, { page: reduxPagination?.doc?.number, limit: reduxPagination?.doc?.limit });
     }
-
-
-
+    
     HitApi(json, searchDevice).then((result) => {
-
-      // if (result?.success !== false) {
-      //   CompileSiteMaster(result).then((compiledData) => {
-      //     dispatch(setSiteMasterData(compiledData));
-      //     dispatch(setPagination({
-      //       limit: json?.limit,
-      //       totalPages: compiledData?.totalPages,
-      //       number: compiledData?.number,
-      //       totalElements: compiledData?.totalElements,
-      //     }));
-      //   });
-      // } else {
-      //   dispatch(setSiteMasterData([]));
-      // }
+      console.log('result', result);
+      if (result?.success !== false) {
+        CompileDevices(result).then((compiledData) => {
+          dispatch(setDevicesData(compiledData));
+          dispatch(setPagination({
+            limit: json?.limit,
+            totalPages: compiledData?.totalPages,
+            number: compiledData?.number,
+            totalElements: compiledData?.totalElements,
+          }));
+        });
+      } else {
+        dispatch(setDevicesData([]));
+      }
     });
   }
 
