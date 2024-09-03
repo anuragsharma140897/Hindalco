@@ -35,15 +35,19 @@ function renderDefaultDisplay(value) {
 
 
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label}) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label, defaultOptions}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    if (api && options === null) {
+    if (api && options === null && !defaultOptions) {
       loadData();
+    }else{
+      if(defaultOptions!==null){
+        setOptions(defaultOptions)
+      }
     }
 
 
