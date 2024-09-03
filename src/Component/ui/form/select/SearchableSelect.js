@@ -39,14 +39,16 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    if (api && options === null && !defaultOptions) {
+
+    if (api && options === null && defaultOptions === undefined) {
       loadData();
-    }else{
-      if(defaultOptions!==null){
-        setOptions(defaultOptions)
+    } else {
+      console.log('loading else');
+      if (defaultOptions !== null && defaultOptions !== undefined) {  // Checking for both null and undefined
+        setOptions(defaultOptions);
       }
     }
-
+    
   }, [options, reduxSelect]);
 
   const loadData = () => {
@@ -92,9 +94,6 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
 
   }
 
-  console.log('reduxSelect?.selected', reduxSelect?.selected);
- 
-  console.log('error?.[name]', error?.[name]);
 
   return (
     <div>
