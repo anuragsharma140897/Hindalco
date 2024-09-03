@@ -32,18 +32,19 @@ function renderDefaultDisplay(value) {
   );
 }
 
-
-
-
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label, reduxState}) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay ,label, reduxState, defaultOptions}) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    if (api && options === null) {
+    if (api && options === null && !defaultOptions) {
       loadData();
+    }else{
+      if(defaultOptions!==null){
+        setOptions(defaultOptions)
+      }
     }
 
   }, [options, reduxSelect]);
@@ -122,11 +123,6 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           This field cannot be edited
         </span>
       )}
-      {/* {error?.[name] && (
-        <span className="text-red-500 text-sm mt-2 block">
-          {error?.[name]}
-        </span>
-      )} */}
     </div>
   )
 }

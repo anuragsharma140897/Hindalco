@@ -20,7 +20,6 @@ export default function GeneralMaster() {
   const reduxPagination = useSelector(state => state.PaginationReducer)
   const [loading ,setLoading ] = useState(false)
 
-
   const { openModal, closeModal } = useModal();
   const columns = useMemo(() => getGeneralMasterColumns({ openModal, closeModal ,loading,setLoading }))
   const { visibleColumns } = useColumn(columns);
