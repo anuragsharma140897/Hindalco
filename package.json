@@ -28,6 +28,7 @@
     "rc-pagination": "^4.0.4",
     "rc-table": "^7.42.0",
     "react": "^18.2.0",
+    "react-ace": "^12.0.0",
     "react-big-calendar": "^1.11.2",
     "react-datetime-picker": "^6.0.1",
     "react-dom": "^18.2.0",

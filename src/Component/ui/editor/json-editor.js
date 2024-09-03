@@ -5,9 +5,6 @@ import 'jsoneditor/dist/jsoneditor.css';
 const CustomJsonEditor = ({ json ={}, onChange, readOnly = false,  }) => {
   const editorRef = useRef(null);
   const containerRef = useRef(null);
-
-  console.log('json - - -  - - - - - - ', json);
-
   useEffect(() => {
     // Initialize the JSON editor
     editorRef.current = new JSONEditor(containerRef.current, {

@@ -30,7 +30,7 @@ function ApiMapper() {
     const SaveConfiguration = () => {
         console.log('SaveConfiguration', mapping);
         console.log('ServiceMasterReducer', ServiceMasterReducer);
-        var oldData = ServiceMasterReducer?.doc[0]
+        var oldData = ServiceMasterReducer?.doc[1]
         oldData.globalVariables = mapping
 
         console.log('oldData', oldData);

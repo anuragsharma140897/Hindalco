@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChevronDown, ChevronRight, Folder, File, PlusCircle, EllipsisVertical, Plus, Edit, Trash2 } from 'lucide-react';
-import { setApiJson, setServiceGlobalVariabls, setServiceMasterJson, setServiceRequestData } from './store/Action/ServiceMasterAction';
+import { setApiJson, setServiceGlobalVariabls, setServiceMasterJson, setServiceRequestData, setWorkingServiceName } from './store/Action/ServiceMasterAction';
 import { AllApiCallHere } from './store/AllApiCallHere';
 import { addRequest, deleteApiService, searchApiService, updateApiService } from './constants/constant';
 import AddMoreService from './addMoreService';
@@ -10,6 +10,7 @@ import { FullJson } from './FullJson';
 import CustomInput from './component/custom-input';
 import GlobalVariableForm from './GlobalService/GlobalService';
 import ApiMapper from './Mapper';
+import { autoRequest } from './utils';
 
 export default function ApiService() {
   const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
@@ -38,7 +39,6 @@ export default function ApiService() {
       }
     }
     AllApiCallHere(json, searchApiService).then(res => {
-      console.log('res', res);
       if (res?.content?.length > 0) {
         dispatch(setServiceMasterJson(res?.content))
       }
@@ -46,7 +46,6 @@ export default function ApiService() {
   }
 
   const toggleService = (index) => {
-    console.log('call==---');
     setOpenServices(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
@@ -54,11 +53,16 @@ export default function ApiService() {
     setOpenPopupIndex(openPopupIndex === index ? null : index);
   };
 
-  const onClickServiceRequest = (i, index,ele) => {
-    dispatch(setServiceGlobalVariabls(ele?.globalVariables))
+  const onClickServiceRequest = (i, index, ele) => {
+    if (ServiceMasterReducer?.globalVariables === null || ServiceMasterReducer?.workingServiceName === null || ServiceMasterReducer?.workingServiceName !== ele?.serviceName) {
+      dispatch(setServiceGlobalVariabls(ele?.globalVariables))
+    } else {
+      dispatch(setServiceGlobalVariabls(ServiceMasterReducer?.globalVariables))
+    }
     dispatch(setServiceRequestData(null))
     setDataForRequest({ serviceIndex: i, requestIndex: index })
     setBodyScreen('Request')
+    dispatch(setWorkingServiceName(ele?.serviceName))
   };
 
   const handleDeleteService = (id) => {
@@ -93,9 +97,6 @@ export default function ApiService() {
     json.serviceName = data.serviceName
     json.serviceId = data._id
 
-    console.log('data', data);
-    console.log('json', json);
-
     AllApiCallHere(json, addRequest).then(res => {
       if (res.status === 201) {
         var newJson = {
@@ -116,6 +117,18 @@ export default function ApiService() {
       }
     })
   }
+
+  const onClickSend = (ele) => {
+    console.log('call');
+
+    var json = {
+
+    }
+
+    autoRequest(ele)
+  }
+
+  console.log(ServiceMasterReducer);
 
   return (
     <div className="grid grid-cols-12 gap-2 h-screen">
@@ -139,7 +152,11 @@ export default function ApiService() {
                   <ChevronRight className="w-4 h-4 mr-2 text-gray-600" />
                 )}
                 <Folder className="w-5 h-5 mr-2 text-yellow-500" />
-                <span className="text-gray-700 font-medium">{ele?.serviceName}</span>
+                <div className='flex justify-between w-full'>
+                  <span className="text-gray-700 font-medium">{ele?.serviceName}</span>
+
+                </div>
+                <p onClick={() => onClickSend(ele)}>Send</p>
               </div>
               <div className="relative">
                 <EllipsisVertical
@@ -188,7 +205,7 @@ export default function ApiService() {
             {openServices[i] && (
               <div className="ml-6 mt-1">
                 {ele?.requests?.map((item, index) => (
-                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={() => onClickServiceRequest(i, index,ele)}>
+                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={() => onClickServiceRequest(i, index, ele)}>
                     <File className="w-4 h-4 mr-2 text-gray-500" />
                     <span className="text-gray-600 text-sm">{item?.requestName}</span>
                   </div>
@@ -203,21 +220,21 @@ export default function ApiService() {
           bodyScreen === 'Global' ?
             <GlobalVariableForm selectedService={selectedService} />
             :
-            bodyScreen === 'Request'?
-            <div>
-              <div className='flex'>
-                <h3 onClick={() => setApiType('Api Controller')} className={`${apiType === 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Api Controller</h3>
-                <h3 onClick={() => setApiType('Mapper')} className={`${apiType !== 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Mapper</h3>
+            bodyScreen === 'Request' ?
+              <div>
+                <div className='flex'>
+                  <h3 onClick={() => setApiType('Api Controller')} className={`${apiType === 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Api Controller</h3>
+                  <h3 onClick={() => setApiType('Mapper')} className={`${apiType !== 'Api Controller' ? 'text-blue-400 border-b border-b-blue-500' : 'text-slate-700 font-light'} p-2 px-5 mb-2 cursor-pointer`}>Mapper</h3>
+                </div>
+                {
+                  apiType === 'Api Controller' ?
+                    <ApiRequest dataForRequest={dataForRequest} />
+                    :
+                    <ApiMapper />
+                }
               </div>
-              {
-                apiType === 'Api Controller' ?
-                  <ApiRequest dataForRequest={dataForRequest} />
-                  :
-                  <ApiMapper />
-              }
-            </div>
-            :
-            ''
+              :
+              ''
         }
       </div>
       {
