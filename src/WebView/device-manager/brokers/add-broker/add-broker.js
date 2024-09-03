@@ -62,8 +62,8 @@ function AddBroker() {
       var newJson = {
         [name]: [
           {
-            "filePath": e?.label,
-            "fileName": e?.value
+            "fileName": e?.label,
+            "filePath": e?.value
           }
         ],
       }

@@ -51,7 +51,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
                     if (result && result.status === 200) {
 
                         alert(result.message);
-                        // window.location.pathname = '/master/general';
+                        window.location.pathname = '/master/general';
                     }
                     else {
                         alert(result.message);
@@ -68,7 +68,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
 
                     if (result && result.status === 201) {
                         alert(result.message);
-                        // window.location.pathname = '/master/general';
+                        window.location.pathname = '/master/general';
                     }
                     else {
                         alert(result.error?.message);
@@ -97,12 +97,9 @@ export default function AddGeneralMaster({ row, closeModal }) {
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    {/* <CustomInput important={true} name="label" label="Label" value={reduxGeneral?.apiJson?.label} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} /> */}
-                    {/* <CustomInput important={true} name="value" label="Value" value={reduxGeneral?.apiJson?.value} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} /> */}
-                    {/* <CustomSelect important={true} name="usedBy" label="Used By" options={usedByOption} value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson}  validate={validate} /> */}
+                    <CustomInput important={true} name="label" label="Label" value={reduxGeneral?.apiJson?.label} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
+                    <CustomInput important={true} name="value" label="Value" value={reduxGeneral?.apiJson?.value} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} />
                     <SearchableSelect name="usedBy" label="Used By" defaultOptions={usedByOption} value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} validate={validate} onChange={(e)=>handleSelect(e,'usedBy')} />
-                    
-                    {/* <CustomInput important={true} name="usedBy" label="Used By" value={reduxGeneral?.apiJson?.usedBy} error={errors} reduxState={reduxGeneral?.apiJson} setAction={setGeneralMasterApiJson} /> */}
                     <div className='flex gap-3 justify-end pt-24'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                         <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} loading={loading} />

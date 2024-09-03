@@ -23,6 +23,9 @@ function renderOptionDisplayValue(value) {
 }
 
 function renderDefaultDisplay(value) {
+
+  console.log('value================================', value);
+
   return (
     <div className="flex items-center">
       <Text className="ms-2 capitalize text-gray-800 transition-colors duration-200 ">
@@ -39,11 +42,12 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
-    if (api && options === null && !defaultOptions) {
+    if (api && options === null && defaultOptions === undefined) {
       loadData();
-    }else{
-      if(defaultOptions!==null){
-        setOptions(defaultOptions)
+    } else {
+      console.log('loading else');
+      if (defaultOptions !== null && defaultOptions !== undefined) {  // Checking for both null and undefined
+        setOptions(defaultOptions);
       }
     }
 
@@ -65,13 +69,16 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   };
 
   const handleChange = (e) => {
-    const { value, id } = e;
+    const { value, id, label } = e;
+
+    console.log('e', e);
+
     const updatedSelected = reduxSelect?.selected.map(item =>
-      item.name === name ? { ...item, value } : item
+      item.name === name ? { ...item, value, label } : item
     );
     
     if (!updatedSelected.some(item => item.name === name)) {
-      updatedSelected.push({ name, value });
+      updatedSelected.push({ name, value, label });
     }
 
     dispatch(setSearchableSelectSelectedData(updatedSelected));
@@ -114,7 +121,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
           }
           error={error?.[name]}
 
-          value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['value']}
+          value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['label']}
           onChange={handleChange}
         />)
       }
