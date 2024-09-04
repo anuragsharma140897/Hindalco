@@ -1,8 +1,0 @@
-{
-    "deviceId": "device123",
-    "deviceType": "sensor",
-    "timestamp": "2024-09-02T10:30:00Z",
-    "timeInterval": "hourly",
-    "rawData": {},
-    "mapperId": "mapper456"
-}
