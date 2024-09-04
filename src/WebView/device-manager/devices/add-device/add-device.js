@@ -9,7 +9,8 @@ import CustomSelect from '../component/form/custom-select'
 import { Title } from 'rizzui'
 import CustomSwitch from '../../../../Component/ui/switch/custom-switch'
 import SearchableSelect from '../../../../Component/ui/form/select/SearchableSelect'
-import { searchApiService, searchBroker, searchConfig, searchGeneral, searchMapper } from '../../../../Constant/Api/Api'
+import { addDevice, searchApiService, searchBroker, searchCertificate, searchConfig, searchGeneral, searchMapper } from '../../../../Constant/Api/Api'
+import { HitApi } from '../../../../Store/Action/Api/ApiAction'
 
 export const Status = [
   { label: 'true', value: 'true' },
@@ -26,7 +27,7 @@ export const Protocol = [
 
 export const DeviceType = [
   { label: 'Gateway', value: 'gateway' },
-  { label: 'GPS', value: 'GPS' },
+  { label: 'Reader', value: 'Reader' },
 ]
 
 export const SecureConnectionType = [
@@ -43,6 +44,9 @@ export default function AddDevice() {
   const handleSubmit = () => {
     var json = reduxDevices?.apiJson
 
+    HitApi(json, addDevice).then((result)=>{
+      console.log('result', result);
+    })
     console.log('json', json);
 
   }
@@ -50,7 +54,7 @@ export default function AddDevice() {
   const handleSelect = (e, name, type) => {
     let { label, value, _id } = e
     var json = reduxDevices?.apiJson || {}
-    Object.assign(json, { [name]: type ? _id : [value] })
+    Object.assign(json, { [name]: type ? _id : name==='secureConnectionType'? [value] : value })
     dispatch(setDevicesApiJson(json))
   }
 
@@ -111,6 +115,7 @@ export default function AddDevice() {
         <div className="grid grid-cols-4 gap-4 my-4">
           <SearchableSelect name="brokerDetailsId" label={'Broker'} api={searchBroker} getFieldName={'brokerIp'} onChange={(e) => handleSelect(e, 'brokerDetailsId', true)} />
           <SearchableSelect name="configName" label={'Configuration'} api={searchConfig} getFieldName={'configName'} onChange={(e) => handleConfigSelect(e, 'configName')} />
+          <SearchableSelect name="certificateId" label={'Certificate'} api={searchCertificate} getFieldName={'certificateName'} onChange={(e) => handleSelect(e, 'certificateId', true)} />
           <SearchableSelect name="mapperName" label={'Mapper'} api={searchMapper} dynamicSearch={{'mapperName':{$ne:null}}} getFieldName={'mapperName'} onChange={(e) => handleConfigSelect(e, 'mapperName')} />
           <SearchableSelect name="serviceName" label={'Api Service'} api={searchApiService} getFieldName={'serviceName'} onChange={(e) => handleConfigSelect(e, 'apiService')} />
         </div>

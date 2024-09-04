@@ -59,7 +59,6 @@ export default function Devices() {
     }
   }, [])
   
-
   return (
     <div>
       <PageHeader btnText={'Add Device'}  href={routes?.panel?.deviceManager?.addDevice} disbleExport />

@@ -103,7 +103,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
 
 
   return (
-    <div className='mt-2'>
+    <div>
       {label && <div className='block font-bold mb-1'>{label}</div>}
       {
         options?.length > 0 ? (<Select name={name} searchable clearable onClear={onClear}
