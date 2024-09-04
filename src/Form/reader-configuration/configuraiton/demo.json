@@ -1,0 +1,56 @@
+[
+  {
+    "configuration": {
+      "additional": {
+        "cleanSession": true,
+        "clientId": "FX75003A2C38",
+        "debug": false,
+        "keepAlive": 20
+      },
+      "endpoint": {
+        "hostname": "10.17.218.77",
+        "port": 1883,
+        "protocol": "tcp"
+      },
+      "topics": {
+        "control": {
+          "command": {
+            "qos": 0,
+            "retain": true,
+            "topic": "/command/FX75003A2C38"
+          },
+          "response": {
+            "qos": 0,
+            "retain": true,
+            "topic": "/response/FX75003A2C38"
+          }
+        },
+        "management": {
+          "command": {
+            "qos": 0,
+            "retain": true,
+            "topic": "/command/FX75003A2C38"
+          },
+          "response": {
+            "qos": 0,
+            "retain": true,
+            "topic": "/response/FX75003A2C38"
+          }
+        },
+        "managementEvents": {
+          "qos": 0,
+          "retain": true,
+          "topic": "/events/FX75003A2C38"
+        },
+        "tagEvents": {
+          "qos": 0,
+          "retain": true,
+          "topic": "/tagEvents/FX75003A2C38"
+        }
+      }
+    },
+    "description": "MQTT Test  Broker Office",
+    "name": "MQTT #18",
+    "type": "MQTT"
+  }
+]

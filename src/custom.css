@@ -1,0 +1,70 @@
+.rizzui-input-container {
+    padding: 10px;
+    height: 3rem;
+}
+
+table { 
+    
+    /* overflow: hidden; */
+}
+/* table thead { 
+    font-weight: bold; 
+    background-color: #516eb1; 
+    color: white; 
+}
+
+table tr:nth-child(even) { 
+    background-color: silver; 
+}
+table tr td { 
+    padding: .3em; 
+} */
+
+.jsoneditor {
+  background-color: #2e2e2e;
+  color: #dcdcdc;
+}
+
+.jsoneditor-tree .jsoneditor-treepath,
+.jsoneditor-tree .jsoneditor-field,
+.jsoneditor-tree .jsoneditor-value,
+.jsoneditor-tree .jsoneditor-append,
+.jsoneditor-tree .jsoneditor-contextmenu,
+.jsoneditor-tree .jsoneditor-expandable,
+.jsoneditor-tree .jsoneditor-expanded,
+.jsoneditor-menu {
+  color: #dcdcdc;
+}
+
+.jsoneditor-tree .jsoneditor-field {
+  color: #9cdcfe;
+}
+
+.jsoneditor-tree .jsoneditor-value {
+  color: #ce9178;
+}
+
+.jsoneditor-tree .jsoneditor-boolean,
+.jsoneditor-tree .jsoneditor-number {
+  color: #b5cea8;
+}
+
+.jsoneditor-tree .jsoneditor-string {
+  color: #d69d85;
+}
+
+.jsoneditor-tree .jsoneditor-button {
+  background-color: #3c3c3c;
+  color: #dcdcdc;
+  border-color: #444444;
+}
+
+.jsoneditor-tree .jsoneditor-button:hover {
+  background-color: #444444;
+  border-color: #555555;
+}
+
+.rizzui-select-button:hover{
+  border-color: red;
+  outline: none;
+}

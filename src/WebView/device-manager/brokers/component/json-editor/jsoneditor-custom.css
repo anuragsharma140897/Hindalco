@@ -1,0 +1,68 @@
+/* jsoneditor-custom.css */
+
+/* Set general background color for the editor container */
+.jsoneditor-outer,
+.jsoneditor,
+.ace_editor {
+  background-color: #1e1e1e !important; /* Dark grey background for the editor */
+  color: #d4d4d4 !important; /* Light grey text color */
+}
+
+/* Ace editor specific styling */
+.ace_editor,
+.ace_content {
+  background-color: #252526 !important; /* Dark background for Ace editor */
+  color: #d4d4d4 !important; /* Light grey text color */
+}
+
+/* Gutter styling (line numbers) */
+.ace_gutter {
+  background-color: #1f1f1f !important; /* Darker background for the gutter */
+  color: #858585 !important; /* Grey text for line numbers */
+}
+
+/* JSON key styling */
+.ace_variable {
+  color: #9cdcfe !important; /* Light blue color for JSON keys */
+}
+
+/* String value styling */
+.ace_string {
+  color: #ce9178 !important; /* Orange color for strings */
+}
+
+/* Number value styling */
+.ace_numeric {
+  color: #b5cea8 !important; /* Light green color for numbers */
+}
+
+/* Boolean and null value styling */
+.ace_constant {
+  color: #569cd6 !important; /* Blue color for booleans */
+}
+
+/* Object and Array brackets styling */
+.ace_paren,
+.ace_bracket {
+  color: #d4d4d4 !important; /* Light grey color for brackets */
+}
+
+/* Key punctuation (colon, comma) styling */
+.ace_punctuation {
+  color: #d4d4d4 !important; /* Light grey color for punctuation */
+}
+
+/* Selection styling */
+.ace_marker-layer .ace_selection {
+  background-color: #264f78 !important; /* Blue selection background */
+}
+
+/* Active line styling */
+.ace_marker-layer .ace_active-line {
+  background-color: #333333 !important; /* Darker grey for active line */
+}
+
+/* Cursor styling */
+.ace_cursor {
+  color: #d4d4d4 !important; /* Light grey cursor */
+}
