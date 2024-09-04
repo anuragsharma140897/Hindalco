@@ -23,6 +23,7 @@ export const HitApi = (json, api) => {
             body: JSON.stringify(json)
         };
 
+        
         fetch(api, requestOptions)
             .then(res => {
                 if (!res.ok) {
