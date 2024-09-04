@@ -181,6 +181,7 @@ export const updateMapper = DeviceMicroService + 'updateMapper'
 export const deleteMapper = DeviceMicroService + 'deleteMapper'
 
 
+export const searchApiService = DeviceMicroService + 'searchApiService'
 
 
 
