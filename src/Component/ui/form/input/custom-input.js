@@ -41,7 +41,7 @@ export default function CustomInput({ type, name, label, onChange, error, placeh
         <>
             {
                 !hide && <div className="mb-1">
-                    <label className="block font-bold mb-2">{label}{important === false ? '(Optional)' : ''}</label>
+                    <label className="block font-bold mb-1">{label}{important === false ? '(Optional)' : ''}</label>
                     <input
                         type={type || 'text'}
                         maxLength={maxLength}
