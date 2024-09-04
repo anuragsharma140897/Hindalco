@@ -52,7 +52,7 @@ export default function AddConfiguration() {
 
   const handleCustomChange = (e) => {
     var json = reduxConfiguration?.apiJson
-    const { id, value } = e
+    const { _id, value } = e
     Object.assign(json, { useFor: value })
     dispatch(setConfigurationJson(json))
 
@@ -77,8 +77,8 @@ export default function AddConfiguration() {
   return (
     <div>
       <div className='grid grid-cols-4 gap-4'>
-        <CustomInput validate={validate} name="configName" label="Confuguraiton Name" value={reduxConfiguration?.apiJson?.configName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} />
-        <SearchableSelect name="useFor" label="Use For" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'fieldName': 'mapperUseFor' }} value={reduxConfiguration?.apiJson?.roleName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} onChange={handleCustomChange} />
+        <CustomInput validate={validate} name="configName" label="Configuraiton Name" value={reduxConfiguration?.apiJson?.configName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} />
+        <SearchableSelect name="useFor" label="Use For" api={searchGeneral} getFieldName={'value'} dynamicSearch={{ 'usedBy': 'defaultData' }} value={reduxConfiguration?.apiJson?.roleName} error={errors} reduxState={reduxConfiguration?.apiJson} setAction={setConfigurationJson} onChange={handleCustomChange} />
 
       </div>
       {/* <CustomButton variant='flat' text={'Load Default'} onClick={loadDefault} /> */}

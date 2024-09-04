@@ -18,7 +18,7 @@ export default function ReaderConfiguraiton() {
   var ID = url.split('/')[4]
 
   useEffect(() => {
-    if (ID && !reduxDevice?.apiJson?.id && reduxReaderConfiguration?.readerLoginData === null) {
+    if (ID && !reduxDevice?.apiJson?._id && reduxReaderConfiguration?.readerLoginData === null) {
       // loadDefault(ID)
     }
   }, [loading,render])
@@ -26,7 +26,7 @@ export default function ReaderConfiguraiton() {
 
   const loadDefault = () => {
     var json = reduxDevice?.searchJson
-    json.search.id = ID
+    json.search._id = ID
     setLoading(true)
 
 

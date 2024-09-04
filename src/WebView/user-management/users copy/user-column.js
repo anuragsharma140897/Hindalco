@@ -103,7 +103,7 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
             </label>
           </Tooltip>
           <Tooltip size="sm" content={'View User'} placement="top" color="invert">
-            <label href={routes?.eCommerce?.orderDetails(row.id)}>
+            <label href={routes?.eCommerce?.orderDetails(row._id)}>
               <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
                 <EyeIcon className="h-4 w-4" />
               </ActionIcon>
@@ -123,7 +123,7 @@ export const DeleteItem = (row) => {
 
   // Object.assign(row, {loading:true})
   // row.setLoading(true)
-  // var json = { id: id }
+  // var json = { _id: _id }
   // HitApi(json, deleteUser).then((Result) => {
 
   // })

@@ -54,7 +54,7 @@ export default function AddProduct() {
     const validationErrors = validate(json);
     if (Object.keys(validationErrors).length === 0) {
       if (ID) {
-        Object.assign(json, { id: ID })
+        Object.assign(json, { _id: ID })
         HitApi(json, updateProduct).then((result) => {
           console.log('result',result);
           if (result.status === 200) {
@@ -92,7 +92,7 @@ export default function AddProduct() {
     }
   };
   const handleOnChange = (e) => {
-    const { id, label, value } = e
+    const { _id, label, value } = e
     console.log("dfsddsd", e);
     let oldJson = reduxProduct?.apiJson
     let newJson = { ...oldJson, "productGroup": e?.value }

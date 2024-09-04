@@ -27,9 +27,9 @@ function OutboundIgoneBatch() {
     const onRowSelect = (row) => {
         setSelectedRows((prevSelected) => {
             if (!prevSelected) return [row];
-            const isSelected = prevSelected.some(item => item.id === row.id);
+            const isSelected = prevSelected.some(item => item._id === row._id);
             if (isSelected) {
-                return prevSelected.filter(item => item.id !== row.id);
+                return prevSelected.filter(item => item._id !== row._id);
             }
             return [...prevSelected, row];
         });
@@ -90,7 +90,7 @@ function OutboundIgoneBatch() {
             movementStatus: Status.ENTRY_MOVEMENT_STATUS,
             status: json?.status || 'Active',
             batchID: null,
-            id : json?._id
+            _id : json?._id
         };
 
 
@@ -103,7 +103,7 @@ function OutboundIgoneBatch() {
 
                 const updateOrderIDArr = (selectedRows || []).map(row => ({
                     ...row,
-                    orderId: result?.data?.id
+                    orderId: result?.data?._id
                 }));
 
                 HitApi(updateOrderIDArr, updateBulkTags).then((updateResult) => {

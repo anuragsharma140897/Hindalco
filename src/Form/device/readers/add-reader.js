@@ -27,14 +27,14 @@ export default function CreateDeviceReader() {
   var ID = url?.split('/')[4]
 
   useEffect(() => {
-    if (ID && !reduxDevice?.apiJson?.id) {
+    if (ID && !reduxDevice?.apiJson?._id) {
       loadDefault(ID)
     }
   }, [])
 
   const loadDefault = () => {
     var json = reduxDevice?.searchJson
-    json.search.id = ID
+    json.search._id = ID
     HitApi(json, searchReader).then((result) => {
       if (result) {
         CompileDeviceReader(result).then((CompiledData) => {
@@ -56,7 +56,7 @@ export default function CreateDeviceReader() {
       // Proceed with your logic if there are no validation errors
       setDynamicLoading({reader:true})
       if (ID) {
-        Object.assign(json, { id: ID })
+        Object.assign(json, { _id: ID })
         HitApi(json, updateReader).then((result) => {
           if (result.success !== false) {
             showCustomAlert({
@@ -87,7 +87,7 @@ export default function CreateDeviceReader() {
   };
 
   const handleChange = (e, fieldName, no) => {
-    const { id, label, value } = e
+    const { _id, label, value } = e
     var json = reduxDevice?.apiJson
 
 

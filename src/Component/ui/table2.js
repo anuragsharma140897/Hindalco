@@ -29,8 +29,8 @@ export default function Table2({
         <tbody>
           {data && data.length > 0 ? (
             data.map((dataItem, index) => (
-              <tr key={dataItem[rowKey] || index} className={loadingRow === dataItem.id ? 'opacity-50' : ''}>
-                {loadingRow === dataItem.id ? (
+              <tr key={dataItem[rowKey] || index} className={loadingRow === dataItem._id ? 'opacity-50' : ''}>
+                {loadingRow === dataItem._id ? (
                   <td colSpan={columns.length} className="p-2">
                     <Skeleton height={40} />
                   </td>

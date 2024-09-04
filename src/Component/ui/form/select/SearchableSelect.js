@@ -71,7 +71,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   };
 
   const handleChange = (e) => {
-    const { value, id, label } = e;
+    const { value, _id, label } = e;
 
     console.log('e', e);
 

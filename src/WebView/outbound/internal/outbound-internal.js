@@ -9,10 +9,10 @@ function OutboundInternal() {
     const reduxOutbound = useSelector(state => state.OutboundReducer);
     const handleOnChange = useCallback
     ((e, name,fromName) => {
-        const { id } = e;
-        let newJson = { [name]: id };
+        const { _id } = e;
+        let newJson = { [name]: _id };
         if ( name === "dispatchTo" || name === "billTo") {
-            newJson = { [name]: e.id , [fromName]: e.value}
+            newJson = { [name]: e._id , [fromName]: e.value}
         }
         else {
             newJson = { [name]: e.value }

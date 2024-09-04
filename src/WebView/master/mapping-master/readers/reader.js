@@ -53,9 +53,9 @@ export default function Reader() {
 
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
-    const { id, label, value } = e
+    const { _id, label, value } = e
 
-    Object.assign(json, { selectedReaderIdFromDropdown: id })
+    Object.assign(json, { selectedReaderIdFromDropdown: _id })
     dispatch(setSelectedMappingMasterJson(json))
   }
 
@@ -147,7 +147,7 @@ export default function Reader() {
       var json = reduxMappingMaster?.mappingJson
       var readerToLocationMappingJson = {
         sourceId: json?.selectedLocationID,
-        mappingId: ele?.id,
+        mappingId: ele?._id,
         "sourceCollection": "locationCollection",
         "destinationCollection": "readerCollection",
         "source": "locationIds",
@@ -160,7 +160,7 @@ export default function Reader() {
         if (readerToLocationMappingResult?.success !== false) {
           var readerToZoneMappingJson = {
             sourceId: json?.selectedZoneID,
-            mappingId: ele?.id,
+            mappingId: ele?._id,
             "sourceCollection": "zoneCollection",
             "destinationCollection": "readerCollection",
             "source": "zoneIds",
@@ -177,7 +177,7 @@ export default function Reader() {
             if (readerToZoneMappingREsult?.success !== false) {
               var readerToBuildingMappingJson = {
                 sourceId: json?.selectedBuildingID,
-                mappingId: ele?.id,
+                mappingId: ele?._id,
                 "sourceCollection": "buildingCollection",
                 "destinationCollection": "readerCollection",
                 "source": "buildingIds",
@@ -220,7 +220,7 @@ export default function Reader() {
   const handleReaderClick = (ele) => {
 
     var json = reduxMappingMaster?.mappingJson
-    Object.assign(json, { selectedReaderID: ele?.id })
+    Object.assign(json, { selectedReaderID: ele?._id })
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterReaderData(ele))
   }
@@ -229,7 +229,7 @@ export default function Reader() {
   if (reduxReader?.doc !== null) {
     item = reduxReader?.doc?.content?.map((ele, index) => {
       return <div key={index} className='group mt-1.5' >
-        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedReaderID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?._id === reduxMappingMaster?.mappingJson?.selectedReaderID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
           <div className='flex justify-between'>
             <div className='flex items-center p-3 w-full' onClick={() => handleReaderClick(ele)}>
               <div><label className='group-hover:cursor-pointer'>Reader : {ele?.placementName}</label></div>

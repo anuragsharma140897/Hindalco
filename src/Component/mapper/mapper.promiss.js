@@ -33,8 +33,6 @@
 //               return acc[key]; // Regular object access
 //             }, inputData);
 
-
-
 //             // Assign the value to the result object, or "blank" if undefined
 //             result[mainKey] = inputValues !== undefined ? inputValues : path;
 //           } else {
@@ -46,8 +44,17 @@
 //         return result;
 //       };
 
-//       // Process each configuration object in the configurations array
-//       const compiledDataArray = configurations?.map((config) => processConfig(config, input));
+//       let compiledDataArray;
+//       if (Array.isArray(configurations)) {
+//         // If configurations is an array, use map
+//         compiledDataArray = configurations.map((config) => processConfig(config, input));
+//       } else if (typeof configurations === 'object' && configurations !== null) {
+//         // If configurations is an object, use Object.keys or Object.entries
+//         compiledDataArray = processConfig(configurations, input);
+//       } else {
+//         // If configurations is neither an array nor an object, reject with an error
+//         throw new Error('Invalid configurations format. Expected an array or object.');
+//       }
 
 //       resolve(compiledDataArray);
 //     } catch (error) {
@@ -57,6 +64,7 @@
 //     }
 //   });
 // };
+
 
 export const CompileConfiguration = (configurations, input) => {
   return new Promise((resolve, reject) => {
@@ -92,11 +100,20 @@ export const CompileConfiguration = (configurations, input) => {
               return acc[key]; // Regular object access
             }, inputData);
 
-            // Assign the value to the result object, or "blank" if undefined
+            // Assign the value to the result object, or set it to "" if the value is undefined
             result[mainKey] = inputValues !== undefined ? inputValues : path;
           } else {
-            // If path is not a valid string, assign "blank"
+            // If path is not a valid string, assign ""
             result[mainKey] = "blank";
+          }
+        });
+
+        // Handle conversion of objects to arrays if needed
+        Object.keys(result).forEach((key) => {
+          if (typeof result[key] === 'object' && result[key] !== null) {
+            if (Array.isArray(config[key]) && !Array.isArray(result[key])) {
+              result[key] = Object.values(result[key]);
+            }
           }
         });
 

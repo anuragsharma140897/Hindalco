@@ -15,9 +15,9 @@ import { addMapper } from './constants/constants'
 import CustomMapper from '../../../Component/mapper/custom-mapper'
 
 const usedBy = [
-  { id: 0, label: 'device', value: 'device' },
-  { id: 0, label: 'gps', value: 'gps' },
-  { id: 0, label: 'reader', value: 'reader' },
+  { _id: 0, label: 'device', value: 'device' },
+  { _id: 0, label: 'gps', value: 'gps' },
+  { _id: 0, label: 'reader', value: 'reader' },
 ]
 
 export default function Mapper({input, mapping, setResult}) {
@@ -60,7 +60,7 @@ export default function Mapper({input, mapping, setResult}) {
 
   const handleSelectChange = (e) => {
     var json = reduxJson?.apiJson
-    const { id, value } = e
+    const { _id, value } = e
     Object.assign(json, { useFor: value })
     dispatch(setMapperApiJson(json))
   }

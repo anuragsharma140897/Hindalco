@@ -23,7 +23,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     const { showCustomAlert } = useAlertController();
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -43,8 +43,8 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
 
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
-            if (row?.id) {
-                Object.assign(json, { id: row?.id })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id })
                 HitApi(json, updateBuilding).then((result) => {
                     if (result?.success!==false) {
                         showCustomAlert({
@@ -77,8 +77,8 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
 
     const handleCustomChange = (e) => {
         var json = reduxBuilding?.apiJson
-        const { id, value } = e
-        Object.assign(json, { unitId: id, unitName: value })
+        const { _id, value } = e
+        Object.assign(json, { unitId: _id, unitName: value })
         dispatch(setBuildingMasterApiJson(json))
     }
 
@@ -104,7 +104,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
 
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={()=>handleClose()} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                        <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} />
                     </div>
                 </div>
             </form>

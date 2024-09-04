@@ -88,7 +88,7 @@ const GlobalVariableForm = ({ selectedService }) => {
                     <div>
                         <label htmlFor="dataType" className="block text-sm font-medium text-gray-700 mb-1">Data Type</label>
                         <select
-                            id="dataType"
+                            _id="dataType"
                             name="dataType"
                             value={ServiceMasterReducer?.apiJson?.dataType || 'String'}
                             onChange={handleDataTypeChange}

@@ -29,18 +29,18 @@ function InboundAddProduct({setShowProdcutTbale}) {
         var oldJson = reduxInbound?.apiJson
 
         var json = {
-            "productId": e?.id
+            "productId": e?._id
         }
         Object.assign(oldJson, json)
         dispatch(setInboundApiJson(oldJson))
-        fetchDetails(e?.id, searchProduct, setSelectedDetails);
+        fetchDetails(e?._id, searchProduct, setSelectedDetails);
     }
 
 
 
-    const fetchDetails = (id, apiMethod, setDetails) => {
+    const fetchDetails = (_id, apiMethod, setDetails) => {
         const searchJson = reduxProduct?.searchJson
-        const json = { ...searchJson, page: 1, limit: reduxPagination?.doc?.limit, search: { id } };
+        const json = { ...searchJson, page: 1, limit: reduxPagination?.doc?.limit, search: { _id } };
         HitApi(json, apiMethod).then((result) => {
             setDetails(result?.content?.[0] || null);
             const oldArr = [...reduxInbound?.productAdded]; 
@@ -56,7 +56,7 @@ function InboundAddProduct({setShowProdcutTbale}) {
         
         if(reduxInbound?.apiJson?.quantity) {
             const json = {
-                "productId": selectedDetails?.id,
+                "productId": selectedDetails?._id,
                 "quantity": reduxInbound?.apiJson?.quantity
             };
             let oldProdArr = []

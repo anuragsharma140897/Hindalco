@@ -18,21 +18,21 @@ function OutboundAddVehicle() {
     const oldJson = reduxOutbound?.apiJson || {};
     const vehicleIds = oldJson.vehicleIds ? [...oldJson.vehicleIds] : [];
 
-    if (vehicleIds.some((vehicle) => vehicle.vehicleId === e?.id)) {
+    if (vehicleIds.some((vehicle) => vehicle.vehicleId === e?._id)) {
       alert('Vehicle is already selected');
     } else {
-      vehicleIds.push({ vehicleId: e?.id, vehicleNumber: e.value });
+      vehicleIds.push({ vehicleId: e?._id, vehicleNumber: e.value });
       dispatch(setOutboundApiJson({ ...oldJson, vehicleIds }));
-      fetchDetails(e?.id);
+      fetchDetails(e?._id);
     }
   };
 
-  const fetchDetails = (id) => {
+  const fetchDetails = (_id) => {
     const json = {
       ...reduxOutbound?.searchJson,
       page: 1,
       limit: reduxPagination?.doc?.limit,
-      search: { id },
+      search: { _id },
     };
     HitApi(json, searchVehicle).then((result) => {
       const vehicleDetails = result?.content?.[0] || null;

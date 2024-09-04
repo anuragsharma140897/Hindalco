@@ -33,7 +33,7 @@ export default function Reader() {
   }
 
   const handleSelect = (ele) => {
-    setSelected(ele?.id)
+    setSelected(ele?._id)
     setSelectedAnteena(null)
     dispatch(setSelectedReader(ele))
   }
@@ -47,7 +47,7 @@ export default function Reader() {
 
   if (reduxDevice?.doc) {
     item = reduxDevice?.doc?.content?.map((ele) => {
-      return <div key={ele.id} className={cn('py-3 px-2 my-1.5 shadow-md rounded-lg group-hover:cursor-pointer', ele?.id === selected ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')} onClick={() => handleSelect(ele)}>
+      return <div key={ele._id} className={cn('py-3 px-2 my-1.5 shadow-md rounded-lg group-hover:cursor-pointer', ele?._id === selected ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')} onClick={() => handleSelect(ele)}>
         <div><label>Name : {ele?.placementName}</label></div>
         <div><label>IP : {ele?.readerIp}</label></div>
       </div>

@@ -87,7 +87,7 @@ export default function AddGeneralMaster({ row, closeModal }) {
     // Example2  var json = { label:male, value : male, usedBy : gender }
 
     const handleSelect = (e, name) =>{
-        const {label, value, id} = e
+        const {label, value, _id} = e
         var json = reduxGeneral?.apiJson
         Object.assign(json,{ [name]:value })
         console.log('e', e);

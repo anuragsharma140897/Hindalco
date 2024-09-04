@@ -15,7 +15,7 @@ function AddConfigurationMaster() {
   var ID = url.split('/')[4]
 
   useEffect(() => {
-    if (ID && !reduxConfiguration?.apiJson?.id && url.split('/')[3] === 'edit') {
+    if (ID && !reduxConfiguration?.apiJson?._id && url.split('/')[3] === 'edit') {
       loadDefault(ID)
     }
   }, [])

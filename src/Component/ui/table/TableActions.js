@@ -29,7 +29,7 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
     
     return (
         <div className="flex items-center gap-3 pe-4">
-            {isEditAllowed && user?.userId !== row?.id && <Tooltip size="sm" content="Edit" placement="top" color="invert">
+            {isEditAllowed && user?.userId !== row?._id && <Tooltip size="sm" content="Edit" placement="top" color="invert">
                 <ActionIcon
                     as="span"
                     size="sm"
@@ -50,7 +50,7 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys }) => {
                     <EyeIcon className="h-4 w-4" />
                 </ActionIcon>
             </Tooltip>
-            {isDeleteAllowed && keysAreNotEmpty && user?.userId !== row?.id && (
+            {isDeleteAllowed && keysAreNotEmpty && user?.userId !== row?._id && (
                 <DeletePopover
                     title="Delete"
                     description="Are you sure you want to delete this?"

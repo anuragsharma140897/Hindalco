@@ -28,15 +28,15 @@ function OutboundBatch() {
 
 
 
-    const onRowSelect = (id) => {
-        setSelectedRow(id);
+    const onRowSelect = (_id) => {
+        setSelectedRow(_id);
 
 
         var oldJson = reduxOutbound?.apiJson
 
 
         var json = {
-            "batchId": id
+            "batchId": _id
         }
         Object.assign(oldJson, json)
         dispatch(setOutboundApiJson(oldJson));
@@ -71,7 +71,7 @@ function OutboundBatch() {
         var json = reduxOutbound?.apiJson
         const apiTohit = isEdit ? updateOrder : addOrder
 
-        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active', id: json?._id };
+        const updatedJson = { ...json, orderType: "OUTBOUND", orderStatus: Status.ORDER_INITIATED, movementStatus: Status.ENTRY_MOVEMENT_STATUS, status: json?.status || 'Active', _id: json?._id };
 
 
         HitApi(updatedJson, apiTohit).then((result) => {

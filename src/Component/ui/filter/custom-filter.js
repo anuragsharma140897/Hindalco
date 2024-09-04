@@ -12,7 +12,7 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
     const reduxSelect = useSelector(state => state.SearchableSelectReducer)
 
     const handleFilterChange = (e, serverKey) => {
-        let { label, value, id } = e
+        let { label, value, _id } = e
         if (value === 'all') {
             Object.assign(json, { search: {} })
             dispatch(setSearchableSelectSelectedData([]))

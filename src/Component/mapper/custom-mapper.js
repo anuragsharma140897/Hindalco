@@ -24,7 +24,7 @@ export default function CustomMapper({ input, setInput, mapping, setMapping, out
         CompileConfiguration(mapping, input).then((CompiledData) => {
             if (CompiledData) {
                 setOutput(CompiledData);
-                onMyClick(CompiledData)
+                if(onMyClick){onMyClick(CompiledData)}
             }
         });
     };

@@ -54,7 +54,7 @@ function AddZoneBuilding({ row }) {
 
                     const x = CompiledData.content?.map(building => ({
                         label: building.buildingName,
-                        value: building.id,
+                        value: building._id,
                     }));
 
                     setBuildingOptions(x);
@@ -117,7 +117,7 @@ function AddZoneBuilding({ row }) {
             <form onSubmit={handleSubmit}>
             <SearchableSelect name="_id" label="Select Building" api={searchBuilding} getFieldName={'buildingName'}  onChange={(e) => handleOnChange(e,"_id")} />
 
-                {/* <SearchSelect name="id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} /> */}
+                {/* <SearchSelect name="_id" label="Select Building" options={buildingOptions} error={error} placeholder="Select Building" reduxState={reduxZone.apiJson} setAction={setZoneMasterApiJson} /> */}
                 <div className='flex gap-3 justify-end mb-5 mt-3'>
                     <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
                     <CustomButton type={'submit'} className={''} text={'Submit'} loading={loading} onClick={handleSubmit}/>

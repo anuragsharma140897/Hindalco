@@ -22,9 +22,9 @@ export const getTagMasterColumns = ({ openModal, closeModal }) => [
     render: (value, row, index) => <Text>{index + 1 || '---'}</Text>,
   },
   {
-    title: <HeaderCell title="id" className={'font-extrabold'} />,
-    dataIndex: 'id',
-    key: 'id',
+    title: <HeaderCell title="_id" className={'font-extrabold'} />,
+    dataIndex: '_id',
+    key: '_id',
     width: 100,
     render: (value) => (
       <Text className="font-medium text-gray-700">{value || '---'}</Text>
@@ -126,7 +126,7 @@ export const getTagMasterColumns = ({ openModal, closeModal }) => [
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Tag Master`}  description={`Are you sure you want to delete this employee?`} 
-          onDelete={() => DeleteItem(row.id)} 
+          onDelete={() => DeleteItem(row._id)} 
         />
       </div>
     ),
@@ -134,8 +134,8 @@ export const getTagMasterColumns = ({ openModal, closeModal }) => [
 ];
 
 
-export const DeleteItem = (id) =>{
-  var json = {id:id}
+export const DeleteItem = (_id) =>{
+  var json = {_id:_id}
   HitApi(json, deleteTag).then((Result)=>{
 
   })

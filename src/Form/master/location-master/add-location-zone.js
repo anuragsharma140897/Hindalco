@@ -45,7 +45,7 @@ function AddLocationZone({ row }) {
 
                     const x = CompiledData.content?.map(building => ({
                         label: building.value,
-                        value: building.id,
+                        value: building._id,
                     }));
 
                     setZoneOptions(x);

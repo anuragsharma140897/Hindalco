@@ -13,7 +13,7 @@ export const GetMapperColumns = (ApiHit) => {
   const handleDelete = async (row) => {
     setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
 
-    const json = { id: row?.id };
+    const json = { _id: row?._id };
 
     // try {
     //   const result = await HitApi(json, deleteSite);

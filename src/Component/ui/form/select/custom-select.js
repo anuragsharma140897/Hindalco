@@ -54,7 +54,7 @@ export default function CustomSelect({
                 >
                     <option value="" disabled>{placeholder || `Select ${label}`}</option>
                     {options?.map((option, index) => (
-                        <option key={index} id={option?.id} value={option?.value}>
+                        <option key={index} _id={option?._id} value={option?.value}>
                             {option.label}
                         </option>
                         

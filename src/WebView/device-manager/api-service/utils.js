@@ -7,8 +7,8 @@ let requestSeq = [];
 
 export const autoRequest = (ele) => getService(ele?._id);
 
-export const getService = async (id) => {
-    const json = { page: 1, limit: 1, search: { _id: id } };
+export const getService = async (_id) => {
+    const json = { page: 1, limit: 1, search: { _id: _id } };
     const res = await AllApiCallHere(json, searchApiService);
     if (res?.content?.[0]) {
         tempGlobalArr = res.content[0].globalVariables;

@@ -9,7 +9,7 @@ export const getOutboundIgoneBatchColumns = ({ sortConfig, onDeleteItem, onHeade
     width: 60,
     render: (_, row) => (
       <Checkbox
-        checked={selectedRows.some(selectedRow => selectedRow.id === row.id)}
+        checked={selectedRows.some(selectedRow => selectedRow._id === row._id)}
         onChange={() => onRowSelect(row)}
         className="cursor-pointer"
         size='sm'

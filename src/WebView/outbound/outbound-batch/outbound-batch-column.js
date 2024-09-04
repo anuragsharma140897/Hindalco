@@ -9,8 +9,8 @@ export const getOutboundBatchColumns = ({ sortConfig, onDeleteItem, onHeaderCell
     width: 60,
     render: (_, row) => (
       <Radio
-        checked={selectedRow === row.id}
-        onChange={() => onRowSelect(row.id)}
+        checked={selectedRow === row._id}
+        onChange={() => onRowSelect(row._id)}
         className="cursor-pointer"
         size='sm'
       />

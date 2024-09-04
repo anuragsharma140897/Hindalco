@@ -65,11 +65,11 @@ export default function ApiService() {
     dispatch(setWorkingServiceName(ele?.serviceName))
   };
 
-  const handleDeleteService = (id) => {
+  const handleDeleteService = (_id) => {
     var confirm = window.confirm('Are you sure to delete this service')
     if (confirm) {
       var json = {
-        _id: id
+        _id: _id
       }
       AllApiCallHere(json, deleteApiService).then(res => {
         dispatch(setServiceMasterJson(null))

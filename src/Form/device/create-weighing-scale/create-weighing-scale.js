@@ -18,7 +18,7 @@ export default function CreateWeighingScale() {
   var ID = url.split('/')[4]
 
   useEffect(() => {
-    if (ID && !reduxWeighingScale?.apiJson?.id) {
+    if (ID && !reduxWeighingScale?.apiJson?._id) {
       loadDefault(ID)
     }
   }, [])
@@ -49,7 +49,7 @@ export default function CreateWeighingScale() {
     const validationErrors = validate(json);
     if (Object.keys(validationErrors).length === 0) {
       if (ID) {
-        Object.assign(json, { id: ID })
+        Object.assign(json, { _id: ID })
         HitApi(json, updateWeighingScale).then((result) => {
           if (result.status === 200) {
             var alert = window.confirm(result.message)

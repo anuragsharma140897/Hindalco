@@ -26,13 +26,13 @@ export default function SearchUser({ row, ApiHit }) {
 
     const handleOnChange = (e) => {
         var json = reduxBuilding?.apiJson
-        const { id, label, value } = e
+        const { _id, label, value } = e
 
 
 
         Object.assign(json, {
-            sourceId: row.id,
-            mappingId: id
+            sourceId: row._id,
+            mappingId: _id
         })
         dispatch(setBuildingMasterApiJson(json))
     }
@@ -70,8 +70,8 @@ export default function SearchUser({ row, ApiHit }) {
         if (r) {
             var json = reduxBuilding?.apiJson
             var finalJson = {
-                sourceId: row?.id,
-                mappingId: ele?.id,
+                sourceId: row?._id,
+                mappingId: ele?._id,
                 "sourceCollection": "buildingCollection",
                 "destinationCollection": "user",
                 "source": "buildingIds",
@@ -88,7 +88,7 @@ export default function SearchUser({ row, ApiHit }) {
                         message: 'User to Building Mapping Removed Successfully',
                     });
                     // Removing data from userIds array to prevent from relaod
-                    const index = row?.userIds.indexOf(ele?.id);
+                    const index = row?.userIds.indexOf(ele?._id);
                     if (index !== -1) {
                         const updatedUserIds = [
                             ...row.userIds.slice(0, index),
@@ -106,11 +106,11 @@ export default function SearchUser({ row, ApiHit }) {
 
 
     let item = row?.userIds?.map((userId) => {
-        const matchedUser = reduxSelectData?.doc?.find((ele) => ele?.id === userId);
+        const matchedUser = reduxSelectData?.doc?.find((ele) => ele?._id === userId);
 
         return matchedUser ? (
-            <div className='flex justify-between border-2 p-1.5 m-1.5' key={matchedUser?.id}>
-                <label>{matchedUser?.id}</label>
+            <div className='flex justify-between border-2 p-1.5 m-1.5' key={matchedUser?._id}>
+                <label>{matchedUser?._id}</label>
                 <label>{matchedUser?.label}</label>
                 <label onClick={() => handleDemapUser(matchedUser)}><FaTrash /></label>
             </div>

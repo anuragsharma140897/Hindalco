@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPagination } from '../../Store/Action/Pagination/PaginationAction';
 
 const paginationLimitOptions = [1,2, 3, 5, 10, 15, 20, 25].map((v, idx) => ({
-  id: idx,
+  _id: idx,
   label: String(v),
   value: v,
 }));

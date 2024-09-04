@@ -16,7 +16,7 @@ export default function Dashboard() {
   const reduxMqtt = useSelector(state => state.MQTTReducer)
 
   const handleOnChange = (e) => {
-    const { _id, label, value } = e
+    const {_id, label, value } = e
 
     var json = reduxDevice?.searchJson
     dispatch(setBuildingMasterSelectedBuildingId(_id))

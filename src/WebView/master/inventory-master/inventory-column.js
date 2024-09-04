@@ -100,12 +100,12 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
           loading={loading}
           title={`Delete Batch Master`}
           description={`Are you sure you want to Batch?`}
-          onDelete={() => DeleteItem(row.id, setLoading)}
+          onDelete={() => DeleteItem(row._id, setLoading)}
         />
 
 
         <Tooltip size="sm" content={'View Inventories'} placement="top" color="invert">
-          <a href={`/master/inventory/${row.id}`}>
+          <a href={`/master/inventory/${row._id}`}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
               <EyeIcon className="h-4 w-4" />
             </ActionIcon>
@@ -117,10 +117,10 @@ export const getInventoryMasterColumns = ({ openModal, closeModal, loading, setL
 ];
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
     const result = await HitApi(json, deleteBatchCollection);
 
     if (result.status === 200) {

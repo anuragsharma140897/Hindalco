@@ -35,15 +35,15 @@ function Inventories() {
         return segments.pop(); 
     };
 
-    const id = getIdFromPathname();
+    const _id = getIdFromPathname();
 
     useEffect(() => {
         loadData();
         getSingleDataFromId()
-    }, [id]);
+    }, [_id]);
 
     const loadData = () => {
-        const json = { page: 1, limit: 100, search: { batchId: id } };
+        const json = { page: 1, limit: 100, search: { batchId: _id } };
 
         HitApi(json, searchRfidTag).then((result) => {
             if (result) {
@@ -62,7 +62,7 @@ function Inventories() {
     };
 
     const getSingleDataFromId = () =>{
-        const json = { page: 1, limit: 100, search: { id: id } };
+        const json = { page: 1, limit: 100, search: { _id: _id } };
 
         HitApi(json, searchBatch).then((result) => {
             if (result) {

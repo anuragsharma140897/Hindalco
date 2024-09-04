@@ -18,7 +18,7 @@ export default function AddInventoryMaster({ row, closeModal }) {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -39,8 +39,8 @@ export default function AddInventoryMaster({ row, closeModal }) {
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
             setLoading(true)
-            if (row?.id) {
-                Object.assign(json, { id: row?.id ,status: json?.status || 'active', movementStatus: json?.movementStatus ||'active' })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id ,status: json?.status || 'active', movementStatus: json?.movementStatus ||'active' })
                 HitApi(json, updateBatch).then((result) => {
                     setLoading(false)
                     if (result.status === 200) {
@@ -69,10 +69,10 @@ export default function AddInventoryMaster({ row, closeModal }) {
     };
 
     const handleOnChange = (e) => {
-        const { id, label, value } = e
+        const { _id, label, value } = e
 
         let oldJson = reduxInventory?.apiJson
-        let newJson = { ...oldJson, "product_id": e?.id }
+        let newJson = { ...oldJson, "product_id": e?._id }
         dispatch(setInventoryMasterApiJson(newJson))
 
     }
@@ -89,7 +89,7 @@ export default function AddInventoryMaster({ row, closeModal }) {
                     <CustomInput important={true} name="totalInventory" type={'number'} label="Total Inventory" value={reduxInventory?.apiJson?.totalInventory} error={errors} reduxState={reduxInventory?.apiJson} setAction={setInventoryMasterApiJson} validate={validate} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat'  onClick={closeModal} />
-                        <CustomButton type={'submit'}  text={row?.id ? 'Update' : 'Submit'} loading={loading} />
+                        <CustomButton type={'submit'}  text={row?._id ? 'Update' : 'Submit'} loading={loading} />
                     </div>
                 </div>
             </form>

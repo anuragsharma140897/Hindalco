@@ -6,7 +6,7 @@ export const CompileSelectData = (data, getFieldName, type) => {
 
         var td = []
 
-        // if(type==='filter') { td.push({ label: 'all', value: 'all', id: 'all' })}
+        // if(type==='filter') { td.push({ label: 'all', value: 'all', _id: 'all' })}
         if (type === 'custom') {
             data?.map((ele, index) => {
                 var label = ele?.label

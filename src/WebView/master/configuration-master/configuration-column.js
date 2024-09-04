@@ -51,12 +51,12 @@ export const getConfigurationMasterColumns = ({ closeModal, openModal }) => [
         render: (_, row) => (
             <div className="flex items-center gap-3 pe-4">
                 <Tooltip size="sm" content={'Edit Customer'} placement="top" color="invert">
-                    <a href={'/master/configuration/edit/'+row?.id}>
+                    <a href={'/master/configuration/edit/'+row?._id}>
                         <PencilIcon className="h-4 w-4" />
                     </a>
                 </Tooltip>
                 <DeletePopover title={`Delete Customer Master`} description={`Are you sure you want to delete this employee?`}
-                    onDelete={() => DeleteItem(row.id)}
+                    onDelete={() => DeleteItem(row._id)}
                 />
             </div>
         ),
@@ -64,8 +64,8 @@ export const getConfigurationMasterColumns = ({ closeModal, openModal }) => [
 ];
 
 
-export const DeleteItem = (id) => {
-    var json = { id: id }
+export const DeleteItem = (_id) => {
+    var json = { _id: _id }
     HitApi(json, deleteMqttConfig).then((Result) => {
         if(Result?.status === 200){
             window.location.reload()

@@ -25,7 +25,7 @@ const AddRole = ({ closeModal, row }) => {
 
   useEffect(() => {
 
-    if (row?.id) {
+    if (row?._id) {
       loadDefault(row)
   }
 

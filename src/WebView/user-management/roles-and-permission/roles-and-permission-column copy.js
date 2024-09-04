@@ -58,7 +58,7 @@ export const getRolesAndPermissionColumns = ({ openModal, closeModal, showCustom
           </label>
         </Tooltip>
         <DeletePopover title={`Delete Role`} description={`Are you sure you want to delete this Role?`}
-          onDelete={() => DeleteItem(row.id, showCustomAlert)}
+          onDelete={() => DeleteItem(row._id, showCustomAlert)}
         />
       </div>
     ),
@@ -116,9 +116,9 @@ export const GenerateBadge = (items) => {
 };
 
 
-export const DeleteItem = (id, showCustomAlert) => {
-  // var json = { page:1, limit : 1, search : {roleId: id} }
-  var json = {id:id}
+export const DeleteItem = (_id, showCustomAlert) => {
+  // var json = { page:1, limit : 1, search : {roleId: _id} }
+  var json = {_id:_id}
   HitApi(json, deleteRole).then((Result)=>{
     if(Result?.content?.length>0){
       showCustomAlert({

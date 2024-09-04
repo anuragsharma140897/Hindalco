@@ -12,7 +12,7 @@ function ShipTo() {
             const json = {
                 page: 1,
                 limit: 1,
-                search: { id: reduxOutbound.apiJson.dispatchTo }
+                search: { _id: reduxOutbound.apiJson.dispatchTo }
             };
             HitApi(json, searchCustomer).then(result => {
                 setData(result?.content[0]);

@@ -36,7 +36,7 @@ export default function Building() {
 
     const handleClick = (ele) => {
         var json = reduxMappingMaster?.mappingJson
-        Object.assign(json, { selectedBuildingID: ele?.id })
+        Object.assign(json, { selectedBuildingID: ele?._id })
         dispatch(setZoneMasterData(null))
         dispatch(setSelectedMappingMasterJson(json))
         dispatch(setSelectedMappingMasterBuildingData(ele))
@@ -50,7 +50,7 @@ export default function Building() {
     if (reduxBuilding?.doc !== null) {
         item = reduxBuilding?.doc?.content?.map((ele, index) => {
             return <div key={index} className='group' onClick={() => handleClick(ele)}>
-                <div className={cn('py-3 px-2 my-1.5 shadow-sm rounded-lg flex items-center justify-between group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedBuildingID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+                <div className={cn('py-3 px-2 my-1.5 shadow-sm rounded-lg flex items-center justify-between group-hover:cursor-pointer', ele?._id === reduxMappingMaster?.mappingJson?.selectedBuildingID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
                     <label className='group-hover:cursor-pointer'>{ele?.buildingName}</label>
                     <label className='group-hover:cursor-pointer'><FaAngleRight /></label>
                 </div>

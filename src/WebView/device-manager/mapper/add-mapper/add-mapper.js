@@ -8,20 +8,76 @@ import { addMapper, searchConfig, searchGeneral } from '../../../../Constant/Api
 import { setMappingApiJson, setMappingMappingJson } from '../../../../Store/Action/device-master/mapping/mapping-action';
 import { addMappingSchema } from '../../../../Utils/validators/device-manager/mapping/add-mapping.schema';
 import CustomButton from '../../../../Component/ui/buttons/custom-button';
+import { HitApi } from '../../../../Store/Action/Api/ApiAction';
 
 const usedBy = [
-  { id: 0, label: 'device', value: 'device' },
-  { id: 0, label: 'gps', value: 'gps' },
-  { id: 0, label: 'reader', value: 'reader' },
+  { _id: 0, label: 'device', value: 'device' },
+  { _id: 0, label: 'gps', value: 'gps' },
+  { _id: 0, label: 'reader', value: 'reader' },
 ]
 export default function AddMapper() {
   const reduxMapping = useSelector(state => state.MappingReducer)
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [input, setInput] = useState({
-    "statusCode": 200,
-    "message": "User Logged In successfully",
-    "jwtToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXJhaiIsInJvbGVJZCI6IjY2YmYyZjQ3YWM4MjMwNDZkYjVkYjg2OSIsImV4cCI6MTcyNTMxNjYwNCwidXNlcklkIjoiNjZjMzExODk1MTc5ZTE0OTc3NTI0NDQ4IiwiaWF0IjoxNzI1Mjg3ODA0fQ.0v8AUN2gzdpxJ--8zXnF4ieZxtm4VYn2iXkiqNE3L6NUK4y8WRNdtmF53gMi9jrqAU1pDBHJGgyzvjbJxarcjg"
-  })
+    "antennas": {
+        "1": "disconnected",
+        "2": "disconnected",
+        "3": "disconnected",
+        "4": "connected"
+    },
+    "cpu": {
+        "system": 9,
+        "user": 2
+    },
+    "flash": {
+        "platform": {
+            "free": 8826880,
+            "total": 33554432,
+            "used": 24727552
+        },
+        "readerConfig": {
+            "free": 3153920,
+            "total": 4194304,
+            "used": 1040384
+        },
+        "readerData": {
+            "free": 63856640,
+            "total": 67108864,
+            "used": 3252224
+        },
+        "rootFileSystem": {
+            "free": 36573184,
+            "total": 192937984,
+            "used": 156364800
+        }
+    },
+    "interfaceConnectionStatus": {
+        "data": [
+            {
+                "connectionError": "connection initialization failed with return code (255), retry count (0)",
+                "connectionStatus": "disconnected",
+                "description": "hindalco",
+                "interface": "headup_config"
+            }
+        ]
+    },
+    "ntp": {
+        "offset": 0.0,
+        "reach": 0
+    },
+    "powerNegotiation": "DISABLED",
+    "powerSource": "DC",
+    "radioActivity": "active",
+    "radioConnection": "connected",
+    "ram": {
+        "free": 99651584,
+        "total": 252329984,
+        "used": 152678400
+    },
+    "systemTime": "2024-09-04T18:09:01Z",
+    "temperature": 46,
+    "uptime": "21:12:33"
+})
   const [mapping, setMapping] = useState([
     {
       "valueName": "code",
@@ -65,9 +121,9 @@ export default function AddMapper() {
 
     console.log('json====', json);
 
-    // HitApi(json, addMapper).then((res)=>{
-    //   console.log('res', res);
-    // })
+    HitApi(json, addMapper).then((res)=>{
+      console.log('res', res);
+    })
 
   }
 

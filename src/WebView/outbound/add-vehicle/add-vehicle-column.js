@@ -14,8 +14,8 @@ export const getaddVehicleColumns = ({ reduxOutbound ,dispatch}) => {
 
 
    var oldApiJson = reduxOutbound?.apiJson
-    const updatedAddedVehicle = reduxOutbound?.vehicleAdded?.filter(item => item.id !== row.id);
-    oldApiJson.vehicleIds = oldApiJson?.vehicleIds?.filter(item => item.vehicleId !== row.id);
+    const updatedAddedVehicle = reduxOutbound?.vehicleAdded?.filter(item => item._id !== row._id);
+    oldApiJson.vehicleIds = oldApiJson?.vehicleIds?.filter(item => item.vehicleId !== row._id);
     dispatch(setOutboundAddedVehicle(updatedAddedVehicle));
     dispatch(setOutboundApiJson(oldApiJson))
   };

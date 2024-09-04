@@ -12,7 +12,7 @@ const BillTo = () => {
             const json = {
                 page: 1,
                 limit: 1,
-                search: { id: reduxOutbound.apiJson.billTo }
+                search: { _id: reduxOutbound.apiJson.billTo }
             };
             HitApi(json, searchCustomer).then(result => {
                 setData(result?.content[0]);

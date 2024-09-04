@@ -26,9 +26,9 @@ export default function ConfigTabs({ID}) {
         setSelected(index)
     }
     const GenderOption = [
-        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
-        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
-        { id: 'MQTT', label: 'MQTT', value: 'MQTT' },
+        { _id: 'MQTT', label: 'MQTT', value: 'MQTT' },
+        { _id: 'MQTT', label: 'MQTT', value: 'MQTT' },
+        { _id: 'MQTT', label: 'MQTT', value: 'MQTT' },
     ]
 
     const handleSubmit = (e) => {
@@ -42,7 +42,7 @@ export default function ConfigTabs({ID}) {
 
             CompileConfigurationJson(reduxConfiguration?.apiJson).then(compiledData => {
                 if (ID) {
-                    Object.assign(compiledData, { id: ID })
+                    Object.assign(compiledData, { _id: ID })
                     HitApi(compiledData, updateMqttConfig).then((result) => {
 
                     })

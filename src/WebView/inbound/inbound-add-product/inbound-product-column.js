@@ -144,10 +144,10 @@ export const inboundProductColumns = ({ openModal, closeModal, loading, setLoadi
 
 
 
-const DeleteItem = async (id, setLoading) => {
+const DeleteItem = async (_id, setLoading) => {
   setLoading(true);
   try {
-    const json = { id };
+    const json = { _id };
     const result = await HitApi(json, deleteGeneral);
 
     if (result.status === 200) {

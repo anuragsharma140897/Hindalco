@@ -43,9 +43,9 @@ export default function Zone() {
 
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
-    const { id, label, value } = e
+    const { _id, label, value } = e
 
-    Object.assign(json, { selectedZoneIdFromDropdown: id })
+    Object.assign(json, { selectedZoneIdFromDropdown: _id })
     dispatch(setSelectedMappingMasterJson(json))
 
   }
@@ -83,7 +83,7 @@ export default function Zone() {
     setDynamicLoading({ 'zone': true })
     var finalJson = {
       sourceId: json?.selectedBuildingID,
-      mappingId: ele?.id,
+      mappingId: ele?._id,
       "sourceCollection": "buildingCollection",
       "destinationCollection": "zoneCollection",
       "source": "buildingIds",
@@ -110,7 +110,7 @@ export default function Zone() {
   const handleZoneClick = (ele) => {
 
     var json = reduxMappingMaster?.mappingJson
-    Object.assign(json, { selectedZoneID: ele?.id })
+    Object.assign(json, { selectedZoneID: ele?._id })
     dispatch(setLocationMasterData(null))
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterZoneData(ele))
@@ -133,7 +133,7 @@ export default function Zone() {
   if (reduxZone?.doc !== null) {
     item = reduxZone?.doc?.content?.map((ele, index) => {
       return <div key={index} className='group my-1.5'>
-        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedZoneID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+        <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?._id === reduxMappingMaster?.mappingJson?.selectedZoneID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
           <div className='flex justify-between'>
             <div className='flex items-center p-3 w-full' onClick={() => handleZoneClick(ele)}>
               <div><label className='group-hover:cursor-pointer'>{ele?.value}</label></div>
@@ -143,7 +143,7 @@ export default function Zone() {
             </div> : null}
           </div>
         </div>
-        <label className='group-hover:cursor-pointer'>{ele?.id}</label>
+        <label className='group-hover:cursor-pointer'>{ele?._id}</label>
       </div>
     })
   }

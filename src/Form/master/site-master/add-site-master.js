@@ -17,7 +17,7 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
     const { showCustomAlert } = useAlertController();
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -33,8 +33,8 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         var json = reduxSite?.apiJson
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
-            if (row?.id) {
-                Object.assign(json, { id: row?.id })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id })
 
                 HitApi(json, updateSite).then((result) => {
                     if (result?.success!==false) {
@@ -74,12 +74,12 @@ export default function AddSiteMaster({ row, closeModal, ApiHit }) {
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
                 <div className="space-y-5 lg:space-y-6">
-                    <CustomInput name="siteName" label="Site Name" validate={validate} value={reduxSite?.apiJson?.siteName} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} disabled={row?.id?true : false} />
+                    <CustomInput name="siteName" label="Site Name" validate={validate} value={reduxSite?.apiJson?.siteName} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} disabled={row?._id?true : false} />
                     <CustomInput important={false} name="buildings" label="Building " value={reduxSite?.apiJson?.buildings} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
                     <CustomInput important={false} name="area" label="Area " helperText={'Type area in sqft only'} value={reduxSite?.apiJson?.area} error={errors} reduxState={reduxSite?.apiJson} setAction={setSiteMasterApiJson} />
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={handleClose} />
-                        <CustomButton type={'submit'} className={''} text={row?.id?'Update' : 'Submit'} />
+                        <CustomButton type={'submit'} className={''} text={row?._id?'Update' : 'Submit'} />
                     </div>
                 </div>
             </form>

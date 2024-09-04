@@ -32,7 +32,7 @@ export function useTable(
     if (selectedRowKeys.length === data.length) {
       setSelectedRowKeys([]);
     } else {
-      setSelectedRowKeys(data.map((record) => record.id));
+      setSelectedRowKeys(data.map((record) => record._id));
     }
   };
 
@@ -94,10 +94,10 @@ export function useTable(
   /*
    * Handle delete
    */
-  function handleDelete(id) {
-    const updatedData = Array.isArray(id)
-      ? data.filter((item) => !id.includes(item.id))
-      : data.filter((item) => item.id !== id);
+  function handleDelete(_id) {
+    const updatedData = Array.isArray(_id)
+      ? data.filter((item) => !_id.includes(item._id))
+      : data.filter((item) => item._id !== _id);
 
     setData(updatedData);
   }

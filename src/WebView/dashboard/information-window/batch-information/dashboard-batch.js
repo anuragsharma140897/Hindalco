@@ -36,9 +36,9 @@ export default function DashboardBatch() {
     }
   }
   
-  const loadSelectedBatchInventory = (id) => {
+  const loadSelectedBatchInventory = (_id) => {
     var json = reduxBatch?.inventoryJson
-    Object.assign(json.search, { batchId: id })
+    Object.assign(json.search, { batchId: _id })
     HitApi(json, searchRfidTag).then((result) => {
       CompileInventoryData(result).then((CompiledData)=>{
         if(CompiledData){
@@ -49,15 +49,15 @@ export default function DashboardBatch() {
   }
 
   const handleSelect = (ele) => {
-    setSelectedBatch(ele?.id)
-    loadSelectedBatchInventory(ele?.id)
+    setSelectedBatch(ele?._id)
+    loadSelectedBatchInventory(ele?._id)
     dispatch(setDashboardSelectedBatchId(ele))
   }
 
   let item;
   if (reduxBatch?.doc?.content) {
     item = reduxBatch?.doc?.content?.map((ele, index) => {
-      return <div className={cn('flex flex-col border px-2 py-3 my-1 bg-white rounded-md shadow-md group-hover:cursor-pointer', ele?.id === selectedBatch ? SelectedItem : '')} onClick={() => handleSelect(ele)}>
+      return <div className={cn('flex flex-col border px-2 py-3 my-1 bg-white rounded-md shadow-md group-hover:cursor-pointer', ele?._id === selectedBatch ? SelectedItem : '')} onClick={() => handleSelect(ele)}>
         <label className='group-hover:cursor-pointer'>{ele?.batchName}</label>
         <label className='group-hover:cursor-pointer'>{ele?.status}</label>
       </div>

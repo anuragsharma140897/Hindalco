@@ -64,9 +64,9 @@ export default function Location() {
 
   const handleOnChange = (e) => {
     var json = reduxMappingMaster?.mappingJson
-    const { id, label, value } = e
+    const { _id, label, value } = e
 
-    Object.assign(json, { selectedLocationIdFromDropdown: id })
+    Object.assign(json, { selectedLocationIdFromDropdown: _id })
     dispatch(setSelectedMappingMasterJson(json))
 
   }
@@ -120,7 +120,7 @@ export default function Location() {
       var json = reduxMappingMaster?.mappingJson
     var locationToZoneMappingJson = {
       sourceId: json?.selectedZoneID,
-      mappingId: ele?.id,
+      mappingId: ele?._id,
       "sourceCollection": "zoneCollection",
       "destinationCollection": "locationCollection",
       "source": "zoneIds",
@@ -140,7 +140,7 @@ export default function Location() {
         });
         var locationToBuilginMappingJson = {
           sourceId: json?.selectedBuildingID,
-          mappingId: ele?.id,
+          mappingId: ele?._id,
           "sourceCollection": "buildingCollection",
           "destinationCollection": "locationCollection",
           "source": "buildingIds",
@@ -167,7 +167,7 @@ export default function Location() {
   const handleLocationClick = (ele) => {
 
     var json = reduxMappingMaster?.mappingJson
-    Object.assign(json, { selectedLocationID: ele?.id })
+    Object.assign(json, { selectedLocationID: ele?._id })
     dispatch(setDeviceReaderData(null))
     dispatch(setSelectedMappingMasterJson(json))
     dispatch(setSelectedMappingMasterLocationData(ele))
@@ -180,7 +180,7 @@ export default function Location() {
   if (reduxLocation?.doc !== null) {
     item = reduxLocation?.doc?.content?.map((ele, index) => {
       return <div key={index} className='group my-1.5'>
-         <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?.id === reduxMappingMaster?.mappingJson?.selectedLocationID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
+         <div className={cn('shadow-sm rounded-lg group-hover:cursor-pointer', ele?._id === reduxMappingMaster?.mappingJson?.selectedLocationID ? 'bg-red-lighter text-red-main font-bold tracking-wider border border-red-main' : 'bg-white ')}>
           <div className='flex justify-between'>
             <div className='flex items-center p-3 border w-full' onClick={() => handleLocationClick(ele)}>
               <div><label className='group-hover:cursor-pointer'>{ele?.value}</label></div>
@@ -190,7 +190,7 @@ export default function Location() {
             </div> : null}
           </div>
         </div>
-        <label className='group-hover:cursor-pointer'>{ele?.id}</label>
+        <label className='group-hover:cursor-pointer'>{ele?._id}</label>
       </div>
     })
   }

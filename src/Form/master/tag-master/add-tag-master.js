@@ -17,7 +17,7 @@ export default function AddTagMaster({ row, closeModal }) {
     const { errors, validate } = useValidation(tagMasterSchema);
 
     useEffect(() => {
-        if (row?.id) {
+        if (row?._id) {
             loadDefault(row)
         }
     }, [])
@@ -35,8 +35,8 @@ export default function AddTagMaster({ row, closeModal }) {
         var json = reduxTag?.apiJson
         const validationErrors = validate(json);
         if (Object.keys(validationErrors).length === 0) {
-            if (row?.id) {
-                Object.assign(json, { id: row?.id })
+            if (row?._id) {
+                Object.assign(json, { _id: row?._id })
                 HitApi(json, updateTag).then((result) => {
 
                 })
@@ -69,7 +69,7 @@ export default function AddTagMaster({ row, closeModal }) {
                     </div>
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={closeModal} />
-                        <CustomButton type={'submit'} className={''} text={row?.id ? 'Update' : 'Submit'} />
+                        <CustomButton type={'submit'} className={''} text={row?._id ? 'Update' : 'Submit'} />
                     </div>
                 </div>
             </form>

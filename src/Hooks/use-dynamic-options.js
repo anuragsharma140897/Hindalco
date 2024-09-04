@@ -7,7 +7,7 @@ const useDynamicOptions = ({ data, serverKey }) => {
   useEffect(() => {
     if (data && serverKey) {
       const generatedOptions = data.map((ele, index) => ({
-        id: index,
+        _id: index,
         label: ele[serverKey],
         value: ele[serverKey],
         status: true,

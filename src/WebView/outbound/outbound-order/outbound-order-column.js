@@ -98,7 +98,7 @@ export const getOutboundOrderColumn = ({ sortConfig, onDeleteItem, onHeaderCellC
         </Tooltip>
         
         <Tooltip size="sm" content={'View'} placement="top" color="invert">
-          <label href={routes?.eCommerce?.editOrder(row.id)}>
+          <label href={routes?.eCommerce?.editOrder(row._id)}>
             <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700" onClick={() => openModal({ view: <SearchUser /> })}>
               <EyeIcon className="w-5 h-5" />
             </ActionIcon>

@@ -25,7 +25,7 @@ const AddRole = ({ closeModal, row }) => {
 
   useEffect(() => {
 
-    if (row?.id) {
+    if (row?._id) {
       loadDefault(row)
     }
 
@@ -60,8 +60,8 @@ const AddRole = ({ closeModal, row }) => {
             allowedEndPoints: FinalJson?.allowedEndPoints,
             permission: FinalJson?.permission,
           }
-          if (row?.id) {
-            Object.assign(json, { id: row?.id })
+          if (row?._id) {
+            Object.assign(json, { _id: row?._id })
 
 
 
@@ -104,7 +104,7 @@ const AddRole = ({ closeModal, row }) => {
           </div>
           <div className='flex gap-3 justify-end'>
             <CustomButton text={'Cancel'} className={''} onClick={closeModal} />
-            <CustomButton type={'submit'} className={''} text={row?.id?'Update' : 'Submit'} />
+            <CustomButton type={'submit'} className={''} text={row?._id?'Update' : 'Submit'} />
           </div>
         </div>
       </form>

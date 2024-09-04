@@ -82,14 +82,14 @@ export const getReaderMasterColumns = ({ openModal, loadData }) => {
       render: (_, row) => (
         <div className="flex items-center gap-3 pe-4">
           <Tooltip size="sm" content={'Edit User'} placement="top" color="invert">
-            <a href={'/device/reader/edit/' + row.id}>
+            <a href={'/device/reader/edit/' + row._id}>
               <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
                 <PencilIcon className="h-4 w-4" />
               </ActionIcon>
             </a>
           </Tooltip>
           <Tooltip size="sm" content={'Check Device'} placement="top" color="invert">
-            <a href={'/device/reader/reader-configuration/' + row.id}>
+            <a href={'/device/reader/reader-configuration/' + row._id}>
               <ActionIcon as="span" size="sm" variant="outline" className="hover:text-gray-700">
                 <IoMdSettings className="h-4 w-4" />
               </ActionIcon>
@@ -99,7 +99,7 @@ export const getReaderMasterColumns = ({ openModal, loadData }) => {
             <DeletePopover
               title="Delete Reader"
               description="Are you sure you want to delete this Reader?"
-              onDelete={() => onDeleteItem(row?.id, ApiHit)}
+              onDelete={() => onDeleteItem(row?._id, ApiHit)}
             />
           )}
         </div>
@@ -109,8 +109,8 @@ export const getReaderMasterColumns = ({ openModal, loadData }) => {
 }
 
 
-export const onDeleteItem = (id, ApiHit) => {
-  var json = { id: id }
+export const onDeleteItem = (_id, ApiHit) => {
+  var json = { _id: _id }
 
   HitApi(json, deleteReader).then((Result) => {
 

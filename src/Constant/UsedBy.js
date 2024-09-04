@@ -5,6 +5,7 @@ export const usedByOption = [
     { label: 'certificateType', value: 'certificateType' },
     { label: 'keyUsage', value: 'keyUsage' },
     { label: 'extendedKeyUsage', value: 'extendedKeyUsage' },
+    { label: 'defaultData', value: 'defaultData' },
 
 
 

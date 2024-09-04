@@ -24,13 +24,13 @@ function EditOutbound() {
   const loadData = () => {
 
     const pathname = window.location.pathname
-    const id = pathname.split('/')[3]
+    const _id = pathname.split('/')[3]
 
     var json = {
       page: 1,
       limit: 1,
       search: {
-        id: id,
+        _id: _id,
       }
     }
     HitApi(json, searchOrder).then(res => {
@@ -52,7 +52,7 @@ function EditOutbound() {
           page:1,
           limit:10,
           search:{
-            id:ele.vehicleId,
+            _id:ele.vehicleId,
           }
         }
 

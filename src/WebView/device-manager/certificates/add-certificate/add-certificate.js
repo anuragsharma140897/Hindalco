@@ -14,7 +14,7 @@ import { HitApi } from '../../../../Store/Action/Api/ApiAction';
 
 function AddCertificate() {
   const _id = window.location.pathname.split('/')[4]
-  console.log("id", _id);
+  console.log("_id", _id);
   const dispatch = useDispatch();
   const reduxCertificates = useSelector((state) => state.CertificatesReducer);
   const [loading, setLoading] = useState(false)

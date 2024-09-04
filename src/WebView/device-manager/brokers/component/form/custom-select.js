@@ -36,7 +36,7 @@ export default function CustomSelect({ name, className, placeholder, disabled, e
   const [selected, setSelected] = useState(null)
 
   const handleChange = (e) => {
-    const { value, id } = e;
+    const { value, _id } = e;
     const updatedSelected = reduxSelect?.selected.map(item =>
       item.name === name ? { ...item, value } : item
     );

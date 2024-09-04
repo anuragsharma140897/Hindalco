@@ -50,7 +50,7 @@ export default function AddSupplierMaster({ row }) {
             value: country.name
         }));
         setCountries(allCountries);
-    }, [row?.id]);
+    }, [row?._id]);
 
     const loadDefault = useCallback((row) => {
         var json = { ...reduxSupplier?.apiJson };
