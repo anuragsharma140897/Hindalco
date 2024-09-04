@@ -1,6 +1,6 @@
 import { getAuthToken } from "../../../../Storage/Storage";
 
-export const AllApiCallHere = (json, api) => {
+export const AllApiCallHere = (json, api,xml) => {
 
     const MyPromise = new Promise((resolve, reject) => {
         if(!json?.search){
@@ -28,7 +28,13 @@ export const AllApiCallHere = (json, api) => {
                         });
                     });
                 }
-                return res.json();
+                if(xml){
+                    return res.text()
+                }else{
+                    return res.json();
+                }
+
+                
             })
             .then(result => {
                 if (result) {

@@ -72,6 +72,11 @@ export const editReaderMode = DeviceMicroService+'editReaderMode'
 
 export const rebootReader = DeviceMicroService + 'rebootReader'
 
+export const proxy = DeviceMicroService + 'proxy'
+
+
+
+
 
 //Weighing Scale
 export const addWeighingScale = DeviceMicroService+'addWeighingScale' 

@@ -1,27 +1,35 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setServiceRequestData } from '../store/Action/ServiceMasterAction';
+import CustomJsonEditor from '../../../../Component/ui/editor/json-editor';
+import CustomXmlEditor from '../../../../Component/ui/editor/xml-editor';
 
 function Body() {
 
     const ServiceMasterReducer = useSelector(state => state.ServiceMasterReducer);
     const dispatch = useDispatch();
-    const [activeTab, setActiveTab] = useState('raw');
+    const [activeTab, setActiveTab] = useState('XML');
 
-    const tabs = ['raw', 'form-data', 'x-www-form-urlencoded', 'binary'];
+    const tabs = ['raw', 'XML'];
 
-    const onChange = (value) =>{
+    const onChange = (value) => {
         var oldJson = ServiceMasterReducer?.requestDoc
-        oldJson.request.body.raw = value
-        dispatch(setServiceRequestData(oldJson))
+        oldJson.request.body.options.raw.language = 'xml'
+        oldJson.request.body.raw = value.toString()
+
+        console.log('oldJson',oldJson);
+
+        // dispatch(setServiceRequestData(oldJson))
     }
 
-    const onChangeMode = (tab) =>{
+    const onChangeMode = (tab) => {
         setActiveTab(tab)
         var oldJson = ServiceMasterReducer?.requestDoc
         oldJson.request.body.mode = tab
         dispatch(setServiceRequestData(oldJson))
     }
+
+    console.log('service',ServiceMasterReducer);
 
     return (
         <div>
@@ -36,13 +44,9 @@ function Body() {
             <div className='m-5'>
                 {
                     activeTab === 'raw' ?
-                    <textarea onChange={(e)=>onChange(e.target.value)} className='h-max w-full' value={ServiceMasterReducer?.requestDoc?.request?.body?.raw}/>    
-                    :
-                        activeTab === 'form-data' ?
-                            <p>form-data</p> :
-                            activeTab === 'x-www-form-urlencoded' ?
-                                <p>x-www-form-urlencoded</p> :
-                                'binary'
+                        <CustomJsonEditor onChange={(value) => onChange(value, 'input')} json={ServiceMasterReducer?.requestDoc?.request?.body?.raw !== "" && Object.keys(ServiceMasterReducer?.requestDoc?.request?.body?.raw).length !== 0 ? JSON.parse(ServiceMasterReducer?.requestDoc?.request?.body?.raw) : {}} />
+                        :
+                        <CustomXmlEditor onChange={(value) => onChange(value, 'input')} xml={ServiceMasterReducer?.requestDoc?.request?.body?.raw}/>
                 }
             </div>
         </div >
