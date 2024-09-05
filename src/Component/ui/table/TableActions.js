@@ -13,10 +13,10 @@ import { autoRequest } from '../../../WebView/device-manager/api-service/utils';
 const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys, enableSetting }) => {
     const user = getAuthenticatedUser()
 
-    // const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
-    const isEditAllowed = true
-    // const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
-    const isDeleteAllowed = true
+    const isEditAllowed = usePermissionCheck(ScreenName?.[screen], 'write');
+    // const isEditAllowed = true
+    const isDeleteAllowed = usePermissionCheck(ScreenName?.[screen], 'delete');
+    // const isDeleteAllowed = true
 
     const areKeysNotEmpty = () => {
         if (!Array.isArray(checkKeys)) return false;
@@ -48,8 +48,6 @@ const TableActions = ({ row, onEdit, onView, onDelete, screen, checkKeys, enable
             }
         })
     }
-
-
 
     return (
         <div className="flex items-center gap-3 pe-4">
