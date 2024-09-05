@@ -1,9 +1,9 @@
 
-export const IP = 'api.hindalco.headsupcorporation.com'
-export const Protocol = 'https://'
+// export const IP = 'api.hindalco.headsupcorporation.com'
+// export const Protocol = 'https://'
 
-// export const IP = '192.168.0.104:9090'
-// export const Protocol = 'http:'
+export const IP = '192.168.0.104:9090'
+export const Protocol = 'http://'
 
 export const MQTTIP = 'ws://192.168.0.104:9001'
 export const BaseUrl = `${Protocol}${IP}/auth/`

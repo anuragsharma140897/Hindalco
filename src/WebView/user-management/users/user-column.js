@@ -64,13 +64,6 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
       render: (value, row) => renderCell(value, row, <Text className="font-medium text-gray-700">{value || '---'}</Text>),
     },
     {
-      title: <HeaderCell title="ID" />,
-      dataIndex: '_id',
-      key: '_id',
-      width: 120,
-      render: (value, row) => renderCell(value, row, <Text className="font-medium text-gray-700">{value || '---'}</Text>),
-    },
-    {
       title: <HeaderCell title="Name" />,
       dataIndex: 'firstName',
       key: 'firstName',

@@ -46,7 +46,7 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
                         showCustomAlert({
                             type: 'success',
                             title: 'Success!',
-                            message: 'User Details Updated Successfully',
+                            message: result?.message,
                         });
                         if (ApiHit) { ApiHit() }
                         handleClose()
@@ -62,10 +62,10 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
                         showCustomAlert({
                             type: 'success',
                             title: 'Success!',
-                            message: 'User Details Added Successfully',
+                            message: result?.message,
                         });
                         if (ApiHit) { ApiHit() }
-                        // handleClose()
+                        handleClose()
                     }
                 })
             }
