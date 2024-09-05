@@ -119,12 +119,7 @@ export default function ApiService() {
   }
 
   const onClickSend = (ele) => {
-    console.log('call');
-
-    var json = {
-
-    }
-
+    console.log('ele',ele);
     autoRequest(ele)
   }
 
@@ -132,7 +127,7 @@ export default function ApiService() {
 
   return (
     <div className="grid grid-cols-12 gap-2 h-screen">
-      <div className="col-span-3 bg-gray-100 p-4 overflow-y-auto">
+      <div className="col-span-4 bg-gray-100 p-4 overflow-y-auto">
         <div className='flex justify-between bg-white shadow-md items-center p-2 rounded-xl mb-5'>
           <h2 className="text-xl font-semibold text-gray-700">
             Services
@@ -141,24 +136,24 @@ export default function ApiService() {
         </div>
         {ServiceMasterReducer?.doc?.map((ele, i) => (
           <div key={i} className="mb-2">
-            <div
-              className="flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded justify-between"
-              onClick={() => toggleService(i)}
-            >
-              <div className='flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded'>
-                {openServices[i] ? (
-                  <ChevronDown className="w-4 h-4 mr-2 text-gray-600" />
-                ) : (
-                  <ChevronRight className="w-4 h-4 mr-2 text-gray-600" />
-                )}
-                <Folder className="w-5 h-5 mr-2 text-yellow-500" />
-                <div className='flex justify-between w-full'>
-                  <span className="text-gray-700 font-medium">{ele?.serviceName}</span>
+            <div className='flex justify-around'>
+              <p onClick={() => onClickSend(ele)} className='p-2 self-center underline text-blue-500 hover:text-blue-600 cursor-pointer'>Send</p>
+              <div className="flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded justify-between" onClick={() => toggleService(i)}>
+                <div className='flex items-center cursor-pointer p-2 hover:bg-gray-200 rounded'>
+                  {openServices[i] ? (
+                    <ChevronDown className="w-4 h-4 mr-2 text-gray-600" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4 mr-2 text-gray-600" />
+                  )}
+                  <Folder className="w-5 h-5 mr-2 text-yellow-500" />
+                  <div className='flex justify-between w-full'>
+                    <span className="text-gray-700 font-medium">{ele?.serviceName}</span>
+
+                  </div>
 
                 </div>
-                <p onClick={() => onClickSend(ele)}>Send</p>
               </div>
-              <div className="relative">
+              <div className="relative p-4 hover:text-blue-600 cursor-pointer">
                 <EllipsisVertical
                   size={20}
                   onClick={(e) => {
@@ -205,7 +200,7 @@ export default function ApiService() {
             {openServices[i] && (
               <div className="ml-6 mt-1">
                 {ele?.requests?.map((item, index) => (
-                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded" onClick={() => onClickServiceRequest(i, index, ele)}>
+                  <div key={index} className="flex items-center p-2 hover:bg-gray-200 rounded cursor-pointer" onClick={() => onClickServiceRequest(i, index, ele)}>
                     <File className="w-4 h-4 mr-2 text-gray-500" />
                     <span className="text-gray-600 text-sm">{item?.requestName}</span>
                   </div>
@@ -215,7 +210,7 @@ export default function ApiService() {
           </div>
         ))}
       </div>
-      <div className="col-span-9 p-4">
+      <div className="col-span-8 p-4">
         {
           bodyScreen === 'Global' ?
             <GlobalVariableForm selectedService={selectedService} />

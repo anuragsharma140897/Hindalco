@@ -51,7 +51,6 @@ function ApiRequest({ dataForRequest }) {
         var oldData = ServiceMasterReducer?.requestDoc
 
         console.log(oldData);
-
         var oldData = ServiceMasterReducer?.requestDoc
         const hashValues = extractHashValues(oldData?.request);
         console.log('hashValues', hashValues);
@@ -63,16 +62,29 @@ function ApiRequest({ dataForRequest }) {
             })
         }
 
+        console.log('oldData--->>>>',oldData);
+
+        
         const exists = oldData?.request?.header?.some(item => item.value === "application/xml");
 
-        var json = {
+        let header;
+        var body = oldData?.request?.body
+        body.raw = exists ? body.raw : JSON.parse(body.raw)
+
+        if (oldBeaer = oldData?.request?.auth?.bearer?.length !== 0) {
+            var oldBeaer = oldData?.request?.auth?.bearer
+            oldBeaer[0].Authorization = 'Bearer ' + oldBeaer[0].value
+            delete oldBeaer[0].value
+            header = [...oldData?.request?.header, ...oldBeaer]
+          }
+          let json = {
             "request": {
-                "host": oldData?.request?.url?.raw,
-                "type": oldData?.request?.method,
-                "body": !exists ? JSON.parse(oldData?.request?.body?.raw) : oldData?.request?.body?.raw
+              "host": oldData?.request?.url?.raw,
+              "type": oldData?.request?.method,
+              "body": body.raw, // We'll set this below
             },
-            "header": oldData?.request?.header
-        }
+            "header": header !== null ? header : oldData?.request?.header
+          };
 
         console.log('json---', json);
 
@@ -90,12 +102,12 @@ function ApiRequest({ dataForRequest }) {
             console.log('ServiceMasterReducer?.globalVariables', ServiceMasterReducer?.globalVariables);
 
 
-            var tempGlobalArr = await CompileConfiguration(ServiceMasterReducer?.globalVariables,jsonResult);
+            var tempGlobalArr = await CompileConfiguration(ServiceMasterReducer?.globalVariables,jsonResult===undefined?res:jsonResult);
 
             console.log('tempGlobalArr',tempGlobalArr);
 
             dispatch(setServiceGlobalVariabls(tempGlobalArr))
-            setAccuatalResult(jsonResult)
+            setAccuatalResult(jsonResult===undefined?res:jsonResult)
             setRender(Date.now())
             dispatch(setServiceRequestData(oldData))
 
@@ -125,6 +137,9 @@ function ApiRequest({ dataForRequest }) {
 
     const onClickSaveRequest = () => {
         var oldData = ServiceMasterReducer.requestDoc
+
+        console.log('oldData',oldData);
+
         if (accuatalResult !== null && accuatalResult !== "") {
             oldData.response[0] = accuatalResult
         }

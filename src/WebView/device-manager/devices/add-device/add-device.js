@@ -33,6 +33,7 @@ export const DeviceType = [
 export const SecureConnectionType = [
   { label: 'TLS', value: 'TLS' },
   { label: 'SSL', value: 'SSL' },
+  { label: 'TCP', value: 'TCP' },
 ]
 
 export default function AddDevice() {

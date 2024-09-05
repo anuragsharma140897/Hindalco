@@ -20,11 +20,9 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
             Object.assign(json.search, { [serverKey]: value })
         }
 
-
         dispatch(setAction(json))
         if (ApiHit) { ApiHit() }
     }
-
 
     const removeJson = () => {
         var tj = json
@@ -35,9 +33,7 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
     }
 
     const handleClearFilter = (name) => {
-
         const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
-
         if (existingIndex !== -1) {
             const updatedSelected = reduxSelect?.selected.filter(item => item.name !== name);
             dispatch(setSearchableSelectSelectedData(updatedSelected));
@@ -50,6 +46,7 @@ export default function CustomFilter({ screen, json, setAction, ApiHit }) {
         <div className='grid grid-cols-4 gap-4'>
             {
                 FilterItem?.condition?.map((ele, index) => <div key={index}>
+                    <div><label className='font-semibold'>{ele?.title}</label></div>
                     {typeof ele.render === 'function'
                         ? ele.render(
                             (e) => handleFilterChange(e, ele?.serverKey),

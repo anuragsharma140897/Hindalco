@@ -34,19 +34,19 @@ export default function Devices() {
     
     HitApi(json, searchDevice).then((result) => {
       console.log('result', result);
-      // if (result?.success !== false) {
-      //   CompileDevices(result).then((compiledData) => {
-      //     dispatch(setDevicesData(compiledData));
-      //     dispatch(setPagination({
-      //       limit: json?.limit,
-      //       totalPages: compiledData?.totalPages,
-      //       number: compiledData?.number,
-      //       totalElements: compiledData?.totalElements,
-      //     }));
-      //   });
-      // } else {
-      //   dispatch(setDevicesData([]));
-      // }
+      if (result?.success !== false) {
+        CompileDevices(result).then((compiledData) => {
+          dispatch(setDevicesData(compiledData));
+          dispatch(setPagination({
+            limit: json?.limit,
+            totalPages: compiledData?.totalPages,
+            number: compiledData?.number,
+            totalElements: compiledData?.totalElements,
+          }));
+        });
+      } else {
+        dispatch(setDevicesData([]));
+      }
     });
   }
 

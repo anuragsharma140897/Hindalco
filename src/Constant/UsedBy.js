@@ -6,6 +6,8 @@ export const usedByOption = [
     { label: 'keyUsage', value: 'keyUsage' },
     { label: 'extendedKeyUsage', value: 'extendedKeyUsage' },
     { label: 'defaultData', value: 'defaultData' },
+    { label: 'status', value: 'status' },
+    { label: 'gender', value: 'gender' },
 
 
 

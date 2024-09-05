@@ -29,6 +29,9 @@ function Auth() {
 
     const onChange = (value,name,index) =>{
         var oldJson = ServiceMasterReducer?.requestDoc
+
+        console.log('oldJson',oldJson);
+
         oldJson.request.auth.bearer[index][name] = value
         dispatch(setServiceRequestData(oldJson))
     }

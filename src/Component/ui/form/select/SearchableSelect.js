@@ -11,7 +11,7 @@ import Skeleton from 'react-loading-skeleton';
 function renderOptionDisplayValue(value) {
   // Check if value is neither null nor undefined and convert to lowercase, otherwise keep as is
   const lowerCaseValue = value != null ? value.toString().toLowerCase() : value;
-  
+
   // Get the corresponding status class or fallback to the default class
   const statusClass = STATUS_CLASSES[lowerCaseValue] || STATUS_CLASSES.default;
 
@@ -36,14 +36,13 @@ function renderDefaultDisplay(value) {
   );
 }
 
-export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay, label, reduxState, defaultOptions }) {
+export default function SearchableSelect({ api, name, className, dynamicSearch, limit, getFieldName, type, placeholder, disabled, error, onChange, useCustomDisplay, label, reduxState, defaultOptions, onClear, hide }) {
   const dispatch = useDispatch()
   const reduxSelect = useSelector(state => state.SearchableSelectReducer)
   const [options, setOptions] = useState(null)
   const [selected, setSelected] = useState(null)
-
+  const [loading, setLoading] = useState(null)
   useEffect(() => {
-
     if (api && options === null && defaultOptions === undefined) {
       loadData();
     } else {
@@ -57,15 +56,21 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
   const loadData = () => {
     if (api) {
       const json = { page: 1, limit: limit || 30, search: dynamicSearch || {} };
+      console.log('json', json);
+      setLoading(true)
       HitApi(json, api).then((result) => {
         console.log('result', result);
-        CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
-          console.log('CompiledData', CompiledData);
-          if (CompiledData) {
-            setOptions(CompiledData);
-            dispatch(setSearchableSelectData(result?.content));
-          }
-        });
+        if (result?.success !== false) {
+          CompileSelectData(result?.content, getFieldName, type).then((CompiledData) => {
+            if (CompiledData) {
+              setOptions(CompiledData);
+              dispatch(setSearchableSelectData(result?.content));
+              setLoading(false)
+            }
+          });
+        } else {
+          setLoading(false)
+        }
       });
     }
   };
@@ -89,7 +94,7 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
     setSelected(value);
   };
 
-  const onClear = () => {
+  const handleClear = () => {
     var json = reduxSelect?.selected
     const existingIndex = reduxSelect?.selected?.findIndex(item => item.name === name);
     if (existingIndex !== -1) {
@@ -98,33 +103,39 @@ export default function SearchableSelect({ api, name, className, dynamicSearch, 
       delete json?.search?.[name]
       if (reduxState) { delete reduxState?.[name] }
     }
-
   }
 
 
   return (
     <div>
-      {label && <div className='block font-bold mb-1'>{label}</div>}
       {
-        options?.length > 0 ? (<Select name={name} searchable clearable onClear={onClear}
-          options={options || []}
-          placeholder={placeholder ? placeholder : `Select ${label || '...'} `}
-          className={cn(className, 'bg-white h-10 z-[99999] rounded-md mb-4')}
-          dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
-          getOptionDisplayValue={(option) =>
-            useCustomDisplay ? renderOptionDisplayValue(option.label) : renderDefaultDisplay(option.label)
-          }
-          error={error?.[name]}
+        !hide ? <div>
+          {label && <div className='block font-bold mb-1'>{label}</div>}
+          {
+            options?.length > 0 ? (<Select name={name} searchable clearable onClear={() => { onClear ? onClear() : handleClear() }}
+              options={options || []}
+              placeholder={placeholder ? placeholder : `Select ${label || '...'} `}
+              className={cn(className, 'bg-white h-10 z-[99999] rounded-md mb-4')}
+              dropdownClassName="p-2 gap-1 grid z-[99999] capitalize"
+              getOptionDisplayValue={(option) =>
+                useCustomDisplay ? renderOptionDisplayValue(option.label) : renderDefaultDisplay(option.label)
+              }
+              error={error?.[name]}
 
-          value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['label']}
-          onChange={handleChange}
-        />) : <Skeleton height={40} />
+              value={reduxSelect?.selected?.find((Obj) => Obj.name === name)?.['label']}
+              onChange={handleChange}
+            />) : <div>
+              <Skeleton height={40} />
+              <span className='text-red-500 text-xs font-semibold tracking-wide capitalize'>{loading ? 'loading...' : 'no data found'}</span>
+            </div>
+          }
+          {disabled && (
+            <span className='text-red-500 text-xs tracking-wide'>
+              This field cannot be edited
+            </span>
+          )}
+        </div> : null
       }
-      {disabled && (
-        <span className='text-red-500 text-xs tracking-wide'>
-          This field cannot be edited
-        </span>
-      )}
     </div>
   )
 }

@@ -21,29 +21,32 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
   const handleDelete = async (row) => {
     setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
 
-    const json = { _id: row?._id };
+    const json = { _id: row?._id || row?.id };
 
-    // try {
-    //   const result = await HitApi(json, deleteUser);
-    //   if (result?.success !== false) {
-    //     showCustomAlert({
-    //       type: 'success',
-    //       title: 'Success!',
-    //       message: 'Role Deleted Successfully',
-    //     });
-    //     if (ApiHit) { ApiHit(); }
-    //   } else {
-    //     showCustomAlert({
-    //       type: 'error',
-    //       title: 'Delete Error',
-    //       message: 'Unable to delete this role. This role is already linked with a user.',
-    //     });
-    //   }
-    // } catch (err) {
+    console.log('json : ', json);
 
-    // } finally {
-    //   setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
-    // }
+    try {
+      const result = await HitApi(json, deleteUser);
+      console.log('result', result);
+      if (result?.success !== false) {
+        showCustomAlert({
+          type: 'success',
+          title: 'Success!',
+          message: 'Role Deleted Successfully',
+        });
+        if (ApiHit) { ApiHit(); }
+      } else {
+        showCustomAlert({
+          type: 'error',
+          title: 'Delete Error',
+          message: 'Unable to delete this User.',
+        });
+      }
+    } catch (err) {
+
+    } finally {
+      setLoadingRows((prev) => ({ ...prev, [row.index]: false }));
+    }
     
   };
 

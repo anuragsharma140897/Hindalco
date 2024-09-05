@@ -24,18 +24,11 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         if (row?._id && Object.keys(reduxUser?.apiJson).length === 0) {
             loadDefault(row)
         }
-
-
-
     }, [reduxUser])
 
     const loadDefault = (row) => {
         var json = reduxUser?.apiJson
-
-
-
         Object.assign(json, ...Object.keys(variable).map(key => ({ [variable[key]]: row[key] })));
-
         dispatch(setUserApiJson(json))
     }
     const handleSubmit = (e) => {
@@ -43,6 +36,7 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         var json = reduxUser?.apiJson
         const validationErrors = validate(json);
 
+        console.log('json', json);
 
         if (Object.keys(validationErrors).length === 0) {
             if (row?._id) {
@@ -104,6 +98,8 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
         dispatch(setUserApiJson(json))
     }
 
+    console.log('row', row);
+
     return (
         <div className='p-10'>
             <form onSubmit={handleSubmit}>
@@ -113,13 +109,13 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
                         <CustomInput validate={validate} name="lastName" label="Last Name" value={reduxUser?.apiJson?.lastName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="username" label="Username" value={reduxUser?.apiJson?.username} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} type={'text'} name="password" label="Password" value={reduxUser?.apiJson?.password} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} disabled={row?._id ? true : false} />
-                        <SearchableSelect validate={validate} name="gender" label="Gender" api={searchGeneral} dynamicSearch={{'fieldName':'gender'}} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleGenderChange} />
+                        <SearchableSelect validate={validate} name="gender" label="Gender" api={searchGeneral} dynamicSearch={{'usedBy':'gender'}} getFieldName={'value'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleGenderChange} />
                         <SearchableSelect validate={validate} name="roleName" label="Role" api={searchRole}  getFieldName={'roleName'} value={reduxUser?.apiJson?.roleName} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleCustomChange} />
                         <CustomInput validate={validate} name="contact" label="Contact No" value={reduxUser?.apiJson?.contact} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="address" label="Address" value={reduxUser?.apiJson?.address} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="email" label="Email Id" value={reduxUser?.apiJson?.email} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
                         <CustomInput validate={validate} name="employeeId" label="Employee Id" value={reduxUser?.apiJson?.employeeId} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} />
-                        <SearchableSelect validate={validate} name="status" label="Status" api={searchGeneral} dynamicSearch={{'fieldName':'status'}}  getFieldName={'value'} value={reduxUser?.apiJson?.status} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleStatusChange}  hide={!row?._id} />
+                        <SearchableSelect validate={validate} name="status" label="Status" api={searchGeneral} dynamicSearch={{'usedBy':'status'}}  getFieldName={'value'} value={reduxUser?.apiJson?.status} error={errors} reduxState={reduxUser?.apiJson} setAction={setUserApiJson} onChange={handleStatusChange}  hide={!row?._id} />
                     </div>
                     <div className='flex gap-3 justify-end'>
                         <CustomButton text={'Cancel'} variant='flat' className={''} onClick={() => handleClose()} />

@@ -36,6 +36,9 @@ function Header() {
                 </div>
                 {
                     ServiceMasterReducer?.requestDoc?.request?.header?.map((ele, i) => {
+
+                        console.log('ele',ele);
+
                         return (
                             <div className='flex mx-10 gap-5'>
                                 <input className='w-full block rounded-md border-gray-300 px-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' onChange={(e) => onChange(e.target.value, 'key', i)} value={ele?.key} placeholder='Key' />
