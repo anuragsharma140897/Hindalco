@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.18817f3e.css",
-    "main.js": "/static/js/main.553c2ca4.js",
+    "main.css": "/static/css/main.497ea910.css",
+    "main.js": "/static/js/main.d266f730.js",
     "static/media/loginimage.png": "/static/media/loginimage.9b3c4fb38cff2b8e8525.png",
     "static/media/loginbg.png": "/static/media/loginbg.43064c5ee6ed66fac50b.png",
     "static/media/buildingMapping.png": "/static/media/buildingMapping.a377cd2efa9c34e870ce.png",
@@ -15,6 +15,7 @@
     "static/media/hind-vadodara-gujarati-400-normal.woff": "/static/media/hind-vadodara-gujarati-400-normal.46612c158c4d5f6aff29.woff",
     "static/media/hind-vadodara-gujarati-700-normal.woff": "/static/media/hind-vadodara-gujarati-700-normal.70b5098bfd9b4af50c14.woff",
     "static/media/hind-vadodara-gujarati-300-normal.woff": "/static/media/hind-vadodara-gujarati-300-normal.a28e6b96e25c58d9ce64.woff",
+    "static/media/jsoneditor-icons.svg": "/static/media/jsoneditor-icons.15f2789dd231f36d43a4.svg",
     "static/media/hind-vadodara-latin-500-normal.woff2": "/static/media/hind-vadodara-latin-500-normal.28da87907aab9c2ecf82.woff2",
     "static/media/hind-vadodara-latin-600-normal.woff2": "/static/media/hind-vadodara-latin-600-normal.8e6afda419206e55fb8d.woff2",
     "static/media/hind-vadodara-latin-700-normal.woff2": "/static/media/hind-vadodara-latin-700-normal.819adcc1ce680aaf04bd.woff2",
@@ -37,11 +38,11 @@
     "static/media/hind-vadodara-latin-ext-700-normal.woff": "/static/media/hind-vadodara-latin-ext-700-normal.6053e82b71b446d2dcc8.woff",
     "index.html": "/index.html",
     "static/media/getFetch.cjs": "/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
-    "main.18817f3e.css.map": "/static/css/main.18817f3e.css.map",
-    "main.553c2ca4.js.map": "/static/js/main.553c2ca4.js.map"
+    "main.497ea910.css.map": "/static/css/main.497ea910.css.map",
+    "main.d266f730.js.map": "/static/js/main.d266f730.js.map"
   },
   "entrypoints": [
-    "static/css/main.18817f3e.css",
-    "static/js/main.553c2ca4.js"
+    "static/css/main.497ea910.css",
+    "static/js/main.d266f730.js"
   ]
 }

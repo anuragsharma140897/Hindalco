@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80         # Port on which the service will be exposed internally
+    targetPort: 3000 # Port on which the container is listening
+  type: NodePort # Type of service to expose the app to external traffic (use NodePort if LoadBalancer is not supported)
+

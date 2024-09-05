@@ -1,15 +1,26 @@
-# Use the official NGINX image as the base
+# Stage 1: Use Node.js 18 to build the React app
+FROM node:18 AS build
+
+WORKDIR /app
+
+# Copy package.json and yarn.lock files to install dependencies
+COPY package.json yarn.lock ./
+
+RUN yarn install
+
+# Copy the rest of the application source code and build the React app
+COPY . .
+RUN yarn build
+
+# Stage 2: Use NGINX to serve the built app
 FROM nginx:latest
 
-# Copy the built React app from /var/www/html on your local machine to the appropriate directory in the container
-COPY /build /usr/share/nginx/html/
+# Copy the build output from the first stage to NGINX's default public directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy the NGINX configuration file if you have a custom one
-# If you are using the default NGINX config, this line can be omitted.
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80
+# Expose port 80 for the NGINX server
 EXPOSE 80
 
 # Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
+
