@@ -1,19 +1,20 @@
 
-// export const IP = '137.184.74.218'
-// export const IP = '192.168.0.104:9090'
+export const IP = 'api.hindalco.headsupcorporation.com'
+export const Protocol = 'https://'
 
-export const IP = '192.168.0.104:9090'
+// export const IP = '192.168.0.104:9090'
+// export const Protocol = 'http:'
 
 export const MQTTIP = 'ws://192.168.0.104:9001'
-export const BaseUrl = `http://${IP}/auth/`
-export const UserMicroService = `http://${IP}/user/api/`
-export const HelperMicroService = `http://${IP}/helper/api/`
-export const PlantMicroService = `http://${IP}/plant/api/`
-export const DeviceMicroService = `http://${IP}/device/api/`
-export const IOTMicroService = `http://${IP}/iot/api/`
-export const OrderMicroService = `http://${IP}/order/api/`
+export const BaseUrl = `${Protocol}${IP}/auth/`
+export const UserMicroService = `${Protocol}${IP}/user/api/`
+export const HelperMicroService = `${Protocol}${IP}/helper/api/`
+export const PlantMicroService = `${Protocol}${IP}/plant/api/`
+export const DeviceMicroService = `${Protocol}${IP}/device/api/`
+export const IOTMicroService = `${Protocol}${IP}/iot/api/`
+export const OrderMicroService = `${Protocol}${IP}/order/api/`
 
-export const IotMicroService = `http://${IP}/iot/api/`
+export const IotMicroService = `${Protocol}${IP}/iot/api/`
 
 export const LoginApi = BaseUrl + 'login'
 // User

@@ -55,14 +55,17 @@ export default function AddUserMaster({ row, closeModal, ApiHit }) {
             } else {
                 Object.assign(json, { status: json?.status || 'active' })
                 HitApi(json, addUser).then((result) => {
-                    if (result) {
+
+                    console.log('result', result);
+
+                    if (result?.success!==false) {
                         showCustomAlert({
                             type: 'success',
                             title: 'Success!',
-                            message: 'User Details Updated Successfully',
+                            message: 'User Details Added Successfully',
                         });
                         if (ApiHit) { ApiHit() }
-                        handleClose()
+                        // handleClose()
                     }
                 })
             }

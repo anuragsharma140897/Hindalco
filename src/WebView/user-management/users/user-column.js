@@ -21,7 +21,7 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
   const handleDelete = async (row) => {
     setLoadingRows((prev) => ({ ...prev, [row.index]: true }));
 
-    const json = { _id: row?._id || row?.id };
+    const json = { _id: row?._id };
 
     console.log('json : ', json);
 
@@ -60,6 +60,13 @@ export const GetUserColumns = (openModal, closeModal, ApiHit) => {
       title: <HeaderCell title="SR No." />,
       dataIndex: 'index',
       key: 'index',
+      width: 120,
+      render: (value, row) => renderCell(value, row, <Text className="font-medium text-gray-700">{value || '---'}</Text>),
+    },
+    {
+      title: <HeaderCell title="ID" />,
+      dataIndex: '_id',
+      key: '_id',
       width: 120,
       render: (value, row) => renderCell(value, row, <Text className="font-medium text-gray-700">{value || '---'}</Text>),
     },
